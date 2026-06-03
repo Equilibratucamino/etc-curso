@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Módulo 05 — Romper el ciclo · ETC Recovery</title>
+  <link rel="stylesheet" href="css/design-system.css">
+  <style>
+    body { background: var(--bg); }
+
+    /* ── TOP NAV ─────────────────────────────────────────────────── */
+    .lesson-nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: 56px;
+      background: rgba(10,10,10,0.95);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      z-index: 100;
+      padding: 0 var(--s6);
+      gap: var(--s6);
+    }
+    .lesson-nav__back {
+      display: flex;
+      align-items: center;
+      gap: var(--s2);
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      transition: color var(--t-fast);
+    }
+    .lesson-nav__back:hover { color: var(--text); }
+    .lesson-nav__progress {
+      flex: 1;
+      max-width: 280px;
+    }
+    .lesson-nav__progress-label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.72rem;
+      color: var(--text-subtle);
+      margin-bottom: 4px;
+    }
+
+    /* ── VIDEO SECTION ───────────────────────────────────────────── */
+    .video-section {
+      padding-top: 56px;
+      background: var(--bg-1);
+      border-bottom: 1px solid var(--border);
+    }
+    .video-container {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: var(--s8) var(--s6);
+    }
+    .video-area {
+      position: relative;
+      background: #000;
+      border-radius: var(--r-lg);
+      overflow: hidden;
+      aspect-ratio: 16 / 9;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .video-placeholder {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, var(--bg-3) 0%, var(--bg-2) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: var(--s4);
+    }
+    .video-placeholder__text {
+      text-align: center;
+    }
+    .video-placeholder__eyebrow {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: var(--s2);
+    }
+    .video-placeholder__title {
+      font-family: var(--font-serif);
+      font-size: clamp(1.5rem, 3vw, 2rem);
+      font-weight: 600;
+      color: var(--text);
+    }
+    .video-play-btn {
+      width: 72px; height: 72px;
+      border-radius: 50%;
+      background: var(--teal);
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all var(--t-mid) var(--ease);
+      box-shadow: 0 0 32px var(--teal-glow);
+    }
+    .video-play-btn:hover {
+      background: var(--teal-dk);
+      transform: scale(1.08);
+      box-shadow: 0 0 48px var(--teal-glow);
+    }
+
+    /* ── CONTENT SECTION ─────────────────────────────────────────── */
+    .content-layout {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: var(--s10) var(--s6) var(--s16);
+      display: grid;
+      grid-template-columns: 1fr 280px;
+      gap: var(--s8);
+      align-items: start;
+    }
+
+    /* ── MAIN COLUMN ─────────────────────────────────────────────── */
+    .lesson-eyebrow {
+      display: flex;
+      align-items: center;
+      gap: var(--s3);
+      margin-bottom: var(--s5);
+    }
+    .lesson-title {
+      font-family: var(--font-serif);
+      font-size: clamp(1.75rem, 3vw, 2.5rem);
+      font-weight: 600;
+      line-height: 1.2;
+      margin-bottom: var(--s5);
+    }
+    .lesson-description {
+      font-size: 1rem;
+      color: var(--text-muted);
+      line-height: 1.75;
+      max-width: 620px;
+    }
+
+    /* Divider */
+    .lesson-divider {
+      height: 1px;
+      background: var(--border);
+      margin: var(--s8) 0;
+    }
+
+    /* Key takeaways */
+    .takeaways { margin-bottom: var(--s8); }
+    .takeaways__title {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-subtle);
+      margin-bottom: var(--s5);
+    }
+    .takeaway-list { display: flex; flex-direction: column; gap: var(--s4); }
+    .takeaway {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--s4);
+      padding: var(--s4);
+      background: var(--bg-2);
+      border: 1px solid var(--border);
+      border-radius: var(--r-md);
+    }
+    .takeaway__icon {
+      width: 28px; height: 28px;
+      border-radius: var(--r-sm);
+      background: var(--teal-lt);
+      border: 1px solid rgba(50,180,140,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      color: var(--teal);
+      font-size: 0.85rem;
+    }
+    .takeaway__text { font-size: 0.9rem; color: var(--text-muted); line-height: 1.55; padding-top: 3px; }
+
+    /* Action points */
+    .actions { margin-bottom: var(--s8); }
+    .action-item {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--s4);
+      padding: var(--s4) 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .action-item:last-child { border-bottom: none; }
+    .action-checkbox {
+      width: 18px; height: 18px;
+      border-radius: 4px;
+      border: 1.5px solid var(--border-md);
+      flex-shrink: 0;
+      margin-top: 2px;
+      cursor: pointer;
+      transition: all var(--t-fast);
+    }
+    .action-checkbox:hover { border-color: var(--teal); }
+    .action-text { font-size: 0.9rem; color: var(--text-muted); line-height: 1.5; }
+
+    /* Notes */
+    .notes-area {
+      background: var(--bg-2);
+      border: 1px solid var(--border);
+      border-radius: var(--r-lg);
+      padding: var(--s5);
+      margin-bottom: var(--s8);
+    }
+    .notes-area__label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-subtle);
+      margin-bottom: var(--s3);
+    }
+    .notes-area textarea {
+      width: 100%;
+      min-height: 100px;
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      line-height: 1.6;
+      resize: none;
+      outline: none;
+    }
+    .notes-area textarea::placeholder { color: var(--text-subtle); }
+
+    /* Complete button */
+    .complete-section {
+      background: linear-gradient(135deg, var(--bg-2), var(--bg-3));
+      border: 1px solid var(--border-md);
+      border-radius: var(--r-xl);
+      padding: var(--s8);
+      text-align: center;
+    }
+    .complete-section h3 {
+      font-family: var(--font-serif);
+      font-size: 1.4rem;
+      font-weight: 600;
+      margin-bottom: var(--s3);
+    }
+    .complete-section p { font-size: 0.9rem; color: var(--text-muted); margin-bottom: var(--s6); }
+
+    /* ── SIDEBAR ─────────────────────────────────────────────────── */
+    .lesson-sidebar { position: sticky; top: calc(56px + var(--s6)); }
+    .sidebar-card {
+      background: var(--bg-2);
+      border: 1px solid var(--border);
+      border-radius: var(--r-lg);
+      overflow: hidden;
+      margin-bottom: var(--s4);
+    }
+    .sidebar-card__header {
+      padding: var(--s4) var(--s5);
+      border-bottom: 1px solid var(--border);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-subtle);
+    }
+    .sidebar-card__body { padding: var(--s4) var(--s5); }
+
+    .module-list-mini { display: flex; flex-direction: column; gap: 0; }
+    .module-mini {
+      display: flex;
+      align-items: center;
+      gap: var(--s3);
+      padding: var(--s3) 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: color var(--t-fast);
+    }
+    .module-mini:last-child { border-bottom: none; }
+    .module-mini:hover { color: var(--text); }
+    .module-mini.current { color: var(--teal); font-weight: 500; }
+    .module-mini__num {
+      width: 22px; height: 22px;
+      border-radius: 50%;
+      border: 1.5px solid var(--border-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.68rem;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+    .module-mini.done .module-mini__num { background: var(--teal-lt); border-color: rgba(50,180,140,0.4); color: var(--teal); }
+    .module-mini.current .module-mini__num { background: var(--teal); border-color: var(--teal); color: white; }
+
+    /* Navigation */
+    .lesson-nav-btns {
+      display: flex;
+      gap: var(--s3);
+      margin-top: var(--s4);
+    }
+    .lesson-nav-btns .btn { flex: 1; justify-content: center; }
+
+    @media (max-width: 768px) {
+      .content-layout { grid-template-columns: 1fr; }
+      .lesson-sidebar { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── TOP NAV ──────────────────────────────────────────────────── -->
+  <nav class="lesson-nav">
+    <a href="programa.html" class="lesson-nav__back">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M10 12L6 8l4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Volver al programa
+    </a>
+    <div class="lesson-nav__progress">
+      <div class="lesson-nav__progress-label">
+        <span>Módulo 05 de 15</span>
+        <span class="teal">27% completado</span>
+      </div>
+      <div class="progress-track">
+        <div class="progress-fill" style="width: 27%;"></div>
+      </div>
+    </div>
+    <span class="pill pill--teal" style="font-size:0.75rem;">En progreso</span>
+  </nav>
+
+  <!-- ── VIDEO ────────────────────────────────────────────────────── -->
+  <section class="video-section">
+    <div class="video-container">
+      <div class="video-area" data-reveal>
+        <div class="video-placeholder">
+          <div class="video-placeholder__text">
+            <div class="video-placeholder__eyebrow">Módulo 05</div>
+            <div class="video-placeholder__title">Romper el ciclo</div>
+          </div>
+          <button class="video-play-btn" aria-label="Reproducir">
+            <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+              <path d="M8 5l18 9-18 9V5z" fill="white"/>
+            </svg>
+          </button>
+          <p style="font-size:0.8rem;color:var(--text-subtle);">Haz clic para reproducir · ~32 minutos</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CONTENT ──────────────────────────────────────────────────── -->
+  <div class="content-layout">
+
+    <!-- Main column -->
+    <div>
+      <div class="lesson-eyebrow" data-reveal>
+        <span class="pill pill--teal">Módulo 05</span>
+        <span class="pill">~32 min</span>
+      </div>
+
+      <h1 class="lesson-title" data-reveal data-delay="1">Romper el ciclo</h1>
+
+      <p class="lesson-description" data-reveal data-delay="2">
+        En este módulo entenderás por qué la adicción al juego no es un problema de voluntad, sino un ciclo neurológico que se retroalimenta a sí mismo. Aprenderás a identificar los momentos exactos en los que el ciclo se activa — y cómo interrumpirlo antes de que tome el control.
+      </p>
+
+      <div class="lesson-divider"></div>
+
+      <!-- Takeaways -->
+      <div class="takeaways" data-reveal data-delay="1">
+        <div class="takeaways__title">Lo que aprenderás</div>
+        <div class="takeaway-list">
+          <div class="takeaway">
+            <div class="takeaway__icon">01</div>
+            <div class="takeaway__text">Cómo funciona el ciclo automático de la adicción y por qué se mantiene solo sin necesitar tu "permiso" consciente.</div>
+          </div>
+          <div class="takeaway">
+            <div class="takeaway__icon">02</div>
+            <div class="takeaway__text">Los 3 detonantes más comunes que activan el impulso de jugar — y cómo detectarlos antes de que se conviertan en acción.</div>
+          </div>
+          <div class="takeaway">
+            <div class="takeaway__icon">03</div>
+            <div class="takeaway__text">La técnica de "pausa e intervención" que permite crear distancia entre el impulso y la conducta.</div>
+          </div>
+          <div class="takeaway">
+            <div class="takeaway__icon">04</div>
+            <div class="takeaway__text">Por qué la fuerza de voluntad sola no funciona — y qué hacer en su lugar para que el cambio sea real y duradero.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="lesson-divider"></div>
+
+      <!-- Actions -->
+      <div class="actions" data-reveal>
+        <div class="takeaways__title">Ejercicios prácticos</div>
+        <div>
+          <div class="action-item">
+            <div class="action-checkbox"></div>
+            <div class="action-text">Escribe los 3 momentos del último mes en que sentiste más urgencia de jugar. ¿Qué estabas haciendo? ¿Cómo te sentías?</div>
+          </div>
+          <div class="action-item">
+            <div class="action-checkbox"></div>
+            <div class="action-text">Identifica tu detonante principal (aburrimiento / estrés / soledad / celebración). Escríbelo y ponle nombre.</div>
+          </div>
+          <div class="action-item">
+            <div class="action-checkbox"></div>
+            <div class="action-text">Diseña tu "pausa de 10 minutos": ¿qué harás exactamente cuando sientas el impulso? Sé específico.</div>
+          </div>
+          <div class="action-item">
+            <div class="action-checkbox"></div>
+            <div class="action-text">Comparte tu plan con alguien de confianza o escríbelo aquí en tus notas.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="lesson-divider"></div>
+
+      <!-- Notes -->
+      <div class="notes-area" data-reveal>
+        <div class="notes-area__label">Mis notas</div>
+        <textarea placeholder="Escribe aquí tus reflexiones, ideas o lo que quieras recordar de este módulo..."></textarea>
+      </div>
+
+      <!-- Complete -->
+      <div class="complete-section" data-reveal>
+        <h3>¿Has terminado el módulo?</h3>
+        <p>Cuando hayas visto el vídeo completo y completado los ejercicios, marca el módulo como terminado para desbloquear el siguiente.</p>
+        <a href="programa.html" class="btn btn--primary btn--lg">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 8l4.5 4.5L14 3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Marcar como completado
+        </a>
+        <p style="font-size:0.8rem;color:var(--text-subtle);margin-top:var(--s4);">
+          Siguiente: <strong>Módulo 06 — Gestión de impulsos</strong>
+        </p>
+      </div>
+    </div>
+
+    <!-- Sidebar -->
+    <aside class="lesson-sidebar" data-reveal data-delay="3">
+
+      <!-- Progress -->
+      <div class="sidebar-card">
+        <div class="sidebar-card__header">Tu progreso</div>
+        <div class="sidebar-card__body">
+          <div style="margin-bottom:var(--s3);">
+            <div style="display:flex;justify-content:space-between;margin-bottom:var(--s2);font-size:0.8rem;">
+              <span class="muted">Módulos completados</span>
+              <span class="teal" style="font-weight:600;">4 / 15</span>
+            </div>
+            <div class="progress-track" style="height:6px;">
+              <div class="progress-fill" style="width:27%;"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Module list -->
+      <div class="sidebar-card">
+        <div class="sidebar-card__header">Módulos</div>
+        <div class="sidebar-card__body">
+          <div class="module-list-mini">
+            <div class="module-mini done"><div class="module-mini__num">✓</div>Aceptar la realidad</div>
+            <div class="module-mini done"><div class="module-mini__num">✓</div>La mente de un ludópata</div>
+            <div class="module-mini done"><div class="module-mini__num">✓</div>Dopamina y cerebro</div>
+            <div class="module-mini done"><div class="module-mini__num">✓</div>Las mentiras que te cuentas</div>
+            <div class="module-mini current"><div class="module-mini__num">5</div>Romper el ciclo</div>
+            <div class="module-mini"><div class="module-mini__num">6</div>Gestión de impulsos</div>
+            <div class="module-mini" style="opacity:0.4;"><div class="module-mini__num">7</div>Ansiedad y vergüenza</div>
+            <div class="module-mini" style="opacity:0.4;"><div class="module-mini__num">8</div>Reconstruir la confianza</div>
+            <div class="module-mini" style="opacity:0.3;font-size:0.78rem;color:var(--text-subtle);">
+              <div class="module-mini__num" style="border-color:var(--border);">…</div>+7 módulos más
+            </div>
+          </div>
+          <div class="lesson-nav-btns" style="margin-top:var(--s5);">
+            <a href="programa.html" class="btn btn--outline" style="font-size:0.82rem;padding:0.6rem 0.8rem;">← Anterior</a>
+            <a href="programa.html" class="btn btn--primary" style="font-size:0.82rem;padding:0.6rem 0.8rem;">Siguiente →</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Help -->
+      <div class="sidebar-card">
+        <div class="sidebar-card__header">¿Necesitas ayuda?</div>
+        <div class="sidebar-card__body">
+          <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:var(--s4);line-height:1.55;">
+            Si tienes dudas o quieres hablar con Nacho directamente, escríbenos por WhatsApp.
+          </p>
+          <a href="https://wa.me/34611847645" class="btn btn--outline w-full" style="font-size:0.85rem;gap:var(--s2);">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.124.553 4.117 1.526 5.847L0 24l6.335-1.496A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.9a9.87 9.87 0 01-5.032-1.374l-.361-.214-3.761.888.929-3.65-.235-.375A9.838 9.838 0 012.1 12C2.1 6.533 6.533 2.1 12 2.1S21.9 6.533 21.9 12 17.467 21.9 12 21.9z"/></svg>
+            WhatsApp
+          </a>
+        </div>
+      </div>
+
+    </aside>
+  </div>
+
+  <script src="js/app.js"></script>
+</body>
+</html>

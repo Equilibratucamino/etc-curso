@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tu Programa — ETC Recovery</title>
+  <link rel="stylesheet" href="css/design-system.css">
+  <style>
+    body { background: var(--bg-1); }
+
+    /* ── APP SHELL ──────────────────────────────────────────────── */
+    .app-layout {
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      min-height: 100svh;
+    }
+
+    /* ── SIDEBAR ─────────────────────────────────────────────────── */
+    .sidebar {
+      position: fixed;
+      top: 0; left: 0; bottom: 0;
+      width: 260px;
+      background: var(--bg);
+      border-right: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      z-index: 50;
+      padding: var(--s6);
+    }
+    .sidebar__logo {
+      font-weight: 800;
+      font-size: 1.3rem;
+      letter-spacing: -0.03em;
+      margin-bottom: var(--s8);
+      padding-bottom: var(--s6);
+      border-bottom: 1px solid var(--border);
+    }
+    .sidebar__logo span { color: var(--teal); }
+    .sidebar__section-label {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-subtle);
+      margin-bottom: var(--s3);
+      margin-top: var(--s5);
+    }
+    .sidebar__progress {
+      background: var(--bg-2);
+      border: 1px solid var(--border);
+      border-radius: var(--r-md);
+      padding: var(--s4);
+      margin-bottom: var(--s6);
+    }
+    .sidebar__progress-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: var(--s3);
+    }
+    .sidebar__progress-label { font-size: 0.8rem; color: var(--text-muted); }
+    .sidebar__progress-count { font-size: 0.8rem; font-weight: 600; color: var(--teal); }
+    .sidebar__nav { display: flex; flex-direction: column; gap: var(--s1); flex: 1; overflow-y: auto; }
+    .sidebar__link {
+      display: flex;
+      align-items: center;
+      gap: var(--s3);
+      padding: 0.5rem var(--s3);
+      border-radius: var(--r-sm);
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      transition: all var(--t-fast);
+      cursor: pointer;
+    }
+    .sidebar__link:hover { background: var(--bg-2); color: var(--text); }
+    .sidebar__link.active { background: var(--teal-lt); color: var(--teal); }
+    .sidebar__link-icon {
+      width: 16px; height: 16px;
+      flex-shrink: 0;
+      opacity: 0.5;
+    }
+    .sidebar__link.active .sidebar__link-icon { opacity: 1; }
+    .sidebar__bottom {
+      margin-top: auto;
+      padding-top: var(--s5);
+      border-top: 1px solid var(--border);
+    }
+    .sidebar__user {
+      display: flex;
+      align-items: center;
+      gap: var(--s3);
+      padding: var(--s3);
+    }
+    .sidebar__avatar {
+      width: 32px; height: 32px;
+      border-radius: 50%;
+      background: var(--teal-lt);
+      border: 1px solid rgba(50,180,140,0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--teal);
+      flex-shrink: 0;
+    }
+    .sidebar__user-name { font-size: 0.85rem; font-weight: 500; }
+    .sidebar__user-email { font-size: 0.72rem; color: var(--text-muted); }
+
+    /* ── MAIN CONTENT ────────────────────────────────────────────── */
+    .main-content {
+      margin-left: 260px;
+      padding: var(--s10) var(--s8);
+      min-height: 100svh;
+    }
+
+    /* ── WELCOME HEADER ──────────────────────────────────────────── */
+    .welcome {
+      margin-bottom: var(--s10);
+    }
+    .welcome__greeting { font-size: 0.85rem; color: var(--text-muted); margin-bottom: var(--s2); }
+    .welcome__title {
+      font-family: var(--font-serif);
+      font-size: clamp(1.75rem, 3vw, 2.5rem);
+      font-weight: 600;
+      line-height: 1.2;
+      margin-bottom: var(--s5);
+    }
+    .welcome__stats {
+      display: flex;
+      gap: var(--s4);
+      flex-wrap: wrap;
+    }
+    .welcome__stat {
+      background: var(--bg-2);
+      border: 1px solid var(--border);
+      border-radius: var(--r-md);
+      padding: var(--s4) var(--s5);
+      min-width: 140px;
+    }
+    .welcome__stat-num {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--teal);
+      font-family: var(--font-serif);
+      line-height: 1;
+      margin-bottom: var(--s1);
+    }
+    .welcome__stat-label { font-size: 0.8rem; color: var(--text-muted); }
+
+    /* ── CONTINUE CARD ────────────────────────────────────────────── */
+    .continue-card {
+      background: linear-gradient(135deg, var(--bg-2) 0%, var(--bg-3) 100%);
+      border: 1px solid var(--border-md);
+      border-radius: var(--r-xl);
+      padding: var(--s8);
+      margin-bottom: var(--s10);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--s6);
+      position: relative;
+      overflow: hidden;
+    }
+    .continue-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; bottom: 0;
+      width: 3px;
+      background: var(--teal);
+    }
+    .continue-card__label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: var(--s2);
+    }
+    .continue-card__title { font-size: 1.2rem; font-weight: 600; margin-bottom: var(--s2); }
+    .continue-card__sub { font-size: 0.9rem; color: var(--text-muted); }
+
+    /* ── MODULES GRID ────────────────────────────────────────────── */
+    .section-title {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: var(--s5);
+      color: var(--text-muted);
+    }
+    .modules-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: var(--s4);
+    }
+    .module-card {
+      background: var(--bg-2);
+      border: 1px solid var(--border);
+      border-radius: var(--r-lg);
+      padding: var(--s5);
+      display: flex;
+      align-items: flex-start;
+      gap: var(--s4);
+      cursor: pointer;
+      transition: all var(--t-mid) var(--ease);
+      text-decoration: none;
+      color: inherit;
+    }
+    .module-card:hover {
+      border-color: var(--border-md);
+      transform: translateY(-2px);
+      background: var(--bg-3);
+    }
+    .module-card.module-done { opacity: 0.7; }
+    .module-card.module-done:hover { opacity: 1; }
+    .module-card.module-active {
+      border-color: rgba(50,180,140,0.4);
+      background: rgba(50,180,140,0.04);
+    }
+    .module-card.module-locked { opacity: 0.45; cursor: default; }
+    .module-card.module-locked:hover { transform: none; border-color: var(--border); background: var(--bg-2); }
+
+    .module-badge {
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      border: 1.5px solid var(--border-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      flex-shrink: 0;
+      transition: all var(--t-mid);
+    }
+    .badge--done {
+      background: var(--teal-lt);
+      border-color: rgba(50,180,140,0.4);
+      color: var(--teal);
+    }
+    .badge--active {
+      background: var(--teal);
+      border-color: var(--teal);
+      color: white;
+      box-shadow: 0 0 16px var(--teal-glow);
+    }
+    .module-card__info { flex: 1; min-width: 0; }
+    .module-card__num {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-subtle);
+      margin-bottom: var(--s1);
+    }
+    .module-card__title { font-size: 0.95rem; font-weight: 600; margin-bottom: var(--s1); }
+    .module-card__desc { font-size: 0.82rem; color: var(--text-muted); line-height: 1.5; }
+    .module-card__status {
+      font-size: 0.72rem;
+      font-weight: 600;
+      margin-top: var(--s2);
+    }
+    .status--done  { color: var(--teal); }
+    .status--active { color: var(--teal); }
+    .status--locked { color: var(--text-subtle); }
+
+    /* ── LOCK ICON ───────────────────────────────────────────────── */
+    .lock-icon { color: var(--text-subtle); flex-shrink: 0; align-self: center; }
+
+    @media (max-width: 900px) {
+      .app-layout { grid-template-columns: 1fr; }
+      .sidebar { display: none; }
+      .main-content { margin-left: 0; padding: var(--s6) var(--s4); }
+    }
+  </style>
+</head>
+<body>
+<div class="app-layout">
+
+  <!-- ── SIDEBAR ──────────────────────────────────────────────────── -->
+  <aside class="sidebar">
+    <div class="sidebar__logo">ETC<span>.</span></div>
+
+    <div class="sidebar__progress">
+      <div class="sidebar__progress-header">
+        <span class="sidebar__progress-label">Tu progreso</span>
+        <span class="sidebar__progress-count" data-progress-text>4 / 15</span>
+      </div>
+      <div class="progress-track">
+        <div class="progress-fill" data-progress style="width:0%"></div>
+      </div>
+    </div>
+
+    <div class="sidebar__section-label">Navegación</div>
+    <nav class="sidebar__nav">
+      <a href="programa.html" class="sidebar__link active">
+        <svg class="sidebar__link-icon" viewBox="0 0 16 16" fill="none"><rect x="2" y="2" width="5" height="5" rx="1" fill="currentColor"/><rect x="9" y="2" width="5" height="5" rx="1" fill="currentColor" opacity="0.4"/><rect x="2" y="9" width="5" height="5" rx="1" fill="currentColor" opacity="0.4"/><rect x="9" y="9" width="5" height="5" rx="1" fill="currentColor" opacity="0.4"/></svg>
+        Módulos
+      </a>
+      <a href="#" class="sidebar__link">
+        <svg class="sidebar__link-icon" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="1.5"/><path d="M8 5v3l2 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        Mi progreso
+      </a>
+      <a href="index.html" class="sidebar__link">
+        <svg class="sidebar__link-icon" viewBox="0 0 16 16" fill="none"><path d="M2 8h12M8 2l6 6-6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Inicio
+      </a>
+    </nav>
+
+    <div class="sidebar__bottom">
+      <div class="sidebar__user">
+        <div class="sidebar__avatar">TÚ</div>
+        <div>
+          <div class="sidebar__user-name">Mi cuenta</div>
+          <div class="sidebar__user-email">Programa ETC</div>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ── MAIN ─────────────────────────────────────────────────────── -->
+  <main class="main-content">
+
+    <!-- Welcome -->
+    <div class="welcome" data-reveal>
+      <p class="welcome__greeting">Bienvenido de nuevo</p>
+      <h1 class="welcome__title">Programa de<br><em style="font-style:italic;color:var(--teal);">Recuperación ETC</em></h1>
+      <div class="welcome__stats">
+        <div class="welcome__stat">
+          <div class="welcome__stat-num teal">4</div>
+          <div class="welcome__stat-label">módulos completados</div>
+        </div>
+        <div class="welcome__stat">
+          <div class="welcome__stat-num">11</div>
+          <div class="welcome__stat-label">por completar</div>
+        </div>
+        <div class="welcome__stat">
+          <div class="welcome__stat-num" style="color:var(--gold);">27%</div>
+          <div class="welcome__stat-label">progreso total</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Continue -->
+    <div class="continue-card" data-reveal data-delay="1">
+      <div>
+        <div class="continue-card__label">Continúa donde lo dejaste</div>
+        <div class="continue-card__title">Módulo 05 — Romper el ciclo</div>
+        <div class="continue-card__sub">Cómo la adicción se mantiene a sí misma.</div>
+      </div>
+      <a href="modulo.html" class="btn btn--primary" style="white-space:nowrap;">Continuar →</a>
+    </div>
+
+    <!-- Module list -->
+    <div data-reveal data-delay="2">
+      <p class="section-title">Todos los módulos</p>
+      <div class="modules-list">
+
+        <a href="modulo.html" class="module-card module-done" data-module="1">
+          <div class="module-badge">1</div>
+          <div class="module-card__info">
+            <div class="module-card__num">Módulo 01</div>
+            <div class="module-card__title">Aceptar la realidad</div>
+            <div class="module-card__desc">Entender la adicción y romper la negación.</div>
+            <div class="module-card__status status--done">✓ Completado</div>
+          </div>
+        </a>
+
+        <a href="modulo.html" class="module-card module-done" data-module="2">
+          <div class="module-badge">2</div>
+          <div class="module-card__info">
+            <div class="module-card__num">Módulo 02</div>
+            <div class="module-card__title">La mente de un ludópata</div>
+            <div class="module-card__desc">La psicología de la adicción al juego.</div>
+            <div class="module-card__status status--done">✓ Completado</div>
+          </div>
+        </a>
+
+        <a href="modulo.html" class="module-card module-done" data-module="3">
+          <div class="module-badge">3</div>
+          <div class="module-card__info">
+            <div class="module-card__num">Módulo 03</div>
+            <div class="module-card__title">Dopamina y cerebro</div>
+            <div class="module-card__desc">Qué le hace el juego a tu cerebro.</div>
+            <div class="module-card__status status--done">✓ Completado</div>
+          </div>
+        </a>
+
+        <a href="modulo.html" class="module-card module-done" data-module="4">
+          <div class="module-badge">4</div>
+          <div class="module-card__info">
+            <div class="module-card__num">Módulo 04</div>
+            <div class="module-card__title">Las mentiras que te cuentas</div>
+            <div class="module-card__desc">Distorsiones cognitivas y autoengaño.</div>
+            <div class="module-card__status status--done">✓ Completado</div>
+          </div>
+        </a>
+
+        <a href="modulo.html" class="module-card module-active" data-module="5">
+          <div class="module-badge">5</div>
+          <div class="module-card__info">
+            <div class="module-card__num">Módulo 05</div>
+            <div class="module-card__title">Romper el ciclo</div>
+            <div class="module-card__desc">Cómo la adicción se mantiene a sí misma.</div>
+            <div class="module-card__status status--active">▶ En progreso</div>
+          </div>
+        </a>
+
+        <a href="modulo.html" class="module-card" data-module="6">
+          <div class="module-badge">6</div>
+          <div class="module-card__info">
+            <div class="module-card__num">Módulo 06</div>
+            <div class="module-card__title">Gestión de impulsos</div>
+            <div class="module-card__desc">Manejar los antojos y la urgencia de jugar.</div>
+          </div>
+        </a>
+
+        <div class="module-card module-locked" data-module="7">
+          <div class="module-badge">7</div>
+          <div class="module-card__info">
+            <div class="module-card__num">Módulo 07</div>
+            <div class="module-card__title">Ansiedad, culpa y vergüenza</div>
+            <div class="module-card__desc">Las trampas emocionales de la adicción.</div>
+            <div class="module-card__status status--locked">🔒 Próximamente</div>
+          </div>
+        </div>
+
+        <div class="module-card module-locked" data-module="8">
+          <div class="module-badge">8</div>
+          <div class="module-card__info">
+            <div class="module-card__num">Módulo 08</div>
+            <div class="module-card__title">Reconstruir la confianza</div>
+            <div class="module-card__desc">Reparar relaciones y credibilidad.</div>
+            <div class="module-card__status status--locked">🔒 Próximamente</div>
+          </div>
+        </div>
+
+        <div class="module-card module-locked" data-module="9">
+          <div class="module-badge">9</div>
+          <div class="module-card__info">
+            <div class="module-card__num">Módulo 09</div>
+            <div class="module-card__title">Dinero y recuperación</div>
+            <div class="module-card__desc">Estrategia de recuperación financiera.</div>
+            <div class="module-card__status status--locked">🔒 Próximamente</div>
+          </div>
+        </div>
+
+        <div class="module-card module-locked" data-module="10">
+          <div class="module-badge">10</div>
+          <div class="module-card__info">
+            <div class="module-card__num">Módulo 10</div>
+            <div class="module-card__title">La nueva identidad</div>
+            <div class="module-card__desc">Dejar de ser "un jugador".</div>
+            <div class="module-card__status status--locked">🔒 Próximamente</div>
+          </div>
+        </div>
+
+        <div class="module-card module-locked" data-module="11">
+          <div class="module-badge">11</div>
+          <div class="module-card__info">
+            <div class="module-card__num">Módulo 11</div>
+            <div class="module-card__title">Crear nuevos hábitos</div>
+            <div class="module-card__desc">Reemplazar los comportamientos del juego.</div>
+            <div class="module-card__status status--locked">🔒 Próximamente</div>
+          </div>
+        </div>
+
+        <div class="module-card module-locked" data-module="12">
+          <div class="module-badge">12</div>
+          <div class="module-card__info">
+            <div class="module-card__num">Módulo 12</div>
+            <div class="module-card__title">Familia y entorno</div>
+            <div class="module-card__desc">Construir un entorno de apoyo.</div>
+            <div class="module-card__status status--locked">🔒 Próximamente</div>
+          </div>
+        </div>
+
+        <div class="module-card module-locked" data-module="13">
+          <div class="module-badge">13</div>
+          <div class="module-card__info">
+            <div class="module-card__num">Módulo 13</div>
+            <div class="module-card__title">Prevenir recaídas</div>
+            <div class="module-card__desc">Sistemas de prevención de recaídas.</div>
+            <div class="module-card__status status--locked">🔒 Próximamente</div>
+          </div>
+        </div>
+
+        <div class="module-card module-locked" data-module="14">
+          <div class="module-badge">14</div>
+          <div class="module-card__info">
+            <div class="module-card__num">Módulo 14</div>
+            <div class="module-card__title">Diseñar una nueva vida</div>
+            <div class="module-card__desc">Propósito y planificación de futuro.</div>
+            <div class="module-card__status status--locked">🔒 Próximamente</div>
+          </div>
+        </div>
+
+        <div class="module-card module-locked" data-module="15" style="border-color:rgba(201,168,76,0.15);">
+          <div class="module-badge" style="border-color:rgba(201,168,76,0.3);color:var(--gold);">15</div>
+          <div class="module-card__info">
+            <div class="module-card__num" style="color:var(--gold);">Módulo Final</div>
+            <div class="module-card__title">El futuro empieza hoy</div>
+            <div class="module-card__desc">Transformación final y compromiso definitivo.</div>
+            <div class="module-card__status status--locked">🔒 Próximamente</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </main>
+</div>
+<script src="js/app.js"></script>
+</body>
+</html>

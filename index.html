@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Programa de Recuperación ETC — Equilibra Tu Camino</title>
+  <meta name="description" content="15 módulos para recuperar el control de tu vida. El programa de recuperación de ludopatía más completo en español.">
+  <link rel="stylesheet" href="css/design-system.css">
+  <style>
+    /* ── HERO ──────────────────────────────────────────────────── */
+    .hero {
+      min-height: 100svh;
+      display: grid;
+      place-items: center;
+      position: relative;
+      overflow: hidden;
+      padding: calc(64px + var(--s20)) var(--s6) var(--s20);
+    }
+    .hero__bg {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 50% 0%, rgba(50,180,140,0.12) 0%, transparent 70%),
+        radial-gradient(ellipse 60% 40% at 80% 60%, rgba(201,168,76,0.06) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .hero__grid-overlay {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+      background-size: 80px 80px;
+      mask-image: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.4) 30%, rgba(0,0,0,0.4) 70%, transparent 100%);
+      pointer-events: none;
+    }
+    .hero__content {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      max-width: 860px;
+    }
+    .hero__eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--s2);
+      margin-bottom: var(--s8);
+    }
+    .hero__eyebrow-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--teal);
+      animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50%       { opacity: 0.5; transform: scale(0.8); }
+    }
+    .hero__title {
+      font-family: var(--font-serif);
+      font-size: clamp(3rem, 7vw, 5.5rem);
+      font-weight: 600;
+      line-height: 1.08;
+      letter-spacing: -0.03em;
+      margin-bottom: var(--s6);
+    }
+    .hero__title em {
+      font-style: italic;
+      color: var(--teal);
+    }
+    .hero__subtitle {
+      font-size: clamp(1rem, 2vw, 1.25rem);
+      color: var(--text-muted);
+      max-width: 560px;
+      margin: 0 auto var(--s10);
+      line-height: 1.65;
+    }
+    .hero__cta-group {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--s4);
+      flex-wrap: wrap;
+    }
+    .hero__scroll {
+      position: absolute;
+      bottom: var(--s8);
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--s2);
+      color: var(--text-subtle);
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      animation: float 3s ease-in-out infinite;
+    }
+    @keyframes float {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50%       { transform: translateX(-50%) translateY(6px); }
+    }
+    .hero__scroll-line {
+      width: 1px; height: 40px;
+      background: linear-gradient(to bottom, var(--text-subtle), transparent);
+    }
+
+    /* ── STATS BAR ──────────────────────────────────────────────── */
+    .stats-bar {
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: var(--s8) 0;
+      background: var(--bg-1);
+    }
+    .stats-bar__grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--s6);
+    }
+    .stat-item {
+      text-align: center;
+      padding: var(--s4);
+    }
+    .stat-item__number {
+      font-family: var(--font-serif);
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 600;
+      color: var(--text);
+      line-height: 1;
+      margin-bottom: var(--s2);
+    }
+    .stat-item__label { font-size: 0.85rem; color: var(--text-muted); }
+
+    /* ── INSTRUCTORS ────────────────────────────────────────────── */
+    .instructors { padding: var(--s24) 0; }
+    .instructors__grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--s6);
+      margin-top: var(--s12);
+    }
+    .instructor-card {
+      background: var(--bg-2);
+      border: 1px solid var(--border);
+      border-radius: var(--r-xl);
+      overflow: hidden;
+      transition: border-color var(--t-mid) var(--ease);
+    }
+    .instructor-card:hover { border-color: var(--border-md); }
+    .instructor-card__image {
+      width: 100%; height: 260px;
+      background: var(--bg-3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .instructor-card__image::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 80px;
+      background: linear-gradient(to top, var(--bg-2), transparent);
+    }
+    .instructor-placeholder {
+      width: 80px; height: 80px;
+      border-radius: 50%;
+      background: var(--bg-4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-serif);
+      font-size: 2rem;
+      color: var(--teal);
+      font-weight: 600;
+    }
+    .instructor-card__body { padding: var(--s6); }
+    .instructor-card__name {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: var(--s2);
+    }
+    .instructor-card__role {
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: var(--s4);
+    }
+    .instructor-card__bio {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+
+    /* ── MODULES PREVIEW ────────────────────────────────────────── */
+    .modules-preview { padding: var(--s24) 0; background: var(--bg-1); }
+    .modules-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--s4);
+      margin-top: var(--s12);
+    }
+    .module-preview-card {
+      background: var(--bg-2);
+      border: 1px solid var(--border);
+      border-radius: var(--r-lg);
+      padding: var(--s5);
+      transition: all var(--t-mid) var(--ease);
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+    .module-preview-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, var(--teal-lt), transparent);
+      opacity: 0;
+      transition: opacity var(--t-mid);
+    }
+    .module-preview-card:hover {
+      border-color: rgba(50,180,140,0.3);
+      transform: translateY(-3px);
+    }
+    .module-preview-card:hover::before { opacity: 1; }
+    .module-num {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: var(--s3);
+    }
+    .module-preview-card h3 {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: var(--s2);
+      color: var(--text);
+    }
+    .module-preview-card p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.5; }
+
+    /* ── PRICING ────────────────────────────────────────────────── */
+    .pricing { padding: var(--s24) 0; }
+    .pricing__card {
+      max-width: 520px;
+      margin: var(--s12) auto 0;
+      background: var(--bg-2);
+      border: 1px solid var(--border-md);
+      border-radius: var(--r-xl);
+      overflow: hidden;
+    }
+    .pricing__top {
+      background: linear-gradient(135deg, var(--teal-lt), transparent);
+      border-bottom: 1px solid var(--border);
+      padding: var(--s8);
+      text-align: center;
+    }
+    .pricing__price {
+      font-family: var(--font-serif);
+      font-size: 4rem;
+      font-weight: 600;
+      color: var(--text);
+      line-height: 1;
+      margin: var(--s4) 0 var(--s2);
+    }
+    .pricing__price sup { font-size: 1.5rem; vertical-align: super; margin-right: 2px; }
+    .pricing__period { font-size: 0.85rem; color: var(--text-muted); }
+    .pricing__body { padding: var(--s8); }
+    .pricing__features { display: flex; flex-direction: column; gap: var(--s4); margin-bottom: var(--s8); }
+    .pricing__feature {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--s3);
+      font-size: 0.95rem;
+      color: var(--text-muted);
+    }
+    .pricing__check {
+      width: 18px; height: 18px;
+      border-radius: 50%;
+      background: var(--teal-lt);
+      border: 1px solid rgba(50,180,140,0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 2px;
+      color: var(--teal);
+    }
+    .pricing__guarantee {
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--text-subtle);
+      margin-top: var(--s4);
+    }
+
+    /* ── FAQ ────────────────────────────────────────────────────── */
+    .faq { padding: var(--s24) 0; background: var(--bg-1); }
+    .faq__list { margin-top: var(--s12); max-width: 680px; margin-left: auto; margin-right: auto; }
+    .faq-item {
+      border-bottom: 1px solid var(--border);
+    }
+    .faq-trigger {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: var(--s5) 0;
+      font-size: 1rem;
+      font-weight: 500;
+      color: var(--text);
+      text-align: left;
+      cursor: pointer;
+      transition: color var(--t-fast);
+      background: none;
+      border: none;
+    }
+    .faq-trigger:hover { color: var(--teal); }
+    .faq-icon {
+      width: 20px; height: 20px;
+      border-radius: 50%;
+      border: 1px solid var(--border-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: transform var(--t-mid) var(--ease), background var(--t-mid);
+    }
+    .faq-item.open .faq-icon { transform: rotate(45deg); background: var(--teal-lt); border-color: var(--teal); }
+    .faq-body { max-height: 0; overflow: hidden; transition: max-height var(--t-slow) var(--ease); }
+    .faq-body p { padding: 0 0 var(--s5); font-size: 0.95rem; color: var(--text-muted); line-height: 1.7; }
+
+    /* ── FINAL CTA ──────────────────────────────────────────────── */
+    .final-cta {
+      padding: var(--s24) 0;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .final-cta::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 70% 60% at 50% 50%, var(--teal-lt), transparent);
+      pointer-events: none;
+    }
+    .final-cta__content { position: relative; z-index: 1; }
+
+    /* ── FOOTER ─────────────────────────────────────────────────── */
+    .footer {
+      border-top: 1px solid var(--border);
+      padding: var(--s8) 0;
+    }
+    .footer__inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--s4);
+      flex-wrap: wrap;
+    }
+    .footer__copy { font-size: 0.8rem; color: var(--text-subtle); }
+    .footer__links { display: flex; gap: var(--s5); }
+    .footer__links a { font-size: 0.8rem; color: var(--text-subtle); transition: color var(--t-fast); }
+    .footer__links a:hover { color: var(--text-muted); }
+
+    @media (max-width: 768px) {
+      .stats-bar__grid { grid-template-columns: repeat(2, 1fr); }
+      .instructors__grid { grid-template-columns: 1fr; }
+      .modules-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── NAV ──────────────────────────────────────────────────── -->
+  <nav class="nav">
+    <div class="container">
+      <div class="nav__inner">
+        <a class="nav__logo" href="index.html">ETC<span>.</span></a>
+        <div class="nav__links">
+          <a href="#modulos">Módulos</a>
+          <a href="#instructores">Instructores</a>
+          <a href="#precio">Precio</a>
+          <a href="programa.html" class="btn btn--primary" style="padding:0.5rem 1.25rem;font-size:0.85rem;">Entrar al programa</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ── HERO ─────────────────────────────────────────────────── -->
+  <section class="hero">
+    <div class="hero__bg"></div>
+    <div class="hero__grid-overlay"></div>
+    <div class="hero__content">
+      <div class="hero__eyebrow" data-reveal>
+        <div class="hero__eyebrow-dot"></div>
+        <span class="pill pill--teal">Primer programa en español</span>
+      </div>
+      <h1 class="hero__title" data-reveal data-delay="1">
+        Programa de<br><em>Recuperación</em><br>ETC
+      </h1>
+      <p class="hero__subtitle" data-reveal data-delay="2">
+        15 módulos para recuperar el control de tu vida.<br>
+        Creado por quienes lo han vivido.
+      </p>
+      <div class="hero__cta-group" data-reveal data-delay="3">
+        <a href="#precio" class="btn btn--primary btn--lg">Empezar ahora</a>
+        <a href="#modulos" class="btn btn--outline btn--lg">Ver el programa</a>
+      </div>
+    </div>
+    <div class="hero__scroll">
+      <div class="hero__scroll-line"></div>
+      <span>Descubrir</span>
+    </div>
+  </section>
+
+  <!-- ── STATS BAR ─────────────────────────────────────────────── -->
+  <div class="stats-bar">
+    <div class="container">
+      <div class="stats-bar__grid">
+        <div class="stat-item" data-reveal>
+          <div class="stat-item__number">
+            <span data-count="500" data-suffix="+">500+</span>
+          </div>
+          <div class="stat-item__label">personas atendidas</div>
+        </div>
+        <div class="stat-item" data-reveal data-delay="1">
+          <div class="stat-item__number">
+            <span data-count="15" data-suffix="">15</span>
+          </div>
+          <div class="stat-item__label">módulos en profundidad</div>
+        </div>
+        <div class="stat-item" data-reveal data-delay="2">
+          <div class="stat-item__number">
+            <span data-count="20" data-suffix="+">20+</span>
+          </div>
+          <div class="stat-item__label">años de experiencia</div>
+        </div>
+        <div class="stat-item" data-reveal data-delay="3">
+          <div class="stat-item__number">
+            <span data-count="100" data-suffix="%">100%</span>
+          </div>
+          <div class="stat-item__label">online y privado</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── INSTRUCTORS ────────────────────────────────────────────── -->
+  <section class="instructors" id="instructores">
+    <div class="container">
+      <div class="text-center" data-reveal>
+        <span class="t-label">Los instructores</span>
+        <h2 class="t-display-sm" style="margin-top:var(--s4);">
+          Te entienden porque<br><em style="font-style:italic;color:var(--teal);">lo han vivido.</em>
+        </h2>
+        <p class="t-body-lg" style="margin-top:var(--s5);max-width:520px;margin-left:auto;margin-right:auto;">
+          No hay teoría sin experiencia. Nacho y Marcos combinan conocimiento clínico con la única perspectiva que realmente importa.
+        </p>
+      </div>
+
+      <div class="instructors__grid">
+        <!-- Nacho -->
+        <div class="instructor-card" data-reveal data-delay="1">
+          <div class="instructor-card__image">
+            <div class="instructor-placeholder">N</div>
+          </div>
+          <div class="instructor-card__body">
+            <div class="instructor-card__role">Fundador · Ex-ludópata</div>
+            <div class="instructor-card__name">Nacho</div>
+            <p class="instructor-card__bio">
+              Convivió con la ludopatía desde la adolescencia. Perdió más de €40.000 en menos de 48 horas y pasó cerca de 10 años atrapado en la adicción. Hoy lidera ETC desde un lugar distinto: la experiencia real. No desde la teoría. Desde haber estado ahí.
+            </p>
+            <div style="margin-top:var(--s5);display:flex;gap:var(--s3);flex-wrap:wrap;">
+              <span class="pill pill--teal">20 años de experiencia</span>
+              <span class="pill">500+ sesiones</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Marcos -->
+        <div class="instructor-card" data-reveal data-delay="2">
+          <div class="instructor-card__image">
+            <div class="instructor-placeholder">M</div>
+          </div>
+          <div class="instructor-card__body">
+            <div class="instructor-card__role">Especialista · Referente nacional</div>
+            <div class="instructor-card__name">Marcos Agudo</div>
+            <p class="instructor-card__bio">
+              Uno de los profesionales más respetados en el tratamiento de la adicción al juego en España. Autor, conferenciante con más de 50 charlas, colaborador en TV y radio. Aporta el rigor clínico que complementa la experiencia vivida de Nacho.
+            </p>
+            <div style="margin-top:var(--s5);display:flex;gap:var(--s3);flex-wrap:wrap;">
+              <span class="pill pill--gold">Autor publicado</span>
+              <span class="pill">50+ charlas</span>
+              <span class="pill">TV y radio</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── MODULES PREVIEW ────────────────────────────────────────── -->
+  <section class="modules-preview" id="modulos">
+    <div class="container">
+      <div class="text-center" data-reveal>
+        <span class="t-label">El programa</span>
+        <h2 class="t-display-sm" style="margin-top:var(--s4);">15 módulos.<br>Un objetivo.</h2>
+        <p class="t-body-lg" style="margin-top:var(--s5);max-width:480px;margin-left:auto;margin-right:auto;">
+          Cada módulo construye sobre el anterior. Avanzas a tu ritmo, sin presión.
+        </p>
+      </div>
+
+      <div class="modules-grid" style="margin-top:var(--s12);">
+        <div class="module-preview-card" data-reveal data-delay="1">
+          <div class="module-num">Módulo 01</div>
+          <h3>Aceptar la realidad</h3>
+          <p>Entender la adicción al juego y romper la negación.</p>
+        </div>
+        <div class="module-preview-card" data-reveal data-delay="1">
+          <div class="module-num">Módulo 02</div>
+          <h3>La mente de un ludópata</h3>
+          <p>La psicología de la adicción al juego.</p>
+        </div>
+        <div class="module-preview-card" data-reveal data-delay="2">
+          <div class="module-num">Módulo 03</div>
+          <h3>Dopamina y cerebro</h3>
+          <p>Qué le hace el juego a tu cerebro.</p>
+        </div>
+        <div class="module-preview-card" data-reveal data-delay="2">
+          <div class="module-num">Módulo 04</div>
+          <h3>Las mentiras que te cuentas</h3>
+          <p>Distorsiones cognitivas y autoengaño.</p>
+        </div>
+        <div class="module-preview-card" data-reveal data-delay="3">
+          <div class="module-num">Módulo 05</div>
+          <h3>Romper el ciclo</h3>
+          <p>Cómo la adicción se mantiene a sí misma.</p>
+        </div>
+        <div class="module-preview-card" data-reveal data-delay="3">
+          <div class="module-num">Módulo 06</div>
+          <h3>Gestión de impulsos</h3>
+          <p>Manejar los antojos y la urgencia de jugar.</p>
+        </div>
+        <div class="module-preview-card" data-reveal data-delay="1">
+          <div class="module-num">Módulo 07</div>
+          <h3>Ansiedad, culpa y vergüenza</h3>
+          <p>Las trampas emocionales de la adicción.</p>
+        </div>
+        <div class="module-preview-card" data-reveal data-delay="2">
+          <div class="module-num">Módulo 08</div>
+          <h3>Reconstruir la confianza</h3>
+          <p>Reparar relaciones y credibilidad.</p>
+        </div>
+        <div class="module-preview-card" data-reveal data-delay="3">
+          <div class="module-num">Módulo 09</div>
+          <h3>Dinero y recuperación</h3>
+          <p>Estrategia de recuperación financiera.</p>
+        </div>
+        <div class="module-preview-card" data-reveal data-delay="1">
+          <div class="module-num">Módulo 10</div>
+          <h3>La nueva identidad</h3>
+          <p>Dejar de ser "un jugador".</p>
+        </div>
+        <div class="module-preview-card" data-reveal data-delay="2">
+          <div class="module-num">Módulo 11</div>
+          <h3>Crear nuevos hábitos</h3>
+          <p>Reemplazar los comportamientos del juego.</p>
+        </div>
+        <div class="module-preview-card" data-reveal data-delay="3">
+          <div class="module-num">Módulo 12</div>
+          <h3>Familia y entorno</h3>
+          <p>Construir un entorno de apoyo.</p>
+        </div>
+        <div class="module-preview-card" data-reveal data-delay="1">
+          <div class="module-num">Módulo 13</div>
+          <h3>Prevenir recaídas</h3>
+          <p>Sistemas de prevención de recaídas.</p>
+        </div>
+        <div class="module-preview-card" data-reveal data-delay="2">
+          <div class="module-num">Módulo 14</div>
+          <h3>Diseñar una nueva vida</h3>
+          <p>Propósito y planificación de futuro.</p>
+        </div>
+        <div class="module-preview-card" data-reveal data-delay="3" style="border-color:rgba(50,180,140,0.3);">
+          <div class="module-num" style="color:var(--gold);">Módulo 15</div>
+          <h3>El futuro empieza hoy</h3>
+          <p>Transformación final y compromiso definitivo.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── PRICING ────────────────────────────────────────────────── -->
+  <section class="pricing" id="precio">
+    <div class="container container--narrow">
+      <div class="text-center" data-reveal>
+        <span class="t-label">Inversión</span>
+        <h2 class="t-display-sm" style="margin-top:var(--s4);">Un pago.<br>Acceso de por vida.</h2>
+        <p class="t-body-lg" style="margin-top:var(--s5);">
+          Sin suscripciones. Sin sorpresas. Acceso completo a los 15 módulos.
+        </p>
+      </div>
+
+      <div class="pricing__card" data-reveal data-delay="1">
+        <div class="pricing__top">
+          <span class="pill pill--teal">Programa completo</span>
+          <div class="pricing__price"><sup>€</sup>127</div>
+          <div class="pricing__period">pago único · acceso de por vida</div>
+        </div>
+        <div class="pricing__body">
+          <div class="pricing__features">
+            <div class="pricing__feature">
+              <div class="pricing__check">
+                <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M1.5 5l2.5 2.5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+              <span>15 módulos en vídeo de alta calidad</span>
+            </div>
+            <div class="pricing__feature">
+              <div class="pricing__check">
+                <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M1.5 5l2.5 2.5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+              <span>Ejercicios prácticos por módulo</span>
+            </div>
+            <div class="pricing__feature">
+              <div class="pricing__check">
+                <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M1.5 5l2.5 2.5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+              <span>Impartido por Nacho y Marcos Agudo</span>
+            </div>
+            <div class="pricing__feature">
+              <div class="pricing__check">
+                <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M1.5 5l2.5 2.5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+              <span>Acceso en móvil, tablet y ordenador</span>
+            </div>
+            <div class="pricing__feature">
+              <div class="pricing__check">
+                <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M1.5 5l2.5 2.5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+              <span>Avanza a tu propio ritmo, sin límites</span>
+            </div>
+            <div class="pricing__feature">
+              <div class="pricing__check" style="background:var(--gold-lt);border-color:rgba(201,168,76,0.3);color:var(--gold);">
+                <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M1.5 5l2.5 2.5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+              <span><strong style="color:var(--gold);">Bonus:</strong> posibilidad de sesión privada con Nacho</span>
+            </div>
+          </div>
+          <a href="programa.html" class="btn btn--primary w-full btn--lg">Empezar el programa ahora</a>
+          <p class="pricing__guarantee">🔒 Pago seguro · 100% privado y confidencial</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FAQ ───────────────────────────────────────────────────── -->
+  <section class="faq">
+    <div class="container">
+      <div class="text-center" data-reveal>
+        <span class="t-label">Preguntas frecuentes</span>
+        <h2 class="t-display-sm" style="margin-top:var(--s4);">Lo que más nos preguntan.</h2>
+      </div>
+      <div class="faq__list">
+        <div class="faq-item" data-reveal data-delay="1">
+          <button class="faq-trigger">
+            <span>¿Para quién es este programa?</span>
+            <div class="faq-icon">
+              <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M5 1v8M1 5h8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            </div>
+          </button>
+          <div class="faq-body">
+            <p>Para cualquier persona que quiera entender y superar su adicción al juego. También es útil para familiares que quieren comprender mejor lo que vive su ser querido. No hace falta haber "tocado fondo" para empezar.</p>
+          </div>
+        </div>
+        <div class="faq-item" data-reveal data-delay="2">
+          <button class="faq-trigger">
+            <span>¿Esto sustituye a la terapia?</span>
+            <div class="faq-icon">
+              <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M5 1v8M1 5h8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            </div>
+          </button>
+          <div class="faq-body">
+            <p>No. Este programa es complementario a la terapia individual. Es ideal como punto de partida, como refuerzo entre sesiones o para quienes aún no están listos para la terapia personalizada. El objetivo es darte herramientas y comprensión. Si después quieres iniciar terapia con nosotros, puedes hacerlo.</p>
+          </div>
+        </div>
+        <div class="faq-item" data-reveal data-delay="3">
+          <button class="faq-trigger">
+            <span>¿Cuánto tiempo necesito cada día?</span>
+            <div class="faq-icon">
+              <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M5 1v8M1 5h8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            </div>
+          </button>
+          <div class="faq-body">
+            <p>Cada módulo dura entre 20 y 40 minutos. Avanzas a tu propio ritmo. Puedes completarlo en pocas semanas o tomarte meses — no hay límite. El acceso es de por vida.</p>
+          </div>
+        </div>
+        <div class="faq-item" data-reveal data-delay="4">
+          <button class="faq-trigger">
+            <span>¿Es confidencial?</span>
+            <div class="faq-icon">
+              <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M5 1v8M1 5h8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            </div>
+          </button>
+          <div class="faq-body">
+            <p>Completamente. Nadie tiene que saber que estás haciendo este programa. Accedes desde cualquier dispositivo de forma privada. No enviamos correos llamativos ni aparecemos en tu extracto bancario con un nombre comprometedor.</p>
+          </div>
+        </div>
+        <div class="faq-item" data-reveal data-delay="5">
+          <button class="faq-trigger">
+            <span>¿Y si tengo dudas durante el programa?</span>
+            <div class="faq-icon">
+              <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M5 1v8M1 5h8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            </div>
+          </button>
+          <div class="faq-body">
+            <p>Al finalizar los 15 módulos tienes la opción de reservar una sesión privada con Nacho y Marcos. Una hora para hablar de tu situación, resolver dudas y diseñar los siguientes pasos juntos.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FINAL CTA ──────────────────────────────────────────────── -->
+  <section class="final-cta">
+    <div class="container container--narrow">
+      <div class="final-cta__content" data-reveal>
+        <span class="t-label">El siguiente paso</span>
+        <h2 class="t-display" style="margin-top:var(--s5);margin-bottom:var(--s5);">
+          El futuro<br><em class="serif" style="font-style:italic;color:var(--teal);">empieza hoy.</em>
+        </h2>
+        <p class="t-body-lg" style="max-width:480px;margin:0 auto var(--s10);">
+          Miles de personas han empezado exactamente donde estás tú ahora.
+        </p>
+        <a href="programa.html" class="btn btn--primary btn--lg">Entrar al programa →</a>
+        <p class="t-small" style="margin-top:var(--s5);">€127 · pago único · acceso de por vida</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FOOTER ─────────────────────────────────────────────────── -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__inner">
+        <div>
+          <div style="font-weight:800;font-size:1.1rem;letter-spacing:-0.02em;margin-bottom:4px;">ETC<span style="color:var(--teal);">.</span></div>
+          <div class="footer__copy">© 2026 Equilibra Tu Camino · equilibratucamino@gmail.com</div>
+        </div>
+        <div class="footer__links">
+          <a href="https://app.equilibratucamino.com">Web principal</a>
+          <a href="#">Privacidad</a>
+          <a href="#">Aviso legal</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
