@@ -2,6 +2,13 @@
    ETC Recovery Program — App JS
    ═══════════════════════════════════════════════════════════════════ */
 
+/* ── GREETING ────────────────────────────────────────────────────── */
+const greetingEl = document.querySelector('[data-greeting]');
+if (greetingEl) {
+  const h = new Date().getHours();
+  greetingEl.textContent = h < 12 ? 'Buenos días' : h < 20 ? 'Buenas tardes' : 'Buenas noches';
+}
+
 /* ── NAV SCROLL ─────────────────────────────────────────────────── */
 const nav = document.querySelector('.nav');
 if (nav) {
