@@ -303,7 +303,9 @@
 
 <!-- TOP NAV -->
 <nav class="topnav">
-  <div class="topnav__logo">ETC<span>.</span></div>
+  <a href="index.html" class="topnav__logo">
+    <img src="images/logo-etc-transparent.webp" alt="ETC." style="height:24px;width:auto;">
+  </a>
   <div class="topnav__right">
     <a href="https://app.equilibratucamino.com" class="topnav__link">← Volver a la web</a>
     <div class="topnav__avatar" id="userInitials">TÚ</div>
@@ -318,7 +320,7 @@
     <!-- Progreso hero -->
     <div class="progress-hero" data-reveal>
       <div class="progress-hero__label">Programa de Recuperación ETC.</div>
-      <h1 class="progress-hero__title" id="heroTitle">Bienvenido al curso.<br><em>Empieza cuando quieras.</em></h1>
+      <h1 class="progress-hero__title" id="heroTitle">Bienvenido al curso.<br><em>Empieza ya.</em></h1>
       <div class="progress-hero__bar-wrap">
         <div class="progress-hero__bar-label">
           <span id="progressLabel" style="color:var(--muted);font-size:0.8rem;">0 de 15 clases completadas</span>
@@ -501,6 +503,29 @@ MODULES.forEach(m => {
   `;
   list.appendChild(item);
 });
+
+/* ── Bloque certificado después del módulo 15 ── */
+const certBlock = document.createElement('div');
+certBlock.style.cssText = `
+  margin-top: 32px;
+  padding: 40px 36px;
+  background: linear-gradient(135deg, #FFF8E1, #FFFDE7);
+  border: 2px solid rgba(232,169,0,0.3);
+  border-radius: 24px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+`;
+certBlock.innerHTML = `
+  <div style="font-size:3rem;margin-bottom:16px;line-height:1;">🏆</div>
+  <div style="font-size:0.68rem;font-weight:600;letter-spacing:0.13em;text-transform:uppercase;color:#B45309;margin-bottom:10px;">Al completar las 15 clases</div>
+  <div style="font-family:'Fraunces',Georgia,serif;font-size:clamp(1.4rem,2.5vw,2rem);font-weight:400;color:#92400E;line-height:1.2;margin-bottom:12px;">¡Consigues tu<br><em style="font-style:italic;">certificado!</em></div>
+  <p style="font-size:0.88rem;font-weight:300;color:#78350F;line-height:1.65;max-width:420px;margin:0 auto 24px;">Un certificado personalizado firmado por Nacho y Marcos Agudo que reconoce lo que has conseguido.</p>
+  <a href="index.html#cert-section" style="display:inline-flex;align-items:center;gap:8px;background:#E8A900;color:#fff;font-size:0.9rem;font-weight:500;padding:13px 28px;border-radius:999px;text-decoration:none;box-shadow:0 4px 20px rgba(232,169,0,0.3);">
+    Ver mi certificado →
+  </a>
+`;
+list.appendChild(certBlock);
 
 /* ── Reveal animation ── */
 document.querySelectorAll('[data-reveal]').forEach(el => {
