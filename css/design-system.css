@@ -1,27 +1,27 @@
 /* ═══════════════════════════════════════════════════════════════════
-   ETC RECOVERY PROGRAM — Design System
-   Aesthetic: Apple × Masterclass × Calm
+   ETC CURSO — Design System
+   Estética: Premium Wellness · Blanco · Teal · Minimalista
    ═══════════════════════════════════════════════════════════════════ */
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,300;0,14..32,400;0,14..32,500;0,14..32,600;0,14..32,700;1,14..32,300;1,14..32,400&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,700;1,9..144,500;1,9..144,700&family=Inter:wght@300;400;500;600;700&display=swap');
 
 /* ── TOKENS ─────────────────────────────────────────────────────── */
 :root {
-  /* Background layers */
-  --bg:          #0A0A0A;
-  --bg-1:        #111111;
-  --bg-2:        #161616;
-  --bg-3:        #1E1E1E;
-  --bg-4:        #262626;
+  /* Backgrounds — claros, limpios */
+  --bg:          #FAFAF8;
+  --bg-1:        #F4F4F0;
+  --bg-2:        #FFFFFF;
+  --bg-3:        #EEF1EE;
+  --bg-4:        #E4E8E4;
 
   /* Borders */
-  --border:      rgba(255,255,255,0.08);
-  --border-md:   rgba(255,255,255,0.12);
+  --border:      rgba(0,0,0,0.07);
+  --border-md:   rgba(0,0,0,0.12);
 
   /* Text */
-  --text:        #F2F2F0;
-  --text-muted:  #888882;
-  --text-subtle: #555550;
+  --text:        #1A1A1A;
+  --text-muted:  #6B7280;
+  --text-subtle: #9CA3AF;
 
   /* Brand — Teal */
   --teal:        #32B48C;
@@ -37,9 +37,9 @@
   --success:     #32B48C;
   --red:         #E53E3E;
 
-  /* Typography */
+  /* Typography — igual que la landing de ETC */
   --font-sans:   'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-serif:  'Playfair Display', Georgia, serif;
+  --font-serif:  'Fraunces', Georgia, serif;
 
   /* Spacing scale */
   --s1: 0.25rem;
