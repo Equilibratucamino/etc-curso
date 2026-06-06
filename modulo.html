@@ -6,7 +6,20 @@
   <title>Módulo 05 — Romper el ciclo · ETC Recovery</title>
   <link rel="stylesheet" href="css/design-system.css">
   <style>
-    body { background: var(--bg); }
+    /* ── DARK OVERRIDE para modo cinematico ── */
+    :root {
+      --bg:          #0A0A0A;
+      --bg-1:        #111111;
+      --bg-2:        #161616;
+      --bg-3:        #1E1E1E;
+      --bg-4:        #262626;
+      --border:      rgba(255,255,255,0.08);
+      --border-md:   rgba(255,255,255,0.13);
+      --text:        #F2F2F0;
+      --text-muted:  #888882;
+      --text-subtle: #555550;
+    }
+    body { background: var(--bg); color: var(--text); }
 
     /* ── TOP NAV ─────────────────────────────────────────────────── */
     .lesson-nav {
@@ -439,6 +452,48 @@
           Siguiente: <strong>Clase 06 — Gestión de impulsos</strong>
         </p>
       </div>
+
+      <!-- ── BLOQUE ESPECIAL CLASE 15 (solo visible en la última clase) ── -->
+      <div id="class15Block" style="display:none;margin-top:var(--s8);">
+        <!-- Certificado -->
+        <div style="
+          background: linear-gradient(135deg, rgba(232,169,0,0.1), rgba(232,169,0,0.04));
+          border: 1.5px solid rgba(232,169,0,0.3);
+          border-radius: 24px; padding: 36px; text-align: center; margin-bottom: 24px;
+        ">
+          <div style="font-size:2.5rem;margin-bottom:12px;">🏆</div>
+          <div style="font-size:0.68rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:#E8A900;margin-bottom:8px;">¡Lo has conseguido!</div>
+          <div style="font-family:'Fraunces',Georgia,serif;font-size:1.6rem;font-weight:400;color:#fff;line-height:1.2;margin-bottom:10px;">
+            <em style="font-style:italic;">¡Consigues tu certificado!</em>
+          </div>
+          <p style="font-size:0.88rem;font-weight:300;color:rgba(255,255,255,.5);line-height:1.65;margin-bottom:20px;">
+            Has completado las 15 clases del Programa de Recuperación ETC. Tu certificado personalizado te está esperando.
+          </p>
+          <a href="dashboard.html" class="btn btn--primary btn--lg" style="display:inline-flex;">
+            🏅 Ver mi certificado →
+          </a>
+        </div>
+
+        <!-- Sesión con Nacho -->
+        <div style="
+          background: linear-gradient(135deg, rgba(50,180,140,0.1), rgba(50,180,140,0.04));
+          border: 1px solid rgba(50,180,140,0.25);
+          border-radius: 20px; padding: 28px;
+        ">
+          <div style="font-size:0.68rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--teal);margin-bottom:10px;">El siguiente paso</div>
+          <div style="font-family:'Fraunces',Georgia,serif;font-size:1.2rem;font-weight:400;color:#fff;line-height:1.3;margin-bottom:10px;">
+            Recomendamos tener una sesión con Nacho para trazar un plan de acción.
+          </div>
+          <p style="font-size:0.85rem;font-weight:300;color:rgba(255,255,255,.5);line-height:1.6;margin-bottom:18px;">
+            Has trabajado mucho en este programa. Una sesión personal con Nacho te ayudará a consolidar lo aprendido y diseñar tus próximos pasos con alguien que ha estado donde estás tú.
+          </p>
+          <a href="https://wa.me/34611847645?text=Hola%20Nacho%2C%20acabo%20de%20terminar%20el%20curso%20ETC%20y%20me%20gustar%C3%ADa%20reservar%20una%20sesi%C3%B3n%20contigo%20para%20trazar%20un%20plan%20de%20acci%C3%B3n." class="btn btn--primary" style="display:inline-flex;gap:8px;" target="_blank" rel="noopener">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.117 1.526 5.847L.057 23.535l5.693-1.466A11.944 11.944 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22a9.94 9.94 0 01-5.071-1.388l-.364-.216-3.774.989.998-3.801-.235-.374A9.953 9.953 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+            Reservar sesión con Nacho →
+          </a>
+        </div>
+      </div>
+
     </div>
 
     <!-- Sidebar -->
@@ -534,5 +589,19 @@
 </nav>
 
 <script src="js/app.js"></script>
+<script>
+// Detectar si es la clase 15 por URL param o por localStorage
+(function() {
+  const params = new URLSearchParams(window.location.search);
+  const n = parseInt(params.get('n')) || 5; // default demo = 5
+  if (n === 15) {
+    const block = document.getElementById('class15Block');
+    if (block) block.style.display = 'block';
+    // Actualizar texto del "siguiente" si existe
+    const nextText = document.querySelector('.complete-section p:last-child');
+    if (nextText) nextText.textContent = '¡Has completado el programa completo! 🎉';
+  }
+})();
+</script>
 </body>
 </html>
