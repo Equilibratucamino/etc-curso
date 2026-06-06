@@ -4,153 +4,720 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Curso ETC. — Programa de Recuperación de la Ludopatía</title>
-  <meta name="description" content="15 clases para recuperar el control de tu vida. Creado por quienes lo han vivido.">
+  <meta name="description" content="15 clases creadas por Nacho y Marcos Agudo. El programa más completo en español para superar la adicción al juego.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,700;1,9..144,500&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,700;1,9..144,500;1,9..144,700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html, body { height: 100%; background: #FAFAF8; font-family: 'Inter', -apple-system, sans-serif; color: #1A1A1A; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+    html { font-size: 16px; scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+    body { font-family: 'Inter', -apple-system, sans-serif; color: #1A1A1A; background: #FAFAF8; overflow-x: hidden; }
+    a { text-decoration: none; color: inherit; }
 
-    .blob { position: fixed; border-radius: 50%; pointer-events: none; filter: blur(90px); opacity: 0.15; z-index: 0; }
-    .blob-1 { width: 480px; height: 480px; background: #32B48C; top: -120px; right: -80px; }
-    .blob-2 { width: 360px; height: 360px; background: #C8EDE4; bottom: -60px; left: -60px; }
+    :root {
+      --teal:   #32B48C;
+      --teal-d: #1e8a68;
+      --blue:   #2563EB;
+      --blue-d: #1d4ed8;
+      --gold:   #F5C21B;
+      --dark:   #0D1F17;
+      --muted:  #6B7280;
+    }
 
-    .page { min-height: 100svh; display: flex; flex-direction: column; position: relative; z-index: 1; }
+    /* ════════════════════════════════════════
+       NAV
+    ════════════════════════════════════════ */
+    .nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+      height: 64px;
+      background: rgba(13,31,23,0.92);
+      backdrop-filter: blur(16px);
+      display: flex; align-items: center;
+      padding: 0 40px;
+      justify-content: space-between;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .nav__logo { font-weight: 800; font-size: 1.25rem; letter-spacing: -0.03em; color: #fff; }
+    .nav__logo span { color: var(--teal); }
+    .nav__links { display: flex; align-items: center; gap: 28px; }
+    .nav__link { font-size: 0.85rem; color: rgba(255,255,255,0.6); transition: color 0.15s; }
+    .nav__link:hover { color: #fff; }
+    .nav__cta {
+      background: var(--teal); color: #fff;
+      font-size: 0.85rem; font-weight: 600;
+      padding: 9px 22px; border-radius: 999px;
+      transition: background 0.18s, transform 0.15s;
+    }
+    .nav__cta:hover { background: var(--teal-d); transform: translateY(-1px); }
+    @media (max-width: 640px) { .nav__links { display: none; } .nav { padding: 0 20px; } }
 
-    /* ── NAV ── */
-    .nav { padding: 28px 40px; display: flex; align-items: center; justify-content: space-between; }
-    .nav__logo { font-family: 'Inter', sans-serif; font-weight: 800; font-size: 1.3rem; letter-spacing: -0.03em; color: #1A1A1A; text-decoration: none; }
-    .nav__logo span { color: #32B48C; }
-    .nav__back { font-size: 0.82rem; color: #9CA3AF; text-decoration: none; transition: color 0.2s; }
-    .nav__back:hover { color: #32B48C; }
+    /* ════════════════════════════════════════
+       HERO — oscuro, cinematic
+    ════════════════════════════════════════ */
+    .hero {
+      min-height: 100svh;
+      background: var(--dark);
+      display: flex; align-items: center; justify-content: center;
+      padding: 80px 24px 60px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero__bg {
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 70% 55% at 50% 0%, rgba(50,180,140,0.18) 0%, transparent 65%),
+        radial-gradient(ellipse 50% 40% at 80% 80%, rgba(37,99,235,0.10) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .hero__grid {
+      position: absolute; inset: 0;
+      background-image: linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+                        linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+      background-size: 80px 80px;
+      mask-image: linear-gradient(to bottom, transparent, rgba(0,0,0,0.3) 30%, rgba(0,0,0,0.3) 70%, transparent);
+      pointer-events: none;
+    }
+    .hero__inner {
+      position: relative; z-index: 1;
+      text-align: center; max-width: 760px;
+    }
 
-    /* ── HERO ── */
-    .hero { flex: 1; display: flex; align-items: center; justify-content: center; padding: 20px 24px 72px; }
-    .hero__inner { text-align: center; max-width: 560px; }
-
-    .eyebrow {
+    .hero__badge {
       display: inline-flex; align-items: center; gap: 8px;
-      font-size: 0.7rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase;
-      color: #32B48C; background: rgba(50,180,140,0.08); border: 1px solid rgba(50,180,140,0.22);
+      font-size: 0.7rem; font-weight: 700; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--teal);
+      background: rgba(50,180,140,0.1); border: 1px solid rgba(50,180,140,0.25);
       padding: 5px 14px; border-radius: 100px; margin-bottom: 28px;
     }
-    .eyebrow__dot { width: 6px; height: 6px; border-radius: 50%; background: #32B48C; animation: pulse 2.2s ease-in-out infinite; }
-    @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.35;transform:scale(0.65)} }
+    .hero__badge-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--teal); animation: pulse 2s ease-in-out infinite; }
+    @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.3;transform:scale(0.6)} }
 
     .hero__title {
       font-family: 'Fraunces', Georgia, serif;
-      font-size: clamp(2.4rem, 6vw, 4rem);
-      font-weight: 600; line-height: 1.07; letter-spacing: -0.03em;
-      color: #1A1A1A; margin-bottom: 20px;
+      font-size: clamp(2.6rem, 6.5vw, 5rem);
+      font-weight: 700; line-height: 1.06; letter-spacing: -0.03em;
+      color: #fff; margin-bottom: 22px;
     }
-    .hero__title em { font-style: italic; color: #32B48C; }
+    .hero__title em { font-style: italic; color: var(--teal); }
 
-    .hero__desc {
-      font-size: 1.05rem; font-weight: 300; color: #6B7280;
-      line-height: 1.78; margin-bottom: 8px;
+    .hero__sub {
+      font-size: clamp(1rem, 2vw, 1.2rem);
+      font-weight: 300; color: rgba(255,255,255,0.6);
+      line-height: 1.75; max-width: 520px; margin: 0 auto 36px;
     }
-    .hero__desc strong { font-weight: 500; color: #1A1A1A; }
+    .hero__sub strong { font-weight: 500; color: rgba(255,255,255,0.85); }
 
-    /* Separador */
-    .dots { display: flex; justify-content: center; gap: 5px; margin: 24px 0; }
-    .dots span { width: 4px; height: 4px; border-radius: 50%; background: #D1D5DB; }
-    .dots span:nth-child(2) { background: #32B48C; }
-
-    /* Pills */
-    .pills { display: flex; justify-content: center; gap: 8px; margin-bottom: 36px; flex-wrap: wrap; }
-    .pill {
-      display: inline-flex; align-items: center; gap: 5px;
-      font-size: 0.78rem; font-weight: 400; color: #6B7280;
-      background: #fff; border: 1px solid rgba(0,0,0,0.08);
-      padding: 5px 12px; border-radius: 100px;
+    /* Social proof row */
+    .social-proof {
+      display: flex; align-items: center; justify-content: center;
+      gap: 16px; margin-bottom: 40px; flex-wrap: wrap;
     }
-    .pill svg { color: #32B48C; }
+    .avatar-stack { display: flex; }
+    .avatar-circle {
+      width: 36px; height: 36px; border-radius: 50%;
+      border: 2px solid var(--dark);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.75rem; font-weight: 700; color: #fff;
+      margin-left: -8px;
+    }
+    .avatar-circle:first-child { margin-left: 0; }
+    .avatar-circle.a1 { background: #228A6A; }
+    .avatar-circle.a2 { background: #2563EB; }
+    .avatar-circle.a3 { background: #9333EA; }
+    .avatar-circle.a4 { background: #D97706; }
+    .avatar-circle.a5 { background: #DC2626; }
+    .avatar-circle.amore { background: rgba(255,255,255,0.12); color: rgba(255,255,255,0.7); font-size: 0.6rem; }
 
-    /* CTA */
-    .btn-access {
+    .rating-block { text-align: left; }
+    .stars { color: var(--gold); font-size: 1rem; letter-spacing: 1px; line-height: 1; margin-bottom: 3px; }
+    .rating-text { font-size: 0.78rem; color: rgba(255,255,255,0.5); }
+    .rating-text strong { color: rgba(255,255,255,0.85); }
+
+    /* CTA buttons */
+    .hero__ctas { display: flex; align-items: center; justify-content: center; gap: 14px; flex-wrap: wrap; }
+    .btn-primary {
       display: inline-flex; align-items: center; gap: 10px;
-      background: #32B48C; color: #fff;
-      font-size: 1rem; font-weight: 600; letter-spacing: 0.01em;
-      padding: 16px 36px; border-radius: 999px; text-decoration: none;
-      box-shadow: 0 4px 24px rgba(50,180,140,0.28);
-      transition: background 0.2s, transform 0.18s, box-shadow 0.2s;
+      background: var(--teal); color: #fff;
+      font-size: 1.05rem; font-weight: 600;
+      padding: 16px 36px; border-radius: 999px;
+      box-shadow: 0 6px 28px rgba(50,180,140,0.32);
+      transition: background 0.18s, transform 0.18s, box-shadow 0.18s;
     }
-    .btn-access:hover { background: #228A6A; transform: translateY(-2px); box-shadow: 0 12px 36px rgba(50,180,140,0.35); }
-    .btn-access__arr { width: 22px; height: 22px; background: rgba(255,255,255,0.18); border-radius: 50%; display:flex; align-items:center; justify-content:center; font-size:0.9rem; transition: transform 0.2s; }
-    .btn-access:hover .btn-access__arr { transform: translateX(3px); }
-
-    .hero__note { margin-top: 18px; font-size: 0.78rem; color: #9CA3AF; }
-    .hero__note a { color: #32B48C; text-decoration: none; }
-    .hero__note a:hover { text-decoration: underline; }
-
-    /* ── FOOTER ── */
-    .footer { padding: 20px 40px; text-align: center; font-size: 0.75rem; color: #C4C9C4; border-top: 1px solid rgba(0,0,0,0.05); }
-
-    @media (max-width: 600px) {
-      .nav { padding: 20px; }
-      .hero { padding: 16px 20px 56px; }
-      .hero__title { font-size: 2.1rem; }
-      .footer { padding: 16px 20px; }
-      .pills { gap: 6px; }
+    .btn-primary:hover { background: var(--teal-d); transform: translateY(-2px); box-shadow: 0 12px 36px rgba(50,180,140,0.4); }
+    .btn-ghost {
+      display: inline-flex; align-items: center; gap: 6px;
+      color: rgba(255,255,255,0.55); font-size: 0.9rem;
+      padding: 15px 20px; border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.12);
+      transition: color 0.15s, border-color 0.15s;
     }
+    .btn-ghost:hover { color: #fff; border-color: rgba(255,255,255,0.3); }
+
+    /* ════════════════════════════════════════
+       WHAT'S INSIDE — claro
+    ════════════════════════════════════════ */
+    .inside { padding: 96px 24px; background: #FAFAF8; }
+    .section-label {
+      font-size: 0.7rem; font-weight: 700; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--teal);
+      margin-bottom: 12px;
+    }
+    .section-title {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: clamp(1.9rem, 3.5vw, 2.8rem);
+      font-weight: 600; line-height: 1.12; letter-spacing: -0.025em;
+      color: #1A1A1A; margin-bottom: 16px;
+    }
+    .section-title em { font-style: italic; color: var(--teal); }
+    .section-sub { font-size: 1rem; font-weight: 300; color: var(--muted); line-height: 1.7; max-width: 520px; }
+    .container { max-width: 1100px; margin: 0 auto; }
+
+    .inside__grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 48px; align-items: center; margin-top: 56px;
+    }
+    .features { display: flex; flex-direction: column; gap: 20px; }
+    .feature {
+      display: flex; align-items: flex-start; gap: 16px;
+      padding: 20px 22px;
+      background: #fff; border: 1px solid rgba(0,0,0,0.07);
+      border-radius: 16px;
+      transition: border-color 0.15s, box-shadow 0.15s;
+    }
+    .feature:hover { border-color: rgba(50,180,140,0.25); box-shadow: 0 4px 20px rgba(50,180,140,0.06); }
+    .feature__icon {
+      width: 40px; height: 40px; border-radius: 10px;
+      background: rgba(50,180,140,0.08); border: 1px solid rgba(50,180,140,0.15);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem; flex-shrink: 0;
+    }
+    .feature__title { font-size: 0.95rem; font-weight: 600; margin-bottom: 4px; }
+    .feature__desc { font-size: 0.85rem; color: var(--muted); line-height: 1.55; }
+
+    /* Module preview list */
+    .module-preview { display: flex; flex-direction: column; gap: 6px; }
+    .mod-row {
+      display: flex; align-items: center; gap: 12px;
+      padding: 12px 16px; border-radius: 12px;
+      background: #fff; border: 1px solid rgba(0,0,0,0.06);
+      font-size: 0.88rem;
+      transition: background 0.12s;
+    }
+    .mod-row:hover { background: rgba(50,180,140,0.04); }
+    .mod-num {
+      width: 26px; height: 26px; border-radius: 50%;
+      background: rgba(50,180,140,0.1); border: 1px solid rgba(50,180,140,0.2);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.68rem; font-weight: 700; color: var(--teal); flex-shrink: 0;
+    }
+    .mod-title { flex: 1; font-weight: 400; color: #1A1A1A; }
+    .mod-dur { font-size: 0.75rem; color: var(--muted); flex-shrink: 0; }
+    .mod-row.locked .mod-num { background: rgba(0,0,0,0.04); border-color: rgba(0,0,0,0.08); color: var(--muted); }
+    .mod-row.locked .mod-title { color: var(--muted); }
+    .mod-more {
+      padding: 10px 16px; text-align: center;
+      font-size: 0.8rem; color: var(--teal); font-weight: 500;
+      cursor: pointer;
+    }
+
+    @media (max-width: 768px) {
+      .inside__grid { grid-template-columns: 1fr; gap: 32px; }
+    }
+
+    /* ════════════════════════════════════════
+       INSTRUCTORS — dark section
+    ════════════════════════════════════════ */
+    .instructors {
+      background: var(--dark);
+      padding: 96px 24px;
+      position: relative; overflow: hidden;
+    }
+    .instructors::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse 60% 50% at 50% 100%, rgba(50,180,140,0.12) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .instructors__header { text-align: center; margin-bottom: 64px; position: relative; z-index: 1; }
+    .instructors__header .section-label { color: rgba(50,180,140,0.8); }
+    .instructors__header .section-title { color: #fff; }
+    .instructors__header .section-sub { color: rgba(255,255,255,0.5); margin: 0 auto; }
+
+    .instructors__grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 28px; max-width: 900px; margin: 0 auto;
+      position: relative; z-index: 1;
+    }
+    .instructor-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 24px; overflow: hidden;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .instructor-card:hover { border-color: rgba(50,180,140,0.3); transform: translateY(-3px); }
+    .instructor-card__photo {
+      width: 100%; height: 240px;
+      background: linear-gradient(135deg, rgba(50,180,140,0.1), rgba(37,99,235,0.1));
+      display: flex; align-items: center; justify-content: center;
+      position: relative; overflow: hidden;
+    }
+    .instructor-card__photo img { width: 100%; height: 100%; object-fit: cover; }
+    .instructor-avatar {
+      width: 90px; height: 90px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--teal-d), var(--teal));
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Fraunces', serif; font-size: 2.5rem; font-weight: 700; color: #fff;
+      box-shadow: 0 8px 32px rgba(50,180,140,0.3);
+    }
+    .instructor-card__body { padding: 24px 28px; }
+    .instructor-card__role {
+      font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--teal); margin-bottom: 6px;
+    }
+    .instructor-card__name {
+      font-family: 'Fraunces', serif; font-size: 1.5rem; font-weight: 600;
+      color: #fff; margin-bottom: 12px;
+    }
+    .instructor-card__bio {
+      font-size: 0.88rem; color: rgba(255,255,255,0.55);
+      line-height: 1.7; margin-bottom: 18px;
+    }
+    .instructor-tags { display: flex; gap: 6px; flex-wrap: wrap; }
+    .tag {
+      font-size: 0.72rem; font-weight: 500; color: rgba(255,255,255,0.5);
+      background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.08);
+      padding: 4px 10px; border-radius: 100px;
+    }
+
+    @media (max-width: 640px) {
+      .instructors__grid { grid-template-columns: 1fr; }
+    }
+
+    /* ════════════════════════════════════════
+       CERTIFICATE TEASER — claro
+    ════════════════════════════════════════ */
+    .cert-section {
+      padding: 80px 24px;
+      background: linear-gradient(135deg, #eef9f5, #f7fdf9);
+      border-top: 1px solid rgba(50,180,140,0.1);
+      border-bottom: 1px solid rgba(50,180,140,0.1);
+    }
+    .cert-inner {
+      max-width: 880px; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 48px; align-items: center;
+    }
+    .cert-card {
+      background: #fff;
+      border: 1.5px solid rgba(50,180,140,0.2);
+      border-radius: 20px;
+      padding: 32px;
+      box-shadow: 0 8px 40px rgba(50,180,140,0.1);
+      text-align: center;
+      position: relative; overflow: hidden;
+    }
+    .cert-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 4px;
+      background: linear-gradient(90deg, var(--teal), #2563EB);
+    }
+    .cert-logo { font-weight: 800; font-size: 1.3rem; letter-spacing: -0.03em; color: #1A1A1A; margin-bottom: 8px; }
+    .cert-logo span { color: var(--teal); }
+    .cert-title-card {
+      font-family: 'Fraunces', serif; font-size: 1rem; font-weight: 600;
+      color: var(--muted); margin-bottom: 12px; font-style: italic;
+    }
+    .cert-name {
+      font-family: 'Fraunces', serif; font-size: 1.5rem; font-weight: 700;
+      color: #1A1A1A; border-bottom: 2px solid var(--teal);
+      padding-bottom: 8px; margin-bottom: 12px;
+    }
+    .cert-course { font-size: 0.82rem; color: var(--muted); margin-bottom: 16px; }
+    .cert-seal {
+      width: 52px; height: 52px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--teal-d), var(--teal));
+      margin: 0 auto; display: flex; align-items: center; justify-content: center;
+      font-size: 1.4rem;
+    }
+    .cert-copy .section-label { margin-bottom: 12px; }
+    .cert-copy .section-title { margin-bottom: 16px; font-size: clamp(1.5rem,3vw,2.2rem); }
+    .cert-copy p { font-size: 0.95rem; color: var(--muted); line-height: 1.7; margin-bottom: 24px; }
+    .cert-perks { display: flex; flex-direction: column; gap: 10px; }
+    .cert-perk {
+      display: flex; align-items: center; gap: 10px;
+      font-size: 0.88rem; color: #1A1A1A;
+    }
+    .cert-perk::before {
+      content: '✓'; width: 20px; height: 20px; border-radius: 50%;
+      background: rgba(50,180,140,0.1); border: 1px solid rgba(50,180,140,0.25);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.65rem; font-weight: 700; color: var(--teal); flex-shrink: 0;
+    }
+    @media (max-width: 700px) { .cert-inner { grid-template-columns: 1fr; } }
+
+    /* ════════════════════════════════════════
+       REVIEWS — claro
+    ════════════════════════════════════════ */
+    .reviews { padding: 96px 24px; background: #fff; }
+    .reviews__header { text-align: center; margin-bottom: 56px; }
+    .reviews__hero {
+      display: flex; align-items: center; justify-content: center;
+      gap: 20px; margin-top: 20px; flex-wrap: wrap;
+    }
+    .reviews__avatars { display: flex; }
+    .rev-avatar {
+      width: 42px; height: 42px; border-radius: 50%;
+      border: 2.5px solid #fff;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.8rem; font-weight: 700; color: #fff;
+      margin-left: -10px;
+    }
+    .rev-avatar:first-child { margin-left: 0; }
+    .rev-a1 { background: #228A6A; }
+    .rev-a2 { background: #2563EB; }
+    .rev-a3 { background: #9333EA; }
+    .rev-a4 { background: #D97706; }
+    .rev-a5 { background: #DC2626; }
+    .rev-a6 { background: #0891B2; }
+    .rev-amore { background: #6B7280; font-size: 0.62rem; }
+
+    .reviews__rating { text-align: left; }
+    .reviews__stars { color: var(--gold); font-size: 1.2rem; letter-spacing: 2px; line-height: 1; margin-bottom: 4px; }
+    .reviews__score { font-size: 0.82rem; color: var(--muted); }
+    .reviews__score strong { color: #1A1A1A; font-weight: 700; }
+
+    .reviews__grid {
+      display: grid; grid-template-columns: repeat(3,1fr);
+      gap: 20px; max-width: 960px; margin: 0 auto;
+    }
+    .review-card {
+      background: #FAFAF8;
+      border: 1px solid rgba(0,0,0,0.07);
+      border-radius: 18px; padding: 24px;
+      transition: box-shadow 0.18s;
+    }
+    .review-card:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.07); }
+    .review-stars { color: var(--gold); font-size: 0.88rem; margin-bottom: 12px; }
+    .review-text { font-size: 0.9rem; color: #374151; line-height: 1.65; margin-bottom: 16px; font-style: italic; }
+    .review-author { display: flex; align-items: center; gap: 10px; }
+    .review-av {
+      width: 34px; height: 34px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.75rem; font-weight: 700; color: #fff; flex-shrink: 0;
+    }
+    .review-name { font-size: 0.82rem; font-weight: 600; }
+    .review-source { font-size: 0.72rem; color: var(--muted); }
+    @media (max-width: 700px) { .reviews__grid { grid-template-columns: 1fr; } }
+
+    /* ════════════════════════════════════════
+       FINAL CTA — oscuro
+    ════════════════════════════════════════ */
+    .final-cta {
+      background: var(--dark);
+      padding: 100px 24px;
+      text-align: center;
+      position: relative; overflow: hidden;
+    }
+    .final-cta::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse 60% 50% at 50% 50%, rgba(50,180,140,0.14) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .final-cta__inner { position: relative; z-index: 1; }
+    .final-cta__title {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(2rem, 5vw, 3.6rem);
+      font-weight: 700; line-height: 1.1; letter-spacing: -0.03em;
+      color: #fff; margin-bottom: 20px;
+    }
+    .final-cta__title em { font-style: italic; color: var(--teal); }
+    .final-cta__sub { font-size: 1rem; color: rgba(255,255,255,0.5); margin-bottom: 40px; }
+
+    /* Footer */
+    .footer {
+      background: #0a1810;
+      padding: 28px 40px;
+      display: flex; align-items: center; justify-content: space-between;
+      border-top: 1px solid rgba(255,255,255,0.05);
+      flex-wrap: wrap; gap: 12px;
+    }
+    .footer__logo { font-weight: 800; font-size: 1.1rem; letter-spacing: -0.03em; color: rgba(255,255,255,0.5); }
+    .footer__logo span { color: var(--teal); }
+    .footer__copy { font-size: 0.75rem; color: rgba(255,255,255,0.3); }
+    .footer a { color: rgba(255,255,255,0.4); font-size: 0.78rem; transition: color 0.15s; }
+    .footer a:hover { color: var(--teal); }
   </style>
 </head>
 <body>
-<div class="page">
-  <div class="blob blob-1"></div>
-  <div class="blob blob-2"></div>
 
-  <nav class="nav">
-    <a href="https://app.equilibratucamino.com" class="nav__logo">ETC<span>.</span></a>
-    <a href="https://app.equilibratucamino.com" class="nav__back">← Volver a la web</a>
-  </nav>
+<!-- ── NAV ── -->
+<nav class="nav">
+  <div class="nav__logo">ETC<span>.</span></div>
+  <div class="nav__links">
+    <a href="#curso" class="nav__link">El curso</a>
+    <a href="#instructores" class="nav__link">Instructores</a>
+    <a href="#reviews" class="nav__link">Opiniones</a>
+    <a href="dashboard.html" class="nav__cta">Accede al curso →</a>
+  </div>
+</nav>
 
-  <section class="hero">
-    <div class="hero__inner">
+<!-- ── HERO ── -->
+<section class="hero">
+  <div class="hero__bg"></div>
+  <div class="hero__grid"></div>
+  <div class="hero__inner">
 
-      <div class="eyebrow">
-        <div class="eyebrow__dot"></div>
-        Programa de recuperación ETC.
-      </div>
-
-      <h1 class="hero__title">
-        15 clases para<br><em>recuperar el control.</em>
-      </h1>
-
-      <p class="hero__desc">
-        Creado por <strong>Nacho y Marcos Agudo</strong>, personas que han vivido la adicción al juego y saben exactamente lo que necesitas para salir.
-      </p>
-
-      <div class="dots"><span></span><span></span><span></span></div>
-
-      <div class="pills">
-        <div class="pill">
-          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
-          15 vídeos en profundidad
-        </div>
-        <div class="pill">
-          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-          A tu ritmo · Acceso de por vida
-        </div>
-        <div class="pill">
-          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-          100% privado
-        </div>
-      </div>
-
-      <a href="dashboard.html" class="btn-access">
-        Accede al curso
-        <span class="btn-access__arr">→</span>
-      </a>
-
-      <p class="hero__note">
-        ¿Dudas? <a href="https://wa.me/34611847645?text=Hola%2C%20me%20interesa%20el%20curso%20de%20ETC." target="_blank" rel="noopener">Escríbenos por WhatsApp</a>
-      </p>
+    <div class="hero__badge">
+      <div class="hero__badge-dot"></div>
+      Primer programa en español · Fundado por exludópatas
     </div>
-  </section>
 
-  <footer class="footer">© 2026 ETC. Equilibra Tu Camino</footer>
-</div>
+    <h1 class="hero__title">
+      15 clases para<br><em>recuperar el control</em><br>de tu vida.
+    </h1>
+
+    <p class="hero__sub">
+      Creado por <strong>Nacho y Marcos Agudo</strong> — dos personas que han vivido la adicción al juego y saben exactamente lo que necesitas para salir. Sin teoría vacía. Solo lo que funciona.
+    </p>
+
+    <!-- Social proof -->
+    <div class="social-proof">
+      <div class="avatar-stack">
+        <div class="avatar-circle a1">MA</div>
+        <div class="avatar-circle a2">TR</div>
+        <div class="avatar-circle a3">AI</div>
+        <div class="avatar-circle a4">JL</div>
+        <div class="avatar-circle a5">SO</div>
+        <div class="avatar-circle amore">+42</div>
+      </div>
+      <div class="rating-block">
+        <div class="stars">★★★★★</div>
+        <div class="rating-text"><strong>5.0</strong> · 47 reseñas verificadas en Google</div>
+      </div>
+    </div>
+
+    <div class="hero__ctas">
+      <a href="dashboard.html" class="btn-primary">
+        Accede al curso →
+      </a>
+      <a href="#instructores" class="btn-ghost">
+        Conocer a los instructores ↓
+      </a>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── QUÉ INCLUYE ── -->
+<section class="inside" id="curso">
+  <div class="container">
+    <div class="inside__grid">
+
+      <div>
+        <div class="section-label">El programa</div>
+        <h2 class="section-title">Todo lo que<br><em>necesitas saber.</em></h2>
+        <p class="section-sub" style="margin-bottom:36px;">Cada clase construye sobre la anterior. Avanzas a tu ritmo, con ejercicios prácticos en cada módulo.</p>
+
+        <div class="features">
+          <div class="feature">
+            <div class="feature__icon">📹</div>
+            <div>
+              <div class="feature__title">15 clases en vídeo</div>
+              <div class="feature__desc">En profundidad, directas, sin relleno. Entre 28 y 40 minutos cada una.</div>
+            </div>
+          </div>
+          <div class="feature">
+            <div class="feature__icon">✏️</div>
+            <div>
+              <div class="feature__title">Ejercicios prácticos</div>
+              <div class="feature__desc">Cada clase incluye preguntas de reflexión y ejercicios reales para aplicar lo aprendido.</div>
+            </div>
+          </div>
+          <div class="feature">
+            <div class="feature__icon">🏆</div>
+            <div>
+              <div class="feature__title">Certificado al finalizar</div>
+              <div class="feature__desc">Al completar las 15 clases recibes tu certificado de ETC. Algo real que te llevaste.</div>
+            </div>
+          </div>
+          <div class="feature">
+            <div class="feature__icon">🔓</div>
+            <div>
+              <div class="feature__title">Acceso de por vida</div>
+              <div class="feature__desc">Sin suscripciones. Pago único. Vuelve cuando quieras, desde cualquier dispositivo.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div style="font-size:0.7rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-bottom:12px;">Las 15 clases</div>
+        <div class="module-preview">
+          <div class="mod-row"><div class="mod-num">1</div><div class="mod-title">Aceptar la realidad</div><div class="mod-dur">28 min</div></div>
+          <div class="mod-row"><div class="mod-num">2</div><div class="mod-title">La mente de un ludópata</div><div class="mod-dur">32 min</div></div>
+          <div class="mod-row"><div class="mod-num">3</div><div class="mod-title">Dopamina y cerebro</div><div class="mod-dur">30 min</div></div>
+          <div class="mod-row"><div class="mod-num">4</div><div class="mod-title">Las mentiras que te cuentas</div><div class="mod-dur">35 min</div></div>
+          <div class="mod-row"><div class="mod-num">5</div><div class="mod-title">Romper el ciclo</div><div class="mod-dur">32 min</div></div>
+          <div class="mod-row locked"><div class="mod-num">6</div><div class="mod-title">Gestión de impulsos</div><div class="mod-dur">38 min</div></div>
+          <div class="mod-row locked"><div class="mod-num">7</div><div class="mod-title">Ansiedad, culpa y vergüenza</div><div class="mod-dur">36 min</div></div>
+          <div class="mod-row locked"><div class="mod-num">8</div><div class="mod-title">Reconstruir la confianza</div><div class="mod-dur">34 min</div></div>
+          <div class="mod-row locked"><div class="mod-num">9</div><div class="mod-title">Dinero y recuperación</div><div class="mod-dur">40 min</div></div>
+          <div class="mod-row locked"><div class="mod-num">10</div><div class="mod-title">La nueva identidad</div><div class="mod-dur">30 min</div></div>
+          <div class="mod-more">+ 5 clases más incluidas →</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── INSTRUCTORES ── -->
+<section class="instructors" id="instructores">
+  <div class="container">
+    <div class="instructors__header">
+      <div class="section-label">Los instructores</div>
+      <h2 class="section-title" style="color:#fff;">Te entienden porque<br><em style="color:var(--teal);">lo han vivido.</em></h2>
+      <p class="section-sub">No hay teoría sin experiencia. Nacho y Marcos combinan el conocimiento de haber estado ahí con años de acompañar a otras personas.</p>
+    </div>
+
+    <div class="instructors__grid">
+
+      <!-- Nacho -->
+      <div class="instructor-card">
+        <div class="instructor-card__photo">
+          <div class="instructor-avatar">N</div>
+        </div>
+        <div class="instructor-card__body">
+          <div class="instructor-card__role">Fundador · Ex-ludópata recuperado</div>
+          <div class="instructor-card__name">Nacho</div>
+          <p class="instructor-card__bio">Convivió con la ludopatía desde la adolescencia, llegando a perder más de €40.000 en menos de 48 horas. Hoy lidera ETC desde la única perspectiva que importa: la de alguien que ha estado ahí. La primera sesión del curso es siempre con él.</p>
+          <div class="instructor-tags">
+            <span class="tag">20 años de experiencia</span>
+            <span class="tag">500+ personas atendidas</span>
+            <span class="tag">Fundador ETC.</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Marcos -->
+      <div class="instructor-card">
+        <div class="instructor-card__photo">
+          <div class="instructor-avatar" style="background:linear-gradient(135deg,#1d4ed8,#2563EB);">M</div>
+        </div>
+        <div class="instructor-card__body">
+          <div class="instructor-card__role">Especialista · Referente nacional</div>
+          <div class="instructor-card__name">Marcos Agudo</div>
+          <p class="instructor-card__bio">Uno de los profesionales más reconocidos en el tratamiento de la adicción al juego en España. Autor publicado, conferenciante con más de 50 charlas, colaborador habitual en TV y radio. Aporta el rigor que complementa la experiencia vivida de Nacho.</p>
+          <div class="instructor-tags">
+            <span class="tag">Autor publicado</span>
+            <span class="tag">50+ charlas</span>
+            <span class="tag">TV y radio</span>
+            <span class="tag">Sesiones en Madrid</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── CERTIFICADO ── -->
+<section class="cert-section">
+  <div class="container">
+    <div class="cert-inner">
+      <div class="cert-card">
+        <div class="cert-logo">ETC<span>.</span></div>
+        <div class="cert-title-card">Certifica que</div>
+        <div class="cert-name">Tu nombre aquí</div>
+        <div class="cert-course">ha completado el Programa de Recuperación ETC.<br>15 clases · Nacho & Marcos Agudo</div>
+        <div class="cert-seal">🏆</div>
+      </div>
+      <div class="cert-copy">
+        <div class="section-label">Al completar el programa</div>
+        <h2 class="section-title">Tu certificado<br><em>de recuperación.</em></h2>
+        <p>Cuando termines las 15 clases recibirás un certificado personalizado de ETC. No es solo un papel — es el reconocimiento de algo que realmente conseguiste.</p>
+        <div class="cert-perks">
+          <div class="cert-perk">Certificado personalizado con tu nombre</div>
+          <div class="cert-perk">Firmado por Nacho y Marcos Agudo</div>
+          <div class="cert-perk">Descargable en PDF y compartible</div>
+          <div class="cert-perk">Reconocimiento real de tu progreso</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── REVIEWS ── -->
+<section class="reviews" id="reviews">
+  <div class="container">
+    <div class="reviews__header">
+      <div class="section-label">Lo que dicen nuestros alumnos</div>
+      <h2 class="section-title" style="margin-top:10px;">Resultados reales.<br><em>Personas reales.</em></h2>
+      <div class="reviews__hero">
+        <div class="reviews__avatars">
+          <div class="rev-avatar rev-a1">MA</div>
+          <div class="rev-avatar rev-a2">TR</div>
+          <div class="rev-avatar rev-a3">AI</div>
+          <div class="rev-avatar rev-a4">JL</div>
+          <div class="rev-avatar rev-a5">SO</div>
+          <div class="rev-avatar rev-a6">CV</div>
+          <div class="rev-avatar rev-amore">+41</div>
+        </div>
+        <div class="reviews__rating">
+          <div class="reviews__stars">★★★★★</div>
+          <div class="reviews__score"><strong>5.0</strong> de 5 · 47 reseñas verificadas en Google</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="reviews__grid">
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"Muchas gracias Nacho por tu cercanía y tu apoyo. Estoy mejorando un montón gracias a todo el equipo."</p>
+        <div class="review-author">
+          <div class="review-av rev-a1">MA</div>
+          <div><div class="review-name">Manuel A.</div><div class="review-source">Google · Alumno verificado</div></div>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"Desde Argentina quiero recomendar y agradecer al programa ETC. por ayudarme a salir del juego para siempre."</p>
+        <div class="review-author">
+          <div class="review-av rev-a2">TR</div>
+          <div><div class="review-name">Tomás R.</div><div class="review-source">Google · Alumno verificado</div></div>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"Best team. You are my savior, forever grateful. Thank you so much for everything you have done for me."</p>
+        <div class="review-author">
+          <div class="review-av rev-a3">AI</div>
+          <div><div class="review-name">Aitor I.</div><div class="review-source">Google · Alumno verificado</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FINAL CTA ── -->
+<section class="final-cta">
+  <div class="final-cta__inner">
+    <h2 class="final-cta__title">El primer paso<br><em>ya lo diste.</em></h2>
+    <p class="final-cta__sub">Miles de personas han empezado exactamente donde estás tú ahora. El curso te espera.</p>
+    <a href="dashboard.html" class="btn-primary" style="margin: 0 auto; display:inline-flex;">
+      Accede al curso →
+    </a>
+    <p style="margin-top:16px;font-size:0.78rem;color:rgba(255,255,255,0.3);">€127 · pago único · acceso de por vida</p>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer class="footer">
+  <div class="footer__logo">ETC<span>.</span></div>
+  <div class="footer__copy">© 2026 Equilibra Tu Camino · equilibratucamino@gmail.com</div>
+  <a href="https://app.equilibratucamino.com">Web principal →</a>
+</footer>
+
 </body>
 </html>
