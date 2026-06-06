@@ -35,7 +35,7 @@
     }
     .nav__logo img { height: 26px; width: auto; }
     .nav__links { display: flex; align-items: center; gap: 28px; margin-left: auto; }
-    .nav__link { font-size: 0.82rem; font-weight: 300; color: rgba(255,255,255,.5); transition: color .15s; }
+    .nav__link { font-size: 0.82rem; font-weight: 300; color: rgba(255,255,255,.75); transition: color .15s; }
     .nav__link:hover { color: rgba(255,255,255,.9); }
     .nav__cta {
       background: var(--teal); color: #fff; font-size: 0.85rem; font-weight: 500;
@@ -84,6 +84,7 @@
     }
     .badge__pulse { width: 6px; height: 6px; border-radius: 50%; background: var(--teal); animation: pulse 2s ease-in-out infinite; }
     @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.25;transform:scale(.6)} }
+    @keyframes floatHero { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-12px)} }
 
     /* Main headline */
     .hero__h1 {
@@ -104,7 +105,7 @@
 
     .hero__sub {
       font-size: clamp(1rem, 2vw, 1.15rem); font-weight: 300;
-      color: rgba(255,255,255,.55); line-height: 1.8;
+      color: rgba(255,255,255,.78); line-height: 1.8;
       max-width: 500px; margin: 0 auto 36px;
     }
     .hero__sub strong { font-weight: 500; color: rgba(255,255,255,.85); }
@@ -125,10 +126,10 @@
     .av:first-child { margin-left: 0; }
     .av img { width: 100%; height: 100%; object-fit: cover; }
     .c1{background:#228A6A;} .c2{background:#2563EB;} .c3{background:#9333EA;}
-    .c4{background:#D97706;} .c5{background:#DC2626;} .cm{background:rgba(255,255,255,.1);color:rgba(255,255,255,.5);font-size:.6rem;}
+    .c4{background:#D97706;} .c5{background:#DC2626;} .cm{background:rgba(255,255,255,.1);color:rgba(255,255,255,.75);font-size:.6rem;}
     .proof__rating { text-align: left; }
     .proof__stars { color: #F5C21B; font-size: 1rem; letter-spacing: 1.5px; line-height: 1; margin-bottom: 3px; }
-    .proof__text { font-size: 0.75rem; font-weight: 300; color: rgba(255,255,255,.4); }
+    .proof__text { font-size: 0.75rem; font-weight: 300; color: rgba(255,255,255,.65); }
     .proof__text strong { color: rgba(255,255,255,.8); font-weight: 500; }
 
     /* CTAs */
@@ -149,7 +150,7 @@
     .btn-big:hover .btn-big__arrow { transform: translateX(3px); }
     .btn-outline {
       display: inline-flex; align-items: center; gap: 6px;
-      color: rgba(255,255,255,.5); font-size: 0.9rem; font-weight: 300;
+      color: rgba(255,255,255,.75); font-size: 0.9rem; font-weight: 300;
       padding: 16px 22px; border-radius: 999px;
       border: 1px solid rgba(255,255,255,.1);
       transition: color .15s, border-color .15s;
@@ -168,7 +169,7 @@
     .hero__stat:last-child { border-right: none; }
     .hero__stat-n { font-family: 'Fraunces', serif; font-size: 1.8rem; font-weight: 400; color: #fff; line-height: 1; }
     .hero__stat-n span { color: var(--teal); }
-    .hero__stat-l { font-size: 0.72rem; font-weight: 300; color: rgba(255,255,255,.4); margin-top: 4px; }
+    .hero__stat-l { font-size: 0.72rem; font-weight: 300; color: rgba(255,255,255,.65); margin-top: 4px; }
 
     /* ════════ DIVIDER SECTION ════════ */
     .section-divider {
@@ -181,7 +182,7 @@
     }
     .div-item { display: flex; align-items: center; gap: 10px; }
     .div-icon { font-size: 0.9rem; }
-    .div-text { font-size: 0.82rem; font-weight: 300; color: rgba(255,255,255,.45); }
+    .div-text { font-size: 0.82rem; font-weight: 300; color: rgba(255,255,255,.72); }
 
     /* ════════ SHARED ════════ */
     .container { max-width: 1060px; margin: 0 auto; }
@@ -196,7 +197,7 @@
     .inside .s-label { color: var(--teal); margin-bottom: 10px; }
     .inside .s-title { font-size: clamp(1.8rem,3.5vw,2.8rem); color: #fff; margin-bottom: 14px; }
     .inside .s-title em { font-style: italic; color: var(--teal); }
-    .inside__sub { font-size: 0.95rem; font-weight: 300; color: rgba(255,255,255,.45); line-height: 1.75; margin-bottom: 52px; max-width: 460px; }
+    .inside__sub { font-size: 0.95rem; font-weight: 300; color: rgba(255,255,255,.72); line-height: 1.75; margin-bottom: 52px; max-width: 460px; }
     .inside__grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
 
     .feat-list { display: flex; flex-direction: column; gap: 14px; }
@@ -209,7 +210,7 @@
     .feat:hover { border-color: rgba(50,180,140,.2); }
     .feat__icon { width: 36px; height: 36px; border-radius: 9px; background: rgba(50,180,140,.08); display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0; }
     .feat__title { font-size: 0.9rem; font-weight: 500; color: #fff; margin-bottom: 3px; }
-    .feat__desc { font-size: 0.82rem; font-weight: 300; color: rgba(255,255,255,.45); line-height: 1.55; }
+    .feat__desc { font-size: 0.82rem; font-weight: 300; color: rgba(255,255,255,.72); line-height: 1.55; }
 
     .mod-list { display: flex; flex-direction: column; gap: 3px; }
     .mod-lbl { font-size: 0.67rem; font-weight: 500; letter-spacing: 0.11em; text-transform: uppercase; color: rgba(255,255,255,.35); margin-bottom: 10px; padding-left: 14px; }
@@ -284,7 +285,7 @@
     .diploma__orn { text-align: center; color: rgba(180,145,60,.35); letter-spacing: 5px; font-size: 0.55rem; margin-bottom: 12px; }
     .diploma__cert { text-align: center; font-size: 0.68rem; font-weight: 400; letter-spacing: 0.07em; text-transform: uppercase; color: rgba(255,255,255,.35); margin-bottom: 6px; }
     .diploma__name { text-align: center; font-family: 'Fraunces', serif; font-size: 1.3rem; font-weight: 400; font-style: italic; color: #fff; border-bottom: 1px solid rgba(180,145,60,.25); padding-bottom: 8px; margin-bottom: 10px; }
-    .diploma__course { text-align: center; font-size: 0.72rem; font-weight: 300; color: rgba(255,255,255,.4); line-height: 1.6; margin-bottom: 18px; }
+    .diploma__course { text-align: center; font-size: 0.72rem; font-weight: 300; color: rgba(255,255,255,.65); line-height: 1.6; margin-bottom: 18px; }
     .diploma__course strong { color: rgba(255,255,255,.7); font-weight: 500; }
     .diploma__sigs { display: flex; justify-content: space-around; margin-bottom: 12px; }
     .diploma__sig { text-align: center; }
@@ -296,7 +297,7 @@
     .cert-copy .s-label { color: var(--gold); margin-bottom: 10px; }
     .cert-copy .s-title { font-size: clamp(1.5rem,2.8vw,2.2rem); color: #fff; margin-bottom: 14px; }
     .cert-copy .s-title em { font-style: italic; color: var(--teal); }
-    .cert-copy p { font-size: 0.92rem; font-weight: 300; color: rgba(255,255,255,.45); line-height: 1.75; margin-bottom: 22px; }
+    .cert-copy p { font-size: 0.92rem; font-weight: 300; color: rgba(255,255,255,.72); line-height: 1.75; margin-bottom: 22px; }
     .cert-perks { display: flex; flex-direction: column; gap: 10px; }
     .cp { display: flex; align-items: center; gap: 10px; font-size: 0.86rem; font-weight: 300; color: rgba(255,255,255,.75); }
     .cp-tick { width: 18px; height: 18px; border-radius: 50%; background: rgba(50,180,140,.1); border: 1px solid rgba(50,180,140,.25); display: flex; align-items: center; justify-content: center; font-size: 0.58rem; font-weight: 600; color: var(--teal); flex-shrink: 0; }
@@ -342,7 +343,7 @@
     .final__inner { position: relative; z-index: 1; }
     .final__h { font-family: 'Fraunces', serif; font-size: clamp(2.2rem,6vw,4.5rem); font-weight: 400; line-height: 1.1; letter-spacing: -0.03em; color: #fff; margin-bottom: 18px; }
     .final__h em { font-style: italic; color: var(--teal); }
-    .final__sub { font-size: 1rem; font-weight: 300; color: rgba(255,255,255,.45); margin-bottom: 40px; line-height: 1.7; }
+    .final__sub { font-size: 1rem; font-weight: 300; color: rgba(255,255,255,.72); margin-bottom: 40px; line-height: 1.7; }
     .final__note { margin-top: 14px; font-size: 0.75rem; font-weight: 300; color: rgba(255,255,255,.2); }
 
     /* ════════ FOOTER ════════ */
@@ -371,6 +372,23 @@
 <!-- HERO -->
 <section class="hero">
   <div class="hero__noise"></div>
+
+  <!-- Mascots flotantes -->
+  <img src="images/mascot-heart.webp" alt="" aria-hidden="true" style="
+    position:absolute; bottom: 60px; left: clamp(16px, 6vw, 80px);
+    width: clamp(80px, 12vw, 160px); height: auto;
+    opacity: 0.85; pointer-events: none; z-index: 1;
+    filter: drop-shadow(0 8px 24px rgba(50,180,140,.25));
+    animation: floatHero 4s ease-in-out infinite;
+  ">
+  <img src="images/mascot-slot.webp" alt="" aria-hidden="true" style="
+    position:absolute; bottom: 80px; right: clamp(16px, 6vw, 80px);
+    width: clamp(60px, 9vw, 120px); height: auto;
+    opacity: 0.55; pointer-events: none; z-index: 1;
+    filter: drop-shadow(0 6px 16px rgba(0,0,0,.4)) grayscale(0.2);
+    animation: floatHero 4s ease-in-out infinite 1.2s;
+  ">
+
   <div class="hero__inner">
     <div class="badge"><div class="badge__pulse"></div>Primer programa en español · Fundado por exludópatas</div>
 
@@ -390,11 +408,11 @@
 
     <div class="proof">
       <div class="av-row">
-        <div class="av c1">MA</div>
-        <div class="av c2">TR</div>
-        <div class="av c3">AI</div>
-        <div class="av c4">JL</div>
-        <div class="av c5">SO</div>
+        <div class="av" style="background:#1a2e25;font-size:1.1rem;">😊</div>
+        <div class="av" style="background:#1a2040;font-size:1.1rem;">🙂</div>
+        <div class="av" style="background:#2a1a38;font-size:1.1rem;">😌</div>
+        <div class="av" style="background:#2e1f0a;font-size:1.1rem;">🧑</div>
+        <div class="av" style="background:#2a1010;font-size:1.1rem;">👩</div>
         <div class="av cm">+42</div>
       </div>
       <div class="proof__rating">
@@ -516,7 +534,7 @@
       <div class="cert-copy">
         <div class="s-label" style="color:var(--gold);margin-bottom:10px;">Al completar el programa</div>
         <h2 class="s-title" style="font-size:clamp(1.5rem,2.8vw,2.2rem);color:#fff;margin-bottom:14px;">Tu certificado<br><em>de recuperación.</em></h2>
-        <p style="font-size:0.92rem;font-weight:300;color:rgba(255,255,255,.45);line-height:1.75;margin-bottom:22px;">Cuando termines las 15 clases recibirás un certificado personalizado firmado por Nacho y Marcos. El reconocimiento real de algo que conseguiste.</p>
+        <p style="font-size:0.92rem;font-weight:300;color:rgba(255,255,255,.72);line-height:1.75;margin-bottom:22px;">Cuando termines las 15 clases recibirás un certificado personalizado firmado por Nacho y Marcos. El reconocimiento real de algo que conseguiste.</p>
         <div class="cert-perks">
           <div class="cp"><div class="cp-tick">✓</div>Certificado con tu nombre personalizado</div>
           <div class="cp"><div class="cp-tick">✓</div>Firmado por Nacho y Marcos Agudo</div>
@@ -545,9 +563,9 @@
       </div>
     </div>
     <div class="rev-grid">
-      <div class="rev-card"><div class="rev-s">★★★★★</div><p class="rev-t">"Muchas gracias Nacho por tu cercanía y tu apoyo. Estoy mejorando un montón gracias a todo el equipo."</p><div class="rev-a"><div class="rev-dot r1">MA</div><div><div class="rev-n">Manuel A.</div><div class="rev-src">Google · Alumno verificado</div></div></div></div>
-      <div class="rev-card"><div class="rev-s">★★★★★</div><p class="rev-t">"Desde Argentina quiero recomendar y agradecer al programa ETC. por ayudarme a salir del juego para siempre."</p><div class="rev-a"><div class="rev-dot r2">TR</div><div><div class="rev-n">Tomás R.</div><div class="rev-src">Google · Alumno verificado</div></div></div></div>
-      <div class="rev-card"><div class="rev-s">★★★★★</div><p class="rev-t">"Best team. You are my savior, forever grateful. Thank you so much for everything you have done for me."</p><div class="rev-a"><div class="rev-dot r3">AI</div><div><div class="rev-n">Aitor I.</div><div class="rev-src">Google · Alumno verificado</div></div></div></div>
+      <div class="rev-card"><div class="rev-s">★★★★★</div><p class="rev-t">"Muchas gracias Nacho por tu cercanía y tu apoyo. Estoy mejorando un montón gracias a todo el equipo."</p><div class="rev-a"><div class="rev-dot" style="font-size:1.5rem;background:transparent;">😊</div><div><div class="rev-n">Manuel A.</div><div class="rev-src">Google · Alumno verificado</div></div></div></div>
+      <div class="rev-card"><div class="rev-s">★★★★★</div><p class="rev-t">"Desde Argentina quiero recomendar y agradecer al programa ETC. por ayudarme a salir del juego para siempre."</p><div class="rev-a"><div class="rev-dot" style="font-size:1.5rem;background:transparent;">🙂</div><div><div class="rev-n">Tomás R.</div><div class="rev-src">Google · Alumno verificado</div></div></div></div>
+      <div class="rev-card"><div class="rev-s">★★★★★</div><p class="rev-t">"Best team. You are my savior, forever grateful. Thank you so much for everything you have done for me."</p><div class="rev-a"><div class="rev-dot" style="font-size:1.5rem;background:transparent;">😌</div><div><div class="rev-n">Aitor I.</div><div class="rev-src">Google · Alumno verificado</div></div></div></div>
     </div>
   </div>
 </section>
