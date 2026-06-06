@@ -4,465 +4,507 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mi Curso — ETC. Equilibra Tu Camino</title>
-  <link rel="stylesheet" href="css/design-system.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,700;1,9..144,500&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    body { background: var(--bg-1); }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 16px; -webkit-font-smoothing: antialiased; scroll-behavior: smooth; }
+    body { font-family: 'Inter', -apple-system, sans-serif; background: #FAFAF8; color: #1A1A1A; min-height: 100svh; overflow-x: hidden; }
+    a { text-decoration: none; color: inherit; }
+    button { cursor: pointer; border: none; background: none; font: inherit; }
 
-    /* ── APP SHELL ── */
-    .app-layout { min-height: 100svh; }
-
-    /* ── SIDEBAR ── */
-    .sidebar {
-      position: fixed;
-      top: 0; left: 0; bottom: 0;
-      width: 260px;
-      background: var(--bg);
-      border-right: 1px solid var(--border);
-      display: flex;
-      flex-direction: column;
-      z-index: 50;
-      padding: var(--s6);
+    :root {
+      --teal: #32B48C;
+      --teal-d: #228A6A;
+      --teal-l: rgba(50,180,140,0.08);
+      --teal-l2: rgba(50,180,140,0.14);
+      --border: rgba(0,0,0,0.07);
+      --border-md: rgba(0,0,0,0.12);
+      --muted: #6B7280;
+      --subtle: #9CA3AF;
+      --r-sm: 8px;
+      --r-md: 14px;
+      --r-lg: 20px;
+      --r-xl: 28px;
+      --ease: cubic-bezier(0.16,1,0.3,1);
     }
-    .sidebar__logo {
-      font-weight: 800;
-      font-size: 1.3rem;
-      letter-spacing: -0.03em;
-      margin-bottom: var(--s8);
-      padding-bottom: var(--s6);
+
+    /* ── TOP NAV ── */
+    .topnav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(250,250,248,0.92);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
       border-bottom: 1px solid var(--border);
-    }
-    .sidebar__logo span { color: var(--teal); }
-
-    /* Progress in sidebar */
-    .sidebar__progress-block {
-      background: var(--bg-2);
-      border: 1px solid var(--border);
-      border-radius: var(--r-md);
-      padding: var(--s4);
-      margin-bottom: var(--s6);
-    }
-    .sidebar__progress-header {
-      display: flex;
+      height: 60px;
+      display: flex; align-items: center;
+      padding: 0 32px;
       justify-content: space-between;
-      align-items: center;
-      margin-bottom: var(--s3);
-      font-size: 0.8rem;
     }
-    .sidebar__progress-label { color: var(--text-muted); }
-    .sidebar__progress-count { font-weight: 600; color: var(--teal); }
-
-    /* Module nav in sidebar */
-    .sidebar__section-label {
-      font-size: 0.68rem;
-      font-weight: 700;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--text-subtle);
-      margin-bottom: var(--s3);
-    }
-    .sidebar__nav { display: flex; flex-direction: column; gap: var(--s1); flex: 1; overflow-y: auto; }
-    .sidebar__link {
-      display: flex;
-      align-items: center;
-      gap: var(--s3);
-      padding: 0.45rem var(--s3);
-      border-radius: var(--r-sm);
-      font-size: 0.82rem;
-      color: var(--text-muted);
-      transition: all var(--t-fast);
-      cursor: pointer;
-      text-decoration: none;
-    }
-    .sidebar__link:hover { background: var(--bg-2); color: var(--text); }
-    .sidebar__link.active { background: var(--teal-lt); color: var(--teal); }
-    .sidebar__link-badge {
-      width: 18px; height: 18px;
-      border-radius: 50%;
-      border: 1.5px solid var(--border-md);
+    .topnav__logo { font-weight: 800; font-size: 1.2rem; letter-spacing: -0.03em; }
+    .topnav__logo span { color: var(--teal); }
+    .topnav__right { display: flex; align-items: center; gap: 20px; }
+    .topnav__link { font-size: 0.82rem; color: var(--muted); transition: color 0.15s; }
+    .topnav__link:hover { color: var(--teal); }
+    .topnav__avatar {
+      width: 32px; height: 32px; border-radius: 50%;
+      background: var(--teal-l2); border: 1.5px solid rgba(50,180,140,0.3);
       display: flex; align-items: center; justify-content: center;
-      font-size: 0.6rem; font-weight: 700;
-      flex-shrink: 0; color: var(--text-subtle);
-    }
-    .sidebar__link.done .sidebar__link-badge {
-      background: var(--teal-lt);
-      border-color: rgba(50,180,140,0.4);
-      color: var(--teal);
-    }
-    .sidebar__link.locked { opacity: 0.4; cursor: default; pointer-events: none; }
-    .sidebar__link.locked .sidebar__link-badge { background: var(--bg-3); }
-
-    .sidebar__bottom {
-      margin-top: auto;
-      padding-top: var(--s5);
-      border-top: 1px solid var(--border);
+      font-size: 0.7rem; font-weight: 700; color: var(--teal);
     }
 
-    /* ── MAIN ── */
-    .main-content {
-      margin-left: 260px;
-      padding: var(--s10) var(--s8);
+    /* ── LAYOUT ── */
+    .layout {
+      max-width: 1160px; margin: 0 auto;
+      padding: 40px 32px 80px;
+      display: grid;
+      grid-template-columns: 1fr 320px;
+      gap: 32px;
+      align-items: start;
     }
 
-    /* ── HERO CARD ── */
-    .course-hero {
-      background: linear-gradient(135deg, rgba(50,180,140,0.1) 0%, var(--bg-2) 100%);
-      border: 1px solid var(--border-md);
+    /* ── PROGRESS HERO ── */
+    .progress-hero {
+      background: #fff;
+      border: 1px solid var(--border);
       border-radius: var(--r-xl);
-      padding: var(--s10) var(--s10);
-      margin-bottom: var(--s8);
+      padding: 32px 36px;
+      margin-bottom: 28px;
       position: relative;
       overflow: hidden;
     }
-    .course-hero::before {
+    .progress-hero::after {
       content: '';
       position: absolute;
-      top: -40px; right: -40px;
-      width: 200px; height: 200px;
-      background: var(--teal-lt);
-      border-radius: 50%;
+      top: 0; right: 0;
+      width: 180px; height: 180px;
+      background: radial-gradient(circle, rgba(50,180,140,0.08) 0%, transparent 70%);
       pointer-events: none;
     }
-    .course-hero__eyebrow {
-      font-size: 0.72rem;
-      font-weight: 700;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--teal);
-      margin-bottom: var(--s3);
+    .progress-hero__label {
+      font-size: 0.7rem; font-weight: 700; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--teal);
+      margin-bottom: 8px;
     }
-    .course-hero__title {
-      font-family: var(--font-serif);
-      font-size: clamp(1.6rem, 2.5vw, 2.2rem);
-      font-weight: 600;
-      line-height: 1.2;
-      margin-bottom: var(--s5);
+    .progress-hero__title {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: clamp(1.5rem, 2.5vw, 2rem);
+      font-weight: 600; line-height: 1.2;
+      letter-spacing: -0.02em;
+      margin-bottom: 20px;
+    }
+    .progress-hero__title em { font-style: italic; color: var(--teal); }
+    .progress-hero__bar-wrap { margin-bottom: 24px; }
+    .progress-hero__bar-label {
+      display: flex; justify-content: space-between;
+      font-size: 0.8rem; margin-bottom: 6px;
+    }
+    .progress-hero__bar-label span:last-child { font-weight: 600; color: var(--teal); }
+    .bar-track {
+      height: 6px; background: #F0F0EC; border-radius: 100px; overflow: hidden;
+    }
+    .bar-fill {
+      height: 100%; background: var(--teal); border-radius: 100px;
+      transition: width 1s var(--ease);
+    }
+    .progress-hero__actions { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+    .btn-continue {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--teal); color: #fff;
+      font-size: 0.95rem; font-weight: 600;
+      padding: 13px 28px; border-radius: 999px;
+      box-shadow: 0 4px 20px rgba(50,180,140,0.25);
+      transition: background 0.18s, transform 0.18s, box-shadow 0.18s;
+    }
+    .btn-continue:hover { background: var(--teal-d); transform: translateY(-1px); box-shadow: 0 8px 28px rgba(50,180,140,0.32); }
+    .btn-continue svg { flex-shrink: 0; }
+    .btn-outline-sm {
+      display: inline-flex; align-items: center; gap: 6px;
+      border: 1px solid var(--border-md); color: var(--muted);
+      font-size: 0.85rem; padding: 12px 20px; border-radius: 999px;
+      transition: border-color 0.15s, color 0.15s;
+    }
+    .btn-outline-sm:hover { border-color: var(--teal); color: var(--teal); }
+
+    /* ── MODULE LIST ── */
+    .modules-section { }
+    .section-header {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 16px;
+    }
+    .section-title {
+      font-size: 0.7rem; font-weight: 700; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--muted);
+    }
+    .section-count { font-size: 0.78rem; color: var(--subtle); }
+
+    .module-item {
+      display: flex; align-items: center; gap: 16px;
+      padding: 16px 20px;
+      border-radius: var(--r-md);
+      border: 1px solid transparent;
+      transition: all 0.18s var(--ease);
+      cursor: pointer;
       position: relative;
     }
-    .course-hero__meta {
-      display: flex;
-      align-items: center;
-      gap: var(--s6);
-      margin-bottom: var(--s8);
-      flex-wrap: wrap;
+    .module-item:not(.locked):hover {
+      background: #fff;
+      border-color: var(--border);
+      box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+      transform: translateX(2px);
     }
-    .course-hero__stat {
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
+    .module-item.current {
+      background: #fff;
+      border-color: rgba(50,180,140,0.25);
+      box-shadow: 0 2px 16px rgba(50,180,140,0.08);
     }
-    .course-hero__stat-num {
-      font-size: 1.5rem;
-      font-weight: 700;
-      font-family: var(--font-serif);
-      color: var(--text);
-      line-height: 1;
-    }
-    .course-hero__stat-lbl { font-size: 0.75rem; color: var(--text-muted); }
-    .course-hero__progress-wrap { margin-bottom: var(--s8); max-width: 440px; }
-    .course-hero__progress-label {
-      display: flex;
-      justify-content: space-between;
-      font-size: 0.8rem;
-      margin-bottom: var(--s2);
-    }
-    .course-hero__actions { display: flex; gap: var(--s4); flex-wrap: wrap; }
+    .module-item.done { opacity: 0.72; }
+    .module-item.done:hover { opacity: 1; }
+    .module-item.locked { cursor: default; opacity: 0.45; }
 
-    /* ── MODULE GRID ── */
-    .section-title {
-      font-size: 0.72rem;
-      font-weight: 700;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--text-subtle);
-      margin-bottom: var(--s5);
+    /* Connector line between modules */
+    .module-item + .module-item::before {
+      content: '';
+      position: absolute;
+      left: 31px; top: -8px;
+      width: 1px; height: 8px;
+      background: var(--border);
     }
-    .modules-list {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: var(--s3);
-      margin-bottom: var(--s12);
-    }
-    .module-card {
-      background: var(--bg-2);
-      border: 1px solid var(--border);
-      border-radius: var(--r-md);
-      padding: var(--s4) var(--s5);
-      display: flex;
-      align-items: center;
-      gap: var(--s4);
-      text-decoration: none;
-      color: inherit;
-      transition: all var(--t-fast);
-    }
-    .module-card:hover { background: var(--bg-3); border-color: var(--border-md); }
-    .module-card.active { border-color: rgba(50,180,140,0.4); background: rgba(50,180,140,0.05); }
-    .module-card.locked { opacity: 0.4; cursor: default; pointer-events: none; }
-    .module-card.done { opacity: 0.75; }
-    .module-card.done:hover { opacity: 1; }
 
     .module-badge {
-      width: 34px; height: 34px;
-      border-radius: 50%;
+      width: 36px; height: 36px; border-radius: 50%; flex-shrink: 0;
       border: 1.5px solid var(--border-md);
       display: flex; align-items: center; justify-content: center;
-      font-size: 0.78rem; font-weight: 700;
-      color: var(--text-muted);
-      flex-shrink: 0;
+      font-size: 0.78rem; font-weight: 700; color: var(--muted);
+      transition: all 0.18s;
     }
-    .badge--done { background: var(--teal-lt); border-color: rgba(50,180,140,0.4); color: var(--teal); }
-    .badge--active { background: var(--teal); border-color: var(--teal); color: #fff; box-shadow: 0 0 12px var(--teal-glow); }
-
-    .module-card__info { flex: 1; min-width: 0; }
-    .module-card__num { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-subtle); margin-bottom: 2px; }
-    .module-card__title { font-size: 0.9rem; font-weight: 500; color: var(--text); }
-    .module-card__duration { font-size: 0.75rem; color: var(--text-muted); margin-top: 2px; }
-
-    /* ── CTA BANNERS ── */
-    .cta-banners {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: var(--s4);
-      margin-top: var(--s4);
+    .module-item.done .module-badge {
+      background: var(--teal-l); border-color: rgba(50,180,140,0.4); color: var(--teal);
     }
-    .cta-banner {
+    .module-item.current .module-badge {
+      background: var(--teal); border-color: var(--teal); color: #fff;
+      box-shadow: 0 0 0 3px rgba(50,180,140,0.15);
+    }
+
+    .module-info { flex: 1; min-width: 0; }
+    .module-num {
+      font-size: 0.66rem; font-weight: 700; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--subtle); margin-bottom: 2px;
+    }
+    .module-title { font-size: 0.95rem; font-weight: 500; color: #1A1A1A; }
+    .module-meta { font-size: 0.78rem; color: var(--muted); margin-top: 2px; display: flex; align-items: center; gap: 8px; }
+    .module-status {
+      display: inline-flex; align-items: center; gap: 4px;
+      font-size: 0.72rem; font-weight: 600;
+    }
+    .module-status.done { color: var(--teal); }
+    .module-status.current { color: var(--teal); }
+    .module-status.locked { color: var(--subtle); }
+
+    .module-arrow { color: var(--subtle); font-size: 0.85rem; flex-shrink: 0; opacity: 0; transition: opacity 0.15s; }
+    .module-item:not(.locked):hover .module-arrow { opacity: 1; }
+    .module-item.current .module-arrow { opacity: 1; color: var(--teal); }
+
+    /* ── SIDEBAR ── */
+    .sidebar { position: sticky; top: 80px; }
+
+    .side-card {
+      background: #fff;
+      border: 1px solid var(--border);
       border-radius: var(--r-xl);
-      padding: var(--s8);
-      position: relative;
       overflow: hidden;
-    }
-    .cta-banner--nacho {
-      background: linear-gradient(135deg, #eef9f5, #f5fdf9);
-      border: 1px solid rgba(50,180,140,0.2);
-    }
-    .cta-banner--webinar {
-      background: linear-gradient(135deg, #f3f1ff, #faf9ff);
-      border: 1px solid rgba(130,100,200,0.18);
-    }
-    .cta-banner__tag {
-      display: inline-block;
-      font-size: 0.68rem;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      padding: 3px 10px;
-      border-radius: 100px;
-      margin-bottom: var(--s4);
-    }
-    .cta-banner--nacho .cta-banner__tag { background: rgba(50,180,140,0.1); color: #228A6A; }
-    .cta-banner--webinar .cta-banner__tag { background: rgba(130,100,200,0.1); color: #7c3aed; }
-    .cta-banner__title {
-      font-family: var(--font-serif);
-      font-size: 1.2rem;
-      font-weight: 600;
-      color: #1A1A1A;
-      line-height: 1.3;
-      margin-bottom: var(--s3);
-    }
-    .cta-banner__sub { font-size: 0.85rem; color: #6B7280; line-height: 1.55; margin-bottom: var(--s6); }
-    .cta-banner__btn {
-      display: inline-flex;
-      align-items: center;
-      gap: var(--s2);
-      padding: 0.7rem 1.5rem;
-      border-radius: var(--r-md);
-      font-size: 0.875rem;
-      font-weight: 600;
-      cursor: pointer;
-      border: none;
-      transition: all var(--t-mid) var(--ease);
-      text-decoration: none;
-    }
-    .cta-banner--nacho .cta-banner__btn { background: var(--teal); color: #fff; }
-    .cta-banner--nacho .cta-banner__btn:hover { background: var(--teal-dk); transform: translateY(-1px); box-shadow: 0 8px 24px var(--teal-glow); }
-    .cta-banner--webinar .cta-banner__btn { background: #7c3aed; color: #fff; }
-    .cta-banner--webinar .cta-banner__btn:hover { background: #6d28d9; transform: translateY(-1px); box-shadow: 0 8px 24px rgba(124,58,237,0.3); }
-    .cta-banner__price {
-      font-size: 1.4rem;
-      font-weight: 700;
-      font-family: var(--font-serif);
-      color: #7c3aed;
-      margin-bottom: var(--s1);
+      margin-bottom: 16px;
     }
 
+    /* Webinar card */
+    .webinar-card {
+      background: linear-gradient(145deg, #f6f3ff 0%, #fdf9ff 100%);
+      border-color: rgba(124,58,237,0.15);
+    }
+    .webinar-card .side-card__body { padding: 24px; }
+    .webinar-tag {
+      display: inline-flex; align-items: center; gap: 5px;
+      font-size: 0.68rem; font-weight: 700; letter-spacing: 0.1em;
+      text-transform: uppercase; color: #7c3aed;
+      background: rgba(124,58,237,0.08); padding: 3px 10px; border-radius: 100px;
+      margin-bottom: 14px;
+    }
+    .webinar-tag::before { content: '●'; font-size: 0.5rem; animation: blink 2s ease-in-out infinite; }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.2} }
+    .webinar-price {
+      font-family: 'Fraunces', serif; font-size: 2.2rem; font-weight: 700;
+      color: #7c3aed; line-height: 1; margin-bottom: 4px;
+    }
+    .webinar-price sup { font-size: 1rem; vertical-align: super; }
+    .webinar-title { font-size: 1rem; font-weight: 600; color: #1A1A1A; line-height: 1.35; margin-bottom: 8px; }
+    .webinar-desc { font-size: 0.82rem; color: var(--muted); line-height: 1.55; margin-bottom: 18px; }
+    .btn-webinar {
+      display: flex; align-items: center; justify-content: center; gap: 6px;
+      background: #7c3aed; color: #fff;
+      font-size: 0.875rem; font-weight: 600;
+      padding: 12px; border-radius: var(--r-md);
+      transition: background 0.18s, transform 0.15s, box-shadow 0.18s;
+      box-shadow: 0 4px 16px rgba(124,58,237,0.2);
+    }
+    .btn-webinar:hover { background: #6d28d9; transform: translateY(-1px); box-shadow: 0 8px 24px rgba(124,58,237,0.28); }
+
+    /* Session card */
+    .session-card { background: linear-gradient(145deg, #eef9f5 0%, #f7fdf9 100%); border-color: rgba(50,180,140,0.18); }
+    .session-card .side-card__body { padding: 24px; }
+    .session-tag {
+      display: inline-flex; align-items: center; gap: 5px;
+      font-size: 0.68rem; font-weight: 700; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--teal-d);
+      background: rgba(50,180,140,0.1); padding: 3px 10px; border-radius: 100px;
+      margin-bottom: 14px;
+    }
+    .session-avatar {
+      width: 48px; height: 48px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--teal-d), var(--teal));
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Fraunces', serif; font-size: 1.1rem; font-weight: 600;
+      color: #fff; margin-bottom: 14px;
+      box-shadow: 0 4px 14px rgba(50,180,140,0.2);
+    }
+    .session-title { font-size: 1rem; font-weight: 600; color: #1A1A1A; line-height: 1.35; margin-bottom: 8px; }
+    .session-desc { font-size: 0.82rem; color: var(--muted); line-height: 1.55; margin-bottom: 18px; }
+    .btn-session {
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      background: var(--teal); color: #fff;
+      font-size: 0.875rem; font-weight: 600;
+      padding: 12px; border-radius: var(--r-md);
+      transition: background 0.18s, transform 0.15s, box-shadow 0.18s;
+      box-shadow: 0 4px 16px rgba(50,180,140,0.2);
+    }
+    .btn-session:hover { background: var(--teal-d); transform: translateY(-1px); box-shadow: 0 8px 24px rgba(50,180,140,0.28); }
+    .btn-session svg { flex-shrink: 0; }
+
+    /* Progress mini card */
+    .progress-mini .side-card__body { padding: 20px 24px; }
+    .progress-mini__header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; font-size: 0.82rem; }
+    .progress-mini__label { color: var(--muted); }
+    .progress-mini__count { font-weight: 700; color: var(--teal); }
+
+    /* Responsive */
     @media (max-width: 900px) {
-      .app-layout { display: block; }
-      .sidebar { display: none; }
-      .main-content { margin-left: 0; padding: var(--s6) var(--s4); }
-      .cta-banners { grid-template-columns: 1fr; }
-      .modules-list { grid-template-columns: 1fr; }
+      .layout { grid-template-columns: 1fr; padding: 24px 16px 60px; gap: 24px; }
+      .sidebar { position: static; }
+      .progress-hero { padding: 24px; }
+      .module-item { padding: 14px 16px; }
+    }
+    @media (max-width: 600px) {
+      .topnav { padding: 0 20px; }
+      .topnav__right .topnav__link { display: none; }
     }
   </style>
 </head>
 <body>
-<div class="app-layout">
 
-  <!-- ── SIDEBAR ── -->
-  <aside class="sidebar">
-    <div class="sidebar__logo">ETC<span>.</span></div>
+<!-- TOP NAV -->
+<nav class="topnav">
+  <div class="topnav__logo">ETC<span>.</span></div>
+  <div class="topnav__right">
+    <a href="https://app.equilibratucamino.com" class="topnav__link">← Volver a la web</a>
+    <div class="topnav__avatar" id="userInitials">TÚ</div>
+  </div>
+</nav>
 
-    <div class="sidebar__progress-block">
-      <div class="sidebar__progress-header">
-        <span class="sidebar__progress-label">Tu progreso</span>
-        <span class="sidebar__progress-count" data-progress-text>4 / 15</span>
-      </div>
-      <div class="progress-track">
-        <div class="progress-fill" data-progress style="width:0%"></div>
-      </div>
-    </div>
+<div class="layout">
 
-    <div class="sidebar__section-label">Módulos</div>
-    <nav class="sidebar__nav" id="sidebarNav">
-      <!-- generado por JS -->
-    </nav>
+  <!-- ── COLUMNA IZQUIERDA ── -->
+  <div>
 
-    <div class="sidebar__bottom">
-      <a href="https://app.equilibratucamino.com" class="sidebar__link" style="font-size:0.78rem;color:var(--text-subtle);">
-        ← Volver a ETC.
-      </a>
-    </div>
-  </aside>
-
-  <!-- ── MAIN ── -->
-  <main class="main-content">
-
-    <!-- Hero card -->
-    <div class="course-hero" data-reveal>
-      <div class="course-hero__eyebrow">Programa de Recuperación</div>
-      <h1 class="course-hero__title">15 clases para<br><em style="font-style:italic;color:var(--teal);">recuperar el control.</em></h1>
-      <div class="course-hero__meta">
-        <div class="course-hero__stat">
-          <div class="course-hero__stat-num teal" data-progress-text2>4</div>
-          <div class="course-hero__stat-lbl">completadas</div>
+    <!-- Progreso hero -->
+    <div class="progress-hero" data-reveal>
+      <div class="progress-hero__label">Programa de Recuperación ETC.</div>
+      <h1 class="progress-hero__title" id="heroTitle">Bienvenido al curso.<br><em>Empieza cuando quieras.</em></h1>
+      <div class="progress-hero__bar-wrap">
+        <div class="progress-hero__bar-label">
+          <span id="progressLabel" style="color:var(--muted);font-size:0.8rem;">0 de 15 clases completadas</span>
+          <span id="progressPct">0%</span>
         </div>
-        <div style="width:1px;height:32px;background:var(--border);"></div>
-        <div class="course-hero__stat">
-          <div class="course-hero__stat-num">15</div>
-          <div class="course-hero__stat-lbl">clases en total</div>
-        </div>
-        <div style="width:1px;height:32px;background:var(--border);"></div>
-        <div class="course-hero__stat">
-          <div class="course-hero__stat-num" id="pctNum">27%</div>
-          <div class="course-hero__stat-lbl">completado</div>
+        <div class="bar-track">
+          <div class="bar-fill" id="barFill" style="width:0%;"></div>
         </div>
       </div>
-      <div class="course-hero__progress-wrap">
-        <div class="course-hero__progress-label">
-          <span class="muted" style="font-size:0.8rem;">Progreso general</span>
-          <span class="teal" style="font-size:0.8rem;font-weight:600;" id="pctLabel">27%</span>
-        </div>
-        <div class="progress-track" style="height:6px;">
-          <div class="progress-fill" id="heroProgress" style="width:0%;"></div>
-        </div>
-      </div>
-      <div class="course-hero__actions">
-        <a href="modulo.html" class="btn btn--primary">Continuar → Módulo 05</a>
-        <a href="#modulos" class="btn btn--outline">Ver todos los módulos</a>
+      <div class="progress-hero__actions">
+        <a href="modulo.html" class="btn-continue" id="continueBtn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+          <span id="continueBtnText">Empezar — Clase 01</span>
+        </a>
+        <a href="#clases" class="btn-outline-sm">Ver todas las clases ↓</a>
       </div>
     </div>
 
-    <!-- Module grid -->
-    <div id="modulos">
-      <p class="section-title" style="margin-top:var(--s8);">Todas las clases</p>
-      <div class="modules-list" id="moduleGrid">
+    <!-- Lista de módulos -->
+    <div class="modules-section" id="clases">
+      <div class="section-header">
+        <div class="section-title">Todas las clases</div>
+        <div class="section-count" id="sectionCount">15 clases · ~8 horas</div>
+      </div>
+      <div id="moduleList">
         <!-- generado por JS -->
       </div>
     </div>
+  </div>
 
-    <!-- CTA banners -->
-    <div class="cta-banners" data-reveal>
-      <div class="cta-banner cta-banner--nacho">
-        <div class="cta-banner__tag">Sesión privada</div>
-        <div class="cta-banner__title">Habla con<br>Nacho directamente</div>
-        <p class="cta-banner__sub">Primera sesión de 50 min con el fundador de ETC. Solo para alumnos del curso.</p>
-        <a href="https://wa.me/34611847645?text=Hola%20Nacho%2C%20soy%20alumno%20del%20curso%20ETC%20y%20me%20gustar%C3%ADa%20reservar%20una%20sesi%C3%B3n." class="cta-banner__btn" target="_blank" rel="noopener">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.112 1.523 5.843L.057 23.535.965 23.943l5.693-1.466A11.944 11.944 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22a9.94 9.94 0 01-5.071-1.388l-.364-.216-3.774.989.998-3.801-.235-.374A9.953 9.953 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
-          Reservar sesión
-        </a>
+  <!-- ── SIDEBAR DERECHA ── -->
+  <aside class="sidebar">
+
+    <!-- Progreso mini -->
+    <div class="side-card progress-mini">
+      <div class="side-card__body">
+        <div class="progress-mini__header">
+          <span class="progress-mini__label">Tu progreso</span>
+          <span class="progress-mini__count" id="sideProgress">0 / 15</span>
+        </div>
+        <div class="bar-track">
+          <div class="bar-fill" id="sideBar" style="width:0%;"></div>
+        </div>
+        <div style="margin-top:12px;font-size:0.78rem;color:var(--subtle);">Avanza a tu ritmo. Sin límite de tiempo.</div>
       </div>
+    </div>
 
-      <div class="cta-banner cta-banner--webinar">
-        <div class="cta-banner__tag">Webinar en directo</div>
-        <div class="cta-banner__price">25€</div>
-        <div class="cta-banner__title">Sesión grupal<br>con Nacho</div>
-        <p class="cta-banner__sub">Webinar mensual en directo. Preguntas, experiencias y apoyo en grupo.</p>
-        <a href="https://wa.me/34611847645?text=Hola%2C%20me%20interesa%20el%20pr%C3%B3ximo%20webinar%20de%2025%E2%82%AC." class="cta-banner__btn" target="_blank" rel="noopener">
-          Apuntarme →
+    <!-- Webinar card -->
+    <div class="side-card webinar-card">
+      <div class="side-card__body">
+        <div class="webinar-tag">Webinar en directo</div>
+        <div class="webinar-price"><sup>€</sup>25</div>
+        <div class="webinar-title">Sesión grupal mensual con Nacho</div>
+        <p class="webinar-desc">Cada mes, Nacho conecta en directo con los alumnos. Preguntas, experiencias reales, apoyo del grupo. <strong style="color:#1A1A1A;">Solo 25€.</strong></p>
+        <a href="https://wa.me/34611847645?text=Hola%2C%20soy%20alumno%20del%20curso%20ETC%20y%20me%20interesa%20el%20pr%C3%B3ximo%20webinar%20de%2025%E2%82%AC." class="btn-webinar" target="_blank" rel="noopener">
+          Apuntarme al próximo →
         </a>
       </div>
     </div>
 
-  </main>
+    <!-- Session card -->
+    <div class="side-card session-card">
+      <div class="side-card__body">
+        <div class="session-tag">Sesión privada</div>
+        <div class="session-avatar">N</div>
+        <div class="session-title">Sesión 1 a 1 con Nacho</div>
+        <p class="session-desc">Cuando lo necesites, puedes reservar una sesión personal. Solo para alumnos del curso.</p>
+        <a href="https://wa.me/34611847645?text=Hola%20Nacho%2C%20soy%20alumno%20del%20curso%20ETC%20y%20me%20gustar%C3%ADa%20reservar%20una%20sesi%C3%B3n%20contigo." class="btn-session" target="_blank" rel="noopener">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.117 1.526 5.847L.057 23.535l5.693-1.466A11.944 11.944 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22a9.94 9.94 0 01-5.071-1.388l-.364-.216-3.774.989.998-3.801-.235-.374A9.953 9.953 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+          Reservar por WhatsApp
+        </a>
+      </div>
+    </div>
+
+  </aside>
 </div>
 
-<script src="js/app.js"></script>
 <script>
+/* ═══════════════════════════════════════
+   PROGRESS ENGINE — localStorage
+   ═══════════════════════════════════════ */
+const STORAGE_KEY = 'etc_progress_v1';
 const MODULES = [
-  { n:1,  title:'Aceptar la realidad',          dur:'~28 min' },
-  { n:2,  title:'La mente de un ludópata',       dur:'~32 min' },
-  { n:3,  title:'Dopamina y cerebro',            dur:'~30 min' },
-  { n:4,  title:'Las mentiras que te cuentas',   dur:'~35 min' },
-  { n:5,  title:'Romper el ciclo',               dur:'~32 min' },
-  { n:6,  title:'Gestión de impulsos',           dur:'~38 min' },
-  { n:7,  title:'Ansiedad, culpa y vergüenza',   dur:'~36 min' },
-  { n:8,  title:'Reconstruir la confianza',      dur:'~34 min' },
-  { n:9,  title:'Dinero y recuperación',         dur:'~40 min' },
-  { n:10, title:'La nueva identidad',            dur:'~30 min' },
-  { n:11, title:'Crear nuevos hábitos',          dur:'~33 min' },
-  { n:12, title:'Familia y entorno',             dur:'~37 min' },
-  { n:13, title:'Prevenir recaídas',             dur:'~35 min' },
-  { n:14, title:'Diseñar una nueva vida',        dur:'~32 min' },
-  { n:15, title:'El futuro empieza hoy',         dur:'~28 min' },
+  { n:1,  title:'Aceptar la realidad',         dur:'28 min' },
+  { n:2,  title:'La mente de un ludópata',      dur:'32 min' },
+  { n:3,  title:'Dopamina y cerebro',           dur:'30 min' },
+  { n:4,  title:'Las mentiras que te cuentas',  dur:'35 min' },
+  { n:5,  title:'Romper el ciclo',              dur:'32 min' },
+  { n:6,  title:'Gestión de impulsos',          dur:'38 min' },
+  { n:7,  title:'Ansiedad, culpa y vergüenza',  dur:'36 min' },
+  { n:8,  title:'Reconstruir la confianza',     dur:'34 min' },
+  { n:9,  title:'Dinero y recuperación',        dur:'40 min' },
+  { n:10, title:'La nueva identidad',           dur:'30 min' },
+  { n:11, title:'Crear nuevos hábitos',         dur:'33 min' },
+  { n:12, title:'Familia y entorno',            dur:'37 min' },
+  { n:13, title:'Prevenir recaídas',            dur:'35 min' },
+  { n:14, title:'Diseñar una nueva vida',       dur:'32 min' },
+  { n:15, title:'El futuro empieza hoy',        dur:'28 min' },
 ];
-const COMPLETED = [1,2,3,4];
-const CURRENT   = 5;
-const TOTAL     = 15;
-const pct = Math.round((COMPLETED.length / TOTAL) * 100);
 
-// Hero progress
-document.getElementById('heroProgress').style.width = pct + '%';
-document.getElementById('pctNum').textContent = pct + '%';
-document.getElementById('pctLabel').textContent = pct + '%';
+function getProgress() {
+  try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || { completed: [] }; }
+  catch { return { completed: [] }; }
+}
 
-// Sidebar progress
-const pFill = document.querySelector('[data-progress]');
-const pText = document.querySelector('[data-progress-text]');
-const pText2 = document.querySelector('[data-progress-text2]');
-if (pFill) setTimeout(() => pFill.style.width = pct + '%', 300);
-if (pText) pText.textContent = COMPLETED.length + ' / ' + TOTAL;
-if (pText2) pText2.textContent = COMPLETED.length;
+const p = getProgress();
+const completed = p.completed || [];
+const TOTAL = MODULES.length;
+const pct = Math.round((completed.length / TOTAL) * 100);
+// Módulo actual = el primero no completado
+const currentN = completed.length < TOTAL
+  ? (MODULES.find(m => !completed.includes(m.n))?.n || 1)
+  : TOTAL;
 
-// Module grid
-const grid = document.getElementById('moduleGrid');
+/* ── Actualiza hero ── */
+const barFill   = document.getElementById('barFill');
+const sideBar   = document.getElementById('sideBar');
+const progLabel = document.getElementById('progressLabel');
+const progPct   = document.getElementById('progressPct');
+const sideP     = document.getElementById('sideProgress');
+const heroTitle = document.getElementById('heroTitle');
+const continueBtn = document.getElementById('continueBtn');
+const continueTxt = document.getElementById('continueBtnText');
+
+setTimeout(() => {
+  if (barFill)  barFill.style.width  = pct + '%';
+  if (sideBar)  sideBar.style.width  = pct + '%';
+}, 300);
+
+if (progLabel) progLabel.textContent = completed.length + ' de ' + TOTAL + ' clases completadas';
+if (progPct)   progPct.textContent   = pct + '%';
+if (sideP)     sideP.textContent     = completed.length + ' / ' + TOTAL;
+
+if (completed.length > 0 && completed.length < TOTAL) {
+  const curMod = MODULES.find(m => m.n === currentN);
+  if (heroTitle) heroTitle.innerHTML = 'Continúa donde<br><em>lo dejaste.</em>';
+  if (continueTxt && curMod) continueTxt.textContent = 'Continuar — Clase ' + String(currentN).padStart(2,'0');
+} else if (completed.length >= TOTAL) {
+  if (heroTitle) heroTitle.innerHTML = '¡Lo conseguiste!<br><em>Curso completado.</em>';
+  if (continueTxt) continueTxt.textContent = 'Repasar desde el inicio';
+}
+
+/* ── Renderiza módulos ── */
+const list = document.getElementById('moduleList');
 MODULES.forEach(m => {
-  const isDone   = COMPLETED.includes(m.n);
-  const isActive = m.n === CURRENT;
-  const isLocked = m.n > CURRENT;
-  const card = document.createElement(isLocked ? 'div' : 'a');
-  if (!isLocked) card.href = 'modulo.html';
-  card.className = 'module-card' + (isDone?' done':'') + (isActive?' active':'') + (isLocked?' locked':'');
-  card.innerHTML = `
-    <div class="module-badge ${isDone?'badge--done':isActive?'badge--active':''}">
-      ${isDone ? '<svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M1.5 6l3 3 6-6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>' : (isLocked ? '🔒' : m.n)}
+  const isDone    = completed.includes(m.n);
+  const isCurrent = m.n === currentN && completed.length < TOTAL;
+  const isLocked  = !isDone && !isCurrent;
+
+  const item = document.createElement(isLocked ? 'div' : 'a');
+  if (!isLocked) {
+    item.href = 'modulo.html?n=' + m.n;
+  }
+
+  let statusClass = isLocked ? 'locked' : isDone ? 'done' : 'current';
+  item.className = 'module-item ' + statusClass;
+
+  let badgeContent = isDone
+    ? '<svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M2 7l3 3 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>'
+    : isLocked ? '<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>'
+    : m.n;
+
+  let metaText = isDone
+    ? '<span class="module-status done">✓ Completada</span>'
+    : isCurrent
+      ? '<span class="module-status current">▶ En progreso</span>'
+      : '<span class="module-status locked">' + m.dur + '</span>';
+
+  item.innerHTML = `
+    <div class="module-badge">${badgeContent}</div>
+    <div class="module-info">
+      <div class="module-num">Clase ${String(m.n).padStart(2,'0')}</div>
+      <div class="module-title">${m.title}</div>
+      <div class="module-meta">${metaText} ${!isLocked ? '· ' + m.dur : ''}</div>
     </div>
-    <div class="module-card__info">
-      <div class="module-card__num">Clase ${String(m.n).padStart(2,'0')}</div>
-      <div class="module-card__title">${m.title}</div>
-      <div class="module-card__duration">${isDone ? '✓ Completada' : isActive ? '▶ En progreso' : isLocked ? 'Bloqueada' : m.dur}</div>
-    </div>`;
-  grid.appendChild(card);
+    <div class="module-arrow">→</div>
+  `;
+  list.appendChild(item);
 });
 
-// Sidebar nav (compact)
-const nav = document.getElementById('sidebarNav');
-MODULES.forEach(m => {
-  const isDone   = COMPLETED.includes(m.n);
-  const isActive = m.n === CURRENT;
-  const isLocked = m.n > CURRENT;
-  const el = document.createElement(isLocked ? 'div' : 'a');
-  if (!isLocked) el.href = 'modulo.html';
-  el.className = 'sidebar__link' + (isActive?' active':'') + (isDone?' done':'') + (isLocked?' locked':'');
-  el.innerHTML = `<div class="sidebar__link-badge">${isDone ? '✓' : m.n}</div><span>${m.title}</span>`;
-  nav.appendChild(el);
+/* ── Reveal animation ── */
+document.querySelectorAll('[data-reveal]').forEach(el => {
+  el.style.opacity = '0';
+  el.style.transform = 'translateY(16px)';
+  el.style.transition = 'opacity 0.55s ease, transform 0.55s ease';
+  setTimeout(() => { el.style.opacity = '1'; el.style.transform = 'none'; }, 80);
 });
 </script>
 </body>
