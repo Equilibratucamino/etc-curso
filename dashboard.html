@@ -6,7 +6,7 @@
   <title>Mi Curso — ETC. Equilibra Tu Camino</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500;1,9..144,600&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { font-size: 16px; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; scroll-behavior: smooth; }
@@ -14,305 +14,219 @@
     button { cursor: pointer; border: none; background: none; font: inherit; }
 
     :root {
-      /* Brand spine */
-      --teal: #2FA97F;
-      --teal-d: #1F8C68;
-      --teal-dd: #15694E;
-      --ink: #1E211D;
-      --ink-2: #2A2E28;
+      --teal: #1F9E76;
+      --teal-d: #17855F;
+      --teal-tint: rgba(31,158,118,0.08);
+      --teal-line: rgba(31,158,118,0.26);
 
-      /* Bento pastels */
-      --mint-bg: #D8F0E6;   --mint-ink: #1C8A66;
-      --gold-bg: #F8EBCF;   --gold-ink: #A07E2A;
-      --lav-bg:  #E8E5F7;   --lav-ink:  #5F55A6;
-      --sky-bg:  #DBEBF8;   --sky-ink:  #34749F;
-      --peach-bg:#FBE5D6;   --peach-ink:#BE7440;
-      --blush-bg:#F8E2E2;   --blush-ink:#BC6464;
+      --ink: #14161A;
+      --ink-2: #2A2E35;
+      --muted: #646B74;
+      --subtle: #9AA1AA;
 
-      --muted: #71746C;
-      --subtle: #A3A59B;
-      --border: rgba(30,33,29,0.08);
-      --border-md: rgba(30,33,29,0.13);
-      --bg: #F3F1EA;
+      --bg: #F4F5F7;
       --paper: #FFFFFF;
+      --panel: #FAFBFC;
+      --line: #E6E8EC;
+      --line-2: #EEF0F3;
 
-      --r-tile: 26px;
-      --r-in: 16px;
-      --ease: cubic-bezier(0.16,1,0.3,1);
-      --sh-sm: 0 1px 2px rgba(35,33,24,0.04), 0 2px 8px rgba(35,33,24,0.04);
-      --sh-md: 0 2px 8px -2px rgba(35,33,24,0.06), 0 16px 36px -16px rgba(35,33,24,0.14);
-      --sh-lg: 0 4px 14px -4px rgba(35,33,24,0.10), 0 28px 56px -22px rgba(35,33,24,0.22);
+      --mono: ui-monospace, 'SF Mono', 'JetBrains Mono', Menlo, monospace;
+      --r: 12px;
+      --r-lg: 16px;
+      --ease: cubic-bezier(0.22,1,0.36,1);
+      --sh: 0 1px 2px rgba(20,22,26,0.04);
+      --sh-md: 0 1px 3px rgba(20,22,26,0.05), 0 10px 24px -14px rgba(20,22,26,0.18);
     }
 
     body {
       font-family: 'Inter', -apple-system, sans-serif;
       color: var(--ink); min-height: 100svh; overflow-x: hidden;
-      background: var(--bg); position: relative;
+      background: var(--bg);
     }
-    body::before {
-      content: ''; position: fixed; inset: 0; z-index: -1; pointer-events: none;
-      background:
-        radial-gradient(820px 480px at 8% -6%, rgba(47,169,127,0.10), transparent 60%),
-        radial-gradient(700px 460px at 104% 2%, rgba(160,126,42,0.07), transparent 58%),
-        radial-gradient(760px 560px at 92% 110%, rgba(95,85,166,0.06), transparent 60%);
-    }
-    ::selection { background: rgba(47,169,127,0.18); }
+    ::selection { background: var(--teal-tint); }
 
     /* ── TOP NAV ── */
     .topnav {
       position: sticky; top: 0; z-index: 100;
-      background: rgba(243,241,234,0.78);
-      backdrop-filter: blur(20px) saturate(1.2);
-      -webkit-backdrop-filter: blur(20px) saturate(1.2);
-      border-bottom: 1px solid var(--border);
-      height: 64px; display: flex; align-items: center;
-      padding: 0 clamp(18px,4vw,40px); justify-content: space-between;
+      background: rgba(244,245,247,0.85);
+      backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--line);
+      height: 60px; display: flex; align-items: center;
+      padding: 0 clamp(18px,4vw,32px); justify-content: space-between;
     }
-    .topnav__logo img { height: 24px; width: auto; display: block; }
-    .topnav__right { display: flex; align-items: center; gap: 20px; }
-    .topnav__link { font-size: 0.82rem; color: var(--muted); transition: color 0.18s; font-weight: 500; }
-    .topnav__link:hover { color: var(--teal-d); }
+    .topnav__logo img { height: 22px; width: auto; display: block; }
+    .topnav__right { display: flex; align-items: center; gap: 18px; }
+    .topnav__link { font-size: 0.8rem; color: var(--muted); transition: color 0.16s; font-weight: 500; }
+    .topnav__link:hover { color: var(--ink); }
     .topnav__avatar {
-      width: 36px; height: 36px; border-radius: 50%;
-      background: radial-gradient(circle at 30% 25%, #fff, var(--mint-bg));
-      border: 1.5px solid rgba(47,169,127,0.32);
+      width: 32px; height: 32px; border-radius: 9px;
+      background: var(--paper); border: 1px solid var(--line);
       display: flex; align-items: center; justify-content: center;
-      font-size: 0.68rem; font-weight: 700; color: var(--teal-d);
-      letter-spacing: 0.03em; box-shadow: var(--sh-sm);
+      font-size: 0.62rem; font-weight: 700; color: var(--teal-d);
+      letter-spacing: 0.04em; font-family: var(--mono);
     }
 
     /* ── PAGE ── */
-    .wrap { max-width: 1200px; margin: 0 auto; padding: clamp(22px,3vw,40px) clamp(16px,4vw,40px) 90px; }
-    .page-head { margin-bottom: 24px; padding: 0 4px; }
-    .page-head__eyebrow {
-      display: inline-flex; align-items: center; gap: 8px;
-      font-size: 0.66rem; font-weight: 700; letter-spacing: 0.16em;
-      text-transform: uppercase; color: var(--teal-d); margin-bottom: 10px;
-    }
-    .page-head__eyebrow::before { content: ''; width: 18px; height: 1.5px; background: var(--teal); border-radius: 2px; }
-    .page-head__title { font-family: 'Fraunces', Georgia, serif; font-size: clamp(1.6rem,3.2vw,2.4rem); font-weight: 500; letter-spacing: -0.025em; line-height: 1.1; }
-    .page-head__title em { font-style: italic; color: var(--teal-d); }
+    .wrap { max-width: 840px; margin: 0 auto; padding: clamp(20px,3vw,36px) clamp(16px,4vw,28px) 100px; }
 
-    /* ── BENTO GRID ── */
-    .bento {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      grid-auto-rows: minmax(178px, auto);
-      gap: 16px;
-      margin-bottom: 34px;
+    /* ── HERO ── */
+    .hero {
+      background: linear-gradient(180deg, #FFFFFF 0%, var(--panel) 100%);
+      border: 1px solid var(--line);
+      border-radius: var(--r-lg);
+      padding: 30px 32px;
+      display: grid; grid-template-columns: minmax(0,1fr) clamp(190px,34%,300px);
+      gap: 20px; align-items: stretch;
+      box-shadow: var(--sh);
+      margin-bottom: 40px;
+      position: relative; overflow: hidden;
     }
-    .tile {
-      border-radius: var(--r-tile);
-      padding: 26px;
-      position: relative;
-      overflow: hidden;
-      box-shadow: var(--sh-md);
-      display: flex; flex-direction: column;
-      transition: transform 0.28s var(--ease), box-shadow 0.28s var(--ease);
+    .hero::before { content:''; position:absolute; left:0; top:0; right:0; height:2px; background: linear-gradient(90deg, var(--teal), transparent 60%); }
+    .hero__content { display: flex; flex-direction: column; min-width: 0; }
+    .hero__eyebrow {
+      font-family: var(--mono); font-size: 0.66rem; font-weight: 500;
+      letter-spacing: 0.12em; text-transform: uppercase; color: var(--teal-d);
+      display: inline-flex; align-items: center; gap: 8px; margin-bottom: 14px;
     }
-    .tile-link:hover { transform: translateY(-3px); box-shadow: var(--sh-lg); }
-    .tile__label {
-      font-size: 0.64rem; font-weight: 700; letter-spacing: 0.14em;
-      text-transform: uppercase; opacity: 0.8; margin-bottom: 14px;
-      display: inline-flex; align-items: center; gap: 7px;
-    }
-
-    /* HERO tile (2x2) */
-    .t-hero {
-      grid-column: span 2; grid-row: span 2;
-      background:
-        radial-gradient(360px 260px at 100% 0%, rgba(47,169,127,0.16), transparent 62%),
-        linear-gradient(160deg, #FFFFFF 0%, #F4FBF8 100%);
-      border: 1px solid rgba(47,169,127,0.16);
-      display: grid;
-      grid-template-columns: minmax(0,1fr) clamp(210px, 37%, 340px);
-      gap: 18px; align-items: stretch;
-    }
-    .t-hero__content { display: flex; flex-direction: column; justify-content: space-between; height: 100%; gap: 18px; min-width: 0; }
-    .t-hero__art { width: 100%; height: auto; max-height: 270px; object-fit: contain; object-position: bottom; align-self: end; margin-bottom: 2px; filter: drop-shadow(0 16px 28px rgba(35,33,24,0.12)); }
-    .t-hero__top { }
-    .t-hero__label { color: var(--teal-d); }
-    .t-hero__title {
+    .hero__eyebrow::before { content:''; width: 6px; height: 6px; border-radius: 2px; background: var(--teal); }
+    .hero__title {
       font-family: 'Fraunces', Georgia, serif; font-weight: 500;
-      font-size: clamp(1.7rem, 3vw, 2.5rem); line-height: 1.1;
-      letter-spacing: -0.025em; margin-bottom: 6px;
+      font-size: clamp(1.6rem, 3vw, 2.3rem); line-height: 1.08;
+      letter-spacing: -0.025em; margin-bottom: 8px; color: var(--ink);
     }
-    .t-hero__title em { font-style: italic; color: var(--teal-d); }
-    .t-hero__sub { font-size: 0.92rem; color: var(--muted); line-height: 1.55; max-width: 90%; }
+    .hero__title em { font-style: italic; color: var(--teal-d); }
+    .hero__sub { font-size: 0.92rem; color: var(--muted); line-height: 1.55; max-width: 95%; }
 
-    /* current class chip inside hero */
-    .now-card {
-      margin-top: 22px; background: rgba(255,255,255,0.7);
-      border: 1px solid var(--border); border-radius: var(--r-in);
-      padding: 14px 16px; display: flex; align-items: center; gap: 14px;
-      backdrop-filter: blur(6px);
-    }
-    .now-card__badge {
-      width: 44px; height: 44px; border-radius: 13px; flex-shrink: 0;
-      background: linear-gradient(160deg, var(--teal), var(--teal-d));
-      color: #fff; display: flex; align-items: center; justify-content: center;
-      font-family: 'Fraunces', serif; font-weight: 600; font-size: 1.15rem;
-      box-shadow: 0 6px 16px -4px rgba(47,169,127,0.5);
-    }
-    .now-card__info { flex: 1; min-width: 0; }
-    .now-card__k { font-size: 0.62rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--subtle); }
-    .now-card__t { font-size: 0.96rem; font-weight: 600; letter-spacing: -0.01em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .prog { margin-top: 22px; }
+    .prog__head { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 8px; }
+    .prog__label { font-size: 0.78rem; color: var(--muted); font-weight: 500; }
+    .prog__nums { font-family: var(--mono); font-size: 0.78rem; color: var(--ink); font-weight: 500; }
+    .prog__nums b { color: var(--teal-d); }
+    .prog__track { height: 6px; background: #E8EAEE; border-radius: 4px; overflow: hidden; }
+    .prog__fill { height: 100%; background: var(--teal); border-radius: 4px; transition: width 1s var(--ease); }
 
-    .t-hero__actions { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-top: 20px; }
+    .hero__actions { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-top: auto; padding-top: 24px; }
     .btn-primary {
-      display: inline-flex; align-items: center; gap: 9px;
-      background: linear-gradient(180deg, var(--teal), var(--teal-d));
-      color: #fff; font-size: 0.94rem; font-weight: 600;
-      padding: 14px 28px; border-radius: 999px;
-      box-shadow: 0 6px 16px -4px rgba(47,169,127,0.4), 0 14px 34px -12px rgba(47,169,127,0.36);
-      transition: transform 0.22s var(--ease), filter 0.2s;
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--teal); color: #fff; font-size: 0.9rem; font-weight: 600;
+      padding: 12px 22px; border-radius: 10px;
+      transition: background 0.18s, transform 0.18s;
     }
-    .btn-primary:hover { transform: translateY(-2px); filter: brightness(1.05); }
-    .btn-soft {
+    .btn-primary:hover { background: var(--teal-d); transform: translateY(-1px); }
+    .btn-ghost {
       display: inline-flex; align-items: center; gap: 6px;
-      border: 1px solid var(--border-md); color: var(--muted);
-      font-size: 0.86rem; font-weight: 500; padding: 13px 20px; border-radius: 999px;
-      transition: all 0.18s;
+      border: 1px solid var(--line); color: var(--muted);
+      font-size: 0.84rem; font-weight: 500; padding: 11px 18px; border-radius: 10px;
+      transition: all 0.16s; background: var(--paper);
     }
-    .btn-soft:hover { border-color: var(--teal); color: var(--teal-d); background: rgba(47,169,127,0.06); }
+    .btn-ghost:hover { border-color: var(--teal-line); color: var(--ink); }
 
-    /* RING tile */
-    .t-ring { background: var(--paper); border: 1px solid var(--border); align-items: center; text-align: center; justify-content: center; }
-    .ring-wrap { position: relative; width: 122px; height: 122px; margin-bottom: 12px; }
-    .ring-wrap svg { transform: rotate(-90deg); display: block; }
-    .ring-bg { fill: none; stroke: #ECEAE1; stroke-width: 10; }
-    .ring-fg { fill: none; stroke: url(#rg); stroke-width: 10; stroke-linecap: round; transition: stroke-dashoffset 1.3s var(--ease); }
-    .ring-center { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; }
-    .ring-center__n { font-family: 'Fraunces', serif; font-size: 1.85rem; font-weight: 600; line-height: 1; }
-    .t-ring__cap { font-size: 0.8rem; color: var(--muted); font-weight: 500; }
-    .t-ring__cap b { color: var(--teal-d); font-weight: 700; }
-
-    /* QUOTE / motivation tile */
-    .t-quote { background: linear-gradient(155deg, var(--lav-bg), #F1EFFB); border: 1px solid rgba(95,85,166,0.16); justify-content: space-between; }
-    .t-quote .tile__label { color: var(--lav-ink); }
-    .t-quote__text { font-family: 'Fraunces', serif; font-weight: 500; font-size: 1.12rem; line-height: 1.32; letter-spacing: -0.01em; color: var(--ink-2); }
-    .t-quote__text em { font-style: italic; color: var(--lav-ink); }
-    .t-quote__by { font-size: 0.74rem; color: var(--muted); margin-top: 12px; }
-
-    /* MENTOR tile */
-    .t-mentor { background: linear-gradient(155deg, var(--mint-bg), #E8F8F1); border: 1px solid rgba(28,138,102,0.18); justify-content: space-between; }
-    .t-mentor .tile__label { color: var(--mint-ink); }
-    .mentor-av { display: flex; margin-bottom: 12px; }
-    .mentor-av span {
-      width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
-      font-family: 'Fraunces', serif; font-weight: 600; font-size: 0.95rem; color: #fff; border: 2.5px solid #EAF7F1;
-    }
-    .mentor-av span:nth-child(1){ background: linear-gradient(135deg, var(--teal), var(--teal-d)); }
-    .mentor-av span:nth-child(2){ background: linear-gradient(135deg, var(--teal-d), var(--teal-dd)); margin-left: -12px; }
-    .t-mentor__t { font-size: 0.98rem; font-weight: 600; line-height: 1.3; margin-bottom: 14px; }
-    .btn-tile {
-      display: flex; align-items: center; justify-content: center; gap: 7px;
-      font-size: 0.85rem; font-weight: 600; padding: 12px; border-radius: 13px;
-      transition: transform 0.2s var(--ease), filter 0.2s; margin-top: auto;
-    }
-    .btn-tile:hover { transform: translateY(-2px); filter: brightness(1.04); }
-    .btn-tile.teal { background: linear-gradient(180deg, var(--teal), var(--teal-d)); color: #fff; box-shadow: 0 6px 16px -5px rgba(47,169,127,0.5); }
-    .btn-tile.gold { background: linear-gradient(180deg, #D7B354, var(--gold-ink)); color: #fff; box-shadow: 0 6px 16px -5px rgba(160,126,42,0.5); }
-
-    /* WEBINAR tile */
-    .t-webinar { background: linear-gradient(155deg, var(--gold-bg), #FCF5E4); border: 1px solid rgba(160,126,42,0.2); justify-content: space-between; }
-    .t-webinar .tile__label { color: var(--gold-ink); }
-    .t-webinar .tile__label::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: var(--gold-ink); animation: pg 2.4s ease-in-out infinite; }
-    @keyframes pg { 0%{box-shadow:0 0 0 0 rgba(160,126,42,0.5)} 70%{box-shadow:0 0 0 7px rgba(160,126,42,0)} 100%{box-shadow:0 0 0 0 rgba(160,126,42,0)} }
-    .t-webinar__price { font-family: 'Fraunces', serif; font-size: 2.1rem; font-weight: 600; color: var(--gold-ink); line-height: 1; letter-spacing: -0.02em; }
-    .t-webinar__price sup { font-size: 0.95rem; vertical-align: super; }
-    .t-webinar__price small { font-family: 'Inter', sans-serif; font-size: 0.72rem; font-weight: 500; color: var(--muted); }
-    .t-webinar__t { font-size: 0.92rem; font-weight: 600; line-height: 1.3; margin: 8px 0 0; }
+    .hero__art { width: 100%; height: auto; max-height: 250px; object-fit: contain; object-position: bottom; align-self: end; filter: drop-shadow(0 14px 24px rgba(20,22,26,0.10)); }
 
     /* ── SECTION HEAD ── */
-    .sec-head { display: flex; align-items: center; justify-content: space-between; margin: 0 4px 18px; }
-    .sec-head__t { font-family: 'Fraunces', serif; font-size: 1.3rem; font-weight: 500; letter-spacing: -0.02em; }
-    .sec-head__c { font-size: 0.78rem; color: var(--muted); font-weight: 500; background: var(--paper); border: 1px solid var(--border); padding: 6px 14px; border-radius: 999px; box-shadow: var(--sh-sm); }
+    .sec { display: flex; align-items: flex-end; justify-content: space-between; margin: 0 2px 18px; }
+    .sec__eyebrow { font-family: var(--mono); font-size: 0.64rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--subtle); margin-bottom: 6px; }
+    .sec__title { font-family: 'Fraunces', serif; font-size: 1.35rem; font-weight: 500; letter-spacing: -0.02em; }
+    .sec__meta { font-family: var(--mono); font-size: 0.74rem; color: var(--muted); }
 
-    /* ── CLASS CARDS ── */
-    .classes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
-    .ccard {
-      background: var(--paper); border: 1px solid var(--border); border-radius: 22px;
-      overflow: hidden; display: flex; flex-direction: column;
-      box-shadow: var(--sh-sm); transition: transform 0.26s var(--ease), box-shadow 0.26s var(--ease), border-color 0.2s;
+    /* ── CLASS LIST (timeline / funnel) ── */
+    .list {
+      background: var(--paper); border: 1px solid var(--line); border-radius: var(--r-lg);
+      overflow: hidden; box-shadow: var(--sh);
     }
-    .ccard.clickable { cursor: pointer; }
-    .ccard.clickable:hover { transform: translateY(-4px); box-shadow: var(--sh-md); border-color: var(--border-md); }
-    .ccard.current { border-color: rgba(47,169,127,0.4); box-shadow: 0 0 0 3px rgba(47,169,127,0.12), var(--sh-md); }
-    .ccard.locked { opacity: 0.9; }
-    .ccard.locked .ccard__cover { filter: saturate(0.78); }
+    .crow {
+      display: flex; align-items: center; gap: 18px;
+      padding: 20px 24px; position: relative;
+      border-bottom: 1px solid var(--line-2);
+      transition: background 0.16s;
+    }
+    .crow:last-child { border-bottom: none; }
+    .crow.clickable { cursor: pointer; }
+    .crow.clickable:hover { background: var(--panel); }
+    .crow.current { background: var(--teal-tint); }
+    .crow.current::before { content:''; position:absolute; left:0; top:0; bottom:0; width:3px; background: var(--teal); }
 
-    .ccard__cover {
-      height: 92px; position: relative; display: flex; align-items: center; padding: 0 20px;
-      overflow: hidden;
+    /* connector rail */
+    .crow:not(:last-child) .crow__node::after {
+      content:''; position: absolute; left: 50%; top: 100%; transform: translateX(-50%);
+      width: 2px; height: 28px; background: var(--line); z-index: 0;
     }
-    .ccard__cover::after {
-      content: ''; position: absolute; right: -30px; bottom: -40px; width: 130px; height: 130px;
-      border-radius: 50%; background: rgba(255,255,255,0.35);
-    }
-    .ccard__num { font-family: 'Fraunces', serif; font-weight: 600; font-size: 2.3rem; letter-spacing: -0.02em; position: relative; z-index: 1; }
-    .ccard__statribbon {
-      position: absolute; top: 12px; right: 14px; z-index: 2;
-      width: 30px; height: 30px; border-radius: 50%;
+    .crow.done .crow__node::after { background: var(--teal-line); }
+
+    .crow__node {
+      width: 40px; height: 40px; border-radius: 11px; flex-shrink: 0;
+      border: 1px solid var(--line); background: var(--paper);
       display: flex; align-items: center; justify-content: center;
-      background: rgba(255,255,255,0.85); backdrop-filter: blur(4px);
+      font-family: var(--mono); font-size: 0.84rem; font-weight: 500; color: var(--muted);
+      position: relative; z-index: 1;
     }
-    .ccard__body { padding: 16px 20px 18px; display: flex; flex-direction: column; flex: 1; }
-    .ccard__k { font-size: 0.62rem; font-weight: 700; letter-spacing: 0.13em; text-transform: uppercase; color: var(--subtle); margin-bottom: 4px; }
-    .ccard__t { font-size: 1rem; font-weight: 600; letter-spacing: -0.01em; line-height: 1.3; margin-bottom: 10px; }
-    .ccard__meta { font-size: 0.76rem; color: var(--muted); margin-top: auto; display: flex; align-items: center; gap: 7px; }
-    .ccard__meta .dot { width: 3px; height: 3px; border-radius: 50%; background: var(--subtle); }
-    .ccard__foot { margin-top: 12px; display: flex; align-items: center; justify-content: space-between; }
-    .ccard__status { font-size: 0.76rem; font-weight: 600; display: inline-flex; align-items: center; gap: 5px; }
-    .ccard__arrow { color: var(--teal-d); opacity: 0; transform: translateX(-4px); transition: all 0.2s var(--ease); }
-    .ccard.clickable:hover .ccard__arrow, .ccard.current .ccard__arrow { opacity: 1; transform: translateX(0); }
+    .crow.done .crow__node { background: var(--teal); border-color: var(--teal); color: #fff; }
+    .crow.current .crow__node { background: var(--paper); border-color: var(--teal); color: var(--teal-d); box-shadow: 0 0 0 3px var(--teal-tint); }
+    .crow.locked .crow__node { color: var(--subtle); background: var(--panel); }
 
-    /* cover palettes */
-    .cv-teal  { background: linear-gradient(150deg, var(--mint-bg), #C6EBDC); color: var(--mint-ink); }
-    .cv-sky   { background: linear-gradient(150deg, var(--sky-bg), #C9E2F4); color: var(--sky-ink); }
-    .cv-lav   { background: linear-gradient(150deg, var(--lav-bg), #DBD6F2); color: var(--lav-ink); }
-    .cv-peach { background: linear-gradient(150deg, var(--peach-bg), #F8D6BF); color: var(--peach-ink); }
-    .cv-gold  { background: linear-gradient(150deg, var(--gold-bg), #F2DFB0); color: var(--gold-ink); }
-    .cv-blush { background: linear-gradient(150deg, var(--blush-bg), #F3CFCF); color: var(--blush-ink); }
-    .cv-done  { background: linear-gradient(150deg, var(--teal), var(--teal-d)); color: #fff; }
-    .cv-lock  { background: linear-gradient(150deg, #ECEAE2, #E2DFD5); color: #9A9C90; }
+    .crow__body { flex: 1; min-width: 0; }
+    .crow__idx { font-family: var(--mono); font-size: 0.62rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--subtle); margin-bottom: 3px; }
+    .crow.current .crow__idx { color: var(--teal-d); }
+    .crow__title { font-size: 0.98rem; font-weight: 600; letter-spacing: -0.01em; color: var(--ink); }
+    .crow.locked .crow__title { color: var(--muted); }
 
-    /* ── CERTIFICATE feature ── */
+    .crow__side { display: flex; align-items: center; gap: 16px; flex-shrink: 0; }
+    .crow__dur { font-family: var(--mono); font-size: 0.74rem; color: var(--subtle); }
+    .crow__status { font-size: 0.74rem; font-weight: 600; display: inline-flex; align-items: center; gap: 5px; white-space: nowrap; }
+    .crow__status.done { color: var(--teal-d); }
+    .crow__status.current { color: var(--teal-d); }
+    .crow__status.locked { color: var(--subtle); }
+    .crow__chev { color: var(--subtle); display: flex; opacity: 0; transform: translateX(-3px); transition: all 0.18s var(--ease); }
+    .crow.clickable:hover .crow__chev { opacity: 1; transform: translateX(0); color: var(--teal-d); }
+    .crow.current .crow__chev { opacity: 1; transform: none; color: var(--teal-d); }
+    @media (max-width: 560px) { .crow__dur { display: none; } }
+
+    /* ── CERTIFICATE (goal / funnel end) ── */
     .cert {
-      margin-top: 34px; border-radius: var(--r-tile); padding: 48px clamp(24px,5vw,56px);
-      background:
-        radial-gradient(420px 260px at 18% 0%, rgba(215,179,84,0.22), transparent 60%),
-        radial-gradient(420px 260px at 100% 120%, rgba(47,169,127,0.18), transparent 60%),
-        linear-gradient(155deg, var(--ink), var(--ink-2));
-      color: #fff; display: flex; align-items: center; gap: clamp(24px,5vw,56px);
-      box-shadow: var(--sh-lg); position: relative; overflow: hidden; flex-wrap: wrap;
+      margin-top: 40px; border-radius: var(--r-lg); padding: 36px clamp(24px,5vw,40px);
+      background: linear-gradient(160deg, var(--ink) 0%, #1B2024 100%);
+      color: #fff; display: flex; align-items: center; gap: clamp(20px,4vw,36px);
+      position: relative; overflow: hidden; box-shadow: var(--sh-md); flex-wrap: wrap;
     }
+    .cert::before { content:''; position:absolute; left:0; top:0; right:0; height:2px; background: linear-gradient(90deg, var(--teal), transparent 55%); }
     .cert__seal { flex-shrink: 0; }
-    .cert__body { flex: 1; min-width: 240px; }
-    .cert__eyebrow { font-size: 0.66rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: #E3C56A; margin-bottom: 12px; }
-    .cert__title { font-family: 'Fraunces', Georgia, serif; font-size: clamp(1.6rem,3vw,2.3rem); font-weight: 500; line-height: 1.14; margin-bottom: 12px; }
-    .cert__title em { font-style: italic; color: #E3C56A; }
-    .cert__desc { font-size: 0.92rem; color: rgba(255,255,255,0.72); line-height: 1.6; max-width: 460px; margin-bottom: 24px; }
-    .btn-cert { display: inline-flex; align-items: center; gap: 8px; background: linear-gradient(180deg, #E3C56A, var(--gold-ink)); color: #2A230E; font-size: 0.9rem; font-weight: 700; padding: 14px 30px; border-radius: 999px; transition: transform 0.2s var(--ease), filter 0.2s; }
-    .btn-cert:hover { transform: translateY(-2px); filter: brightness(1.06); }
+    .cert__body { flex: 1; min-width: 230px; }
+    .cert__eyebrow { font-family: var(--mono); font-size: 0.64rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--teal); margin-bottom: 10px; }
+    .cert__title { font-family: 'Fraunces', Georgia, serif; font-size: clamp(1.5rem,3vw,2rem); font-weight: 500; line-height: 1.15; margin-bottom: 10px; }
+    .cert__title em { font-style: italic; color: #fff; }
+    .cert__desc { font-size: 0.9rem; color: rgba(255,255,255,0.66); line-height: 1.6; max-width: 460px; margin-bottom: 22px; }
+    .btn-cert { display: inline-flex; align-items: center; gap: 8px; background: var(--teal); color: #fff; font-size: 0.88rem; font-weight: 600; padding: 12px 24px; border-radius: 10px; transition: background 0.18s, transform 0.18s; }
+    .btn-cert:hover { background: var(--teal-d); transform: translateY(-1px); }
+
+    /* ── SUPPORT (mentor + webinar) ── */
+    .support { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 16px; }
+    .scard {
+      background: var(--paper); border: 1px solid var(--line); border-radius: var(--r);
+      padding: 22px; display: flex; flex-direction: column; box-shadow: var(--sh);
+    }
+    .scard__label { font-family: var(--mono); font-size: 0.62rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--subtle); margin-bottom: 14px; display: inline-flex; align-items: center; gap: 7px; }
+    .scard__label .live { width: 6px; height: 6px; border-radius: 50%; background: var(--teal); animation: blink 2.2s ease-in-out infinite; }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.25} }
+    .scard__av { display: flex; margin-bottom: 12px; }
+    .scard__av span { width: 36px; height: 36px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-family: var(--mono); font-weight: 600; font-size: 0.82rem; color: #fff; background: var(--teal-d); border: 2px solid var(--paper); }
+    .scard__av span:nth-child(2){ background: var(--ink-2); margin-left: -10px; }
+    .scard__price { font-family: 'Fraunces', serif; font-size: 1.7rem; font-weight: 600; color: var(--ink); line-height: 1; margin-bottom: 12px; }
+    .scard__price small { font-family: var(--mono); font-size: 0.7rem; font-weight: 500; color: var(--subtle); }
+    .scard__t { font-size: 0.95rem; font-weight: 600; line-height: 1.35; margin-bottom: 6px; }
+    .scard__d { font-size: 0.82rem; color: var(--muted); line-height: 1.55; margin-bottom: 18px; }
+    .scard__btn { margin-top: auto; display: flex; align-items: center; justify-content: center; gap: 7px; border: 1px solid var(--teal-line); color: var(--teal-d); background: var(--teal-tint); font-size: 0.84rem; font-weight: 600; padding: 11px; border-radius: 9px; transition: all 0.18s; }
+    .scard__btn:hover { background: var(--teal); color: #fff; border-color: var(--teal); }
 
     /* ── RESPONSIVE ── */
-    @media (max-width: 980px) {
-      .bento { grid-template-columns: repeat(2, 1fr); grid-auto-rows: minmax(168px, auto); }
-      .t-hero { grid-column: span 2; grid-row: span 1; }
-      .classes { grid-template-columns: repeat(2, 1fr); }
-    }
-    @media (max-width: 600px) {
-      .topnav { padding: 0 18px; }
-      .topnav__right .topnav__link { display: none; }
-      .bento { grid-template-columns: 1fr; }
-      .t-hero { grid-column: span 1; grid-template-columns: 1fr; }
-      .t-hero__art { max-height: 230px; max-width: 300px; margin: 4px auto 0; }
-      .classes { grid-template-columns: 1fr; }
-      .tile { padding: 22px; }
+    @media (max-width: 680px) {
+      .hero { grid-template-columns: 1fr; padding: 26px 22px; }
+      .hero__art { max-height: 210px; max-width: 290px; margin: 6px auto 0; }
+      .support { grid-template-columns: 1fr; }
+      .crow { padding: 18px 18px; gap: 14px; }
       .cert { flex-direction: column; text-align: center; }
       .cert__desc { margin-left: auto; margin-right: auto; }
     }
+    @media (max-width: 560px) { .topnav__right .topnav__link { display: none; } }
   </style>
 </head>
 <body>
@@ -328,102 +242,50 @@
 
 <div class="wrap">
 
-  <!-- ── BENTO ── -->
-  <div class="bento">
-
-    <!-- HERO -->
-    <div class="tile t-hero" data-reveal>
-      <div class="t-hero__content">
-        <div class="t-hero__top">
-          <div class="tile__label t-hero__label">Programa de Recuperación ETC.</div>
-          <h1 class="t-hero__title" id="heroTitle">Bienvenido a tu<br><em>camino.</em></h1>
-          <p class="t-hero__sub" id="heroSub">Tu espacio para recuperar el control, a tu ritmo y para siempre.</p>
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero__content">
+      <div class="hero__eyebrow">Programa de Recuperación ETC.</div>
+      <h1 class="hero__title" id="heroTitle">Bienvenido a tu<br><em>camino.</em></h1>
+      <p class="hero__sub" id="heroSub">Tu espacio para recuperar el control, a tu ritmo y para siempre.</p>
+      <div class="prog">
+        <div class="prog__head">
+          <span class="prog__label" id="progLabel">Tu progreso</span>
+          <span class="prog__nums"><b id="progDone">0</b> / 15 · <span id="progPct">0%</span></span>
         </div>
-        <div>
-          <div class="now-card">
-            <div class="now-card__badge" id="nowBadge">1</div>
-            <div class="now-card__info">
-              <div class="now-card__k" id="nowK">Empieza por aquí</div>
-              <div class="now-card__t" id="nowT">Clase 01 · Aceptar la realidad</div>
-            </div>
-          </div>
-          <div class="t-hero__actions">
-            <a href="modulo.html" class="btn-primary" id="continueBtn">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-              <span id="continueBtnText">Empezar — Clase 01</span>
-            </a>
-            <a href="#clases" class="btn-soft">Ver todas las clases ↓</a>
-          </div>
-        </div>
+        <div class="prog__track"><div class="prog__fill" id="progFill" style="width:0%"></div></div>
       </div>
-      <img class="t-hero__art" src="images/hero-illustration.png" alt="Corazón caminante de ETC junto a una sesión con psicóloga" loading="eager">
-    </div>
-
-    <!-- RING -->
-    <div class="tile t-ring" data-reveal>
-      <div class="ring-wrap">
-        <svg width="122" height="122" viewBox="0 0 122 122">
-          <defs><linearGradient id="rg" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#2FA97F"/><stop offset="100%" stop-color="#1F8C68"/></linearGradient></defs>
-          <circle class="ring-bg" cx="61" cy="61" r="52"/>
-          <circle class="ring-fg" id="ringFg" cx="61" cy="61" r="52" stroke-dasharray="326.7" stroke-dashoffset="326.7"/>
-        </svg>
-        <div class="ring-center"><div class="ring-center__n" id="ringNum">0%</div></div>
-      </div>
-      <div class="t-ring__cap"><b id="ringCount">0</b> de 15 clases</div>
-    </div>
-
-    <!-- QUOTE / motivation -->
-    <div class="tile t-quote" data-reveal>
-      <div class="tile__label">Tu camino</div>
-      <div>
-        <div class="t-quote__text" id="quoteText">Cada clase es <em>un paso</em> que nadie te puede quitar.</div>
-        <div class="t-quote__by">— Equilibra Tu Camino</div>
+      <div class="hero__actions">
+        <a href="modulo.html" class="btn-primary" id="continueBtn">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+          <span id="continueBtnText">Empezar — Clase 01</span>
+        </a>
+        <a href="#clases" class="btn-ghost">Ver el programa ↓</a>
       </div>
     </div>
-
-    <!-- MENTOR -->
-    <div class="tile t-mentor" data-reveal>
-      <div>
-        <div class="tile__label">Sesión privada · 1 a 1</div>
-        <div class="mentor-av"><span>N</span><span>M</span></div>
-        <div class="t-mentor__t">Acompañamiento con Nacho o Marcos</div>
-      </div>
-      <a href="https://wa.me/34611847645?text=Hola%2C%20soy%20alumno%20del%20curso%20ETC%20y%20me%20gustar%C3%ADa%20reservar%20una%20sesi%C3%B3n%20privada." class="btn-tile teal" target="_blank" rel="noopener">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.117 1.526 5.847L.057 23.535l5.693-1.466A11.944 11.944 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22a9.94 9.94 0 01-5.071-1.388l-.364-.216-3.774.989.998-3.801-.235-.374A9.953 9.953 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
-        Reservar por WhatsApp
-      </a>
-    </div>
-
-    <!-- WEBINAR -->
-    <div class="tile t-webinar" data-reveal>
-      <div>
-        <div class="tile__label">Webinar en directo</div>
-        <div class="t-webinar__price"><sup>€</sup>25 <small>/ sesión</small></div>
-        <div class="t-webinar__t">Sesión grupal mensual con Nacho</div>
-      </div>
-      <a href="https://wa.me/34611847645?text=Hola%2C%20soy%20alumno%20del%20curso%20ETC%20y%20me%20interesa%20el%20pr%C3%B3ximo%20webinar%20de%2025%E2%82%AC." class="btn-tile gold" target="_blank" rel="noopener">Apuntarme al próximo →</a>
-    </div>
-
+    <img class="hero__art" src="images/hero-illustration.png" alt="Corazón caminante de ETC junto a una sesión con psicóloga" loading="eager">
   </div>
 
-  <!-- ── CLASES ── -->
+  <!-- CLASES -->
   <div id="clases">
-    <div class="sec-head">
-      <div class="sec-head__t">Tus 15 clases</div>
-      <div class="sec-head__c">15 clases · ~8 horas</div>
+    <div class="sec">
+      <div>
+        <div class="sec__eyebrow">El programa</div>
+        <div class="sec__title">15 clases, paso a paso</div>
+      </div>
+      <div class="sec__meta">~8 h totales</div>
     </div>
-    <div class="classes" id="classGrid"><!-- JS --></div>
+    <div class="list" id="classList"><!-- JS --></div>
   </div>
 
-  <!-- ── CERTIFICADO ── -->
-  <div class="cert" data-reveal>
+  <!-- CERTIFICADO -->
+  <div class="cert">
     <div class="cert__seal">
-      <svg width="116" height="116" viewBox="0 0 116 116" fill="none">
-        <circle cx="58" cy="50" r="36" fill="url(#sg)" stroke="#E3C56A" stroke-width="2"/>
-        <circle cx="58" cy="50" r="28" fill="none" stroke="#fff" stroke-width="1.2" stroke-opacity="0.5"/>
-        <path d="M46 50l8.5 8.5L74 39" stroke="#fff" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/>
-        <path d="M40 82l-6 28 24-13 24 13-6-28" fill="#D7B354" stroke="#A07E2A" stroke-width="1.6" stroke-linejoin="round"/>
-        <defs><linearGradient id="sg" x1="22" y1="14" x2="92" y2="86" gradientUnits="userSpaceOnUse"><stop stop-color="#E9CE78"/><stop offset="1" stop-color="#B8922F"/></linearGradient></defs>
+      <svg width="104" height="104" viewBox="0 0 104 104" fill="none">
+        <circle cx="52" cy="44" r="32" fill="none" stroke="#1F9E76" stroke-width="2.5"/>
+        <circle cx="52" cy="44" r="24" fill="none" stroke="rgba(255,255,255,0.28)" stroke-width="1.2"/>
+        <path d="M41 44l8 8 16-18" stroke="#1F9E76" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M36 73l-6 25 22-12 22 12-6-25" fill="none" stroke="#1F9E76" stroke-width="2.2" stroke-linejoin="round"/>
       </svg>
     </div>
     <div class="cert__body">
@@ -431,6 +293,24 @@
       <div class="cert__title">Recibes tu <em>certificado</em></div>
       <p class="cert__desc">Un certificado personalizado, firmado por Nacho y Marcos Agudo, que reconoce todo lo que has conseguido en tu camino.</p>
       <a href="index.html#cert-section" class="btn-cert">Ver mi certificado →</a>
+    </div>
+  </div>
+
+  <!-- SOPORTE -->
+  <div class="support">
+    <div class="scard">
+      <div class="scard__label">Sesión privada · 1 a 1</div>
+      <div class="scard__av"><span>N</span><span>M</span></div>
+      <div class="scard__t">Acompañamiento con Nacho o Marcos</div>
+      <div class="scard__d">Cuando lo necesites, reserva una sesión privada con cualquiera de los dos instructores.</div>
+      <a href="https://wa.me/34611847645?text=Hola%2C%20soy%20alumno%20del%20curso%20ETC%20y%20me%20gustar%C3%ADa%20reservar%20una%20sesi%C3%B3n%20privada." class="scard__btn" target="_blank" rel="noopener">Reservar por WhatsApp →</a>
+    </div>
+    <div class="scard">
+      <div class="scard__label"><span class="live"></span> Webinar en directo</div>
+      <div class="scard__price">€25 <small>/ sesión</small></div>
+      <div class="scard__t">Sesión grupal mensual con Nacho</div>
+      <div class="scard__d">Cada mes, Nacho conecta en directo con los alumnos. Preguntas y experiencias reales.</div>
+      <a href="https://wa.me/34611847645?text=Hola%2C%20soy%20alumno%20del%20curso%20ETC%20y%20me%20interesa%20el%20pr%C3%B3ximo%20webinar%20de%2025%E2%82%AC." class="scard__btn" target="_blank" rel="noopener">Apuntarme al próximo →</a>
     </div>
   </div>
 
@@ -456,7 +336,6 @@ const MODULES = [
   { n:14, title:'Diseñar una nueva vida',       dur:'32 min' },
   { n:15, title:'El futuro empieza hoy',        dur:'28 min' },
 ];
-const COVERS = ['cv-teal','cv-sky','cv-lav','cv-peach','cv-gold','cv-blush'];
 
 function getProgress(){ try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {completed:[]}; } catch { return {completed:[]}; } }
 
@@ -466,99 +345,68 @@ const pct = Math.round((completed.length / TOTAL) * 100);
 const currentN = completed.length < TOTAL ? (MODULES.find(m => !completed.includes(m.n))?.n || 1) : TOTAL;
 const curMod = MODULES.find(m => m.n === currentN);
 
-/* Ring + counts */
-const CIRC = 2 * Math.PI * 52;
-setTimeout(() => {
-  const r = document.getElementById('ringFg');
-  if (r) r.style.strokeDashoffset = (CIRC * (1 - pct/100)).toFixed(2);
-}, 300);
-document.getElementById('ringNum').textContent = pct + '%';
-document.getElementById('ringCount').textContent = completed.length;
+/* Progress + hero */
+setTimeout(() => { document.getElementById('progFill').style.width = pct + '%'; }, 250);
+document.getElementById('progDone').textContent = completed.length;
+document.getElementById('progPct').textContent = pct + '%';
 
-/* Hero dynamic */
 const heroTitle = document.getElementById('heroTitle');
 const heroSub = document.getElementById('heroSub');
-const nowBadge = document.getElementById('nowBadge');
-const nowK = document.getElementById('nowK');
-const nowT = document.getElementById('nowT');
-const contTxt = document.getElementById('continueBtnText');
 const contBtn = document.getElementById('continueBtn');
-const quoteText = document.getElementById('quoteText');
-
-nowBadge.textContent = String(currentN).padStart(2,'0');
-nowT.textContent = 'Clase ' + String(currentN).padStart(2,'0') + ' · ' + curMod.title;
+const contTxt = document.getElementById('continueBtnText');
 contBtn.href = 'modulo.html?n=' + currentN;
 
 if (completed.length === 0) {
-  nowK.textContent = 'Empieza por aquí';
   contTxt.textContent = 'Empezar — Clase 01';
-  quoteText.innerHTML = 'Tu nuevo camino empieza con <em>una sola clase.</em>';
 } else if (completed.length < TOTAL) {
   heroTitle.innerHTML = 'Continúa donde<br><em>lo dejaste.</em>';
   heroSub.textContent = 'Vas por buen camino. Sigue avanzando a tu ritmo.';
-  nowK.textContent = 'Continúa ahora';
   contTxt.textContent = 'Continuar — Clase ' + String(currentN).padStart(2,'0');
-  quoteText.innerHTML = 'Llevas <em>' + completed.length + ' clase' + (completed.length>1?'s':'') + '</em>. Cada una cuenta.';
 } else {
   heroTitle.innerHTML = 'Lo conseguiste.<br><em>Curso completado.</em>';
   heroSub.textContent = 'Has recorrido las 15 clases. Tu certificado te espera.';
-  nowK.textContent = 'Completado';
-  nowT.textContent = 'Has terminado las 15 clases';
   contTxt.textContent = 'Repasar desde el inicio';
-  quoteText.innerHTML = 'Lo que empezó con miedo, hoy es <em>tu victoria.</em>';
 }
 
-/* Class cards */
-const grid = document.getElementById('classGrid');
-let coverI = 0;
+/* Class list */
+const list = document.getElementById('classList');
 MODULES.forEach(m => {
   const isDone = completed.includes(m.n);
   const isCurrent = m.n === currentN && completed.length < TOTAL;
   const isLocked = !isDone && !isCurrent;
 
-  const card = document.createElement(isLocked ? 'div' : 'a');
-  if (!isLocked) card.href = 'modulo.html?n=' + m.n;
-  card.className = 'ccard ' + (isLocked ? 'locked' : 'clickable') + (isCurrent ? ' current' : '');
+  const row = document.createElement(isLocked ? 'div' : 'a');
+  if (!isLocked) row.href = 'modulo.html?n=' + m.n;
+  row.className = 'crow ' + (isLocked ? 'locked' : 'clickable') + (isDone ? ' done' : '') + (isCurrent ? ' current' : '');
 
-  // Portada de color para TODAS las clases (look bento/curso)
-  const coverClass = isDone ? 'cv-done' : COVERS[(m.n - 1) % COVERS.length];
-  const numContent = String(m.n).padStart(2,'0');
-  let ribbon, statusHTML;
+  let node, status, sideEnd;
   if (isDone) {
-    ribbon = '<div class="ccard__statribbon"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7l3 3 7-7" stroke="#1F8C68" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>';
-    statusHTML = '<span class="ccard__status" style="color:var(--teal-d)">✓ Completada</span>';
+    node = '<svg width="16" height="16" viewBox="0 0 14 14" fill="none"><path d="M2 7l3 3 7-7" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+    status = '<span class="crow__status done">Completada</span>';
+    sideEnd = '<span class="crow__chev"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></span>';
   } else if (isCurrent) {
-    ribbon = '<div class="ccard__statribbon"><svg width="11" height="11" viewBox="0 0 24 24" fill="#1F8C68"><path d="M8 5v14l11-7z"/></svg></div>';
-    statusHTML = '<span class="ccard__status" style="color:var(--teal-d)">▶ Continuar ahora</span>';
+    node = String(m.n).padStart(2,'0');
+    status = '<span class="crow__status current">Continuar →</span>';
+    sideEnd = '<span class="crow__chev"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></span>';
   } else {
-    ribbon = '<div class="ccard__statribbon"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#8A8C80" stroke-width="2.4"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>';
-    statusHTML = '<span class="ccard__status" style="color:var(--subtle)">Bloqueada</span>';
+    node = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>';
+    status = '<span class="crow__status locked">Bloqueada</span>';
+    sideEnd = '';
   }
 
-  card.innerHTML = `
-    <div class="ccard__cover ${coverClass}">
-      <span class="ccard__num">${numContent}</span>
-      ${ribbon}
+  row.innerHTML = `
+    <div class="crow__node">${node}</div>
+    <div class="crow__body">
+      <div class="crow__idx">Clase ${String(m.n).padStart(2,'0')}</div>
+      <div class="crow__title">${m.title}</div>
     </div>
-    <div class="ccard__body">
-      <div class="ccard__k">Clase ${String(m.n).padStart(2,'0')}</div>
-      <div class="ccard__t">${m.title}</div>
-      <div class="ccard__meta"><span>${m.dur}</span><span class="dot"></span><span>Vídeo + manual</span></div>
-      <div class="ccard__foot">
-        ${statusHTML}
-        <span class="ccard__arrow"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-      </div>
+    <div class="crow__side">
+      <span class="crow__dur">${m.dur}</span>
+      ${status}
+      ${sideEnd}
     </div>
   `;
-  grid.appendChild(card);
-});
-
-/* Reveal */
-document.querySelectorAll('[data-reveal]').forEach((el, i) => {
-  el.style.opacity = '0';
-  el.style.transform = 'translateY(16px)';
-  el.style.transition = 'opacity 0.6s var(--ease), transform 0.6s var(--ease)';
-  setTimeout(() => { el.style.opacity = '1'; el.style.transform = 'none'; }, 60 + i*55);
+  list.appendChild(row);
 });
 </script>
 </body>
