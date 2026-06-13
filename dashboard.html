@@ -124,8 +124,12 @@
         radial-gradient(360px 260px at 100% 0%, rgba(47,169,127,0.16), transparent 62%),
         linear-gradient(160deg, #FFFFFF 0%, #F4FBF8 100%);
       border: 1px solid rgba(47,169,127,0.16);
-      justify-content: space-between;
+      display: grid;
+      grid-template-columns: minmax(0,1fr) clamp(210px, 37%, 340px);
+      gap: 18px; align-items: stretch;
     }
+    .t-hero__content { display: flex; flex-direction: column; justify-content: space-between; height: 100%; gap: 18px; min-width: 0; }
+    .t-hero__art { width: 100%; height: auto; max-height: 270px; object-fit: contain; object-position: bottom; align-self: end; margin-bottom: 2px; filter: drop-shadow(0 16px 28px rgba(35,33,24,0.12)); }
     .t-hero__top { }
     .t-hero__label { color: var(--teal-d); }
     .t-hero__title {
@@ -302,7 +306,8 @@
       .topnav { padding: 0 18px; }
       .topnav__right .topnav__link { display: none; }
       .bento { grid-template-columns: 1fr; }
-      .t-hero { grid-column: span 1; }
+      .t-hero { grid-column: span 1; grid-template-columns: 1fr; }
+      .t-hero__art { max-height: 230px; max-width: 300px; margin: 4px auto 0; }
       .classes { grid-template-columns: 1fr; }
       .tile { padding: 22px; }
       .cert { flex-direction: column; text-align: center; }
@@ -328,27 +333,30 @@
 
     <!-- HERO -->
     <div class="tile t-hero" data-reveal>
-      <div class="t-hero__top">
-        <div class="tile__label t-hero__label">Programa de Recuperación ETC.</div>
-        <h1 class="t-hero__title" id="heroTitle">Bienvenido a tu<br><em>camino.</em></h1>
-        <p class="t-hero__sub" id="heroSub">Tu espacio para recuperar el control, a tu ritmo y para siempre.</p>
-      </div>
-      <div>
-        <div class="now-card">
-          <div class="now-card__badge" id="nowBadge">1</div>
-          <div class="now-card__info">
-            <div class="now-card__k" id="nowK">Empieza por aquí</div>
-            <div class="now-card__t" id="nowT">Clase 01 · Aceptar la realidad</div>
+      <div class="t-hero__content">
+        <div class="t-hero__top">
+          <div class="tile__label t-hero__label">Programa de Recuperación ETC.</div>
+          <h1 class="t-hero__title" id="heroTitle">Bienvenido a tu<br><em>camino.</em></h1>
+          <p class="t-hero__sub" id="heroSub">Tu espacio para recuperar el control, a tu ritmo y para siempre.</p>
+        </div>
+        <div>
+          <div class="now-card">
+            <div class="now-card__badge" id="nowBadge">1</div>
+            <div class="now-card__info">
+              <div class="now-card__k" id="nowK">Empieza por aquí</div>
+              <div class="now-card__t" id="nowT">Clase 01 · Aceptar la realidad</div>
+            </div>
+          </div>
+          <div class="t-hero__actions">
+            <a href="modulo.html" class="btn-primary" id="continueBtn">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+              <span id="continueBtnText">Empezar — Clase 01</span>
+            </a>
+            <a href="#clases" class="btn-soft">Ver todas las clases ↓</a>
           </div>
         </div>
-        <div class="t-hero__actions">
-          <a href="modulo.html" class="btn-primary" id="continueBtn">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-            <span id="continueBtnText">Empezar — Clase 01</span>
-          </a>
-          <a href="#clases" class="btn-soft">Ver todas las clases ↓</a>
-        </div>
       </div>
+      <img class="t-hero__art" src="images/hero-illustration.png" alt="Corazón caminante de ETC junto a una sesión con psicóloga" loading="eager">
     </div>
 
     <!-- RING -->
