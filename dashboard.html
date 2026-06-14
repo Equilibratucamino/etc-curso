@@ -216,7 +216,14 @@
     }
     .btn-tile:hover { transform: translateY(-2px); filter: brightness(1.04); }
     .btn-tile.teal { background: linear-gradient(180deg, var(--teal), var(--teal-d)); color: #fff; box-shadow: 0 6px 16px -5px rgba(47,169,127,0.5); }
-    .btn-tile.gold { background: linear-gradient(180deg, #D7B354, var(--gold-ink)); color: #fff; box-shadow: 0 6px 16px -5px rgba(160,126,42,0.5); }
+    .btn-tile.gold {
+      background: linear-gradient(180deg, #A9853A 0%, #8C6E2A 100%);
+      color: #FBF4E2;
+      border: 1px solid rgba(110,86,28,0.6);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.16), 0 3px 10px -3px rgba(70,52,12,0.4);
+      letter-spacing: 0.01em;
+    }
+    .btn-tile.gold:hover { filter: brightness(1.06); }
 
     /* WEBINAR tile — premium + chollo + zumbido al entrar */
     .t-webinar {
@@ -224,35 +231,44 @@
       border: 1px solid rgba(160,126,42,0.32);
       justify-content: space-between;
       transform-origin: center;
-      animation: buzz 6s ease-in-out 1.1s 3, goldpulse 2.6s ease-in-out 0.6s 6;
+      animation: buzz 3.6s ease-in-out 0.8s 6, goldpulse 2.4s ease-in-out 0.6s 8;
     }
     @media (prefers-reduced-motion: reduce) { .t-webinar { animation: none; } }
     @keyframes buzz {
-      0%, 7.5%, 100% { transform: translate3d(0,0,0) rotate(0); }
-      1%   { transform: translate3d(-2px,1px,0) rotate(-1.1deg); }
-      2.2% { transform: translate3d(2px,-1px,0) rotate(1.1deg); }
-      3.4% { transform: translate3d(-2px,1px,0) rotate(-0.9deg); }
-      4.6% { transform: translate3d(2px,-1px,0) rotate(0.8deg); }
-      5.8% { transform: translate3d(-1px,1px,0) rotate(-0.4deg); }
+      0%, 12%, 100% { transform: translate3d(0,0,0) rotate(0); }
+      1%  { transform: translate3d(-3px,0,0) rotate(-1.3deg); }
+      2%  { transform: translate3d(3px,0,0) rotate(1.3deg); }
+      3%  { transform: translate3d(-3px,0,0) rotate(-1.3deg); }
+      4%  { transform: translate3d(3px,0,0) rotate(1.3deg); }
+      5%  { transform: translate3d(-2.5px,0,0) rotate(-1deg); }
+      6%  { transform: translate3d(2.5px,0,0) rotate(1deg); }
+      7%  { transform: translate3d(-2px,0,0) rotate(-0.7deg); }
+      8%  { transform: translate3d(2px,0,0) rotate(0.7deg); }
+      9%  { transform: translate3d(-1.2px,0,0); }
+      10% { transform: translate3d(1.2px,0,0); }
     }
     @keyframes goldpulse {
       0%,100% { box-shadow: var(--sh-md); }
-      50%     { box-shadow: var(--sh-md), 0 0 0 4px rgba(216,170,74,0.30); }
+      50%     { box-shadow: var(--sh-md), 0 0 0 4px rgba(216,170,74,0.32); }
     }
     .t-webinar .tile__label { color: var(--gold-ink); }
     .t-webinar .tile__label::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: #D5232B; animation: pg 1.8s ease-in-out infinite; }
     @keyframes pg { 0%{box-shadow:0 0 0 0 rgba(213,35,43,0.55)} 70%{box-shadow:0 0 0 7px rgba(213,35,43,0)} 100%{box-shadow:0 0 0 0 rgba(213,35,43,0)} }
     .t-webinar__badge {
-      position: absolute; top: 16px; right: 16px; z-index: 2;
+      display: inline-flex; align-self: flex-start; margin-bottom: 12px;
       font-family: var(--mono); font-size: 0.54rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
-      color: #6E5212; background: rgba(255,255,255,0.7); border: 1px solid rgba(160,126,42,0.4);
-      padding: 4px 9px; border-radius: 999px; backdrop-filter: blur(4px);
+      color: #6E5212; background: rgba(255,255,255,0.72); border: 1px solid rgba(160,126,42,0.45);
+      padding: 4px 9px; border-radius: 999px;
     }
-    .t-webinar__t { font-size: 0.96rem; font-weight: 700; line-height: 1.3; margin-top: 6px; color: var(--ink); }
-    .t-webinar__price { font-family: 'Fraunces', serif; font-size: 2.5rem; font-weight: 600; color: var(--gold-ink); line-height: 1; letter-spacing: -0.02em; margin-top: 10px; }
-    .t-webinar__price sup { font-size: 1.05rem; vertical-align: super; }
-    .t-webinar__price small { font-family: 'Inter', sans-serif; font-size: 0.72rem; font-weight: 500; color: var(--muted); letter-spacing: 0; }
-    .t-webinar__note { font-size: 0.72rem; font-weight: 600; color: var(--gold-ink); margin-top: 6px; }
+    .t-webinar__t { font-size: 0.96rem; font-weight: 700; line-height: 1.3; color: var(--ink); }
+    .t-webinar__price { font-family: 'Fraunces', serif; font-size: 2.6rem; font-weight: 600; color: var(--gold-ink); line-height: 1; letter-spacing: -0.02em; margin-top: 8px; }
+    .t-webinar__price .solo { font-family: 'Inter', sans-serif; font-size: 0.95rem; font-weight: 700; vertical-align: 0.5em; margin-right: 5px; text-transform: uppercase; letter-spacing: 0.04em; }
+    .t-webinar__price sup { font-size: 1.15rem; vertical-align: super; }
+    .t-webinar__note { font-size: 0.74rem; font-weight: 600; color: var(--gold-ink); margin-top: 6px; }
+
+    /* Par mentor + webinar SIEMPRE lado a lado */
+    .support-pair { grid-column: span 2; display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .support-pair .tile { box-shadow: var(--sh-md); }
 
     /* ── SECTION HEAD ── */
     .sec-head { display: flex; align-items: center; justify-content: space-between; margin: 0 4px 18px; }
@@ -332,6 +348,9 @@
       .bento { grid-template-columns: 1fr; }
       .t-hero { grid-column: span 1; grid-template-columns: 1fr; }
       .t-ring { grid-column: span 1; flex-direction: row; }
+      .support-pair { grid-column: span 1; gap: 12px; }
+      .support-pair .tile { padding: 18px 16px; }
+      .support-pair .btn-tile { font-size: 0.76rem; padding: 11px 8px; gap: 5px; }
       .t-hero__art { max-height: 230px; max-width: 300px; margin: 4px auto 0; }
       .classes { grid-template-columns: 1fr; }
       .tile { padding: 22px; }
@@ -401,30 +420,32 @@
       </div>
     </div>
 
-    <!-- MENTOR -->
-    <div class="tile t-mentor" data-reveal>
-      <div>
-        <div class="tile__label">Sesión privada · 1 a 1</div>
-        <div class="mentor-av"><span>N</span><span>M</span></div>
-        <div class="t-mentor__t">Acompañamiento con Nacho o Marcos</div>
+    <!-- MENTOR + WEBINAR (lado a lado) -->
+    <div class="support-pair" data-reveal>
+      <!-- MENTOR -->
+      <div class="tile t-mentor">
+        <div>
+          <div class="tile__label">Sesión privada · 1 a 1</div>
+          <div class="mentor-av"><span>N</span><span>M</span></div>
+          <div class="t-mentor__t">Acompañamiento con Nacho o Marcos</div>
+        </div>
+        <a href="https://wa.me/34611847645?text=Hola%2C%20soy%20alumno%20del%20curso%20ETC%20y%20me%20gustar%C3%ADa%20reservar%20una%20sesi%C3%B3n%20privada." class="btn-tile teal" target="_blank" rel="noopener">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.117 1.526 5.847L.057 23.535l5.693-1.466A11.944 11.944 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22a9.94 9.94 0 01-5.071-1.388l-.364-.216-3.774.989.998-3.801-.235-.374A9.953 9.953 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+          Reservar por WhatsApp
+        </a>
       </div>
-      <a href="https://wa.me/34611847645?text=Hola%2C%20soy%20alumno%20del%20curso%20ETC%20y%20me%20gustar%C3%ADa%20reservar%20una%20sesi%C3%B3n%20privada." class="btn-tile teal" target="_blank" rel="noopener">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.117 1.526 5.847L.057 23.535l5.693-1.466A11.944 11.944 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22a9.94 9.94 0 01-5.071-1.388l-.364-.216-3.774.989.998-3.801-.235-.374A9.953 9.953 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
-        Reservar por WhatsApp
-      </a>
-    </div>
 
-    <!-- WEBINAR -->
-    <div class="tile t-webinar" data-reveal>
-      <span class="t-webinar__badge">Plazas limitadas</span>
-      <div>
-        <div class="tile__label">En directo cada mes</div>
-        <div class="t-webinar__t">Sesión grupal con Nacho</div>
-      </div>
-      <div>
-        <div class="t-webinar__price"><sup>€</sup>25 <small>/ sesión</small></div>
-        <div class="t-webinar__note">Solo alumnos · menos que una sesión privada</div>
-        <a href="https://wa.me/34611847645?text=Hola%2C%20soy%20alumno%20del%20curso%20ETC%20y%20me%20interesa%20el%20pr%C3%B3ximo%20webinar%20de%2025%E2%82%AC." class="btn-tile gold" style="margin-top:14px;" target="_blank" rel="noopener">Reservar mi plaza →</a>
+      <!-- WEBINAR -->
+      <div class="tile t-webinar">
+        <div>
+          <span class="t-webinar__badge">Plazas limitadas</span>
+          <div class="t-webinar__t">Sesión grupal en directo con Nacho</div>
+        </div>
+        <div>
+          <div class="t-webinar__price"><span class="solo">Solo</span> 25<sup>€</sup></div>
+          <div class="t-webinar__note">menos que una sesión privada</div>
+          <a href="https://wa.me/34611847645?text=Hola%2C%20soy%20alumno%20del%20curso%20ETC%20y%20me%20interesa%20el%20pr%C3%B3ximo%20webinar%20de%2025%E2%82%AC." class="btn-tile gold" style="margin-top:14px;" target="_blank" rel="noopener">Reservar mi plaza →</a>
+        </div>
       </div>
     </div>
 
