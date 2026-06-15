@@ -21,6 +21,7 @@
       --blue:  #2563EB;
       --gold:  #E8A900;
       --dark:  #0A0F0D;
+      --mono:  ui-monospace, 'SF Mono', 'JetBrains Mono', Menlo, monospace;
     }
 
     /* ════════ NAV ════════ */
@@ -225,7 +226,7 @@
       gap: 48px; flex-wrap: wrap;
     }
     .div-item { display: flex; align-items: center; gap: 10px; }
-    .div-icon { font-size: 0.9rem; }
+    .div-icon { display: inline-flex; align-items: center; color: var(--teal); }
     .div-text { font-size: 0.82rem; font-weight: 300; color: rgba(255,255,255,.72); }
 
     /* ════════ SHARED ════════ */
@@ -252,7 +253,7 @@
       border-radius: 14px; transition: border-color .15s;
     }
     .feat:hover { border-color: rgba(50,180,140,.2); }
-    .feat__icon { width: 36px; height: 36px; border-radius: 9px; background: rgba(50,180,140,.08); display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0; }
+    .feat__icon { width: 36px; height: 36px; border-radius: 9px; background: rgba(50,180,140,.1); color: var(--teal); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
     .feat__title { font-size: 0.9rem; font-weight: 500; color: #fff; margin-bottom: 3px; }
     .feat__desc { font-size: 0.82rem; font-weight: 300; color: rgba(255,255,255,.72); line-height: 1.55; }
 
@@ -278,6 +279,26 @@
     .mod-more { padding: 10px 14px; font-size: 0.78rem; font-weight: 400; color: var(--teal); text-decoration: none; }
 
     @media(max-width:768px){ .inside__grid{grid-template-columns:1fr;gap:32px;} }
+
+    /* Curso — métricas + fases */
+    .metric { background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.08); border-radius: 16px; padding: 22px 16px; text-align: center; }
+    .metric__n { font-family: 'Fraunces', serif; font-size: 2rem; font-weight: 500; color: #fff; line-height: 1; letter-spacing: -0.02em; }
+    .metric__l { font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,.5); margin-top: 9px; }
+    .phase { background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.08); border-radius: 18px; padding: 24px; transition: border-color .25s, transform .25s; }
+    .phase:hover { border-color: rgba(50,180,140,.3); transform: translateY(-3px); }
+    .phase__hd { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
+    .phase__tag { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--teal); }
+    .phase__time { font-family: var(--mono); font-size: 0.66rem; color: rgba(255,255,255,.4); }
+    .phase__name { font-family: 'Fraunces', serif; font-size: 1.3rem; color: #fff; letter-spacing: -0.01em; }
+    .phase__sub { font-size: 0.8rem; font-weight: 300; color: rgba(255,255,255,.6); line-height: 1.5; margin: 6px 0 12px; }
+    .phase__list { display: flex; flex-direction: column; }
+    .cl { display: flex; align-items: center; gap: 11px; padding: 10px 0; border-top: 1px solid rgba(255,255,255,.06); }
+    .cl__n { font-family: var(--mono); font-size: 0.68rem; color: rgba(255,255,255,.4); width: 18px; flex-shrink: 0; }
+    .cl__t { font-size: 0.85rem; color: rgba(255,255,255,.86); flex: 1; line-height: 1.3; }
+    .cl__d { font-family: var(--mono); font-size: 0.66rem; color: rgba(255,255,255,.35); flex-shrink: 0; }
+    .incl-row { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 36px; }
+    .incl { display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.08); border-radius: 999px; padding: 9px 16px; font-size: 0.8rem; color: rgba(255,255,255,.82); }
+    .incl svg { color: var(--teal); flex-shrink: 0; }
 
     /* ════════ INSTRUCTORS — alternating light ════════ */
     .instructors { background: #F7F9F7; padding: 96px 24px; }
@@ -449,8 +470,6 @@
   ">
 
   <div class="hero__inner">
-    <div class="badge"><div class="badge__pulse"></div>Primer programa en español · Fundado por exludópatas</div>
-
     <h1 class="hero__h1">
       <span>15 clases para</span>
       <em>recuperar el control</em>
@@ -466,14 +485,6 @@
     <p class="hero__sub">Creado por <strong>Nacho y Marcos Agudo</strong> — personas que han vivido la adicción al juego y saben exactamente lo que necesitas para salir.</p>
 
     <div class="proof">
-      <div class="av-row">
-        <div class="av" style="background:#1a2e25;font-size:1.1rem;">😊</div>
-        <div class="av" style="background:#1a2040;font-size:1.1rem;">🙂</div>
-        <div class="av" style="background:#2a1a38;font-size:1.1rem;">😌</div>
-        <div class="av" style="background:#2e1f0a;font-size:1.1rem;">🧑</div>
-        <div class="av" style="background:#2a1010;font-size:1.1rem;">👩</div>
-        <div class="av cm">+42</div>
-      </div>
       <div style="display:inline-flex;align-items:center;gap:10px;background:#fff;border:1px solid #E8E8E8;border-radius:12px;padding:7px 13px;box-shadow:0 2px 8px rgba(0,0,0,0.06);">
         <svg width="20" height="20" viewBox="0 0 48 48" aria-hidden="true">
           <path fill="#4285F4" d="M45.12 24.5c0-1.56-.14-3.06-.4-4.5H24v8.51h11.84c-.51 2.75-2.06 5.08-4.39 6.64v5.52h7.11c4.16-3.83 6.56-9.47 6.56-16.17z"/>
@@ -510,43 +521,85 @@
 
 <!-- DIVIDER FEATURES -->
 <div class="section-divider">
-  <div class="div-item"><span class="div-icon">📹</span><span class="div-text">15 vídeos en profundidad</span></div>
-  <div class="div-item"><span class="div-icon">✏️</span><span class="div-text">Ejercicios prácticos en cada clase</span></div>
-  <div class="div-item"><span class="div-icon">🏆</span><span class="div-text">Certificado al finalizar</span></div>
-  <div class="div-item"><span class="div-icon">📱</span><span class="div-text">Acceso en todos tus dispositivos</span></div>
-  <div class="div-item"><span class="div-icon">🔒</span><span class="div-text">100% privado y confidencial</span></div>
+  <div class="div-item"><span class="div-icon"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="14" height="14" rx="2.5"/><path d="M16 9l6-3v12l-6-3"/></svg></span><span class="div-text">15 vídeos en profundidad</span></div>
+  <div class="div-item"><span class="div-icon"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg></span><span class="div-text">Ejercicios prácticos en cada clase</span></div>
+  <div class="div-item"><span class="div-icon"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0Z"/><path d="M17 5h3v2a3 3 0 0 1-3 3M7 5H4v2a3 3 0 0 0 3 3"/></svg></span><span class="div-text">Certificado al finalizar</span></div>
+  <div class="div-item"><span class="div-icon"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="3"/><path d="M11 18h2"/></svg></span><span class="div-text">Acceso en todos tus dispositivos</span></div>
+  <div class="div-item"><span class="div-icon"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></span><span class="div-text">100% privado y confidencial</span></div>
 </div>
 
 <!-- WHAT'S INSIDE -->
 <section class="inside" id="curso">
-  <div class="container">
-    <div class="s-label">El programa</div>
-    <h2 class="s-title" style="font-size:clamp(1.8rem,3.5vw,2.8rem);color:#fff;margin-bottom:14px;">Todo lo que<br><em>necesitas saber.</em></h2>
-    <p class="inside__sub">Cada clase construye sobre la anterior. Avanzas a tu ritmo, con ejercicios en cada módulo.</p>
-    <div class="inside__grid">
-      <div class="feat-list">
-        <div class="feat"><div class="feat__icon">📹</div><div><div class="feat__title">15 clases en vídeo</div><div class="feat__desc">Entre 28 y 40 minutos. En profundidad, sin relleno.</div></div></div>
-        <div class="feat"><div class="feat__icon">✏️</div><div><div class="feat__title">Ejercicios prácticos</div><div class="feat__desc">Preguntas de reflexión y ejercicios reales en cada clase.</div></div></div>
-        <div class="feat"><div class="feat__icon">🏆</div><div><div class="feat__title">Certificado al finalizar</div><div class="feat__desc">Certificado personalizado firmado por Nacho y Marcos.</div></div></div>
-        <div class="feat"><div class="feat__icon">💬</div><div><div class="feat__title">Sesión con los instructores</div><div class="feat__desc">Reserva en cualquier momento una sesión privada con Nacho o Marcos.</div></div></div>
-        <div class="feat"><div class="feat__icon">🎥</div><div><div class="feat__title">Webinars mensuales — 25€</div><div class="feat__desc">Sesiones grupales en directo con Nacho. Solo para alumnos.</div></div></div>
-      </div>
-      <div>
-        <div class="mod-lbl">Las 15 clases</div>
-        <div class="mod-list">
-          <div class="mod-r"><div class="mod-n">1</div><span>Aceptar la realidad</span><div class="mod-dur">28 min</div></div>
-          <div class="mod-r"><div class="mod-n">2</div><span>La mente de un ludópata</span><div class="mod-dur">32 min</div></div>
-          <div class="mod-r"><div class="mod-n">3</div><span>Dopamina y cerebro</span><div class="mod-dur">30 min</div></div>
-          <div class="mod-r"><div class="mod-n">4</div><span>Las mentiras que te cuentas</span><div class="mod-dur">35 min</div></div>
-          <div class="mod-r"><div class="mod-n">5</div><span>Romper el ciclo</span><div class="mod-dur">32 min</div></div>
-          <div class="mod-r dim"><div class="mod-n">6</div><span>Gestión de impulsos</span><div class="mod-dur">38 min</div></div>
-          <div class="mod-r dim"><div class="mod-n">7</div><span>Ansiedad, culpa y vergüenza</span><div class="mod-dur">36 min</div></div>
-          <div class="mod-r dim"><div class="mod-n">8</div><span>Reconstruir la confianza</span><div class="mod-dur">34 min</div></div>
-          <div class="mod-r dim"><div class="mod-n">9</div><span>Dinero y recuperación</span><div class="mod-dur">40 min</div></div>
-          <div class="mod-r dim"><div class="mod-n">10</div><span>La nueva identidad</span><div class="mod-dur">30 min</div></div>
-          <div class="mod-more">+ 5 clases más incluidas →</div>
+  <div class="container" style="max-width:1120px;">
+    <div style="text-align:center;max-width:600px;margin:0 auto;">
+      <div class="s-label" style="color:var(--teal);margin-bottom:10px;">El programa</div>
+      <h2 class="s-title" style="font-size:clamp(1.8rem,3.5vw,2.8rem);color:#fff;margin-bottom:14px;">15 clases. <em>Un método.</em></h2>
+      <p style="font-size:0.95rem;font-weight:300;color:rgba(255,255,255,.7);line-height:1.7;">Un recorrido estructurado en 3 fases. Cada clase construye sobre la anterior, con vídeo en profundidad y ejercicios prácticos.</p>
+    </div>
+
+    <!-- MÉTRICAS -->
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin:42px 0 18px;">
+      <div class="metric"><div class="metric__n">15</div><div class="metric__l">clases en vídeo</div></div>
+      <div class="metric"><div class="metric__n" style="color:var(--teal);">~8 h</div><div class="metric__l">de contenido</div></div>
+      <div class="metric"><div class="metric__n">60<span style="font-size:1.3rem;">+</span></div><div class="metric__l">ejercicios prácticos</div></div>
+      <div class="metric"><div class="metric__n">∞</div><div class="metric__l">acceso de por vida</div></div>
+    </div>
+
+    <!-- FASES -->
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-top:18px;">
+
+      <div class="phase">
+        <div class="phase__hd"><span class="phase__tag">Fase 01</span><span class="phase__time">2 h 37 min</span></div>
+        <div class="phase__name">Entender</div>
+        <div class="phase__sub">Comprende qué te pasa, y por qué.</div>
+        <div class="phase__list">
+          <div class="cl"><span class="cl__n">01</span><span class="cl__t">Aceptar la realidad</span><span class="cl__d">28m</span></div>
+          <div class="cl"><span class="cl__n">02</span><span class="cl__t">La mente de un ludópata</span><span class="cl__d">32m</span></div>
+          <div class="cl"><span class="cl__n">03</span><span class="cl__t">Dopamina y cerebro</span><span class="cl__d">30m</span></div>
+          <div class="cl"><span class="cl__n">04</span><span class="cl__t">Las mentiras que te cuentas</span><span class="cl__d">35m</span></div>
+          <div class="cl"><span class="cl__n">05</span><span class="cl__t">Romper el ciclo</span><span class="cl__d">32m</span></div>
         </div>
       </div>
+
+      <div class="phase">
+        <div class="phase__hd"><span class="phase__tag">Fase 02</span><span class="phase__time">2 h 58 min</span></div>
+        <div class="phase__name">Reconstruir</div>
+        <div class="phase__sub">Trabaja las emociones y recupera el control.</div>
+        <div class="phase__list">
+          <div class="cl"><span class="cl__n">06</span><span class="cl__t">Gestión de impulsos</span><span class="cl__d">38m</span></div>
+          <div class="cl"><span class="cl__n">07</span><span class="cl__t">Ansiedad, culpa y vergüenza</span><span class="cl__d">36m</span></div>
+          <div class="cl"><span class="cl__n">08</span><span class="cl__t">Reconstruir la confianza</span><span class="cl__d">34m</span></div>
+          <div class="cl"><span class="cl__n">09</span><span class="cl__t">Dinero y recuperación</span><span class="cl__d">40m</span></div>
+          <div class="cl"><span class="cl__n">10</span><span class="cl__t">La nueva identidad</span><span class="cl__d">30m</span></div>
+        </div>
+      </div>
+
+      <div class="phase">
+        <div class="phase__hd"><span class="phase__tag">Fase 03</span><span class="phase__time">2 h 45 min</span></div>
+        <div class="phase__name">Avanzar</div>
+        <div class="phase__sub">Construye la vida que quieres, sin juego.</div>
+        <div class="phase__list">
+          <div class="cl"><span class="cl__n">11</span><span class="cl__t">Crear nuevos hábitos</span><span class="cl__d">33m</span></div>
+          <div class="cl"><span class="cl__n">12</span><span class="cl__t">Familia y entorno</span><span class="cl__d">37m</span></div>
+          <div class="cl"><span class="cl__n">13</span><span class="cl__t">Prevenir recaídas</span><span class="cl__d">35m</span></div>
+          <div class="cl"><span class="cl__n">14</span><span class="cl__t">Diseñar una nueva vida</span><span class="cl__d">32m</span></div>
+          <div class="cl"><span class="cl__n">15</span><span class="cl__t">El futuro empieza hoy</span><span class="cl__d">28m</span></div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- INCLUYE -->
+    <div class="incl-row">
+      <span class="incl"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0Z"/><path d="M17 5h3v2a3 3 0 0 1-3 3M7 5H4v2a3 3 0 0 0 3 3"/></svg>Certificado oficial</span>
+      <span class="incl"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>Ejercicios en cada clase</span>
+      <span class="incl"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2Z"/></svg>Sesiones 1 a 1</span>
+      <span class="incl"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="2.5"/><path d="M6.3 6.3a8 8 0 0 0 0 11.4M17.7 6.3a8 8 0 0 1 0 11.4"/></svg>Webinars mensuales</span>
+      <span class="incl"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>100% privado</span>
+    </div>
+
+    <div style="text-align:center;margin-top:42px;">
+      <a href="dashboard.html" class="btn-big" style="display:inline-flex;">Empezar el programa <span class="btn-big__arrow">→</span></a>
     </div>
   </div>
 </section>
@@ -678,9 +731,9 @@
       </div>
     </div>
     <div class="rev-grid">
-      <div class="rev-card"><div class="rev-s">★★★★★</div><p class="rev-t">"Muchas gracias Nacho por tu cercanía y tu apoyo. Estoy mejorando un montón gracias a todo el equipo."</p><div class="rev-a"><div class="rev-dot" style="font-size:1.5rem;background:transparent;">😊</div><div><div class="rev-n">Manuel A.</div><div class="rev-src">Google · Alumno verificado</div></div></div></div>
-      <div class="rev-card"><div class="rev-s">★★★★★</div><p class="rev-t">"Desde Argentina quiero recomendar y agradecer al programa ETC. por ayudarme a salir del juego para siempre."</p><div class="rev-a"><div class="rev-dot" style="font-size:1.5rem;background:transparent;">🙂</div><div><div class="rev-n">Tomás R.</div><div class="rev-src">Google · Alumno verificado</div></div></div></div>
-      <div class="rev-card"><div class="rev-s">★★★★★</div><p class="rev-t">"Best team. You are my savior, forever grateful. Thank you so much for everything you have done for me."</p><div class="rev-a"><div class="rev-dot" style="font-size:1.5rem;background:transparent;">😌</div><div><div class="rev-n">Aitor I.</div><div class="rev-src">Google · Alumno verificado</div></div></div></div>
+      <div class="rev-card"><div class="rev-s">★★★★★</div><p class="rev-t">"Muchas gracias Nacho por tu cercanía y tu apoyo. Estoy mejorando un montón gracias a todo el equipo."</p><div class="rev-a"><div class="rev-dot" style="background:#228A6A;">MA</div><div><div class="rev-n">Manuel A.</div><div class="rev-src">Google · Alumno verificado</div></div></div></div>
+      <div class="rev-card"><div class="rev-s">★★★★★</div><p class="rev-t">"Desde Argentina quiero recomendar y agradecer al programa ETC. por ayudarme a salir del juego para siempre."</p><div class="rev-a"><div class="rev-dot" style="background:#2563EB;">TR</div><div><div class="rev-n">Tomás R.</div><div class="rev-src">Google · Alumno verificado</div></div></div></div>
+      <div class="rev-card"><div class="rev-s">★★★★★</div><p class="rev-t">"Best team. You are my savior, forever grateful. Thank you so much for everything you have done for me."</p><div class="rev-a"><div class="rev-dot" style="background:#9333EA;">AI</div><div><div class="rev-n">Aitor I.</div><div class="rev-src">Google · Alumno verificado</div></div></div></div>
     </div>
   </div>
 </section>
