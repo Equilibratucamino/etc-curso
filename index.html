@@ -307,13 +307,20 @@
     .reveal.d2 { transition-delay: .2s; }
     .reveal.d3 { transition-delay: .3s; }
     .reveal.d4 { transition-delay: .4s; }
-    @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; transition: none; } }
+
+    /* Reveal con giro de hoja (fases) — aparecen de izq. a dcha. por orden */
+    .reveal-flip { opacity: 0; transform: perspective(1300px) rotateY(-26deg) translateY(8px); transform-origin: left center; transition: opacity .7s cubic-bezier(.22,1,.36,1), transform .9s cubic-bezier(.34,1.18,.5,1); }
+    .reveal-flip.in { opacity: 1; transform: perspective(1300px) rotateY(0deg) translateY(0); }
+    .reveal-flip.d1 { transition-delay: .16s; }
+    .reveal-flip.d2 { transition-delay: .32s; }
+
+    @media (prefers-reduced-motion: reduce) { .reveal, .reveal-flip { opacity: 1; transform: none; transition: none; } }
 
     /* Casos de éxito — vídeos */
     .vid-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px,1fr)); gap: 22px; margin: 44px 0 44px; }
     .vid-card { display: flex; flex-direction: column; gap: 11px; }
     .vid-label { font-family: var(--mono); font-size: 0.6rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--teal); }
-    .vid-desc { font-family: 'Fraunces', serif; font-size: 0.98rem; font-weight: 500; color: #1A1A1A; line-height: 1.35; letter-spacing: -0.01em; }
+    .vid-desc { font-family: 'Fraunces', serif; font-size: 0.98rem; font-weight: 500; color: #fff; line-height: 1.35; letter-spacing: -0.01em; }
     .yt-wrap { position: relative; border-radius: 16px; overflow: hidden; aspect-ratio: 16/9; background: #000; cursor: pointer; box-shadow: 0 12px 30px -14px rgba(0,0,0,0.28); }
     .yt-thumb { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .4s ease, opacity .3s; }
     .yt-wrap:hover .yt-thumb { transform: scale(1.04); opacity: .9; }
@@ -395,11 +402,12 @@
     @media(max-width:700px){ .cert-inner{grid-template-columns:1fr;} }
 
     /* ════════ REVIEWS — light ════════ */
-    .reviews { background: #fff; padding: 96px 24px; }
-    .reviews__hd { text-align: center; margin-bottom: 48px; }
+    .reviews { background: var(--dark); padding: 88px 24px; }
+    .reviews__hd { text-align: center; margin-bottom: 44px; }
     .reviews__hd .s-label { color: var(--teal); margin-bottom: 10px; }
-    .reviews__hd .s-title { font-size: clamp(1.8rem,3.2vw,2.4rem); color: #1A1A1A; margin-bottom: 20px; }
+    .reviews__hd .s-title { font-size: clamp(1.8rem,3.2vw,2.4rem); color: #fff; margin-bottom: 20px; }
     .reviews__hd .s-title em { font-style: italic; color: var(--teal); }
+    .reviews__sub { color: rgba(255,255,255,.65) !important; }
     .reviews__proof { display: flex; align-items: center; justify-content: center; gap: 14px; flex-wrap: wrap; }
     .rev-row { display: flex; }
     .rev-av { width: 40px; height: 40px; border-radius: 50%; border: 2.5px solid #fff; margin-left: -10px; overflow: hidden; display: flex; align-items: center; justify-content: center; font-size: 0.72rem; font-weight: 600; color: #fff; }
@@ -410,14 +418,14 @@
     .rev-score { font-size: 0.78rem; font-weight: 300; color: #6B7280; }
     .rev-score strong { font-weight: 600; color: #1A1A1A; }
     .rev-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 18px; max-width: 900px; margin: 36px auto 0; }
-    .rev-card { background: #FAFAF8; border: 1px solid rgba(0,0,0,.07); border-radius: 16px; padding: 22px; transition: box-shadow .18s; }
-    .rev-card:hover { box-shadow: 0 4px 20px rgba(0,0,0,.06); }
+    .rev-card { background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.09); border-radius: 16px; padding: 22px; transition: box-shadow .18s, border-color .2s; }
+    .rev-card:hover { border-color: rgba(50,180,140,.3); }
     .rev-s { color: #F5C21B; font-size: 0.82rem; margin-bottom: 10px; }
-    .rev-t { font-size: 0.88rem; font-weight: 300; color: #374151; line-height: 1.65; margin-bottom: 14px; font-style: italic; }
+    .rev-t { font-size: 0.88rem; font-weight: 300; color: rgba(255,255,255,.8); line-height: 1.65; margin-bottom: 14px; font-style: italic; }
     .rev-a { display: flex; align-items: center; gap: 10px; }
     .rev-dot { width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.7rem; font-weight: 600; color: #fff; flex-shrink: 0; }
-    .rev-n { font-size: 0.8rem; font-weight: 500; color: #1A1A1A; }
-    .rev-src { font-size: 0.68rem; font-weight: 300; color: #9CA3AF; }
+    .rev-n { font-size: 0.8rem; font-weight: 500; color: #fff; }
+    .rev-src { font-size: 0.68rem; font-weight: 300; color: rgba(255,255,255,.45); }
     @media(max-width:700px){ .rev-grid{grid-template-columns:1fr;} }
 
     /* ════════ FINAL CTA — impactante ════════ */
@@ -565,7 +573,7 @@
     <!-- FASES -->
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-top:18px;">
 
-      <div class="phase reveal">
+      <div class="phase reveal-flip">
         <div class="phase__hd"><span class="phase__tag">Fase 01</span><span class="phase__time">2 h 37 min</span></div>
         <div class="phase__name">Entender</div>
         <div class="phase__sub">Comprende qué te pasa, y por qué.</div>
@@ -578,7 +586,7 @@
         </div>
       </div>
 
-      <div class="phase reveal d1">
+      <div class="phase reveal-flip d1">
         <div class="phase__hd"><span class="phase__tag">Fase 02</span><span class="phase__time">2 h 58 min</span></div>
         <div class="phase__name">Reconstruir</div>
         <div class="phase__sub">Trabaja las emociones y recupera el control.</div>
@@ -591,7 +599,7 @@
         </div>
       </div>
 
-      <div class="phase reveal d2">
+      <div class="phase reveal-flip d2">
         <div class="phase__hd"><span class="phase__tag">Fase 03</span><span class="phase__time">2 h 45 min</span></div>
         <div class="phase__name">Avanzar</div>
         <div class="phase__sub">Construye la vida que quieres, sin juego.</div>
@@ -719,7 +727,7 @@
         <div style="font-family:'Fraunces',serif;font-size:2.5rem;font-weight:600;color:#1A1A1A;line-height:1;letter-spacing:-0.02em;">25€</div>
         <div style="font-size:0.76rem;color:#6E5212;margin-bottom:3px;">por sesión</div>
         <div style="font-size:0.74rem;color:#888;margin-bottom:16px;">Menos que una sesión privada</div>
-        <a href="https://wa.me/34611847645?text=Hola%2C%20soy%20alumno%20del%20curso%20ETC%20y%20me%20interesa%20el%20pr%C3%B3ximo%20webinar%20de%2025%E2%82%AC." target="_blank" rel="noopener" style="display:inline-flex;align-items:center;justify-content:center;gap:8px;background:#1A1A18;color:#F4F0E6;font-size:0.85rem;font-weight:600;padding:12px 20px;border-radius:11px;text-decoration:none;box-shadow:0 4px 14px -5px rgba(0,0,0,0.4);transition:transform .2s,filter .2s;" onmouseover="this.style.transform='translateY(-2px)';this.style.filter='brightness(1.25)';" onmouseout="this.style.transform='';this.style.filter='';">Reservar mi plaza →</a>
+        <a href="https://wa.me/34611847645?text=Hola%2C%20soy%20alumno%20del%20curso%20ETC%20y%20me%20interesa%20el%20pr%C3%B3ximo%20webinar%20de%2025%E2%82%AC." target="_blank" rel="noopener" style="display:inline-flex;align-items:center;justify-content:center;gap:8px;background:linear-gradient(180deg,#D4B05A 0%,#B08C38 100%);color:#241C06;font-size:0.85rem;font-weight:700;padding:12px 20px;border-radius:11px;text-decoration:none;border:1px solid rgba(140,110,40,0.45);box-shadow:0 6px 18px -8px rgba(150,120,40,0.55);transition:transform .2s,filter .2s;" onmouseover="this.style.transform='translateY(-2px)';this.style.filter='brightness(1.05)';" onmouseout="this.style.transform='';this.style.filter='';">Reservar mi plaza →</a>
         <div style="font-size:0.7rem;color:#8A6A1C;margin-top:10px;">Plazas limitadas cada mes</div>
       </div>
     </div>
@@ -737,7 +745,7 @@
     <div class="reviews__hd reveal">
       <div class="s-label">Casos de éxito</div>
       <h2 class="s-title" style="font-size:clamp(1.8rem,3.2vw,2.4rem);color:#1A1A1A;margin-bottom:0;">Resultados reales.<br><em>Personas reales.</em></h2>
-      <p style="font-size:0.95rem;font-weight:300;color:#666;line-height:1.7;max-width:520px;margin:16px auto 0;">Entrevistas, casos reales y testimonios que demuestran que el método funciona.</p>
+      <p style="font-size:0.95rem;font-weight:300;color:rgba(255,255,255,.65);line-height:1.7;max-width:520px;margin:16px auto 0;">Entrevistas, casos reales y testimonios que demuestran que el método funciona.</p>
     </div>
 
     <!-- Casos de éxito · vídeos -->
@@ -765,14 +773,6 @@
         </div>
         <div class="vid-label">Casos de éxito</div>
         <div class="vid-desc">Pacientes reales que superaron la ludopatía. Sin filtros.</div>
-      </div>
-      <div class="vid-card reveal d3">
-        <div class="yt-wrap" data-id="_4GIF-14Rew" data-start="362" role="button" tabindex="0" aria-label="Ver entrevista a psicóloga ETC.">
-          <img class="yt-thumb" src="https://img.youtube.com/vi/_4GIF-14Rew/hqdefault.jpg" alt="Entrevista a una psicóloga especialista en adicción al juego — ETC." loading="lazy">
-          <div class="yt-play"><div class="yt-play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
-        </div>
-        <div class="vid-label">Entrevista</div>
-        <div class="vid-desc">Una de nuestras psicólogas, en detalle.</div>
       </div>
     </div>
 
@@ -817,7 +817,7 @@
 <script>
 // Reveal escalonado al hacer scroll
 (function(){
-  const els = document.querySelectorAll('.reveal');
+  const els = document.querySelectorAll('.reveal, .reveal-flip');
   if (!('IntersectionObserver' in window)) { els.forEach(el => el.classList.add('in')); return; }
   const io = new IntersectionObserver((entries) => {
     entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
