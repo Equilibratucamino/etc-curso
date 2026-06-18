@@ -475,7 +475,7 @@
       <div class="cert__eyebrow">Al completar las 15 clases</div>
       <div class="cert__title">Recibes tu <em>certificado</em></div>
       <p class="cert__desc">Un certificado personalizado, firmado por Nacho y Marcos Agudo, que reconoce todo lo que has conseguido en tu camino.</p>
-      <a href="index.html#cert-section" class="btn-cert">Ver mi certificado →</a>
+      <a href="certificate.html" class="btn-cert">Ver mi certificado →</a>
     </div>
   </div>
 
@@ -546,7 +546,8 @@ if (completed.length === 0) {
   heroSub.textContent = 'Has recorrido las 15 clases. Tu certificado te espera.';
   nowK.textContent = 'Completado';
   nowT.textContent = 'Has terminado las 15 clases';
-  contTxt.textContent = 'Repasar desde el inicio';
+  contBtn.href = 'certificate.html';
+  contTxt.textContent = 'Obtener mi certificado →';
   if (ringCap) ringCap.textContent = '¡Has completado el programa entero!';
 }
 

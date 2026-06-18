@@ -340,31 +340,31 @@
     </a>
     <div class="lesson-nav__progress">
       <div class="lesson-nav__progress-label">
-        <span>Módulo 05 de 15</span>
-        <span class="teal">27% completado</span>
+        <span id="navModule">Clase 01 de 15</span>
+        <span class="teal" id="navPct">0% completado</span>
       </div>
       <div class="progress-track">
-        <div class="progress-fill" style="width: 27%;"></div>
+        <div class="progress-fill" id="navFill" style="width: 0%;"></div>
       </div>
     </div>
-    <span class="pill pill--teal" style="font-size:0.75rem;">En progreso</span>
+    <span class="pill pill--teal" id="navStatus" style="font-size:0.75rem;">En progreso</span>
   </nav>
 
   <!-- ── VIDEO ────────────────────────────────────────────────────── -->
   <section class="video-section">
     <div class="video-container">
-      <div class="video-area" data-reveal>
+      <div class="video-area" data-reveal id="videoArea">
         <div class="video-placeholder">
           <div class="video-placeholder__text">
-            <div class="video-placeholder__eyebrow">Módulo 05</div>
-            <div class="video-placeholder__title">Romper el ciclo</div>
+            <div class="video-placeholder__eyebrow" id="vidEyebrow">Clase 01</div>
+            <div class="video-placeholder__title" id="vidTitle">Aceptar la realidad</div>
           </div>
-          <button class="video-play-btn" aria-label="Reproducir">
+          <button class="video-play-btn" id="playBtn" aria-label="Reproducir">
             <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
               <path d="M8 5l18 9-18 9V5z" fill="white"/>
             </svg>
           </button>
-          <p style="font-size:0.8rem;color:var(--text-subtle);">Haz clic para reproducir · ~32 minutos</p>
+          <p id="vidNote" style="font-size:0.8rem;color:var(--text-subtle);">Haz clic para reproducir</p>
         </div>
       </div>
     </div>
@@ -376,85 +376,47 @@
     <!-- Main column -->
     <div>
       <div class="lesson-eyebrow" data-reveal>
-        <span class="pill pill--teal">Módulo 05</span>
-        <span class="pill">~32 min</span>
+        <span class="pill pill--teal" id="eyeClase">Clase 01</span>
+        <span class="pill" id="eyeDur">~28 min</span>
       </div>
 
-      <h1 class="lesson-title" data-reveal data-delay="1">Romper el ciclo</h1>
+      <h1 class="lesson-title" data-reveal data-delay="1" id="lessonTitle">Aceptar la realidad</h1>
 
-      <p class="lesson-description" data-reveal data-delay="2">
-        En este módulo entenderás por qué la adicción al juego no es un problema de voluntad, sino un ciclo neurológico que se retroalimenta a sí mismo. Aprenderás a identificar los momentos exactos en los que el ciclo se activa — y cómo interrumpirlo antes de que tome el control.
-      </p>
+      <p class="lesson-description" data-reveal data-delay="2" id="lessonDesc"></p>
 
       <div class="lesson-divider"></div>
 
       <!-- Takeaways -->
       <div class="takeaways" data-reveal data-delay="1">
-        <div class="takeaways__title">Lo que aprenderás</div>
-        <div class="takeaway-list">
-          <div class="takeaway">
-            <div class="takeaway__icon">01</div>
-            <div class="takeaway__text">Cómo funciona el ciclo automático de la adicción y por qué se mantiene solo sin necesitar tu "permiso" consciente.</div>
-          </div>
-          <div class="takeaway">
-            <div class="takeaway__icon">02</div>
-            <div class="takeaway__text">Los 3 detonantes más comunes que activan el impulso de jugar — y cómo detectarlos antes de que se conviertan en acción.</div>
-          </div>
-          <div class="takeaway">
-            <div class="takeaway__icon">03</div>
-            <div class="takeaway__text">La técnica de "pausa e intervención" que permite crear distancia entre el impulso y la conducta.</div>
-          </div>
-          <div class="takeaway">
-            <div class="takeaway__icon">04</div>
-            <div class="takeaway__text">Por qué la fuerza de voluntad sola no funciona — y qué hacer en su lugar para que el cambio sea real y duradero.</div>
-          </div>
-        </div>
+        <div class="takeaways__title">Lo que trabajarás</div>
+        <div class="takeaway-list" id="takeawayList"></div>
       </div>
 
       <div class="lesson-divider"></div>
 
-      <!-- Actions -->
+      <!-- Ejercicios con respuestas guardables -->
       <div class="actions" data-reveal>
-        <div class="takeaways__title">Ejercicios prácticos</div>
-        <div>
-          <div class="action-item">
-            <div class="action-checkbox"></div>
-            <div class="action-text">Escribe los 3 momentos del último mes en que sentiste más urgencia de jugar. ¿Qué estabas haciendo? ¿Cómo te sentías?</div>
-          </div>
-          <div class="action-item">
-            <div class="action-checkbox"></div>
-            <div class="action-text">Identifica tu detonante principal (aburrimiento / estrés / soledad / celebración). Escríbelo y ponle nombre.</div>
-          </div>
-          <div class="action-item">
-            <div class="action-checkbox"></div>
-            <div class="action-text">Diseña tu "pausa de 10 minutos": ¿qué harás exactamente cuando sientas el impulso? Sé específico.</div>
-          </div>
-          <div class="action-item">
-            <div class="action-checkbox"></div>
-            <div class="action-text">Comparte tu plan con alguien de confianza o escríbelo aquí en tus notas.</div>
-          </div>
-        </div>
+        <div class="takeaways__title">Ejercicios · tus respuestas se guardan automáticamente</div>
+        <div id="exerciseList"></div>
       </div>
 
       <div class="lesson-divider"></div>
 
       <!-- Notes -->
       <div class="notes-area" data-reveal>
-        <div class="notes-area__label">Mis notas</div>
-        <textarea placeholder="Escribe aquí tus reflexiones, ideas o lo que quieras recordar de este módulo..."></textarea>
+        <div class="notes-area__label">Mis notas <span id="saveFlag" style="float:right;font-weight:400;color:var(--teal);opacity:0;transition:opacity .3s;text-transform:none;letter-spacing:0;">Guardado ✓</span></div>
+        <textarea id="notesArea" placeholder="Escribe aquí tus reflexiones, ideas o lo que quieras recordar de esta clase..."></textarea>
       </div>
 
       <!-- Complete -->
       <div class="complete-section" data-reveal>
-        <h3>¿Has terminado la clase?</h3>
-        <p>Cuando hayas visto el vídeo completo y respondido las preguntas, márcala como terminada para desbloquear la siguiente.</p>
-        <a href="dashboard.html" class="btn btn--primary btn--lg">
+        <h3 id="completeTitle">¿Has terminado la clase?</h3>
+        <p id="completeSub">Cuando hayas visto el vídeo y respondido los ejercicios, márcala como terminada para desbloquear la siguiente.</p>
+        <button class="btn btn--primary btn--lg" id="completeBtn">
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 8l4.5 4.5L14 3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          Clase completada → Desbloquear siguiente
-        </a>
-        <p style="font-size:0.8rem;color:var(--text-subtle);margin-top:var(--s4);">
-          Siguiente: <strong>Clase 06 — Gestión de impulsos</strong>
-        </p>
+          <span id="completeBtnText">Marcar como completada → Desbloquear siguiente</span>
+        </button>
+        <p id="nextHint" style="font-size:0.8rem;color:var(--text-subtle);margin-top:var(--s4);"></p>
       </div>
 
       <!-- ── BLOQUE ESPECIAL CLASE 15 (solo visible en la última clase) ── -->
@@ -473,7 +435,7 @@
           <p style="font-size:0.88rem;font-weight:300;color:rgba(255,255,255,.5);line-height:1.65;margin-bottom:20px;">
             Has completado las 15 clases del Programa de Recuperación ETC. Tu certificado personalizado te está esperando.
           </p>
-          <a href="dashboard.html" class="btn btn--primary btn--lg" style="display:inline-flex;">
+          <a href="certificate.html" class="btn btn--primary btn--lg" style="display:inline-flex;">
             🏅 Ver mi certificado →
           </a>
         </div>
@@ -510,10 +472,10 @@
           <div style="margin-bottom:var(--s3);">
             <div style="display:flex;justify-content:space-between;margin-bottom:var(--s2);font-size:0.8rem;">
               <span class="muted">Clases completadas</span>
-              <span class="teal" style="font-weight:600;">4 / 15</span>
+              <span class="teal" style="font-weight:600;" id="sideCount">0 / 15</span>
             </div>
             <div class="progress-track" style="height:6px;">
-              <div class="progress-fill" style="width:27%;"></div>
+              <div class="progress-fill" id="sideFill" style="width:0%;"></div>
             </div>
           </div>
           <a href="dashboard.html" style="font-size:0.78rem;color:var(--teal);text-decoration:none;">← Ver todas las clases</a>
@@ -524,22 +486,10 @@
       <div class="sidebar-card">
         <div class="sidebar-card__header">Clases</div>
         <div class="sidebar-card__body">
-          <div class="module-list-mini">
-            <div class="module-mini done"><div class="module-mini__num">✓</div>Aceptar la realidad</div>
-            <div class="module-mini done"><div class="module-mini__num">✓</div>La mente de un ludópata</div>
-            <div class="module-mini done"><div class="module-mini__num">✓</div>Dopamina y cerebro</div>
-            <div class="module-mini done"><div class="module-mini__num">✓</div>Las mentiras que te cuentas</div>
-            <div class="module-mini current"><div class="module-mini__num">5</div>Romper el ciclo</div>
-            <div class="module-mini"><div class="module-mini__num">6</div>Gestión de impulsos</div>
-            <div class="module-mini" style="opacity:0.4;"><div class="module-mini__num">7</div>Ansiedad y vergüenza</div>
-            <div class="module-mini" style="opacity:0.4;"><div class="module-mini__num">8</div>Reconstruir la confianza</div>
-            <div class="module-mini" style="opacity:0.3;font-size:0.78rem;color:var(--text-subtle);">
-              <div class="module-mini__num" style="border-color:var(--border);">…</div>+7 clases más
-            </div>
-          </div>
+          <div class="module-list-mini" id="miniList"></div>
           <div class="lesson-nav-btns" style="margin-top:var(--s5);">
-            <a href="dashboard.html" class="btn btn--outline" style="font-size:0.82rem;padding:0.6rem 0.8rem;">← Anterior</a>
-            <a href="dashboard.html" class="btn btn--primary" style="font-size:0.82rem;padding:0.6rem 0.8rem;">Siguiente →</a>
+            <button class="btn btn--outline" id="prevBtn" style="font-size:0.82rem;padding:0.6rem 0.8rem;">← Anterior</button>
+            <button class="btn btn--primary" id="nextBtn" style="font-size:0.82rem;padding:0.6rem 0.8rem;">Siguiente →</button>
           </div>
         </div>
       </div>
@@ -594,17 +544,153 @@
 
 <script src="js/app.js"></script>
 <script>
-// Detectar si es la clase 15 por URL param o por localStorage
+/* ═══════════ MOTOR DE LA CLASE ═══════════ */
 (function() {
-  const params = new URLSearchParams(window.location.search);
-  const n = parseInt(params.get('n')) || 5; // default demo = 5
-  if (n === 15) {
-    const block = document.getElementById('class15Block');
-    if (block) block.style.display = 'block';
-    // Actualizar texto del "siguiente" si existe
-    const nextText = document.querySelector('.complete-section p:last-child');
-    if (nextText) nextText.textContent = '¡Has completado el programa completo! 🎉';
+  const KEY='etc_progress_v1', NKEY='etc_notes_v1', AKEY='etc_answers_v1';
+  const MODULES=[
+    {n:1,title:'Aceptar la realidad',dur:'28 min'},
+    {n:2,title:'La mente de un ludópata',dur:'32 min'},
+    {n:3,title:'Dopamina y cerebro',dur:'30 min'},
+    {n:4,title:'Las mentiras que te cuentas',dur:'35 min'},
+    {n:5,title:'Romper el ciclo',dur:'32 min'},
+    {n:6,title:'Gestión de impulsos',dur:'38 min'},
+    {n:7,title:'Ansiedad, culpa y vergüenza',dur:'36 min'},
+    {n:8,title:'Reconstruir la confianza',dur:'34 min'},
+    {n:9,title:'Dinero y recuperación',dur:'40 min'},
+    {n:10,title:'La nueva identidad',dur:'30 min'},
+    {n:11,title:'Crear nuevos hábitos',dur:'33 min'},
+    {n:12,title:'Familia y entorno',dur:'37 min'},
+    {n:13,title:'Prevenir recaídas',dur:'35 min'},
+    {n:14,title:'Diseñar una nueva vida',dur:'32 min'},
+    {n:15,title:'El futuro empieza hoy',dur:'28 min'},
+  ];
+  // ▶ Cuando estén grabados los vídeos, añade aquí el ID de YouTube por clase:
+  //   ej.  const VIDEOS = { 1:'abc123', 2:'def456', ... };
+  const VIDEOS = {};
+  const DEFAULT_CONTENT = {
+    desc:'En esta clase trabajarás un paso clave de tu recuperación. Tómate tu tiempo, ve el vídeo completo y haz los ejercicios — ahí está el verdadero cambio.',
+    learn:['La idea central de esta clase y por qué importa en tu proceso.','Cómo aplicarla a tu situación concreta, no solo en teoría.','Un primer paso práctico que puedes dar hoy mismo.'],
+    exercises:['¿Qué te ha removido o resonado de esta clase? Escríbelo.','Describe una situación real tuya donde puedas aplicar lo aprendido.','Define un pequeño compromiso concreto para esta semana.']
+  };
+  const CONTENT = {
+    5:{ desc:'En esta clase entenderás por qué la adicción al juego no es un problema de voluntad, sino un ciclo neurológico que se retroalimenta. Aprenderás a identificar cuándo se activa el ciclo — y cómo interrumpirlo antes de que tome el control.',
+        learn:['Cómo funciona el ciclo automático de la adicción y por qué se mantiene solo.','Los 3 detonantes más comunes que activan el impulso de jugar.','La técnica de "pausa e intervención" para crear distancia entre impulso y conducta.','Por qué la fuerza de voluntad sola no funciona — y qué hacer en su lugar.'],
+        exercises:['Escribe los 3 momentos del último mes en que sentiste más urgencia de jugar. ¿Qué estabas haciendo? ¿Cómo te sentías?','Identifica tu detonante principal (aburrimiento / estrés / soledad / celebración) y ponle nombre.','Diseña tu "pausa de 10 minutos": ¿qué harás exactamente cuando sientas el impulso?'] }
+  };
+
+  const load=k=>{ try{return JSON.parse(localStorage.getItem(k))||{}}catch(e){return {}} };
+  const save=(k,v)=>{ try{localStorage.setItem(k,JSON.stringify(v))}catch(e){} };
+  const pad=x=>String(x).padStart(2,'0');
+  const $=id=>document.getElementById(id);
+
+  let n=parseInt(new URLSearchParams(location.search).get('n'))||1;
+  if(n<1)n=1; if(n>15)n=15;
+
+  const prog=load(KEY); const completed=Array.isArray(prog.completed)?prog.completed:[];
+  const firstIncomplete=(MODULES.find(m=>!completed.includes(m.n))||{n:16}).n;
+
+  // Control de acceso: solo clases ya completadas o la actual desbloqueada
+  if(n>firstIncomplete){ location.replace('dashboard.html'); return; }
+
+  const mod=MODULES.find(m=>m.n===n)||MODULES[0];
+  const content=CONTENT[n]||DEFAULT_CONTENT;
+  const isDone=completed.includes(n);
+  const pct=Math.round(completed.length/15*100);
+
+  // Cabecera / nav
+  $('navModule').textContent='Clase '+pad(n)+' de 15';
+  $('navPct').textContent=pct+'% completado';
+  $('navFill').style.width=pct+'%';
+  $('navStatus').textContent=isDone?'Completada':'En progreso';
+  $('vidEyebrow').textContent='Clase '+pad(n);
+  $('vidTitle').textContent=mod.title;
+  $('eyeClase').textContent='Clase '+pad(n);
+  $('eyeDur').textContent='~'+mod.dur;
+  $('lessonTitle').textContent=mod.title;
+  $('lessonDesc').textContent=content.desc;
+  document.title='Clase '+pad(n)+' — '+mod.title+' · ETC';
+
+  // Vídeo (placeholder hasta que estén grabados)
+  const vid=VIDEOS[n], playBtn=$('playBtn'), vidNote=$('vidNote');
+  if(vid){
+    playBtn.addEventListener('click',()=>{
+      const f=document.createElement('iframe');
+      f.src='https://www.youtube-nocookie.com/embed/'+vid+'?autoplay=1&rel=0';
+      f.allow='autoplay; fullscreen'; f.allowFullscreen=true;
+      f.style.cssText='position:absolute;inset:0;width:100%;height:100%;border:0;';
+      const va=$('videoArea'); va.innerHTML=''; va.appendChild(f);
+    });
+  } else {
+    vidNote.textContent='El vídeo de esta clase estará disponible muy pronto';
+    playBtn.style.opacity='.45'; playBtn.style.cursor='not-allowed';
+    playBtn.addEventListener('click',()=>{ vidNote.textContent='Aún estamos grabando esta clase — disponible muy pronto ✦'; });
   }
+
+  // Lo que trabajarás
+  const tl=$('takeawayList');
+  content.learn.forEach((t,i)=>{
+    const d=document.createElement('div'); d.className='takeaway';
+    d.innerHTML='<div class="takeaway__icon">'+pad(i+1)+'</div><div class="takeaway__text">'+t+'</div>';
+    tl.appendChild(d);
+  });
+
+  // Ejercicios con respuesta guardable
+  const stored=load(AKEY); const ans=stored[n]||{};
+  const exList=$('exerciseList');
+  content.exercises.forEach((q,i)=>{
+    const wrap=document.createElement('div'); wrap.className='action-item';
+    wrap.style.cssText='flex-direction:column;align-items:stretch;gap:10px;';
+    const lab=document.createElement('div'); lab.className='action-text'; lab.textContent=q;
+    const ta=document.createElement('textarea');
+    ta.value=ans[i]||''; ta.placeholder='Tu respuesta...';
+    ta.style.cssText='width:100%;min-height:58px;background:var(--bg-2);border:1px solid var(--border);border-radius:10px;color:var(--text);font-size:0.88rem;line-height:1.5;padding:10px 12px;resize:vertical;outline:none;font-family:inherit;';
+    ta.addEventListener('input',()=>{ const a=load(AKEY); a[n]=a[n]||{}; a[n][i]=ta.value; save(AKEY,a); flash(); });
+    wrap.appendChild(lab); wrap.appendChild(ta);
+    exList.appendChild(wrap);
+  });
+
+  // Notas
+  const na=$('notesArea'); na.value=(load(NKEY)[n])||'';
+  na.addEventListener('input',()=>{ const x=load(NKEY); x[n]=na.value; save(NKEY,x); flash(); });
+
+  let flashT;
+  function flash(){ const f=$('saveFlag'); if(!f)return; f.style.opacity='1'; clearTimeout(flashT); flashT=setTimeout(()=>{f.style.opacity='0';},1200); }
+
+  // Completar / desbloquear
+  const cbtn=$('completeBtn'), cbtnT=$('completeBtnText'), nextHint=$('nextHint'), cTitle=$('completeTitle'), cSub=$('completeSub');
+  if(isDone){
+    cTitle.textContent='Clase completada ✓';
+    cSub.textContent = n<15 ? 'Ya tienes desbloqueada la siguiente clase.' : 'Has terminado las 15 clases. ¡Enhorabuena!';
+    cbtnT.textContent = n<15 ? 'Ir a la Clase '+pad(n+1)+' →' : 'Obtener mi certificado →';
+  } else {
+    nextHint.innerHTML = n<15 ? 'Siguiente: <strong>Clase '+pad(n+1)+' — '+MODULES[n].title+'</strong>' : 'Es la última clase del programa.';
+  }
+  cbtn.addEventListener('click',()=>{
+    const p=load(KEY); const arr=Array.isArray(p.completed)?p.completed:[];
+    if(!arr.includes(n)){ arr.push(n); p.completed=arr; save(KEY,p); }
+    location.href = n<15 ? 'modulo.html?n='+(n+1) : 'certificate.html';
+  });
+
+  // Sidebar
+  $('sideCount').textContent=completed.length+' / 15';
+  $('sideFill').style.width=pct+'%';
+  const mini=$('miniList');
+  MODULES.forEach(m=>{
+    const done=completed.includes(m.n), isCurr=m.n===n, accessible=m.n<=firstIncomplete;
+    const row=document.createElement(accessible?'a':'div');
+    row.className='module-mini'+(done?' done':'')+(isCurr?' current':'');
+    if(accessible) row.href='modulo.html?n='+m.n; else row.style.opacity='0.4';
+    row.innerHTML='<div class="module-mini__num">'+(done?'✓':m.n)+'</div>'+m.title;
+    mini.appendChild(row);
+  });
+  const prev=$('prevBtn'), next=$('nextBtn');
+  if(n>1) prev.onclick=()=>location.href='modulo.html?n='+(n-1);
+  else { prev.disabled=true; prev.style.opacity='.4'; prev.style.cursor='default'; }
+  if(n<15 && (completed.includes(n) || (n+1)<=firstIncomplete)) next.onclick=()=>location.href='modulo.html?n='+(n+1);
+  else { next.disabled=true; next.style.opacity='.4'; next.style.cursor='default'; }
+
+  // Bloque especial clase 15
+  if(n===15){ const b=$('class15Block'); if(b) b.style.display='block'; }
 })();
 </script>
 </body>
