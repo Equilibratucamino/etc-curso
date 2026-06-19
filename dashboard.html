@@ -579,13 +579,13 @@ if (completed.length === 0) {
     sBtn.textContent = 'Reservar →';
     sBtn.href = CALENDAR_URL || WA_SESSION;
   } else if (allDone) {
-    sLabel.textContent = 'Sesión final · desbloqueada';
-    sTitle.textContent = 'Reserva tu sesión final con Nacho o Marcos';
+    sLabel.textContent = 'Última sesión · incluida';
+    sTitle.textContent = 'Reserva tu última sesión con Nacho';
     sBtn.textContent = 'Reservar mi sesión →';
     sBtn.href = CALENDAR_URL || WA_SESSION;
   } else {
-    sLabel.textContent = 'Sesión final · Premium';
-    sTitle.textContent = 'Cuando acabes tu última clase, desbloquearás tu sesión final con Nacho o Marcos';
+    sLabel.textContent = 'Última sesión · Premium';
+    sTitle.textContent = 'Cuando acabes tu última clase, desbloquearás tu última sesión con Nacho';
     lockBtn('🔒 Se desbloquea al terminar las 15');
   }
 })();
