@@ -429,7 +429,7 @@
           <div class="mentor-av"><span>N</span><span>M</span></div>
           <div class="t-mentor__t" id="sessionTitle">Tu sesión final con Nacho o Marcos</div>
         </div>
-        <a id="sessionBtn" class="btn-tile teal" href="#" target="_blank" rel="noopener">Reservar →</a>
+        <a id="sessionBtn" class="btn-tile teal" href="#" rel="noopener">Reservar →</a>
       </div>
 
       <!-- WEBINAR -->
@@ -554,11 +554,9 @@ if (completed.length === 0) {
   if (planParam) localStorage.setItem('etc_plan', planParam);
   const PLAN = localStorage.getItem('etc_plan') || 'premium';
 
-  // ▶ Reserva dentro de ETC Plataforma (flujo /leads: formulario → calendario,
-  //   conectado a Google Calendar). Cambiar a producción cuando esté lista:
-  //   prod: 'https://etc-plataforma.vercel.app/leads'
-  //   preview/develop: 'https://etc-plataforma-git-develop-equilibratucamino.vercel.app/leads'
-  const CALENDAR_URL = 'https://etc-plataforma.vercel.app/leads';
+  // ▶ Página de reserva DENTRO del curso (incrusta el calendario de ETC Plataforma).
+  //   La URL real del calendario se configura en reserva.html (iframe).
+  const CALENDAR_URL = 'reserva.html';
   const WA_SESSION = 'https://wa.me/34611847645?text=Hola%20Nacho%2C%20acabo%20de%20terminar%20el%20curso%20ETC%20y%20me%20gustar%C3%ADa%20reservar%20mi%20sesi%C3%B3n%20final%20contigo.';
 
   const tile = document.getElementById('sessionTile');
