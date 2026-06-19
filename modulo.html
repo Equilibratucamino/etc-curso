@@ -406,6 +406,10 @@
       <div class="notes-area" data-reveal>
         <div class="notes-area__label">Mis notas <span id="saveFlag" style="float:right;font-weight:400;color:var(--teal);opacity:0;transition:opacity .3s;text-transform:none;letter-spacing:0;">Guardado ✓</span></div>
         <textarea id="notesArea" placeholder="Escribe aquí tus reflexiones, ideas o lo que quieras recordar de esta clase..."></textarea>
+        <div style="display:flex;align-items:center;gap:12px;margin-top:14px;flex-wrap:wrap;">
+          <button class="btn btn--primary" id="saveNotesBtn" style="font-size:0.84rem;padding:0.6rem 1.4rem;">Guardar notas</button>
+          <span id="notesHint" style="font-size:0.78rem;color:var(--text-subtle);">Se guardan en este dispositivo y siguen aquí cuando vuelvas.</span>
+        </div>
       </div>
 
       <!-- Complete -->
@@ -652,6 +656,12 @@
   // Notas
   const na=$('notesArea'); na.value=(load(NKEY)[n])||'';
   na.addEventListener('input',()=>{ const x=load(NKEY); x[n]=na.value; save(NKEY,x); flash(); });
+  const saveBtn=$('saveNotesBtn'), hint=$('notesHint');
+  if (saveBtn) saveBtn.addEventListener('click',()=>{
+    const x=load(NKEY); x[n]=na.value; save(NKEY,x); flash();
+    if (hint){ hint.textContent='✓ Notas guardadas'; hint.style.color='var(--teal)';
+      setTimeout(()=>{ hint.textContent='Se guardan en este dispositivo y siguen aquí cuando vuelvas.'; hint.style.color='var(--text-subtle)'; }, 2500); }
+  });
 
   let flashT;
   function flash(){ const f=$('saveFlag'); if(!f)return; f.style.opacity='1'; clearTimeout(flashT); flashT=setTimeout(()=>{f.style.opacity='0';},1200); }
