@@ -575,11 +575,10 @@ if (completed.length === 0) {
   }
 
   if (PLAN === 'basic') {
-    sLabel.textContent = 'Sesión final 1:1';
-    sTitle.innerHTML = 'Disponible en el plan <strong>Premium</strong>';
-    sBtn.textContent = 'Mejorar a Premium →';
-    sBtn.href = 'index.html#planes';
-    sBtn.removeAttribute('target');
+    sLabel.textContent = 'Sesión privada · 1 a 1';
+    sTitle.textContent = 'Reserva tu sesión privada con Nacho o Marcos';
+    sBtn.textContent = 'Reservar →';
+    sBtn.href = CALENDAR_URL || WA_SESSION;
   } else if (allDone) {
     sLabel.textContent = 'Sesión final · desbloqueada';
     sTitle.textContent = 'Reserva tu sesión final con Nacho o Marcos';

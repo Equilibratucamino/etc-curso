@@ -215,6 +215,12 @@
     .hero__stat-n { font-family: 'Fraunces', serif; font-size: 1.8rem; font-weight: 400; color: #1A1A1A; line-height: 1; }
     .hero__stat-n span { color: var(--teal); }
     .hero__stat-l { font-size: 0.72rem; font-weight: 300; color: #9CA3AF; margin-top: 4px; }
+    @media (max-width: 560px) {
+      .hero__stats { display: grid; grid-template-columns: 1fr 1fr; gap: 0; }
+      .hero__stat { padding: 16px 18px; border-right: none; }
+      .hero__stat:nth-child(1) { border-right: 1px solid rgba(0,0,0,.08); }
+      .hero__stat:nth-child(3) { grid-column: 1 / -1; border-top: 1px solid rgba(0,0,0,.08); }
+    }
 
     /* ════════ DIVIDER SECTION ════════ */
     .section-divider {
@@ -547,7 +553,6 @@
       <div class="hero__stat"><div class="hero__stat-n">15</div><div class="hero__stat-l">clases en vídeo</div></div>
       <div class="hero__stat"><div class="hero__stat-n">500<span>+</span></div><div class="hero__stat-l">personas atendidas</div></div>
       <div class="hero__stat"><div class="hero__stat-n">∞</div><div class="hero__stat-l">acceso de por vida</div></div>
-      <div class="hero__stat"><div class="hero__stat-n">5.0<span>★</span></div><div class="hero__stat-l">Google Reviews</div></div>
     </div>
   </div>
 </section>
