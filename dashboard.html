@@ -422,17 +422,14 @@
 
     <!-- MENTOR + WEBINAR (lado a lado) -->
     <div class="support-pair" data-reveal>
-      <!-- MENTOR -->
-      <div class="tile t-mentor">
+      <!-- SESIÓN FINAL (premium) -->
+      <div class="tile t-mentor" id="sessionTile">
         <div>
-          <div class="tile__label">Sesión privada · 1 a 1</div>
+          <div class="tile__label" id="sessionLabel">Sesión final · 1 a 1</div>
           <div class="mentor-av"><span>N</span><span>M</span></div>
-          <div class="t-mentor__t">Acompañamiento con Nacho o Marcos</div>
+          <div class="t-mentor__t" id="sessionTitle">Tu sesión final con Nacho o Marcos</div>
         </div>
-        <a href="https://wa.me/34611847645?text=Hola%2C%20soy%20alumno%20del%20curso%20ETC%20y%20me%20gustar%C3%ADa%20reservar%20una%20sesi%C3%B3n%20privada." class="btn-tile teal" target="_blank" rel="noopener">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.117 1.526 5.847L.057 23.535l5.693-1.466A11.944 11.944 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22a9.94 9.94 0 01-5.071-1.388l-.364-.216-3.774.989.998-3.801-.235-.374A9.953 9.953 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
-          Reservar por WhatsApp
-        </a>
+        <a id="sessionBtn" class="btn-tile teal" href="#" target="_blank" rel="noopener">Reservar →</a>
       </div>
 
       <!-- WEBINAR -->
@@ -550,6 +547,48 @@ if (completed.length === 0) {
   contTxt.textContent = 'Obtener mi certificado →';
   if (ringCap) ringCap.textContent = '¡Has completado el programa entero!';
 }
+
+/* ── PLAN + SESIÓN FINAL (premium) ── */
+(function(){
+  const planParam = new URLSearchParams(location.search).get('plan');
+  if (planParam) localStorage.setItem('etc_plan', planParam);
+  const PLAN = localStorage.getItem('etc_plan') || 'premium';
+
+  // ▶ URL del calendario de Nacho (Vercel + Google Calendar). Vacío = usa WhatsApp de respaldo.
+  const CALENDAR_URL = '';
+  const WA_SESSION = 'https://wa.me/34611847645?text=Hola%20Nacho%2C%20acabo%20de%20terminar%20el%20curso%20ETC%20y%20me%20gustar%C3%ADa%20reservar%20mi%20sesi%C3%B3n%20final%20contigo.';
+
+  const tile = document.getElementById('sessionTile');
+  const sLabel = document.getElementById('sessionLabel');
+  const sTitle = document.getElementById('sessionTitle');
+  const sBtn = document.getElementById('sessionBtn');
+  if (!tile) return;
+  const allDone = completed.length >= TOTAL;
+
+  function lockBtn(text){
+    sBtn.textContent = text;
+    sBtn.removeAttribute('href');
+    sBtn.classList.remove('teal');
+    sBtn.style.cssText = 'pointer-events:none;opacity:.6;cursor:default;background:rgba(30,33,29,0.06);color:var(--muted);';
+  }
+
+  if (PLAN === 'basic') {
+    sLabel.textContent = 'Sesión final 1:1';
+    sTitle.innerHTML = 'Disponible en el plan <strong>Premium</strong>';
+    sBtn.textContent = 'Mejorar a Premium →';
+    sBtn.href = 'index.html#planes';
+    sBtn.removeAttribute('target');
+  } else if (allDone) {
+    sLabel.textContent = 'Sesión final · desbloqueada';
+    sTitle.textContent = 'Reserva tu sesión final con Nacho o Marcos';
+    sBtn.textContent = 'Reservar mi sesión →';
+    sBtn.href = CALENDAR_URL || WA_SESSION;
+  } else {
+    sLabel.textContent = 'Sesión final · Premium';
+    sTitle.textContent = 'Cuando acabes tu última clase, desbloquearás tu sesión final con Nacho o Marcos';
+    lockBtn('🔒 Se desbloquea al terminar las 15');
+  }
+})();
 
 /* Class cards */
 const grid = document.getElementById('classGrid');
