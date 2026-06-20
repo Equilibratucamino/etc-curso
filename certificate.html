@@ -62,7 +62,7 @@
       container-type:inline-size;
     }
     .cert-name{
-      position:absolute; left:50%; top:45.5%; transform:translate(-50%,-50%);
+      position:absolute; left:50%; top:47.5%; transform:translate(-50%,-50%);
       max-width:86%; text-align:center; font-family:'Great Vibes',cursive; color:#F4ECD2;
       line-height:1; white-space:nowrap;
       text-shadow:0 2px 10px rgba(0,0,0,0.35);
@@ -139,7 +139,7 @@
 
   function fitName(){
     const w=certImg.clientWidth||800;
-    let size=w*0.15;                 // tamaño base proporcional al certificado
+    let size=w*0.115;                // tamaño base proporcional al certificado
     certName.style.fontSize=size+'px';
     const maxW=w*0.84;
     let guard=0;
