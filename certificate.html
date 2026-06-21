@@ -148,13 +148,13 @@
   function render(){
     const v=(input.value||'').trim();
     certName.textContent=v||'Tu nombre';
+    certName.style.opacity = v ? '1' : '0.5';   // "Tu nombre" sale en claro/atenuado
     fitName();
   }
 
-  const saved=localStorage.getItem(NAME)||'';
-  if(saved) input.value=saved;
+  // Siempre arranca vacío → "Tu nombre" (no se recuerda el nombre anterior)
   render();
-  input.addEventListener('input',()=>{ localStorage.setItem(NAME, input.value.trim()); render(); });
+  input.addEventListener('input', render);
   window.addEventListener('resize', fitName);
   if(document.fonts && document.fonts.ready) document.fonts.ready.then(fitName);
 
@@ -174,7 +174,7 @@
       const ratio=canvas.width/canvas.height;
       let w=pw, h=w/ratio; if(h>ph){ h=ph; w=h*ratio; }
       pdf.addImage(img,'JPEG',(pw-w)/2,(ph-h)/2,w,h);
-      const nm=(localStorage.getItem(NAME)||'ETC').replace(/[^a-zA-Z0-9]+/g,'-');
+      const nm=((input.value||'ETC').trim()||'ETC').replace(/[^a-zA-Z0-9]+/g,'-');
       pdf.save('Certificado-ETC-'+nm+'.pdf');
       dlBtn.textContent=original; dlBtn.style.opacity='1';
     }catch(e){
