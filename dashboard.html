@@ -539,6 +539,11 @@ const MODULES = [
 ];
 function getProgress(){ try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {completed:[]}; } catch { return {completed:[]}; } }
 
+// Demo: ?reset=1 empieza el curso desde 0 (borra progreso, notas, respuestas y nombre)
+if (new URLSearchParams(location.search).get('reset')) {
+  ['etc_progress_v1','etc_notes_v1','etc_answers_v1','etc_name'].forEach(k => localStorage.removeItem(k));
+}
+
 const completed = getProgress().completed || [];
 const TOTAL = MODULES.length;
 const pct = Math.round((completed.length / TOTAL) * 100);
