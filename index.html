@@ -137,11 +137,11 @@
 
     .hero__h1 {
       font-family: 'Fraunces', Georgia, serif;
-      font-size: clamp(3rem, 8vw, 6.5rem);
-      font-weight: 400; line-height: 1.04; letter-spacing: -0.035em;
-      color: #1A1A1A; margin-bottom: 0;
+      font-size: clamp(3.1rem, 8.2vw, 6.8rem);
+      font-weight: 600; line-height: 1.02; letter-spacing: -0.04em;
+      color: #14160F; margin-bottom: 0;
     }
-    .hero__h1 em { font-style: italic; color: var(--teal); display: block; }
+    .hero__h1 em { font-style: italic; font-weight: 700; color: var(--teal); display: block; }
     .hero__h1 span { display: block; }
 
     .hero__divider {
@@ -188,6 +188,14 @@
       transition: background .18s, transform .18s, box-shadow .18s;
     }
     .btn-big:hover { background: var(--teal-d); transform: translateY(-2px); box-shadow: 0 16px 44px rgba(50,180,140,.38); }
+    /* CTA principal del hero: más grande + con movimiento para que llame */
+    .ctas .btn-big { font-size: 1.2rem; font-weight: 600; padding: 21px 52px; animation: ctaPulse 2.6s ease-in-out infinite; }
+    .ctas .btn-big:hover { animation-play-state: paused; }
+    @keyframes ctaPulse {
+      0%,100% { transform: translateY(0) scale(1); box-shadow: 0 8px 30px rgba(50,180,140,.32); }
+      50%     { transform: translateY(-4px) scale(1.025); box-shadow: 0 20px 52px rgba(50,180,140,.5); }
+    }
+    @media (prefers-reduced-motion: reduce) { .ctas .btn-big { animation: none; } }
     .btn-big__arrow {
       width: 24px; height: 24px; background: rgba(255,255,255,.22);
       border-radius: 50%; display: flex; align-items: center; justify-content: center;
@@ -511,8 +519,7 @@
   <div class="hero__inner">
     <h1 class="hero__h1">
       <span>15 clases para</span>
-      <em>recuperar el control</em>
-      <span>de tu vida.</span>
+      <em>cerrar una etapa.</em>
     </h1>
 
     <div class="hero__divider">
