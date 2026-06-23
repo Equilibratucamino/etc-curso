@@ -137,8 +137,8 @@
 
     .hero__h1 {
       font-family: 'Fraunces', Georgia, serif;
-      font-size: clamp(3.1rem, 8.2vw, 6.8rem);
-      font-weight: 600; line-height: 1.02; letter-spacing: -0.04em;
+      font-size: clamp(3.6rem, 10vw, 8.6rem);
+      font-weight: 600; line-height: 1.0; letter-spacing: -0.04em;
       color: #14160F; margin-bottom: 0;
     }
     .hero__h1 em { font-style: italic; font-weight: 700; color: var(--teal); display: block; }
@@ -181,13 +181,19 @@
 
     .ctas { display: flex; align-items: center; justify-content: center; gap: 12px; flex-wrap: wrap; }
     .btn-big {
-      display: inline-flex; align-items: center; gap: 10px;
+      display: inline-flex; align-items: center; gap: 12px;
       background: var(--teal); color: #fff;
-      font-size: 1.05rem; font-weight: 500; padding: 17px 38px; border-radius: 999px;
-      box-shadow: 0 8px 32px rgba(50,180,140,.3);
+      font-size: 1.25rem; font-weight: 600; padding: 22px 52px; border-radius: 999px;
+      box-shadow: 0 10px 36px rgba(50,180,140,.38);
       transition: background .18s, transform .18s, box-shadow .18s;
+      animation: btnPulse 2.4s ease-in-out infinite;
     }
-    .btn-big:hover { background: var(--teal-d); transform: translateY(-2px); box-shadow: 0 16px 44px rgba(50,180,140,.38); }
+    @keyframes btnPulse {
+      0%,100% { transform: translateY(0); box-shadow: 0 10px 36px rgba(50,180,140,.38); }
+      50%     { transform: translateY(-3px); box-shadow: 0 16px 48px rgba(50,180,140,.5); }
+    }
+    @media (prefers-reduced-motion: reduce) { .btn-big { animation: none; } }
+    .btn-big:hover { background: var(--teal-d); filter: brightness(1.05); animation-play-state: paused; box-shadow: 0 18px 52px rgba(50,180,140,.55); transform: translateY(-3px); }
     /* CTA principal del hero: más grande + con movimiento para que llame */
     .ctas .btn-big { font-size: 1.2rem; font-weight: 600; padding: 21px 52px; animation: ctaPulse 2.6s ease-in-out infinite; }
     .ctas .btn-big:hover { animation-play-state: paused; }
@@ -468,19 +474,7 @@
 </head>
 <body>
 
-<!-- NAV -->
-<nav class="nav">
-  <a href="https://app.equilibratucamino.com" class="nav__logo">
-    <img src="images/logo-etc-transparent.webp" alt="ETC. Equilibra Tu Camino">
-  </a>
-  <div class="nav__links">
-    <a href="#curso" class="nav__link">El curso</a>
-    <a href="#instructores" class="nav__link">Instructores</a>
-    <a href="#webinars" class="nav__link">Webinars</a>
-    <a href="#opiniones" class="nav__link">Opiniones</a>
-    <a href="dashboard.html" class="nav__cta">Accede al curso →</a>
-  </div>
-</nav>
+<!-- (Menú superior eliminado a propósito — hero limpio y directo) -->
 
 <!-- HERO -->
 <section class="hero">
