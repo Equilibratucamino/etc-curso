@@ -2,7 +2,7 @@
 
 > Estado completo del curso online de ETC: **producto, diseño, flujos, planes (premium/básico) y todo lo que queda por hacer**.
 > Proyecto **independiente** de la plataforma terapéutica de Juan (ETC-Plataforma).
-> Última actualización: **21 junio 2026**.
+> Última actualización: **23 junio 2026**.
 
 ---
 
@@ -60,18 +60,26 @@ Tono de marca: directo, cercano, sin tecnicismos, "de alguien que lo ha vivido".
 | Recurso | Valor |
 |---------|-------|
 | GitHub | `Equilibratucamino/etc-curso` (rama `main`) |
-| Deploy | **https://etc-curso.vercel.app** — push a `main` = despliegue automático en Vercel |
+| **Dominio LIVE** | **https://curso.equilibratucamino.com** ✅ (subdominio, SSL ok) |
+| URL Vercel | `https://etc-curso-equilibratucamino.vercel.app` (la `etc-curso.vercel.app` da 404, NO usar) |
+| Deploy | push a `main` = despliegue automático en Vercel |
 | Local | `/Users/inaki/etc-curso/` |
-| Dominio pendiente | `curso.equilibratucamino.com` (DNS en Hostinger) |
+| Proyecto Vercel | `prj_obDjmjDw3r4SEzOm05RnjFb7Amc5` · team `team_XX0LTqydH1xCMINCkHC0ANQs` |
 | WhatsApp ETC | +34 611 847 645 |
 
-### Enlaces de prueba
-- **Premium:** `https://etc-curso.vercel.app/dashboard.html?plan=premium`
-- **Básico:** `https://etc-curso.vercel.app/dashboard.html?plan=basic`
-- **Landing:** `https://etc-curso.vercel.app/`
-- **Certificado:** `https://etc-curso.vercel.app/certificate.html` (requiere 15/15)
+### Dominio y despliegue (resuelto 23-jun)
+- El subdominio **`curso.equilibratucamino.com`** apunta a Vercel con un **CNAME** en Hostinger: `curso` → `cname.vercel-dns.com` (Vercel sugiere `5467a7a7d97e4810.vercel-dns-016.com` pero el clásico funciona). Conectado a **Production**.
+- `.curso` NO es un TLD válido → se descartó `equilibratucamino.curso`. Los subdominios son **gratis**.
+- Estaba activada la **Deployment Protection (Vercel Authentication)** → bloqueaba todo con login (401). Se **desactivó** (Settings → Deployment Protection → Require Log In = OFF). Ahora es público.
 
-> `?plan=` fija la versión en ese navegador. Para verlos a la vez, usar dos navegadores. En real lo fijará la compra.
+### Enlaces
+- **Home:** `https://curso.equilibratucamino.com`
+- **Premium:** `https://curso.equilibratucamino.com/dashboard.html?plan=premium`
+- **Básico:** `https://curso.equilibratucamino.com/dashboard.html?plan=basic`
+- **Empezar de 0 (demo):** añade `&reset=1` (borra progreso/notas/nombre y arranca en la clase 1)
+- **Certificado:** `https://curso.equilibratucamino.com/certificate.html` (requiere 15/15)
+
+> `?plan=` fija la versión en ese navegador (en real lo fijará la compra). `?reset=1` reinicia el curso a 0 para demos.
 
 ---
 
@@ -121,8 +129,8 @@ Estética: **wellness premium con toque moderno**, fría/neutra, dorado mate ele
 ## 6. Páginas en detalle
 
 ### `index.html` — Landing (venta)
-- **Nav** adaptativa (clara sobre hero, oscura al entrar en secciones oscuras).
-- **Hero** claro con burbujas teal + mascotas (corazón / tragaperras), titular Fraunces, **badge oficial de Google Reviews** (logo 4 colores + estrellas amarillas + "5,0 · 47 reseñas"), CTAs y stats (15 clases · 500+ personas · ∞ acceso de por vida). En móvil: 2 stats arriba + "acceso de por vida" debajo.
+- **Sin menú superior** (se eliminó el nav en móvil y desktop para un hero limpio y directo).
+- **Hero** claro con burbujas teal + mascotas (corazón / tragaperras), **titular grande e impactante** "15 clases para *cerrar una etapa.*" (Fraunces 600 + em italic teal 700), **badge oficial de Google Reviews** (logo 4 colores + estrellas amarillas + "5,0 · 47 reseñas"), **botón "Accede al curso" grande con latido** (animación `btnPulse`), y stats (15 clases · 500+ personas · ∞ acceso de por vida). En móvil: 2 stats arriba + "acceso de por vida" debajo.
 - **El programa** (sección oscura): métricas (15 clases · +8 h · 60+ ejercicios · ∞) + las 15 clases agrupadas en **3 fases** (Entender / Reconstruir / Avanzar) con duración por fase y por clase + chips "incluye" (certificado, ejercicios, sesiones, webinars, 100% privado).
 - **Instructores**: Nacho + Marcos (fotos reales), compactos.
 - **Certificado**: diploma de muestra.
@@ -285,9 +293,10 @@ Por cada clase, cuando Iñaki envíe la grabación:
 ### 🟢 Otros
 - **Landing**: sección "Los dos planes" (tabla) + **FAQ**.
 - Conectar `etc_plan` con el **pago real** (Stripe / plataforma de Juan).
-- **DNS** `curso.equilibratucamino.com` (Hostinger).
 - (Opcional) **Cuentas + base de datos** (Supabase) si se quiere progreso/notas entre dispositivos o que Iñaki vea las respuestas.
 - Sustituir la imagen base del certificado por el original en máxima calidad si Iñaki lo tiene en PNG/JPG.
+
+> ✅ **Resuelto 23-jun:** dominio `curso.equilibratucamino.com` live con SSL; protección de despliegue desactivada; hero sin menú + título más grande + botón con latido.
 
 ---
 
