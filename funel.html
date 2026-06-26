@@ -84,9 +84,9 @@
     .hero__h1 .ln{display:block;}
     .hero__sub{font-size:clamp(1.04rem,1.6vw,1.24rem);font-weight:400;color:rgba(255,255,255,.78);line-height:1.6;max-width:540px;margin-bottom:18px;}
     .hero__sub b{font-weight:900;color:#fff;}
-    .hero__ticks{list-style:none;margin:0 0 28px;display:flex;flex-direction:column;gap:9px;}
-    .hero__ticks li{display:flex;align-items:center;gap:11px;font-size:.98rem;font-weight:500;color:rgba(255,255,255,.85);}
-    .hero__ticks .tk{flex-shrink:0;width:22px;height:22px;border-radius:50%;background:var(--gold);color:#1A1205;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:.7rem;}
+    .hero__ticks{list-style:none;margin:0 0 30px;display:inline-flex;flex-direction:column;gap:13px;text-align:left;}
+    .hero__ticks li{display:flex;align-items:center;gap:12px;font-size:1rem;font-weight:500;color:rgba(255,255,255,.9);}
+    .hero__ticks .tk{flex-shrink:0;width:24px;height:24px;border-radius:50%;background:var(--gold);color:#1A1205;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:.72rem;}
     .hero__cta{display:flex;flex-wrap:wrap;gap:14px;align-items:center;}
     .hero__guar{margin-top:16px;font-size:.82rem;color:rgba(255,255,255,.55);display:flex;align-items:center;gap:8px;}
     .hero__guar b{color:#fff;font-weight:700;}
@@ -109,7 +109,7 @@
     @media(max-width:880px){
       .hero__in{grid-template-columns:1fr;gap:40px;text-align:center;}
       .hero__sub{margin-left:auto;margin-right:auto;}
-      .hero__ticks{align-items:center;}
+      .hero__ticks{align-self:center;align-items:flex-start;}
       .hero__cta,.hero__guar{justify-content:center;}
       .hero__media{max-width:400px;margin:8px auto 0;}
       .vsl{aspect-ratio:16/10;}
@@ -345,7 +345,8 @@
     .authbar__lbl{text-align:center;font-size:.6rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.34);margin-bottom:16px;}
     .authbar__mask{overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 9%,#000 91%,transparent);mask-image:linear-gradient(90deg,transparent,#000 9%,#000 91%,transparent);}
     .authbar__track{display:flex;align-items:center;gap:54px;width:max-content;animation:scrollX 34s linear infinite;}
-    .authbar:hover .authbar__track{animation-play-state:paused;}
+    .authbar__track{animation-duration:34s;transition:animation-duration .6s ease;}
+    .authbar:hover .authbar__track{animation-duration:150s;}
     .authbar__track img{height:28px;width:auto;max-width:128px;object-fit:contain;filter:grayscale(1) invert(1) brightness(1.15);opacity:.72;transition:filter .3s,opacity .3s;flex-shrink:0;}
     .authbar__track img:hover{filter:grayscale(1) invert(1) brightness(1.45);opacity:1;}
     .authbar__txt{font-family:'Roboto',sans-serif;font-weight:900;font-size:.95rem;letter-spacing:.04em;color:rgba(255,255,255,.62);white-space:nowrap;flex-shrink:0;}
@@ -389,8 +390,8 @@
     <a href="#programa" class="nav__link">El curso</a>
     <a href="#opiniones" class="nav__link">Opiniones</a>
     <a href="#precios" class="nav__link">Precios</a>
+    <a href="#precios" class="nav__link" style="color:var(--gold);font-weight:700;">Precio de lanzamiento</a>
   </div>
-  <a href="#precios" class="nav__cta">Comprar ahora</a>
 </nav>
 
 <!-- HERO -->
@@ -404,9 +405,9 @@
       </h1>
       <p class="hero__sub">El único programa en español hecho por <b>quienes han vivido la ludopatía</b>. 15 clases para salir del juego de verdad — y no recaer.</p>
       <ul class="hero__ticks">
-        <li><span class="tk">✓</span> 15 clases en vídeo · +8 horas · a tu ritmo</li>
-        <li><span class="tk">✓</span> Sesión 1:1 de 1 hora con Nacho <b style="color:var(--gold)">GRATIS</b> (Premium)</li>
-        <li><span class="tk">✓</span> Acceso de por vida · 100% privado y confidencial</li>
+        <li><span class="tk">✓</span> 15 clases en vídeo · +8 h de contenido</li>
+        <li><span class="tk">✓</span> Sesión 1:1 de 1 h con Nacho <b style="color:var(--gold)">GRATIS</b></li>
+        <li><span class="tk">✓</span> Acceso de por vida · 100% privado</li>
       </ul>
       <div class="hero__cta">
         <a href="#precios" class="btn btn--xl btn--gold">Quiero empezar <span class="btn__arr">→</span></a>
