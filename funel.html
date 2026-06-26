@@ -52,14 +52,14 @@
     @media(max-width:560px){.topbar{font-size:.72rem;padding:8px 10px;}}
 
     /* ════ NAV ════ */
-    .nav{position:sticky;top:0;z-index:250;height:62px;background:rgba(14,19,24,.92);backdrop-filter:blur(18px);display:flex;align-items:center;padding:0 32px;gap:22px;border-bottom:1px solid var(--line-dk);}
-    .nav__logo img{height:36px;width:auto;filter:brightness(0) invert(1);opacity:.92;}
+    .nav{position:sticky;top:0;z-index:250;height:76px;background:rgba(14,19,24,.92);backdrop-filter:blur(18px);display:flex;align-items:center;padding:0 32px;gap:22px;border-bottom:1px solid var(--line-dk);}
+    .nav__logo img{height:54px;width:auto;filter:brightness(0) invert(1);opacity:.95;}
     .nav__links{display:flex;align-items:center;gap:26px;margin-left:auto;}
     .nav__link{font-size:.86rem;font-weight:500;color:rgba(255,255,255,.66);transition:color .15s;}
     .nav__link:hover{color:#fff;}
     .nav__cta{background:var(--gold);color:#1A1205;font-size:.85rem;font-weight:900;text-transform:uppercase;letter-spacing:.03em;padding:11px 22px;border-radius:8px;box-shadow:0 6px 18px rgba(255,179,0,.34);transition:transform .15s,box-shadow .15s;}
     .nav__cta:hover{transform:translateY(-2px);box-shadow:0 10px 26px rgba(255,179,0,.5);}
-    @media(max-width:760px){.nav__links{display:none;}.nav{padding:0 16px;height:56px;}.nav__cta{padding:10px 16px;}}
+    @media(max-width:760px){.nav__links{display:none;}.nav{padding:0 16px;height:66px;}.nav__logo img{height:46px;}.nav__cta{padding:10px 16px;}}
 
     /* ════ BUTTONS ════ */
     .btn{display:inline-flex;align-items:center;justify-content:center;gap:11px;font-family:'Roboto',sans-serif;font-weight:900;text-transform:uppercase;letter-spacing:.03em;cursor:pointer;border:none;border-radius:12px;transition:transform .16s,box-shadow .16s,filter .16s;}
@@ -614,20 +614,12 @@
           <div class="pslide__lbl"><span class="pslide__src">Diario Público</span><span class="pslide__tag">· Entrevista a Nacho</span></div>
         </div>
         <div class="pslide">
-          <div class="pslide__img"><img src="images/media-canal4.webp" alt="Canal 4 — Mallorca a la Carta, entrevista a Nacho" loading="lazy"></div>
-          <div class="pslide__lbl"><span class="pslide__src">Canal 4 · TV</span><span class="pslide__tag">· Mallorca a la Carta</span></div>
-        </div>
-        <div class="pslide">
           <div class="pslide__img"><img src="images/media-4.webp" alt="Mejor Informado — caso de éxito con ETC." loading="lazy"></div>
           <div class="pslide__lbl"><span class="pslide__src">Mejor Informado</span><span class="pslide__tag">· Caso de éxito con ETC.</span></div>
         </div>
         <div class="pslide">
           <div class="pslide__img"><img src="images/media-3.webp" alt="Diario Público — regulación del juego en España" loading="lazy"></div>
           <div class="pslide__lbl"><span class="pslide__src">Diario Público</span><span class="pslide__tag">· Regulación del juego</span></div>
-        </div>
-        <div class="pslide">
-          <div class="pslide__img"><img src="images/media-2.webp" alt="Canal 4 — Mallorca a la Carta, descripción del programa" loading="lazy"></div>
-          <div class="pslide__lbl"><span class="pslide__src">Canal 4 · TV</span><span class="pslide__tag">· Sobre el programa</span></div>
         </div>
       </div>
       <button class="pcar-btn pcar-btn--next" id="pcarNext" aria-label="Siguiente"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 6 15 12 9 18"/></svg></button>
