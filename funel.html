@@ -345,8 +345,7 @@
     .authbar__lbl{text-align:center;font-size:.6rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.34);margin-bottom:16px;}
     .authbar__mask{overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 9%,#000 91%,transparent);mask-image:linear-gradient(90deg,transparent,#000 9%,#000 91%,transparent);}
     .authbar__track{display:flex;align-items:center;gap:54px;width:max-content;will-change:transform;}
-    .authbar__track img{height:28px;width:auto;max-width:128px;object-fit:contain;filter:grayscale(1) invert(1) brightness(1.15);opacity:.72;transition:filter .3s,opacity .3s;flex-shrink:0;}
-    .authbar__track img:hover{filter:grayscale(1) invert(1) brightness(1.45);opacity:1;}
+    .authbar__track img{height:28px;width:auto;max-width:128px;object-fit:contain;filter:grayscale(1) invert(1) brightness(1.2);opacity:.8;flex-shrink:0;pointer-events:none;}
     .authbar__txt{font-family:'Roboto',sans-serif;font-weight:900;font-size:.95rem;letter-spacing:.04em;color:rgba(255,255,255,.62);white-space:nowrap;flex-shrink:0;}
 
     /* ════ PRENSA (carrusel de capturas, formato libro) ════ */
@@ -836,16 +835,21 @@ document.querySelectorAll('[data-book]').forEach(b=>b.addEventListener('click',(
   const bar=document.querySelector('.authbar');
   if(!track||!bar)return;
   if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;
-  let x=0, speed=0.6, target=0.6;            // px por frame
-  const NORMAL=0.6, SLOW=0.1;
+  let half=track.scrollWidth/2;              // se mide UNA vez (no por frame → sin saltos)
+  let x=0, speed=0.5, target=0.5;            // px por frame
+  const NORMAL=0.5, SLOW=0.1;
+  const recalc=()=>{ half=track.scrollWidth/2; };
+  window.addEventListener('load',recalc);
+  window.addEventListener('resize',recalc);
   bar.addEventListener('mouseenter',()=>target=SLOW);
   bar.addEventListener('mouseleave',()=>target=NORMAL);
+  bar.addEventListener('touchstart',()=>target=SLOW,{passive:true});
+  bar.addEventListener('touchend',()=>target=NORMAL,{passive:true});
   function loop(){
-    speed += (target-speed)*0.05;            // easing suave
+    speed += (target-speed)*0.04;            // easing suave de velocidad
     x -= speed;
-    const half=track.scrollWidth/2;
-    if(half>0 && -x>=half) x+=half;          // bucle infinito
-    track.style.transform='translateX('+x.toFixed(2)+'px)';
+    if(half>0 && x<=-half) x+=half;          // bucle infinito continuo
+    track.style.transform='translateX('+x+'px)';
     requestAnimationFrame(loop);
   }
   requestAnimationFrame(loop);
