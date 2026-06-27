@@ -155,13 +155,14 @@
     .who{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:48px;text-align:left;}
     .who-c{border-radius:18px;padding:34px 32px;}
     .who-yes{background:#fff;border:2px solid var(--green);}
-    .who-no{background:#fff;border:2px solid var(--line);}
+    .who-no{background:#fff;border:2px solid var(--red);}
     .who-c h3{font-family:'Roboto',sans-serif;font-weight:900;text-transform:uppercase;font-size:1.2rem;letter-spacing:-.01em;margin-bottom:18px;display:flex;align-items:center;gap:12px;}
     .who-yes h3{color:var(--green);}
     .who-no h3{color:var(--muted);}
     .who-c h3 .ic{width:36px;height:36px;border-radius:9px;display:flex;align-items:center;justify-content:center;color:#fff;flex-shrink:0;}
     .who-yes h3 .ic{background:var(--green);}
-    .who-no h3 .ic{background:#B8BFC8;}
+    .who-no h3{color:var(--red);}
+    .who-no h3 .ic{background:var(--red);}
     .who-li{display:flex;align-items:flex-start;gap:12px;padding:11px 0;font-size:.97rem;font-weight:500;line-height:1.45;border-top:1px solid var(--line);}
     .who-c .who-li:first-of-type{border-top:none;}
     .who-yes .who-li{color:var(--text);}
@@ -189,6 +190,11 @@
     .phases{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
     .phase{background:#fff;border:1px solid var(--line);border-radius:16px;padding:26px;transition:border-color .25s,transform .25s,box-shadow .25s;}
     .phase:hover{border-color:var(--gold);transform:translateY(-4px);box-shadow:0 18px 44px -22px rgba(0,0,0,.2);}
+    /* Entrada en dominó: 01 → 02 → 03 deslizando de izquierda a derecha */
+    .phase.reveal{transform:translateX(-70px) rotate(-1.2deg) scale(.96);transition:opacity .5s ease,transform .65s cubic-bezier(.34,1.25,.5,1);transition-delay:0s;}
+    .phase.reveal.d1{transition-delay:.22s;}
+    .phase.reveal.d2{transition-delay:.44s;}
+    .phase.reveal.in{transform:none;}
     .phase__hd{display:flex;align-items:center;justify-content:space-between;margin-bottom:4px;}
     .phase__tag{font-weight:900;font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gold-d);}
     .phase__time{font-size:.66rem;color:var(--subtle);font-weight:700;}
