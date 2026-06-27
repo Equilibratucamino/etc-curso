@@ -845,6 +845,7 @@ document.querySelectorAll('[data-book]').forEach(b=>b.addEventListener('click',(
   bar.addEventListener('mouseleave',()=>target=NORMAL);
   bar.addEventListener('touchstart',()=>target=SLOW,{passive:true});
   bar.addEventListener('touchend',()=>target=NORMAL,{passive:true});
+  bar.addEventListener('touchcancel',()=>target=NORMAL,{passive:true});
   function loop(){
     speed += (target-speed)*0.04;            // easing suave de velocidad
     x -= speed;
