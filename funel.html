@@ -372,6 +372,13 @@
     .pcar-btn--next{right:-8px;}
     .pcar-hint{margin-top:6px;font-size:.78rem;font-weight:500;color:var(--subtle);display:inline-flex;align-items:center;gap:8px;}
     @media(max-width:760px){.pcar-btn{display:none;}}
+    /* En ordenador: tarjetas de igual altura (imagen entera centrada sobre blanco) */
+    @media(min-width:761px){
+      .pcar{align-items:stretch;}
+      .pslide{display:flex;flex-direction:column;}
+      .pslide__img{height:430px;flex:1;}
+      .pslide__img img{height:100%;object-fit:contain;object-position:top center;}
+    }
 
     /* reveal */
     .reveal{opacity:0;transform:translateY(28px);transition:opacity .6s ease,transform .7s cubic-bezier(.34,1.4,.64,1);}
