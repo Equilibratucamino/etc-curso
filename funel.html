@@ -266,7 +266,7 @@
     @media(max-width:640px){.inst-grid{grid-template-columns:1fr;}}
 
     /* ════ VIDEOS ════ */
-    .vid-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:48px;text-align:left;}
+    .vid-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin:38px auto 0;text-align:left;max-width:760px;}
     .vid-card{display:flex;flex-direction:column;gap:11px;}
     .vid-label{font-size:.6rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);}
     .vid-desc{font-family:'Roboto',sans-serif;font-weight:700;font-size:1rem;color:#fff;line-height:1.35;}
@@ -416,6 +416,17 @@
     .pcar-btn--next{right:-8px;}
     .pcar-hint{margin-top:6px;font-size:.78rem;font-weight:500;color:var(--subtle);display:inline-flex;align-items:center;gap:8px;}
     @media(max-width:760px){.pcar-btn{display:none;}}
+
+    /* ════ COLLAGE DE PRENSA (mosaico de tamaños) ════ */
+    .collage{column-count:4;column-gap:13px;max-width:880px;margin:34px auto 0;}
+    .clip{break-inside:avoid;margin:0 0 13px;background:#fff;border-radius:10px;overflow:hidden;box-shadow:0 12px 30px -16px rgba(0,0,0,.75);border:1px solid rgba(255,255,255,.08);transition:transform .2s;}
+    .clip:hover{transform:translateY(-3px) scale(1.015);}
+    .clip img{width:100%;height:auto;display:block;}
+    .clip__lbl{padding:8px 10px;background:var(--ink);text-align:left;line-height:1.25;}
+    .clip__src{font-weight:900;font-size:.6rem;color:#fff;text-transform:uppercase;letter-spacing:.02em;}
+    .clip__tag{font-size:.58rem;color:rgba(255,255,255,.5);}
+    @media(max-width:980px){.collage{column-count:3;max-width:640px;}}
+    @media(max-width:620px){.collage{column-count:2;max-width:420px;column-gap:10px;}.clip{margin-bottom:10px;}}
     /* En ordenador: tarjetas de igual altura (imagen entera centrada sobre blanco) */
     @media(min-width:761px){
       .pcar{align-items:stretch;}
@@ -683,39 +694,25 @@
 </section>
 
 <!-- PRENSA · capturas -->
-<section class="sec bg-ink2 center" id="prensa">
+<section class="sec bg-ink2 center" id="prensa" style="padding-bottom:46px;">
   <div class="wrap">
     <span class="kick kick--l reveal">En los medios</span>
     <h2 class="h2 reveal">No lo decimos <span class="u-gold">solo nosotros.</span></h2>
-    <p class="lead reveal">Periódicos, radios y medios han hablado de ETC. y del trabajo de Nacho con la adicción al juego.</p>
-    <p class="pcar-hint reveal">← Desliza para ver más →</p>
-    <div class="pcar-wrap reveal">
-      <button class="pcar-btn pcar-btn--prev" id="pcarPrev" aria-label="Anterior"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
-      <div class="pcar" id="pcar">
-        <div class="pslide">
-          <div class="pslide__img"><img src="images/publico-apuestas-2.jpg" alt="Diario Público — Nacho, fundador de ETC, citado sobre las casas de apuestas" loading="lazy"></div>
-          <div class="pslide__lbl"><span class="pslide__src">Diario Público</span><span class="pslide__tag">· Nacho, citado como experto</span></div>
-        </div>
-        <div class="pslide">
-          <div class="pslide__img"><img src="images/media-4.webp" alt="Mejor Informado — caso de éxito con ETC." loading="lazy"></div>
-          <div class="pslide__lbl"><span class="pslide__src">Mejor Informado</span><span class="pslide__tag">· Caso de éxito con ETC.</span></div>
-        </div>
-        <div class="pslide">
-          <div class="pslide__img"><img src="images/publico-apuestas-1.jpg" alt="Diario Público — el director de ETC reclama más regulación de las apuestas" loading="lazy"></div>
-          <div class="pslide__lbl"><span class="pslide__src">Diario Público</span><span class="pslide__tag">· Regulación de las apuestas</span></div>
-        </div>
-        <div class="pslide">
-          <div class="pslide__img"><img src="images/publico-article.webp" alt="Diario Público — entrevista a Nacho sobre la ludopatía" loading="lazy"></div>
-          <div class="pslide__lbl"><span class="pslide__src">Diario Público</span><span class="pslide__tag">· Entrevista a Nacho</span></div>
-        </div>
-      </div>
-      <button class="pcar-btn pcar-btn--next" id="pcarNext" aria-label="Siguiente"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 6 15 12 9 18"/></svg></button>
+    <p class="lead reveal">Periódicos, radios y televisiones han hablado de ETC. y del trabajo de Nacho con la adicción al juego.</p>
+    <div class="collage reveal">
+      <figure class="clip"><img src="images/publico-apuestas-2.jpg" alt="Diario Público — Nacho, fundador de ETC, citado sobre las casas de apuestas" loading="lazy"><figcaption class="clip__lbl"><span class="clip__src">Diario Público</span> <span class="clip__tag">· Nacho, experto</span></figcaption></figure>
+      <figure class="clip"><img src="images/media-canal4.webp" alt="Canal 4 — Mallorca a la Carta, entrevista a Nacho" loading="lazy"><figcaption class="clip__lbl"><span class="clip__src">Canal 4 · TV</span> <span class="clip__tag">· Mallorca a la Carta</span></figcaption></figure>
+      <figure class="clip"><img src="images/media-4.webp" alt="Mejor Informado — caso de éxito con ETC." loading="lazy"><figcaption class="clip__lbl"><span class="clip__src">Mejor Informado</span> <span class="clip__tag">· Caso de éxito</span></figcaption></figure>
+      <figure class="clip"><img src="images/publico-article.webp" alt="Diario Público — entrevista a Nacho sobre la ludopatía" loading="lazy"><figcaption class="clip__lbl"><span class="clip__src">Diario Público</span> <span class="clip__tag">· Entrevista a Nacho</span></figcaption></figure>
+      <figure class="clip"><img src="images/media-2.webp" alt="Canal 4 — Mallorca a la Carta, sobre el programa" loading="lazy"><figcaption class="clip__lbl"><span class="clip__src">Canal 4 · TV</span> <span class="clip__tag">· Sobre el programa</span></figcaption></figure>
+      <figure class="clip"><img src="images/publico-apuestas-1.jpg" alt="Diario Público — el director de ETC reclama más regulación de las apuestas" loading="lazy"><figcaption class="clip__lbl"><span class="clip__src">Diario Público</span> <span class="clip__tag">· Regulación de apuestas</span></figcaption></figure>
+      <figure class="clip"><img src="images/media-3.webp" alt="Diario Público — regulación del juego en España" loading="lazy"><figcaption class="clip__lbl"><span class="clip__src">Diario Público</span> <span class="clip__tag">· Regulación del juego</span></figcaption></figure>
     </div>
   </div>
 </section>
 
 <!-- OPINIONES -->
-<section class="sec bg-ink2 center" id="opiniones">
+<section class="sec bg-ink2 center" id="opiniones" style="padding-top:46px;">
   <div class="wrap">
     <span class="kick kick--l reveal">Casos de éxito reales</span>
     <h2 class="h2 reveal">Resultados reales. <span class="u-gold">Personas reales.</span></h2>
