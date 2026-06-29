@@ -550,8 +550,6 @@
             <div class="imac__screen"><iframe width="1440" height="810" src="dashboard.html" title="El curso en el ordenador" loading="lazy" scrolling="no" aria-hidden="true" tabindex="-1"></iframe></div>
             <div class="imac__chin"><span></span></div>
           </div>
-          <div class="imac__neck"></div>
-          <div class="imac__foot"></div>
         </div>
         <div class="phone">
           <div class="phone__island"></div>
@@ -918,53 +916,57 @@ document.querySelectorAll('[data-book]').forEach(b=>b.addEventListener('click',(
   requestAnimationFrame(loop);
 })();
 
-/* Mockups: escala el iframe del curso para que llene el marco (iMac/iPhone) */
+/* iMac: escala el curso para llenar la pantalla (fijo, muestra la parte de arriba) */
 (function(){
-  const boxes=document.querySelectorAll('.imac__screen,.phone__screen');
-  if(!boxes.length)return;
-  const fit=()=>boxes.forEach(box=>{
+  const box=document.querySelector('.imac__screen');
+  if(!box)return;
+  const fit=()=>{
     const f=box.querySelector('iframe'); if(!f)return;
     const bw=parseFloat(f.getAttribute('width'))||1, bh=parseFloat(f.getAttribute('height'))||1;
-    const s=Math.max(box.clientWidth/bw, box.clientHeight/bh); // cover
-    f.style.transform='scale('+s+')';
-  });
+    f.style.transform='scale('+Math.max(box.clientWidth/bw, box.clientHeight/bh)+')';
+  };
   window.addEventListener('load',fit);
   window.addEventListener('resize',fit);
-  if('ResizeObserver'in window){const ro=new ResizeObserver(fit);boxes.forEach(b=>ro.observe(b));}
+  if('ResizeObserver'in window){new ResizeObserver(fit).observe(box);}
   fit(); setTimeout(fit,60); setTimeout(fit,400);
 })();
 
-/* Mockups: las pantallas se deslizan solas para mostrar el curso entero */
+/* iPhone: la pantalla se desliza sola (paneo translateY, inmune al scroll interno del curso) */
 (function(){
-  function start(f){
-    if(f.__sc) return; f.__sc=1;
-    let pos=0,dir=1,last=null,wait=0;
-    const speed=24; // px/seg
-    function step(t){
-      try{
-        const win=f.contentWindow, doc=f.contentDocument;
-        if(doc&&doc.body){
-          const max=doc.body.scrollHeight-(win.innerHeight||f.clientHeight);
-          if(max>14&&last!=null){
-            const dt=Math.min((t-last)/1000,.05);
-            if(wait>0){wait-=dt;}
-            else{
-              pos+=dir*speed*dt;
-              if(pos>=max){pos=max;dir=-1;wait=1.3;}
-              else if(pos<=0){pos=0;dir=1;wait=1.3;}
-              win.scrollTo(0,pos);
-            }
-          }
-        }
-      }catch(e){}
-      last=t; requestAnimationFrame(step);
-    }
-    requestAnimationFrame(step);
+  const box=document.querySelector('.phone__screen');
+  const f=box&&box.querySelector('iframe');
+  if(!f)return;
+  let s=1,range=0,ready=false,V=0,dir=1,wait=0,last=null;
+  const speed=95; // px visuales/seg
+  function measure(){
+    try{
+      const d=f.contentDocument; if(!d)return false;
+      const ch=d.documentElement.scrollHeight||d.body.scrollHeight; if(!ch)return false;
+      f.style.height=ch+'px';
+      s=box.clientWidth/(parseFloat(f.getAttribute('width'))||390);
+      range=Math.max(0, ch*s - box.clientHeight);
+      return true;
+    }catch(e){return false;}
   }
-  document.querySelectorAll('.imac__screen iframe,.phone__screen iframe').forEach(f=>{
-    f.addEventListener('load',()=>start(f));
-    try{ if(f.contentDocument&&f.contentDocument.readyState==='complete') start(f); }catch(e){}
-  });
+  function step(t){
+    if(!ready) ready=measure();
+    if(ready){
+      if(last!=null){
+        const dt=Math.min((t-last)/1000,.05);
+        if(wait>0){wait-=dt;}
+        else{
+          V+=dir*speed*dt;
+          if(V>=range){V=range;dir=-1;wait=1;}
+          else if(V<=0){V=0;dir=1;wait=1;}
+        }
+      }
+      f.style.transform='translateY('+(-V)+'px) scale('+s+')';
+    }
+    last=t; requestAnimationFrame(step);
+  }
+  f.addEventListener('load',()=>{ready=false;last=null;V=0;dir=1;wait=0;});
+  window.addEventListener('resize',()=>{ready=false;});
+  requestAnimationFrame(step);
 })();
 
 /* Reveal */
