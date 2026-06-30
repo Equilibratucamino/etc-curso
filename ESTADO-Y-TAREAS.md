@@ -2,7 +2,18 @@
 
 > Estado completo del curso online de ETC: **producto, diseño, flujos, planes (premium/básico) y todo lo que queda por hacer**.
 > Proyecto **independiente** de la plataforma terapéutica de Juan (ETC-Plataforma).
-> Última actualización: **23 junio 2026**.
+> Última actualización: **30 junio 2026**.
+
+---
+
+## 🆕 NOVEDADES (30-jun-2026)
+
+- **Nueva página de VENTA / funnel: `funel.html`** (antes se probó como `venta.html`, renombrada). Es la página comercial del curso, una "sales funnel page" estilo academias (Madrid Content Club, Mundo Amazon, etc.). Vive **aparte** de `index.html` (que sigue siendo la landing original del curso). → ver sección **6 bis** y **enlaces**.
+- **Estilo propio del funnel**: tipografía **Roboto** (Black, ancha, mayúsculas), paleta **charcoal oscuro + dorado/ámbar (`#FFB300`)** (NO el verde/teal del resto del curso), con countdown de urgencia, precios tachados, etc. Es deliberadamente distinto al `index.html`.
+- **Duración real del contenido corregida: ~3 h (más de 3 horas), NO 8 h.** Actualizado en funnel y en la tabla de clases (duraciones por clase reducidas a ~10-15 min).
+- **Frase del dashboard cambiada**: `Bienvenido a tu camino.` → **"Empieza tu camino, Se acabó el Juego."** (`dashboard.html`, id `heroTitle`).
+- **Capturas de prensa reales** añadidas (Diario Público, Canal 4 "Mallorca a la Carta", Mejor Informado…) en el funnel y también en la **home de la web oficial** (`etc-landing`, carrusel de medios). Imágenes nuevas en `images/`: `publico-apuestas-1.jpg`, `publico-apuestas-2.jpg`, `media-2/3/4.webp`, `media-canal4.webp`, `logo-*` de medios.
+- **Pendiente grande para el PRÓXIMO CHAT**: poner el curso EN VENTA → pago (Stripe), email automático tras pagar y acceso del alumno (¿con usuario/contraseña o sin login?). → ver sección **18. Puesta en venta**.
 
 ---
 
@@ -24,6 +35,7 @@
 15. Cómo hacer cambios típicos
 16. Decisiones a confirmar
 17. Workflow
+18. **Puesta en venta del curso (pago + email + acceso)** ← para el próximo chat
 
 ---
 
@@ -73,7 +85,8 @@ Tono de marca: directo, cercano, sin tecnicismos, "de alguien que lo ha vivido".
 - Estaba activada la **Deployment Protection (Vercel Authentication)** → bloqueaba todo con login (401). Se **desactivó** (Settings → Deployment Protection → Require Log In = OFF). Ahora es público.
 
 ### Enlaces
-- **Home:** `https://curso.equilibratucamino.com`
+- **Home (landing original):** `https://curso.equilibratucamino.com` (= `index.html`)
+- **Funnel / página de VENTA:** `https://curso.equilibratucamino.com/funel.html` ⭐ (la nueva, donde se vende)
 - **Premium:** `https://curso.equilibratucamino.com/dashboard.html?plan=premium`
 - **Básico:** `https://curso.equilibratucamino.com/dashboard.html?plan=basic`
 - **Empezar de 0 (demo):** añade `&reset=1` (borra progreso/notas/nombre y arranca en la clase 1)
@@ -140,6 +153,26 @@ Estética: **wellness premium con toque moderno**, fría/neutra, dorado mate ele
 - **CTA final**.
 - **Falta**: sección "Los dos planes" (tabla Básico vs Premium) + FAQ (el upsell ya apunta a `#planes`).
 
+### `funel.html` — Página de VENTA (funnel) ⭐ NUEVA
+La página comercial del curso, **independiente** de `index.html`. Estilo propio (Roboto + charcoal/dorado), pensada para convertir. Estructura de arriba a abajo:
+1. **Barra de oferta** + nav (logo ETC grande + enlace "Precio de lanzamiento"; **sin** botón "Comprar" arriba para no saturar).
+2. **Hero**: titular "Deja de jugar. Recupera tu vida.", 3 bullets, VSL (vídeo YouTube `I_zWGSli3Bs`), badge Google 5,0.
+3. **Barra de autoridad**: logos de prensa en marquee (negro, gris), igual que la home oficial; al pasar el ratón va a cámara lenta (JS, no se para).
+4. **Countdown** de oferta (evergreen 24 h por visitante, localStorage `etc_funnel_deadline`).
+5. **Stats** con count-up (500+ · 15 · +3h · 5,0★).
+6. **¿Es este curso para ti?** a 2 columnas: izquierda sí (verde) / no (rojo), más pequeño; **derecha mockup del curso real**: **iMac** (solo pantalla, sin peana, con logo Apple) mostrando una clase (`modulo.html?n=1`) + **iPhone** que se desliza solo (en desktop; quieto en móvil) mostrando el `dashboard.html`. Son **iframes** del propio curso, escalados con JS (`ResizeObserver` + paneo `translateY`).
+7. **"Ya no hay excusas, se acabó el juego"** + 3 beneficios + bloque **"¿Qué incluye?"** (6 puntos en tarjetas amarillas animadas: 15 clases grabadas · referentes · exludópatas · certificado · casos reales · sorpresa).
+8. **Programa** (15 clases en 3 fases), **instructores**, **prensa** (collage/mosaico de recortes: Mallorca a la Carta destacada + Diario Público/Mejor Informado), **casos de éxito** (3 vídeos + reseñas en marquee), **certificado**.
+9. **Precios**: Básico 190€ vs **Premium 219€ destacado** (ribbon, borde dorado) enfatizando la **sesión final 1:1 de 1 h GRATIS** (valor 65€, "por solo 29€ más"). Precios tachados (240€/284€) de "lanzamiento".
+10. Bloque **"agenda una primera sesión"** (alternativa), garantía, FAQ, CTA final, **CTA fijo en móvil**.
+
+**CTAs de compra** → constantes JS al final del archivo:
+```js
+const STRIPE = { basic:'', premium:'' };  // ← pegar Payment Links de Stripe
+const BOOK_URL = '';                       // ← URL del calendario de reserva
+```
+Mientras estén vacías, los botones de plan llevan a **WhatsApp** (+34 611 847 645). En cuanto se peguen los links de Stripe, compran por ahí. **Esto es lo que falta para vender (ver sección 18).**
+
 ### `dashboard.html` — Mi curso
 - Bento: **hero** (saludo dinámico + ilustración + "continuar"), **panel de progreso** (anillo + X/15), **cuadro de sesión** (premium/básico, ver flujos) y **webinar**.
 - **"Tus 15 clases"**: tarjetas tipo curso (portada de color, número grande, estado: completada / actual / bloqueada).
@@ -168,23 +201,25 @@ Estética: **wellness premium con toque moderno**, fría/neutra, dorado mate ele
 
 | # | Clase | Dur. | Fase |
 |---|-------|------|------|
-| 01 | Aceptar la realidad | 28 min | Entender |
-| 02 | La mente de un ludópata | 32 min | Entender |
-| 03 | Dopamina y cerebro | 30 min | Entender |
-| 04 | Las mentiras que te cuentas | 35 min | Entender |
-| 05 | Romper el ciclo | 32 min | Entender |
-| 06 | Gestión de impulsos | 38 min | Reconstruir |
-| 07 | Ansiedad, culpa y vergüenza | 36 min | Reconstruir |
-| 08 | Reconstruir la confianza | 34 min | Reconstruir |
-| 09 | Dinero y recuperación | 40 min | Reconstruir |
-| 10 | La nueva identidad | 30 min | Reconstruir |
-| 11 | Crear nuevos hábitos | 33 min | Avanzar |
-| 12 | Familia y entorno | 37 min | Avanzar |
-| 13 | Prevenir recaídas | 35 min | Avanzar |
-| 14 | Diseñar una nueva vida | 32 min | Avanzar |
-| 15 | El futuro empieza hoy | 28 min | Avanzar |
+| 01 | Aceptar la realidad | 10 min | Entender |
+| 02 | La mente de un ludópata | 14 min | Entender |
+| 03 | Dopamina y cerebro | 12 min | Entender |
+| 04 | Las mentiras que te cuentas | 13 min | Entender |
+| 05 | Romper el ciclo | 11 min | Entender |
+| 06 | Gestión de impulsos | 14 min | Reconstruir |
+| 07 | Ansiedad, culpa y vergüenza | 12 min | Reconstruir |
+| 08 | Reconstruir la confianza | 11 min | Reconstruir |
+| 09 | Dinero y recuperación | 15 min | Reconstruir |
+| 10 | La nueva identidad | 10 min | Reconstruir |
+| 11 | Crear nuevos hábitos | 12 min | Avanzar |
+| 12 | Familia y entorno | 13 min | Avanzar |
+| 13 | Prevenir recaídas | 12 min | Avanzar |
+| 14 | Diseñar una nueva vida | 11 min | Avanzar |
+| 15 | El futuro empieza hoy | 10 min | Avanzar |
 
+> **Total ≈ 3 h** (más de 3 horas), NO 8 h. Fases: Entender 1h 00m · Reconstruir 1h 02m · Avanzar 58m.
 > Títulos y duraciones **provisionales**: se ajustarán con las grabaciones reales (julio).
+> ⚠️ `funel.html` ya usa +3h. **`index.html` (landing original) todavía dice "+8 h"** → actualizar cuando se toque.
 
 ---
 
@@ -246,7 +281,8 @@ Estética: **wellness premium con toque moderno**, fría/neutra, dorado mate ele
 - **WhatsApp**: +34 611 847 645 (CTAs de sesión/webinar de respaldo).
 - **Reserva / calendario**: hoy embebe `etc-plataforma.vercel.app/leads`. La web usa Cal.com (`cal.com/equilibratucamino`) pero **se descartó** para el curso: el calendario bueno es el de la plataforma / el de la web conectado a Google Calendar.
 - **Google Calendar** de Iñaki (`equilibratucamino@gmail.com`) — se conectará cuando se monte el calendario propio.
-- **Stripe**: producto a crear **"Sesión final con Nacho"** (65€ básico; premium 0€).
+- **Stripe**: pendiente crear **3 productos / Payment Links**: (1) Plan Básico 190€, (2) Plan Premium 219€, (3) "Sesión final con Nacho" 65€ (para básico). Los links del curso (190/219) se pegan en `funel.html` → `const STRIPE = {basic, premium}`. (Ver sección 18.)
+- **Capturas de prensa** (en `funel.html` y en la home de `etc-landing`): `publico-apuestas-1.jpg`, `publico-apuestas-2.jpg` (Diario Público, art. Polymarket/Mundial donde citan a Nacho/ETC), `publico-article.webp`, `media-3.webp` (Diario Público), `media-4.webp` (Mejor Informado), `media-2.webp` + `media-canal4.webp` (Canal 4 "Mallorca a la Carta"), `logo-publico.svg`, `logo-canal4/mamireporter/lmental/evermine2/mejorinformado/caminemos.webp`.
 - **PDF**: html2canvas + jsPDF (CDN).
 
 ---
@@ -273,6 +309,9 @@ Estética: **wellness premium con toque moderno**, fría/neutra, dorado mate ele
 - Estética depurada: fría/neutra, Inter+Fraunces (sin mono), oro mate, casos de éxito en oscuro.
 - Página de reserva (embebe plataforma) que pasa el plan.
 - Responsive (desktop, tablet, móvil).
+- **`funel.html`** (NUEVA): página de venta completa — hero+VSL, autoridad (logos prensa), countdown, stats, para-quién, mockup del curso real (iMac+iPhone con iframes), ¿qué incluye?, programa, instructores, collage de prensa, casos de éxito, planes (Básico/Premium con sesión 1h gratis destacada), garantía, FAQ. Botones de compra listos para Stripe (hoy → WhatsApp).
+- Capturas de prensa reales integradas en `funel.html` y en la home oficial (`etc-landing`).
+- Duración corregida a ~3 h; frase del dashboard → "Empieza tu camino, Se acabó el Juego.".
 
 ---
 
@@ -290,10 +329,15 @@ Por cada clase, cuando Iñaki envíe la grabación:
 - **Plan acordado:** cuando el de la web esté confirmado y funcionando (Google Calendar + Stripe), **copiarlo tal cual** al curso.
 - Directo al calendario (sin las 3 preguntas). Premium 0€ / Básico 65€ (producto Stripe "Sesión final con Nacho").
 
+### 🔴 Poner el curso EN VENTA (pago + email + acceso) → **ver sección 18**
+- Crear productos/Payment Links en Stripe (190€ / 219€ / 65€) y pegarlos en `funel.html`.
+- Email automático tras pagar + decidir modelo de acceso (sin login / código / cuentas Supabase).
+- Conectar `etc_plan` con el plan comprado de verdad y proteger el acceso a las clases.
+
 ### 🟢 Otros
-- **Landing**: sección "Los dos planes" (tabla) + **FAQ**.
-- Conectar `etc_plan` con el **pago real** (Stripe / plataforma de Juan).
-- (Opcional) **Cuentas + base de datos** (Supabase) si se quiere progreso/notas entre dispositivos o que Iñaki vea las respuestas.
+- `funel.html`: sustituir el iMac CSS por el **mockup hiperrealista de Canva** si Iñaki exporta el PNG.
+- `index.html` (landing original): actualizar "+8 h" → "+3 h" (el funnel ya está corregido); valorar añadir tabla de planes + FAQ.
+- (Opcional) **Cuentas + base de datos** (Supabase) — detallado en sección 18 (Opción C).
 - Sustituir la imagen base del certificado por el original en máxima calidad si Iñaki lo tiene en PNG/JPG.
 
 > ✅ **Resuelto 23-jun:** dominio `curso.equilibratucamino.com` live con SSL; protección de despliegue desactivada; hero sin menú + título más grande + botón con latido.
@@ -324,3 +368,48 @@ Por cada clase, cuando Iñaki envíe la grabación:
 
 - Trabajamos en **la parte del curso** (este repo). Cambios → commit + push a `main` → Vercel despliega solo.
 - Mantener **este documento al día** al cerrar cada sesión.
+
+---
+
+## 18. Puesta en venta del curso (pago + email + acceso) — PARA EL PRÓXIMO CHAT
+
+**Objetivo:** que un visitante compre en `funel.html`, pague, reciba un email y pueda **acceder a las clases**. Hoy el curso es **estático, sin backend, sin login** (el acceso a `dashboard.html` está abierto a cualquiera con la URL). Hay que decidir el modelo de venta/acceso.
+
+### Estado actual del pago
+- En `funel.html`, los botones de plan usan `const STRIPE = { basic:'', premium:'' }` (vacíos → caen a WhatsApp). Falta crear los productos en Stripe y pegar los **Payment Links**.
+- El curso vive en Vercel (`etc-curso`), que **sí permite funciones serverless** (`/api`) si hiciera falta backend (webhooks, generar accesos, enviar emails).
+
+### El gran punto a decidir: ¿cómo accede el alumno tras pagar?
+Tres modelos, de menos a más trabajo:
+
+**Opción A — Sin login, acceso por enlace (la más rápida).**
+- Stripe **Payment Link** → al pagar, Stripe redirige a una **URL de éxito** (p. ej. `dashboard.html?plan=premium&ok=1`) y envía su **recibo por email** automáticamente.
+- El acceso es "por conocer la URL". El progreso sigue en `localStorage` (por dispositivo).
+- ✅ Cero backend, se monta hoy. ❌ Cualquiera con el enlace entra; no hay cuentas; no se recupera el progreso en otro dispositivo.
+- Email automático: el recibo de Stripe + (opcional) un email propio con el enlace usando **Resend** desde una función `/api` activada por **webhook de Stripe**.
+
+**Opción B — Acceso con "código/contraseña" simple (intermedia).**
+- Stripe Payment Link → página de éxito que muestra/envía un **código de acceso**. `dashboard.html` pide ese código (una contraseña compartida o por compra) antes de mostrar las clases.
+- ✅ Poco backend. ❌ No son cuentas reales; un código se puede compartir.
+
+**Opción C — Cuentas reales (usuario + contraseña) con BBDD (la "pro").**
+- **Supabase** (Auth + Postgres) para registro/login. Webhook de Stripe marca al usuario como "comprado" (y su plan básico/premium). `dashboard.html`/`modulo.html` comprueban sesión.
+- Progreso/notas/respuestas pasan de `localStorage` a la BBDD → **siguen al alumno entre dispositivos** y Iñaki puede ver respuestas.
+- ✅ Lo correcto a medio plazo (control de acceso real, multi-dispositivo, datos). ❌ Más trabajo: Auth, esquema BBDD, migrar el estado de `localStorage`, proteger páginas.
+
+> **Recomendación para arrancar:** Opción A (vender ya con Payment Links + email de Stripe/Resend) y migrar a **Opción C (Supabase)** cuando haya volumen. La plataforma de Juan (ETC-Plataforma) ya usa Supabase+Stripe+Resend; se puede reutilizar el patrón, **sin tocar su repo**.
+
+### Checklist para el próximo chat
+- [ ] Crear en Stripe: **Plan Básico 190€**, **Plan Premium 219€**, **Sesión final 65€** (modo live).
+- [ ] Pegar los Payment Links en `funel.html` (`STRIPE.basic`, `STRIPE.premium`).
+- [ ] Definir **URL de éxito** de cada Payment Link (a dónde llega el alumno tras pagar) y **URL de cancelación**.
+- [ ] Decidir modelo de acceso (A / B / C).
+- [ ] **Email post-pago**: recibo de Stripe (auto) y/o email propio con acceso (Resend + función `/api` + **webhook de Stripe**).
+- [ ] (Si C) Supabase: Auth, tabla de compras/plan, proteger `dashboard.html`/`modulo.html`, migrar progreso de `localStorage`.
+- [ ] Conectar el flag `etc_plan` con el plan realmente comprado.
+- [ ] Pensar **control de acceso** real a las clases (hoy `dashboard.html` es público).
+
+### Contexto técnico útil (para arrancar rápido en el nuevo chat)
+- Repo curso: `Equilibratucamino/etc-curso` (Vercel, estático + soporta `/api`). Local `/Users/inaki/etc-curso/`.
+- WhatsApp ventas: +34 611 847 645. Email/Google: `equilibratucamino@gmail.com`.
+- Referencia de patrón (NO tocar): `Equilibratucamino/ETC-Plataforma` (Next.js + Supabase + Stripe + Resend + Google Calendar) — proyecto de Juan.
