@@ -211,15 +211,15 @@
     .incluye{margin-top:64px;}
     .incluye__h{font-family:'Roboto',sans-serif;font-weight:900;text-transform:uppercase;font-size:clamp(1.5rem,3.2vw,2.3rem);letter-spacing:-.015em;color:#fff;margin-bottom:30px;}
     .incluye__grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;max-width:940px;margin:0 auto;}
-    .inc{display:flex;align-items:center;gap:13px;background:rgba(255,179,0,.07);border:1px solid rgba(255,179,0,.28);border-radius:14px;padding:16px 18px;text-align:left;opacity:0;transform:translateY(22px) scale(.95);transition:opacity .5s ease,transform .55s cubic-bezier(.34,1.45,.6,1),background .2s,border-color .2s;}
-    .inc:hover{background:rgba(255,179,0,.14);border-color:var(--gold);transform:translateY(-4px);}
+    .inc{display:flex;align-items:center;gap:13px;background:rgba(255,179,0,.07);border:1px solid rgba(255,179,0,.28);border-radius:14px;padding:16px 18px;text-align:left;opacity:0;transform:translateY(18px);transition:opacity .45s ease,transform .45s cubic-bezier(.22,1,.36,1),background .35s ease,border-color .35s ease,box-shadow .35s ease;}
+    .inc:hover{background:rgba(255,179,0,.16);border-color:var(--gold);transform:translateY(-4px);box-shadow:0 0 0 1px var(--gold),0 16px 36px -12px rgba(255,179,0,.5);}
     .incluye.in .inc{opacity:1;transform:none;}
-    .incluye.in .inc:nth-child(1){transition-delay:.06s}
-    .incluye.in .inc:nth-child(2){transition-delay:.14s}
-    .incluye.in .inc:nth-child(3){transition-delay:.22s}
-    .incluye.in .inc:nth-child(4){transition-delay:.30s}
-    .incluye.in .inc:nth-child(5){transition-delay:.38s}
-    .incluye.in .inc:nth-child(6){transition-delay:.46s}
+    .incluye.in .inc:nth-child(1){transition-delay:.04s}
+    .incluye.in .inc:nth-child(2){transition-delay:.09s}
+    .incluye.in .inc:nth-child(3){transition-delay:.14s}
+    .incluye.in .inc:nth-child(4){transition-delay:.19s}
+    .incluye.in .inc:nth-child(5){transition-delay:.24s}
+    .incluye.in .inc:nth-child(6){transition-delay:.29s}
     .inc__ic{flex-shrink:0;width:36px;height:36px;border-radius:10px;background:var(--gold);color:#1A1205;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 16px rgba(255,179,0,.4);}
     .inc__t{font-size:.92rem;font-weight:600;color:#fff;line-height:1.3;}
     .inc__t b{color:var(--gold);font-weight:900;}
@@ -419,8 +419,9 @@
 
     /* ════ COLLAGE DE PRENSA (mosaico de tamaños) ════ */
     .collage{column-count:4;column-gap:13px;max-width:880px;margin:34px auto 0;}
-    .clip{break-inside:avoid;margin:0 0 13px;background:#fff;border-radius:10px;overflow:hidden;box-shadow:0 12px 30px -16px rgba(0,0,0,.75);border:1px solid rgba(255,255,255,.08);transition:transform .2s;}
-    .clip:hover{transform:translateY(-3px) scale(1.015);}
+    .clip{break-inside:avoid;margin:0 0 13px;background:#fff;border-radius:10px;overflow:hidden;box-shadow:0 12px 30px -16px rgba(0,0,0,.75);border:1px solid rgba(255,255,255,.08);transition:transform .35s ease,box-shadow .35s ease;}
+    .clip:hover{transform:translateY(-4px) scale(1.02);box-shadow:0 0 0 1px var(--gold),0 22px 50px -16px rgba(255,179,0,.45);}
+    .clip--feat{max-width:660px;margin:32px auto 16px;}
     .clip img{width:100%;height:auto;display:block;}
     .clip__lbl{padding:8px 10px;background:var(--ink);text-align:left;line-height:1.25;}
     .clip__src{font-weight:900;font-size:.6rem;color:#fff;text-transform:uppercase;letter-spacing:.02em;}
@@ -469,7 +470,7 @@
       </h1>
       <p class="hero__sub">El único programa en español hecho por <b>quienes han vivido la ludopatía</b>. 15 clases para salir del juego de verdad — y no recaer.</p>
       <ul class="hero__ticks">
-        <li><span class="tk">✓</span> 15 clases en vídeo · +8 h de contenido</li>
+        <li><span class="tk">✓</span> 15 clases en vídeo · +3 h de contenido</li>
         <li><span class="tk">✓</span> Sesión 1:1 de 1 h con Nacho <b style="color:var(--gold)">GRATIS</b></li>
         <li><span class="tk">✓</span> Acceso de por vida · 100% privado</li>
       </ul>
@@ -540,7 +541,7 @@
   <div class="stats__g">
     <div class="stat reveal"><div class="stat__n" data-count="500" data-suffix="+">0</div><div class="stat__l">personas atendidas</div></div>
     <div class="stat reveal d1"><div class="stat__n">15</div><div class="stat__l">clases en vídeo</div></div>
-    <div class="stat reveal d2"><div class="stat__n" data-count="8" data-prefix="+" data-suffix="h">0</div><div class="stat__l">de contenido</div></div>
+    <div class="stat reveal d2"><div class="stat__n" data-count="3" data-prefix="+" data-suffix="h">0</div><div class="stat__l">de contenido</div></div>
     <div class="stat reveal d3"><div class="stat__n">5,0<span class="u">★</span></div><div class="stat__l">en Google</div></div>
   </div>
 </section>
@@ -624,41 +625,41 @@
 
     <div class="metrics">
       <div class="metric reveal"><div class="metric__n">15</div><div class="metric__l">clases en vídeo</div></div>
-      <div class="metric reveal d1"><div class="metric__n"><span class="u">+8h</span></div><div class="metric__l">de contenido</div></div>
+      <div class="metric reveal d1"><div class="metric__n"><span class="u">+3h</span></div><div class="metric__l">de contenido</div></div>
       <div class="metric reveal d2"><div class="metric__n">60<span class="u">+</span></div><div class="metric__l">ejercicios</div></div>
       <div class="metric reveal d3"><div class="metric__n">∞</div><div class="metric__l">acceso de por vida</div></div>
     </div>
 
     <div class="phases">
       <div class="phase reveal">
-        <div class="phase__hd"><span class="phase__tag">Fase 01</span><span class="phase__time">2h 37m</span></div>
+        <div class="phase__hd"><span class="phase__tag">Fase 01</span><span class="phase__time">1h 00m</span></div>
         <div class="phase__name">Entender</div>
         <div class="phase__sub">Comprende qué te pasa, y por qué.</div>
-        <div class="cl"><span class="cl__n">01</span><span class="cl__t">Aceptar la realidad</span><span class="cl__d">28m</span></div>
-        <div class="cl"><span class="cl__n">02</span><span class="cl__t">La mente de un ludópata</span><span class="cl__d">32m</span></div>
-        <div class="cl"><span class="cl__n">03</span><span class="cl__t">Dopamina y cerebro</span><span class="cl__d">30m</span></div>
-        <div class="cl"><span class="cl__n">04</span><span class="cl__t">Las mentiras que te cuentas</span><span class="cl__d">35m</span></div>
-        <div class="cl"><span class="cl__n">05</span><span class="cl__t">Romper el ciclo</span><span class="cl__d">32m</span></div>
+        <div class="cl"><span class="cl__n">01</span><span class="cl__t">Aceptar la realidad</span><span class="cl__d">10m</span></div>
+        <div class="cl"><span class="cl__n">02</span><span class="cl__t">La mente de un ludópata</span><span class="cl__d">14m</span></div>
+        <div class="cl"><span class="cl__n">03</span><span class="cl__t">Dopamina y cerebro</span><span class="cl__d">12m</span></div>
+        <div class="cl"><span class="cl__n">04</span><span class="cl__t">Las mentiras que te cuentas</span><span class="cl__d">13m</span></div>
+        <div class="cl"><span class="cl__n">05</span><span class="cl__t">Romper el ciclo</span><span class="cl__d">11m</span></div>
       </div>
       <div class="phase reveal d1">
-        <div class="phase__hd"><span class="phase__tag">Fase 02</span><span class="phase__time">2h 58m</span></div>
+        <div class="phase__hd"><span class="phase__tag">Fase 02</span><span class="phase__time">1h 02m</span></div>
         <div class="phase__name">Reconstruir</div>
         <div class="phase__sub">Trabaja las emociones y recupera el control.</div>
-        <div class="cl"><span class="cl__n">06</span><span class="cl__t">Gestión de impulsos</span><span class="cl__d">38m</span></div>
-        <div class="cl"><span class="cl__n">07</span><span class="cl__t">Ansiedad, culpa y vergüenza</span><span class="cl__d">36m</span></div>
-        <div class="cl"><span class="cl__n">08</span><span class="cl__t">Reconstruir la confianza</span><span class="cl__d">34m</span></div>
-        <div class="cl"><span class="cl__n">09</span><span class="cl__t">Dinero y recuperación</span><span class="cl__d">40m</span></div>
-        <div class="cl"><span class="cl__n">10</span><span class="cl__t">La nueva identidad</span><span class="cl__d">30m</span></div>
+        <div class="cl"><span class="cl__n">06</span><span class="cl__t">Gestión de impulsos</span><span class="cl__d">14m</span></div>
+        <div class="cl"><span class="cl__n">07</span><span class="cl__t">Ansiedad, culpa y vergüenza</span><span class="cl__d">12m</span></div>
+        <div class="cl"><span class="cl__n">08</span><span class="cl__t">Reconstruir la confianza</span><span class="cl__d">11m</span></div>
+        <div class="cl"><span class="cl__n">09</span><span class="cl__t">Dinero y recuperación</span><span class="cl__d">15m</span></div>
+        <div class="cl"><span class="cl__n">10</span><span class="cl__t">La nueva identidad</span><span class="cl__d">10m</span></div>
       </div>
       <div class="phase reveal d2">
-        <div class="phase__hd"><span class="phase__tag">Fase 03</span><span class="phase__time">2h 45m</span></div>
+        <div class="phase__hd"><span class="phase__tag">Fase 03</span><span class="phase__time">58m</span></div>
         <div class="phase__name">Avanzar</div>
         <div class="phase__sub">Construye la vida que quieres, sin juego.</div>
-        <div class="cl"><span class="cl__n">11</span><span class="cl__t">Crear nuevos hábitos</span><span class="cl__d">33m</span></div>
-        <div class="cl"><span class="cl__n">12</span><span class="cl__t">Familia y entorno</span><span class="cl__d">37m</span></div>
-        <div class="cl"><span class="cl__n">13</span><span class="cl__t">Prevenir recaídas</span><span class="cl__d">35m</span></div>
-        <div class="cl"><span class="cl__n">14</span><span class="cl__t">Diseñar una nueva vida</span><span class="cl__d">32m</span></div>
-        <div class="cl"><span class="cl__n">15</span><span class="cl__t">El futuro empieza hoy</span><span class="cl__d">28m</span></div>
+        <div class="cl"><span class="cl__n">11</span><span class="cl__t">Crear nuevos hábitos</span><span class="cl__d">12m</span></div>
+        <div class="cl"><span class="cl__n">12</span><span class="cl__t">Familia y entorno</span><span class="cl__d">13m</span></div>
+        <div class="cl"><span class="cl__n">13</span><span class="cl__t">Prevenir recaídas</span><span class="cl__d">12m</span></div>
+        <div class="cl"><span class="cl__n">14</span><span class="cl__t">Diseñar una nueva vida</span><span class="cl__d">11m</span></div>
+        <div class="cl"><span class="cl__n">15</span><span class="cl__t">El futuro empieza hoy</span><span class="cl__d">10m</span></div>
       </div>
     </div>
   </div>
@@ -699,12 +700,11 @@
     <span class="kick kick--l reveal">En los medios</span>
     <h2 class="h2 reveal">No lo decimos <span class="u-gold">solo nosotros.</span></h2>
     <p class="lead reveal">Periódicos, radios y televisiones han hablado de ETC. y del trabajo de Nacho con la adicción al juego.</p>
+    <figure class="clip clip--feat reveal"><img src="images/media-2.webp" alt="Mallorca a la Carta (Canal 4) — Nacho habla del método ETC en televisión" loading="lazy"><figcaption class="clip__lbl"><span class="clip__src">Mallorca a la Carta</span> <span class="clip__tag">· Canal 4 · Televisión</span></figcaption></figure>
     <div class="collage reveal">
       <figure class="clip"><img src="images/publico-apuestas-2.jpg" alt="Diario Público — Nacho, fundador de ETC, citado sobre las casas de apuestas" loading="lazy"><figcaption class="clip__lbl"><span class="clip__src">Diario Público</span> <span class="clip__tag">· Nacho, experto</span></figcaption></figure>
-      <figure class="clip"><img src="images/media-canal4.webp" alt="Canal 4 — Mallorca a la Carta, entrevista a Nacho" loading="lazy"><figcaption class="clip__lbl"><span class="clip__src">Canal 4 · TV</span> <span class="clip__tag">· Mallorca a la Carta</span></figcaption></figure>
       <figure class="clip"><img src="images/media-4.webp" alt="Mejor Informado — caso de éxito con ETC." loading="lazy"><figcaption class="clip__lbl"><span class="clip__src">Mejor Informado</span> <span class="clip__tag">· Caso de éxito</span></figcaption></figure>
       <figure class="clip"><img src="images/publico-article.webp" alt="Diario Público — entrevista a Nacho sobre la ludopatía" loading="lazy"><figcaption class="clip__lbl"><span class="clip__src">Diario Público</span> <span class="clip__tag">· Entrevista a Nacho</span></figcaption></figure>
-      <figure class="clip"><img src="images/media-2.webp" alt="Canal 4 — Mallorca a la Carta, sobre el programa" loading="lazy"><figcaption class="clip__lbl"><span class="clip__src">Canal 4 · TV</span> <span class="clip__tag">· Sobre el programa</span></figcaption></figure>
       <figure class="clip"><img src="images/publico-apuestas-1.jpg" alt="Diario Público — el director de ETC reclama más regulación de las apuestas" loading="lazy"><figcaption class="clip__lbl"><span class="clip__src">Diario Público</span> <span class="clip__tag">· Regulación de apuestas</span></figcaption></figure>
       <figure class="clip"><img src="images/media-3.webp" alt="Diario Público — regulación del juego en España" loading="lazy"><figcaption class="clip__lbl"><span class="clip__src">Diario Público</span> <span class="clip__tag">· Regulación del juego</span></figcaption></figure>
     </div>
@@ -782,7 +782,7 @@
         <div class="plan__price"><span class="plan__amt">190</span><span class="plan__cur">€</span></div>
         <div class="plan__once">Pago único · de por vida</div>
         <div class="plan__feats">
-          <div class="pf"><span class="ck">✓</span>Las 15 clases en vídeo (+8 h)</div>
+          <div class="pf"><span class="ck">✓</span>Las 15 clases en vídeo (+3 h)</div>
           <div class="pf"><span class="ck">✓</span>60+ ejercicios prácticos</div>
           <div class="pf"><span class="ck">✓</span>Certificado personalizado</div>
           <div class="pf"><span class="ck">✓</span>Webinars mensuales (25€/sesión)</div>
@@ -856,7 +856,7 @@
     <h2 class="h2 reveal">Resolvemos <span class="u-gold">tus dudas.</span></h2>
     <div class="faq-list">
       <div class="faq-item reveal"><button class="faq-q">¿Cómo accedo al curso después de pagar?<span class="faq-q__ic">+</span></button><div class="faq-a"><div class="faq-a__in">Justo después del pago recibes acceso a la plataforma con las 15 clases listas para empezar cuando quieras. El acceso es de por vida.</div></div></div>
-      <div class="faq-item reveal"><button class="faq-q">¿Cuánto tarda el curso? ¿Tengo que seguir un horario?<span class="faq-q__ic">+</span></button><div class="faq-a"><div class="faq-a__in">No hay horarios. Son más de 8 horas de vídeo en 15 clases que ves a tu ritmo, desde el móvil o el ordenador. Las clases se desbloquean una a una para que sigas el orden del método.</div></div></div>
+      <div class="faq-item reveal"><button class="faq-q">¿Cuánto tarda el curso? ¿Tengo que seguir un horario?<span class="faq-q__ic">+</span></button><div class="faq-a"><div class="faq-a__in">No hay horarios. Son más de 3 horas de vídeo en 15 clases que ves a tu ritmo, desde el móvil o el ordenador. Las clases se desbloquean una a una para que sigas el orden del método.</div></div></div>
       <div class="faq-item reveal"><button class="faq-q">¿Qué incluye exactamente el plan Premium?<span class="faq-q__ic">+</span></button><div class="faq-a"><div class="faq-a__in">Todo el curso (las 15 clases, ejercicios, certificado y webinars) <b>más una sesión final 1:1 de 1 hora con Nacho totalmente gratis</b> (valor 65€), que se desbloquea al terminar la clase 15. Por solo 29€ más que el Básico.</div></div></div>
       <div class="faq-item reveal"><button class="faq-q">¿Es confidencial? No quiero que nadie se entere.<span class="faq-q__ic">+</span></button><div class="faq-a"><div class="faq-a__in">Totalmente. El curso es 100% privado. No exponemos datos, nombres ni fotos. Avanzas solo, a tu ritmo y con total discreción.</div></div></div>
       <div class="faq-item reveal"><button class="faq-q">¿Sirve si ya lo he intentado todo y siempre recaigo?<span class="faq-q__ic">+</span></button><div class="faq-a"><div class="faq-a__in">Precisamente para eso está. El método lo crearon personas que también recayeron muchas veces antes de salir. No se basa en fuerza de voluntad, sino en entender la adicción y darte herramientas reales para no volver.</div></div></div>
