@@ -321,7 +321,9 @@
     .plan--prem .plan__cur{color:var(--gold);}
     .plan__once{font-size:.76rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;margin-bottom:22px;}
     .plan--basic .plan__once{color:var(--subtle);}
-    .plan--prem .plan__once{color:rgba(255,255,255,.55);}
+    .plan--prem .plan__once{color:rgba(255,255,255,.55);margin-bottom:10px;}
+    .plan__promo{font-size:.7rem;line-height:1.4;color:rgba(255,255,255,.5);margin-bottom:20px;}
+    .plan__promo b{color:var(--gold);font-weight:900;}
     .plan__feats{display:flex;flex-direction:column;gap:12px;margin-bottom:26px;flex:1;}
     .pf{display:flex;align-items:flex-start;gap:10px;font-size:.92rem;font-weight:500;line-height:1.45;}
     .plan--basic .pf{color:var(--text);}
@@ -800,6 +802,7 @@
         <div class="plan__old">284€</div>
         <div class="plan__price"><span class="plan__amt">219</span><span class="plan__cur">€</span></div>
         <div class="plan__once">Pago único · de por vida</div>
+        <div class="plan__promo">*Código <b>MARCOS10</b> disponible si vienes recomendado por Marcos Agudo</div>
 
         <div class="pf-free">
           <span class="star">★</span>
@@ -888,7 +891,10 @@
 
 <script>
 /* ENLACES — rellena cuando los tengas */
-const STRIPE = { basic:'', premium:'' };  // Payment Links de Stripe (190€ / 219€)
+const STRIPE = {
+  basic:   'https://buy.stripe.com/4gM7sN64c6hC9PMeMe2go01',   // Plan Básico 190€
+  premium: 'https://buy.stripe.com/00w28tdwE7lG6DA5bE2go00'    // Plan Premium 219€ (código MARCOS10 = -10€)
+};
 const BOOK_URL = '';                      // URL del calendario de reserva
 const WA = {
   basic:'https://wa.me/34611847645?text='+encodeURIComponent('Hola, quiero comprar el curso ETC — Plan Básico (190€).'),
