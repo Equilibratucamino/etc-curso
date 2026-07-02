@@ -13,7 +13,11 @@
 - **Duración real del contenido corregida: ~3 h (más de 3 horas), NO 8 h.** Actualizado en funnel y en la tabla de clases (duraciones por clase reducidas a ~10-15 min).
 - **Frase del dashboard cambiada**: `Bienvenido a tu camino.` → **"Empieza tu camino, Se acabó el Juego."** (`dashboard.html`, id `heroTitle`).
 - **Capturas de prensa reales** añadidas (Diario Público, Canal 4 "Mallorca a la Carta", Mejor Informado…) en el funnel y también en la **home de la web oficial** (`etc-landing`, carrusel de medios). Imágenes nuevas en `images/`: `publico-apuestas-1.jpg`, `publico-apuestas-2.jpg`, `media-2/3/4.webp`, `media-canal4.webp`, `logo-*` de medios.
-- **Pendiente grande para el PRÓXIMO CHAT**: poner el curso EN VENTA → pago (Stripe), email automático tras pagar y acceso del alumno (¿con usuario/contraseña o sin login?). → ver sección **18. Puesta en venta**.
+- **✅ VENTA ACTIVADA (2-jul):** el curso **ya se puede comprar**. Flujo completo funcionando:
+  - Botones del funnel → **Stripe Payment Links** (Básico 190€ / Premium 219€; cupón `MARCOS10` = −10€ solo en Premium).
+  - Tras pagar → **`success.html`** (página de gracias, detecta el plan, pide nombre+apellidos → `etc_name`, guarda `etc_plan`).
+  - **Email de bienvenida automático** vía función serverless **`/api/send-welcome.js`** (Stripe da el email del comprador + Resend lo envía). Requiere variables en Vercel: `STRIPE_SECRET_KEY`, `RESEND_API_KEY`.
+- **Pendiente grande (siguiente bloque):** el **acceso al curso sigue abierto** (cualquiera con la URL de `dashboard.html` entra; progreso en `localStorage`, por dispositivo). La protección real (**cuentas/login con Supabase** + progreso en la nube + **vídeos propios protegidos**) es la recomendación → ver sección **18**. Se hará junto con las grabaciones de julio.
 
 ---
 
@@ -371,45 +375,42 @@ Por cada clase, cuando Iñaki envíe la grabación:
 
 ---
 
-## 18. Puesta en venta del curso (pago + email + acceso) — PARA EL PRÓXIMO CHAT
+## 18. Puesta en venta del curso (pago + email + acceso)
 
-**Objetivo:** que un visitante compre en `funel.html`, pague, reciba un email y pueda **acceder a las clases**. Hoy el curso es **estático, sin backend, sin login** (el acceso a `dashboard.html` está abierto a cualquiera con la URL). Hay que decidir el modelo de venta/acceso.
+### ✅ HECHO (2-jul-2026) — el curso YA se puede comprar
+Flujo completo funcionando: **funnel → pago Stripe → página de gracias → email de bienvenida.**
 
-### Estado actual del pago
-- En `funel.html`, los botones de plan usan `const STRIPE = { basic:'', premium:'' }` (vacíos → caen a WhatsApp). Falta crear los productos en Stripe y pegar los **Payment Links**.
-- El curso vive en Vercel (`etc-curso`), que **sí permite funciones serverless** (`/api`) si hiciera falta backend (webhooks, generar accesos, enviar emails).
+- **Pago (Stripe Payment Links).** En `funel.html`, al final, están los enlaces:
+  ```js
+  const STRIPE = {
+    basic:   'https://buy.stripe.com/4gM7sN64c6hC9PMeMe2go01',   // 190€
+    premium: 'https://buy.stripe.com/00w28tdwE7lG6DA5bE2go00'    // 219€
+  };
+  ```
+  Cupón **`MARCOS10`** (−10€) activado **solo en el Premium** (para quien viene de Marcos Agudo). Nota con asterisco bajo el precio Premium.
+- **`success.html`** — página de éxito (estilo curso: Fraunces+Inter, paleta dashboard). Lee `?plan=` y `?session_id=` de la URL, guarda `etc_plan`, y **abre un modal que pide nombre+apellidos → `etc_name`** (el mismo que usa el certificado). Botón → `dashboard.html?plan=…`.
+- **`/api/send-welcome.js`** — función serverless (Vercel). La llama `success.html` con el `session_id`; pide a **Stripe** el email del comprador (con `STRIPE_SECRET_KEY`) y envía el **email de bienvenida branded** con **Resend** (`RESEND_API_KEY`). Cabecera del email: **verde suave `#C8EDE4`** con el **logo real de ETC** (`images/logo-etc-real.png`, transparente, sin recuadro). Envía desde `hola@equilibratucamino.com` (dominio verificado en Resend).
+- **Variables en Vercel** (`etc-curso` → Settings → Environment Variables): `STRIPE_SECRET_KEY` (sk_live_…) y `RESEND_API_KEY` (re_…). Tras añadirlas → **Redeploy**.
+- **Success URLs en Stripe** (After payment → Redirect), con `&session_id={CHECKOUT_SESSION_ID}`:
+  - Básico: `https://curso.equilibratucamino.com/success.html?plan=basic&session_id={CHECKOUT_SESSION_ID}`
+  - Premium: `https://curso.equilibratucamino.com/success.html?plan=premium&session_id={CHECKOUT_SESSION_ID}`
 
-### El gran punto a decidir: ¿cómo accede el alumno tras pagar?
-Tres modelos, de menos a más trabajo:
+> Falta hacer un **pago de prueba de punta a punta** para confirmar que llega el email.
+> Detalle menor pendiente: el modal de nombre en `success.html` aún tiene el enlace "añadir después"; Iñaki quiere el nombre **obligatorio** (quitar el "saltar").
 
-**Opción A — Sin login, acceso por enlace (la más rápida).**
-- Stripe **Payment Link** → al pagar, Stripe redirige a una **URL de éxito** (p. ej. `dashboard.html?plan=premium&ok=1`) y envía su **recibo por email** automáticamente.
-- El acceso es "por conocer la URL". El progreso sigue en `localStorage` (por dispositivo).
-- ✅ Cero backend, se monta hoy. ❌ Cualquiera con el enlace entra; no hay cuentas; no se recupera el progreso en otro dispositivo.
-- Email automático: el recibo de Stripe + (opcional) un email propio con el enlace usando **Resend** desde una función `/api` activada por **webhook de Stripe**.
+### ⏳ PENDIENTE — el gran bloque siguiente: acceso real + progreso + vídeos
+Hoy el acceso **sigue abierto**: cualquiera con la URL de `dashboard.html` entra sin pagar, y el progreso vive en `localStorage` (por dispositivo, **no le sigue** si cambia de móvil a ordenador). Decisión de Iñaki (2-jul): como al principio se venderán pocos cursos, **el riesgo de que se comparta la URL es bajo** → se deja para más adelante, junto con las grabaciones de julio.
 
-**Opción B — Acceso con "código/contraseña" simple (intermedia).**
-- Stripe Payment Link → página de éxito que muestra/envía un **código de acceso**. `dashboard.html` pide ese código (una contraseña compartida o por compra) antes de mostrar las clases.
-- ✅ Poco backend. ❌ No son cuentas reales; un código se puede compartir.
+Las 3 cosas que Iñaki quiere (que no se comparta la URL · que el progreso siga a la persona entre dispositivos · que el nombre vaya al certificado) → **todas se resuelven con lo mismo: cuentas con login + base de datos = Supabase (Opción C).**
 
-**Opción C — Cuentas reales (usuario + contraseña) con BBDD (la "pro").**
-- **Supabase** (Auth + Postgres) para registro/login. Webhook de Stripe marca al usuario como "comprado" (y su plan básico/premium). `dashboard.html`/`modulo.html` comprueban sesión.
-- Progreso/notas/respuestas pasan de `localStorage` a la BBDD → **siguen al alumno entre dispositivos** y Iñaki puede ver respuestas.
-- ✅ Lo correcto a medio plazo (control de acceso real, multi-dispositivo, datos). ❌ Más trabajo: Auth, esquema BBDD, migrar el estado de `localStorage`, proteger páginas.
+- **Coste:** Supabase gratis para arrancar (login ~50k usuarios/mes + BBDD); ~25 €/mes solo si crece mucho. Vídeos aparte (Vimeo/Bunny ~10-20 €/mes).
+- **Dificultad:** media (camino estándar). Lo trillado.
+- **Las 2 partes de trabajo reales:** (1) **conectar pago↔cuenta** (paga → crea cuenta con el mismo email → webhook de Stripe le da acceso y plan); (2) **migrar la capa de datos** de `localStorage` a Supabase en `dashboard.html`/`modulo.html`/`certificate.html`.
+- **Vídeos propios (llegan en ~2 semanas, del podcast):** alojarlos en **Vimeo** ("dominio permitido": solo se reproducen dentro de `curso.equilibratucamino.com`) o **Mux** (URLs firmadas). Esto es lo que de verdad protege el contenido (con YouTube oculto el ID se filtra). Se monta a la vez que el login.
 
-> **Recomendación para arrancar:** Opción A (vender ya con Payment Links + email de Stripe/Resend) y migrar a **Opción C (Supabase)** cuando haya volumen. La plataforma de Juan (ETC-Plataforma) ya usa Supabase+Stripe+Resend; se puede reutilizar el patrón, **sin tocar su repo**.
+**Recomendación:** vender ya con lo actual; montar **Supabase (login + progreso en la nube) + vídeos protegidos** de una tacada cuando lleguen las grabaciones.
 
-### Checklist para el próximo chat
-- [ ] Crear en Stripe: **Plan Básico 190€**, **Plan Premium 219€**, **Sesión final 65€** (modo live).
-- [ ] Pegar los Payment Links en `funel.html` (`STRIPE.basic`, `STRIPE.premium`).
-- [ ] Definir **URL de éxito** de cada Payment Link (a dónde llega el alumno tras pagar) y **URL de cancelación**.
-- [ ] Decidir modelo de acceso (A / B / C).
-- [ ] **Email post-pago**: recibo de Stripe (auto) y/o email propio con acceso (Resend + función `/api` + **webhook de Stripe**).
-- [ ] (Si C) Supabase: Auth, tabla de compras/plan, proteger `dashboard.html`/`modulo.html`, migrar progreso de `localStorage`.
-- [ ] Conectar el flag `etc_plan` con el plan realmente comprado.
-- [ ] Pensar **control de acceso** real a las clases (hoy `dashboard.html` es público).
-
-### Contexto técnico útil (para arrancar rápido en el nuevo chat)
+### Contexto técnico útil (para el chat que monte esto)
 - Repo curso: `Equilibratucamino/etc-curso` (Vercel, estático + soporta `/api`). Local `/Users/inaki/etc-curso/`.
 - WhatsApp ventas: +34 611 847 645. Email/Google: `equilibratucamino@gmail.com`.
 - Referencia de patrón (NO tocar): `Equilibratucamino/ETC-Plataforma` (Next.js + Supabase + Stripe + Resend + Google Calendar) — proyecto de Juan.
