@@ -238,13 +238,13 @@
     <div class="name-modal">
       <div class="modal-icon">👋</div>
       <h2>¿Cómo te <em>llamamos?</em></h2>
-      <p>Tu nombre aparecerá en el certificado al finalizar el curso. Puedes cambiarlo después.</p>
+      <p>Escribe tu <strong>nombre y apellidos</strong> tal y como quieres que aparezcan en tu <strong>certificado</strong> al terminar el curso.</p>
       <div class="name-fields">
         <input type="text" id="inputNombre" placeholder="Nombre" autocomplete="given-name" maxlength="40"/>
         <input type="text" id="inputApellido" placeholder="Apellido(s)" autocomplete="family-name" maxlength="60"/>
       </div>
-      <button class="btn-name" id="btnSaveName">Guardar y empezar →</button>
-      <button class="skip-link" id="btnSkipName">Ahora no, añadiré mi nombre después</button>
+      <button class="btn-name" id="btnSaveName" disabled>Guardar y empezar →</button>
+      <p style="margin-top:12px;font-size:.72rem;color:#A1A399;">Necesitamos tu nombre para personalizar tu certificado.</p>
     </div>
   </div>
 
@@ -351,41 +351,40 @@
         // Silencioso: si falla el email, la experiencia del usuario no se interrumpe
       }
 
-      // ── 4. Modal de nombre ──
+      // ── 4. Modal de nombre (OBLIGATORIO — sin opción a saltar) ──
       let savedName = '';
       try { savedName = localStorage.getItem('etc_name') || ''; } catch(e) {}
 
-      const overlay   = document.getElementById('nameOverlay');
-      const btnSave   = document.getElementById('btnSaveName');
-      const btnSkip   = document.getElementById('btnSkipName');
-      const inNombre  = document.getElementById('inputNombre');
+      const overlay    = document.getElementById('nameOverlay');
+      const btnSave    = document.getElementById('btnSaveName');
+      const inNombre   = document.getElementById('inputNombre');
       const inApellido = document.getElementById('inputApellido');
+      const cta        = document.getElementById('ctaBtn');
 
-      // Mostrar modal si no hay nombre guardado
-      if (!savedName) {
-        // Pequeño delay para que primero se vea la card de confirmación
-        setTimeout(() => overlay.classList.remove('hidden'), 1200);
-      }
+      const isValid   = () => inNombre.value.trim() !== '' && inApellido.value.trim() !== '';
+      const refreshBtn = () => { btnSave.disabled = !isValid(); };
+      const openModal = () => { overlay.classList.remove('hidden'); setTimeout(() => inNombre.focus(), 150); };
+
+      [inNombre, inApellido].forEach(i => i.addEventListener('input', refreshBtn));
 
       function saveName() {
-        const nombre   = inNombre.value.trim();
-        const apellido = inApellido.value.trim();
-        const full     = [nombre, apellido].filter(Boolean).join(' ');
-        if (full) {
-          try { localStorage.setItem('etc_name', full); } catch(e) {}
-        }
+        if (!isValid()) { refreshBtn(); (inNombre.value.trim() ? inApellido : inNombre).focus(); return; }
+        const full = (inNombre.value.trim() + ' ' + inApellido.value.trim()).replace(/\s+/g, ' ').trim();
+        try { localStorage.setItem('etc_name', full); } catch(e) {}
+        savedName = full;
         overlay.classList.add('hidden');
       }
 
       btnSave.addEventListener('click', saveName);
-      btnSkip.addEventListener('click', () => overlay.classList.add('hidden'));
+      [inNombre, inApellido].forEach(i => i.addEventListener('keydown', e => { if (e.key === 'Enter') saveName(); }));
 
-      // Guardar con Enter
-      [inNombre, inApellido].forEach(input => {
-        input.addEventListener('keydown', e => {
-          if (e.key === 'Enter') saveName();
-        });
-      });
+      // Si aún no hay nombre, se pide automáticamente (sin poder cerrarlo sin rellenarlo)
+      if (!savedName) { setTimeout(openModal, 1200); }
+
+      // El botón "Empezar el curso" exige tener el nombre puesto
+      cta.addEventListener('click', e => { if (!savedName) { e.preventDefault(); openModal(); } });
+
+      refreshBtn();
     })();
   </script>
 </body>
