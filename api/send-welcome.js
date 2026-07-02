@@ -137,11 +137,10 @@ function buildEmailHTML({ firstName, isPremium, dashboardUrl }) {
       <table width="100%" cellpadding="0" cellspacing="0" role="presentation"
              style="max-width:560px;background:#ffffff;border-radius:20px;border:1px solid #E5E4DF;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,.07);">
 
-        <!-- Header oscuro -->
+        <!-- Header verde con el logo de ETC -->
         <tr>
-          <td style="background:#1E211D;padding:36px 40px;text-align:center;">
-            <p style="margin:0;font-size:28px;font-weight:800;color:#ffffff;letter-spacing:-.5px;font-family:Arial,Helvetica,sans-serif;">ETC.</p>
-            <p style="margin:6px 0 0;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.4);font-weight:400;">Equilibra Tu Camino</p>
+          <td style="background:#2FA97F;padding:28px 40px;text-align:center;">
+            <img src="https://curso.equilibratucamino.com/images/logo-etc-white.png" alt="ETC. Equilibra Tu Camino" width="100" style="display:inline-block;height:auto;border:0;"/>
           </td>
         </tr>
 
@@ -157,8 +156,8 @@ function buildEmailHTML({ firstName, isPremium, dashboardUrl }) {
           <td style="padding:24px 40px 0;text-align:center;">
             <p style="margin:0 0 6px;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#2FA97F;">Pago confirmado</p>
             <h1 style="margin:10px 0 14px;font-size:28px;font-weight:700;line-height:1.15;color:#1E211D;letter-spacing:-.5px;">
-              ${greeting} eres parte<br>
-              <span style="color:#2FA97F;font-style:italic;">de Se Acabó el Juego.</span>
+              ${greeting} eres parte de<br>
+              <span style="color:#2FA97F;font-style:italic;">Se Acabó el Juego.</span>
             </h1>
             <p style="margin:0 0 28px;font-size:15px;font-weight:300;line-height:1.75;color:#6E7168;">
               Las 15 clases están listas para ti. Empieza cuando quieras, a tu ritmo y con total privacidad.
