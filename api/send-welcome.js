@@ -29,15 +29,7 @@ export default async function handler(req, res) {
     if (!stripeRes.ok) {
       const err = await stripeRes.json();
       console.error('Stripe error:', err);
-      return res.status(500).json({
-        error: 'Could not retrieve Stripe session',
-        _diag: {
-          stripeStatus: stripeRes.status,
-          stripeMsg: err && err.error ? (err.error.message || err.error.type) : String(err),
-          keyPrefix: (process.env.STRIPE_SECRET_KEY || 'MISSING').slice(0, 8),
-          resendKey: process.env.RESEND_API_KEY ? 'present' : 'MISSING'
-        }
-      });
+      return res.status(500).json({ error: 'Could not retrieve Stripe session' });
     }
 
     const session = await stripeRes.json();
