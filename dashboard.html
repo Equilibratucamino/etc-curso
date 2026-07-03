@@ -379,9 +379,57 @@
       .cert { flex-direction: column; text-align: center; }
       .cert__desc { margin-left: auto; margin-right: auto; }
     }
+
+    /* ── Puerta de nombre (lo primero al entrar al curso) ── */
+    #nameGate{position:fixed;inset:0;z-index:9999;display:none;align-items:center;justify-content:center;
+      padding:24px;background:rgba(24,31,27,.55);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);}
+    #nameGate .ng-card{width:100%;max-width:440px;background:#fff;border-radius:24px;padding:44px 38px 34px;
+      text-align:center;box-shadow:0 30px 80px rgba(0,0,0,.28);animation:ngIn .45s cubic-bezier(.2,.8,.2,1);}
+    @keyframes ngIn{from{opacity:0;transform:translateY(16px) scale(.97)}to{opacity:1;transform:none}}
+    #nameGate .ng-ico{font-size:34px;margin-bottom:12px;}
+    #nameGate h2{font-family:'Fraunces',Georgia,serif;font-size:1.7rem;line-height:1.15;color:#1E211D;margin:0 0 10px;font-weight:600;}
+    #nameGate h2 em{font-style:italic;color:#2FA97F;}
+    #nameGate p{font-size:.9rem;line-height:1.55;color:#6E7168;margin:0 0 22px;}
+    #nameGate .ng-fields{display:flex;flex-direction:column;gap:11px;text-align:left;}
+    #nameGate input{width:100%;box-sizing:border-box;padding:14px 16px;font-size:1rem;font-family:inherit;
+      border:1.5px solid #E1E3DE;border-radius:13px;color:#1E211D;background:#FAFBFA;transition:border-color .18s,background .18s;}
+    #nameGate input:focus{outline:none;border-color:#32B48C;background:#fff;}
+    #nameGate .ng-btn{width:100%;margin-top:16px;padding:15px 20px;font-size:1rem;font-weight:700;font-family:inherit;
+      color:#fff;background:#2FA97F;border:none;border-radius:999px;cursor:pointer;transition:transform .15s,box-shadow .15s,opacity .15s;
+      box-shadow:0 8px 22px rgba(47,169,127,.32);}
+    #nameGate .ng-btn:hover:not(:disabled){transform:translateY(-1px);box-shadow:0 12px 28px rgba(47,169,127,.4);}
+    #nameGate .ng-btn:disabled{opacity:.45;cursor:not-allowed;box-shadow:none;}
+    #nameGate .ng-note{margin:14px 0 0;font-size:.72rem;color:#A1A399;}
+    html.gate-open,body.gate-open{overflow:hidden;}
   </style>
 </head>
 <body>
+
+<!-- ── PUERTA DE NOMBRE: lo primero de todo al entrar al curso ── -->
+<div id="nameGate">
+  <div class="ng-card">
+    <div class="ng-ico">👋</div>
+    <h2>Lo primero de todo,<br><em>¿cómo te llamas?</em></h2>
+    <p>Escribe tu <strong>nombre y apellidos</strong> tal y como quieres que aparezcan en tu <strong>certificado</strong> al completar el curso.</p>
+    <div class="ng-fields">
+      <input type="text" id="ngNombre" placeholder="Nombre" autocomplete="given-name" maxlength="40"/>
+      <input type="text" id="ngApellido" placeholder="Apellido(s)" autocomplete="family-name" maxlength="60"/>
+    </div>
+    <button class="ng-btn" id="ngSave" disabled>Empezar el curso →</button>
+    <p class="ng-note">Lo necesitamos solo para personalizar tu certificado. 100% privado.</p>
+  </div>
+</div>
+<script>
+  /* Se ejecuta al instante: si no hay nombre guardado, abre la puerta antes de pintar el curso */
+  (function(){
+    var saved=''; try{ saved=localStorage.getItem('etc_name')||''; }catch(e){}
+    if(!saved){
+      var g=document.getElementById('nameGate');
+      g.style.display='flex';
+      document.documentElement.classList.add('gate-open');
+    }
+  })();
+</script>
 
 <!-- TOP NAV -->
 <nav class="topnav">
@@ -518,6 +566,41 @@
 </div>
 
 <script>
+/* ═══════════ PUERTA DE NOMBRE (guardar + iniciales avatar) ═══════════ */
+(function(){
+  function initials(full){
+    const p = full.trim().split(/\s+/);
+    return ((p[0]||'')[0]||'' ) + ((p[1]||'')[0]||'');
+  }
+  function applyAvatar(full){
+    const av = document.getElementById('userInitials');
+    if (av && full) av.textContent = initials(full).toUpperCase() || 'TÚ';
+  }
+  let saved=''; try{ saved=localStorage.getItem('etc_name')||''; }catch(e){}
+  if (saved) { applyAvatar(saved); return; }
+
+  const gate = document.getElementById('nameGate');
+  const inN  = document.getElementById('ngNombre');
+  const inA  = document.getElementById('ngApellido');
+  const btn  = document.getElementById('ngSave');
+  const valid = () => inN.value.trim() !== '' && inA.value.trim() !== '';
+  const refresh = () => { btn.disabled = !valid(); };
+  [inN, inA].forEach(i => i.addEventListener('input', refresh));
+
+  function save(){
+    if (!valid()) { refresh(); (inN.value.trim() ? inA : inN).focus(); return; }
+    const full = (inN.value.trim() + ' ' + inA.value.trim()).replace(/\s+/g,' ').trim();
+    try { localStorage.setItem('etc_name', full); } catch(e){}
+    applyAvatar(full);
+    gate.style.display = 'none';
+    document.documentElement.classList.remove('gate-open');
+  }
+  btn.addEventListener('click', save);
+  [inN, inA].forEach(i => i.addEventListener('keydown', e => { if (e.key === 'Enter') save(); }));
+  setTimeout(() => inN.focus(), 300);
+  refresh();
+})();
+
 /* ═══════════ PROGRESS ENGINE ═══════════ */
 const STORAGE_KEY = 'etc_progress_v1';
 const MODULES = [
