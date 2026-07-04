@@ -140,7 +140,7 @@ function buildEmailHTML({ firstName, isPremium, dashboardUrl }) {
         <!-- Header verde suave con el logo real de ETC (transparente, limpio, sin recuadro) -->
         <tr>
           <td bgcolor="#C8EDE4" style="background:#C8EDE4;padding:34px 40px 30px;text-align:center;">
-            <img src="https://curso.equilibratucamino.com/images/logo-etc-badge-circle.png" alt="ETC. Equilibra Tu Camino" width="140" style="display:block;margin:0 auto;height:auto;border:0;"/>
+            <img src="https://curso.equilibratucamino.com/images/logo-etc-badge-circle.png" alt="ETC. Equilibra Tu Camino" width="150" style="display:block;margin:0 auto;width:150px;max-width:150px;height:auto;border:0;"/>
           </td>
         </tr>
 
