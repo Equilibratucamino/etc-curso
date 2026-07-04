@@ -522,7 +522,7 @@
   <div id="clases">
     <div class="sec-head">
       <div class="sec-head__t">Tus 15 clases</div>
-      <div class="sec-head__c">15 clases · ~8 horas</div>
+      <div class="sec-head__c">15 clases · +3 horas</div>
     </div>
     <div class="classes" id="classGrid"><!-- JS --></div>
   </div>
@@ -604,21 +604,21 @@
 /* ═══════════ PROGRESS ENGINE ═══════════ */
 const STORAGE_KEY = 'etc_progress_v1';
 const MODULES = [
-  { n:1,  title:'Aceptar la realidad',         dur:'28 min' },
-  { n:2,  title:'La mente de un ludópata',      dur:'32 min' },
-  { n:3,  title:'Dopamina y cerebro',           dur:'30 min' },
-  { n:4,  title:'Las mentiras que te cuentas',  dur:'35 min' },
-  { n:5,  title:'Romper el ciclo',              dur:'32 min' },
-  { n:6,  title:'Gestión de impulsos',          dur:'38 min' },
-  { n:7,  title:'Ansiedad, culpa y vergüenza',  dur:'36 min' },
-  { n:8,  title:'Reconstruir la confianza',     dur:'34 min' },
-  { n:9,  title:'Dinero y recuperación',        dur:'40 min' },
-  { n:10, title:'La nueva identidad',           dur:'30 min' },
-  { n:11, title:'Crear nuevos hábitos',         dur:'33 min' },
-  { n:12, title:'Familia y entorno',            dur:'37 min' },
-  { n:13, title:'Prevenir recaídas',            dur:'35 min' },
-  { n:14, title:'Diseñar una nueva vida',       dur:'32 min' },
-  { n:15, title:'El futuro empieza hoy',        dur:'28 min' },
+  { n:1,  title:'Aceptar la realidad',         dur:'10 min' },
+  { n:2,  title:'La mente de un ludópata',      dur:'12 min' },
+  { n:3,  title:'Dopamina y cerebro',           dur:'11 min' },
+  { n:4,  title:'Las mentiras que te cuentas',  dur:'13 min' },
+  { n:5,  title:'Romper el ciclo',              dur:'12 min' },
+  { n:6,  title:'Gestión de impulsos',          dur:'14 min' },
+  { n:7,  title:'Ansiedad, culpa y vergüenza',  dur:'13 min' },
+  { n:8,  title:'Reconstruir la confianza',     dur:'12 min' },
+  { n:9,  title:'Dinero y recuperación',        dur:'14 min' },
+  { n:10, title:'La nueva identidad',           dur:'11 min' },
+  { n:11, title:'Crear nuevos hábitos',         dur:'12 min' },
+  { n:12, title:'Familia y entorno',            dur:'13 min' },
+  { n:13, title:'Prevenir recaídas',            dur:'13 min' },
+  { n:14, title:'Diseñar una nueva vida',       dur:'12 min' },
+  { n:15, title:'El futuro empieza hoy',        dur:'10 min' },
 ];
 function getProgress(){ try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {completed:[]}; } catch { return {completed:[]}; } }
 

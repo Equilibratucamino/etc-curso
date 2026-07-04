@@ -169,8 +169,8 @@ function buildEmailHTML({ firstName, isPremium, dashboardUrl }) {
         <tr>
           <td style="padding:0 40px 36px;text-align:center;">
             <a href="${dashboardUrl}"
-               style="display:inline-block;background:linear-gradient(135deg,#2FA97F,#1F8C68);color:#ffffff;font-size:16px;font-weight:600;text-decoration:none;padding:16px 40px;border-radius:999px;box-shadow:0 6px 20px rgba(47,169,127,.3);font-family:Arial,Helvetica,sans-serif;">
-              Empezar el curso ahora →
+               style="display:inline-block;white-space:nowrap;background:linear-gradient(135deg,#2FA97F,#1F8C68);color:#ffffff;font-size:16px;font-weight:600;text-decoration:none;padding:16px 40px;border-radius:999px;box-shadow:0 6px 20px rgba(47,169,127,.3);font-family:Arial,Helvetica,sans-serif;">
+              ¡Empieza ya el curso! →
             </a>
             <p style="margin:12px 0 0;font-size:11px;color:#A1A399;">Acceso inmediato · Las 15 clases te esperan</p>
           </td>
