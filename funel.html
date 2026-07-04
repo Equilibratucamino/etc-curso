@@ -3,6 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="512x512" href="images/favicon.png">
+  <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
   <title>Se Acabó el Juego — El curso para dejar la ludopatía de una vez | ETC.</title>
   <meta name="description" content="15 clases creadas por exludópatas para dejar de jugar y no recaer. Método probado por +500 personas. Acceso de por vida, certificado y sesión 1:1 con Nacho.">
   <meta property="og:type" content="website">
@@ -440,6 +443,28 @@
     .clip__tag{font-size:.58rem;color:rgba(255,255,255,.5);}
     @media(max-width:980px){.collage{column-count:3;max-width:640px;}}
     @media(max-width:620px){.collage{column-count:2;max-width:420px;column-gap:10px;}.clip{margin-bottom:10px;}}
+
+    /* Banner cinematográfico de podcast (autoridad de lujo) */
+    .podcast-hero{position:relative;max-width:940px;margin:38px auto 6px;aspect-ratio:16/9;border-radius:18px;overflow:hidden;
+      background-image:url('images/podcast-studio.jpg'), radial-gradient(130% 115% at 26% 12%, #2a2411 0%, #17130c 48%, #0b0906 78%);
+      background-size:cover;background-position:center;background-repeat:no-repeat;
+      box-shadow:0 34px 90px -34px rgba(0,0,0,.9);border:1px solid rgba(255,255,255,.07);}
+    .podcast-hero::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(8,6,4,.10) 34%,rgba(8,6,4,.86) 100%);}
+    .podcast-hero__txt{position:absolute;left:0;right:0;bottom:0;z-index:2;padding:clamp(20px,3vw,34px);text-align:left;}
+    .podcast-hero__kick{display:inline-block;font-size:.62rem;font-weight:900;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:10px;}
+    .podcast-hero__q{color:#fff;font-family:'Roboto Condensed','Roboto',sans-serif;font-weight:900;text-transform:uppercase;line-height:1.08;letter-spacing:.01em;font-size:clamp(1.25rem,3.4vw,2rem);max-width:660px;text-shadow:0 2px 20px rgba(0,0,0,.5);}
+
+    /* Carrusel de recortes de prensa: pequeños, sutiles, en movimiento continuo */
+    .press-mq{margin:22px auto 0;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);}
+    .press-track{display:flex;gap:14px;width:max-content;animation:scrollX 55s linear infinite;}
+    .press-mq:hover .press-track{animation-play-state:paused;}
+    .pclip{width:158px;flex-shrink:0;background:#fff;border-radius:9px;overflow:hidden;opacity:.66;filter:saturate(.92);border:1px solid rgba(255,255,255,.08);transition:opacity .35s ease,transform .35s ease;}
+    .pclip:hover{opacity:1;transform:translateY(-3px);}
+    .pclip img{width:100%;height:96px;object-fit:cover;display:block;}
+    .pclip__lbl{padding:6px 9px;background:var(--ink);text-align:left;line-height:1.2;}
+    .pclip__src{display:block;font-weight:900;font-size:.55rem;color:#fff;text-transform:uppercase;letter-spacing:.02em;}
+    .pclip__tag{font-size:.52rem;color:rgba(255,255,255,.45);}
+    @media(max-width:620px){.pclip{width:132px;}.pclip img{height:82px;}}
     /* En ordenador: tarjetas de igual altura (imagen entera centrada sobre blanco) */
     @media(min-width:761px){
       .pcar{align-items:stretch;}
@@ -712,13 +737,30 @@
     <span class="kick kick--l reveal">En los medios</span>
     <h2 class="h2 reveal">No lo decimos <span class="u-gold">solo nosotros.</span></h2>
     <p class="lead reveal">Periódicos, radios y televisiones han hablado de ETC. y del trabajo de Nacho con la adicción al juego.</p>
-    <figure class="clip clip--feat reveal"><img src="images/media-2.webp" alt="Mallorca a la Carta (Canal 4) — Nacho habla del método ETC en televisión" loading="lazy"><figcaption class="clip__lbl"><span class="clip__src">Mallorca a la Carta</span> <span class="clip__tag">· Canal 4 · Televisión</span></figcaption></figure>
-    <div class="collage reveal">
-      <figure class="clip"><img src="images/publico-apuestas-2.jpg" alt="Diario Público — Nacho, fundador de ETC, citado sobre las casas de apuestas" loading="lazy"><figcaption class="clip__lbl"><span class="clip__src">Diario Público</span> <span class="clip__tag">· Nacho, experto</span></figcaption></figure>
-      <figure class="clip"><img src="images/media-4.webp" alt="Mejor Informado — caso de éxito con ETC." loading="lazy"><figcaption class="clip__lbl"><span class="clip__src">Mejor Informado</span> <span class="clip__tag">· Caso de éxito</span></figcaption></figure>
-      <figure class="clip"><img src="images/publico-article.webp" alt="Diario Público — entrevista a Nacho sobre la ludopatía" loading="lazy"><figcaption class="clip__lbl"><span class="clip__src">Diario Público</span> <span class="clip__tag">· Entrevista a Nacho</span></figcaption></figure>
-      <figure class="clip"><img src="images/publico-apuestas-1.jpg" alt="Diario Público — el director de ETC reclama más regulación de las apuestas" loading="lazy"><figcaption class="clip__lbl"><span class="clip__src">Diario Público</span> <span class="clip__tag">· Regulación de apuestas</span></figcaption></figure>
-      <figure class="clip"><img src="images/media-3.webp" alt="Diario Público — regulación del juego en España" loading="lazy"><figcaption class="clip__lbl"><span class="clip__src">Diario Público</span> <span class="clip__tag">· Regulación del juego</span></figcaption></figure>
+    <!-- Banner cinematográfico (podcast · autoridad) -->
+    <div class="podcast-hero reveal">
+      <div class="podcast-hero__txt">
+        <span class="podcast-hero__kick">Apariciones en medios</span>
+        <p class="podcast-hero__q">De la radio a la televisión: el método que ya es referencia.</p>
+      </div>
+    </div>
+
+    <!-- Recortes de prensa: pequeños, sutiles, en carrusel continuo -->
+    <div class="press-mq reveal">
+      <div class="press-track">
+        <figure class="pclip"><img src="images/media-2.webp" alt="Mallorca a la Carta (Canal 4) — Nacho en televisión" loading="lazy"><figcaption class="pclip__lbl"><span class="pclip__src">Mallorca a la Carta</span><span class="pclip__tag">Canal 4 · TV</span></figcaption></figure>
+        <figure class="pclip"><img src="images/publico-apuestas-2.jpg" alt="Diario Público — Nacho citado sobre las casas de apuestas" loading="lazy"><figcaption class="pclip__lbl"><span class="pclip__src">Diario Público</span><span class="pclip__tag">Nacho, experto</span></figcaption></figure>
+        <figure class="pclip"><img src="images/media-4.webp" alt="Mejor Informado — caso de éxito con ETC." loading="lazy"><figcaption class="pclip__lbl"><span class="pclip__src">Mejor Informado</span><span class="pclip__tag">Caso de éxito</span></figcaption></figure>
+        <figure class="pclip"><img src="images/publico-article.webp" alt="Diario Público — entrevista a Nacho sobre la ludopatía" loading="lazy"><figcaption class="pclip__lbl"><span class="pclip__src">Diario Público</span><span class="pclip__tag">Entrevista a Nacho</span></figcaption></figure>
+        <figure class="pclip"><img src="images/publico-apuestas-1.jpg" alt="Diario Público — regulación de las apuestas" loading="lazy"><figcaption class="pclip__lbl"><span class="pclip__src">Diario Público</span><span class="pclip__tag">Regulación de apuestas</span></figcaption></figure>
+        <figure class="pclip"><img src="images/media-3.webp" alt="Diario Público — regulación del juego en España" loading="lazy"><figcaption class="pclip__lbl"><span class="pclip__src">Diario Público</span><span class="pclip__tag">Regulación del juego</span></figcaption></figure>
+        <figure class="pclip" aria-hidden="true"><img src="images/media-2.webp" alt="" loading="lazy"><figcaption class="pclip__lbl"><span class="pclip__src">Mallorca a la Carta</span><span class="pclip__tag">Canal 4 · TV</span></figcaption></figure>
+        <figure class="pclip" aria-hidden="true"><img src="images/publico-apuestas-2.jpg" alt="" loading="lazy"><figcaption class="pclip__lbl"><span class="pclip__src">Diario Público</span><span class="pclip__tag">Nacho, experto</span></figcaption></figure>
+        <figure class="pclip" aria-hidden="true"><img src="images/media-4.webp" alt="" loading="lazy"><figcaption class="pclip__lbl"><span class="pclip__src">Mejor Informado</span><span class="pclip__tag">Caso de éxito</span></figcaption></figure>
+        <figure class="pclip" aria-hidden="true"><img src="images/publico-article.webp" alt="" loading="lazy"><figcaption class="pclip__lbl"><span class="pclip__src">Diario Público</span><span class="pclip__tag">Entrevista a Nacho</span></figcaption></figure>
+        <figure class="pclip" aria-hidden="true"><img src="images/publico-apuestas-1.jpg" alt="" loading="lazy"><figcaption class="pclip__lbl"><span class="pclip__src">Diario Público</span><span class="pclip__tag">Regulación de apuestas</span></figcaption></figure>
+        <figure class="pclip" aria-hidden="true"><img src="images/media-3.webp" alt="" loading="lazy"><figcaption class="pclip__lbl"><span class="pclip__src">Diario Público</span><span class="pclip__tag">Regulación del juego</span></figcaption></figure>
+      </div>
     </div>
   </div>
 </section>
