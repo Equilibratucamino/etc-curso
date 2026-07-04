@@ -372,6 +372,7 @@ Por cada clase, cuando Iñaki envíe la grabación:
 - `funel.html`: sustituir el iMac CSS por el **mockup hiperrealista de Canva** si Iñaki exporta el PNG.
 - `index.html` (landing original): actualizar "+8 h" → "+3 h" (el funnel y el dashboard ya están corregidos); valorar añadir tabla de planes + FAQ.
 - (Opcional) Producto Stripe "Sesión final con Nacho" 65€ para el plan Básico (aún sin crear).
+- **Foto de podcast del funnel**: `images/podcast-studio.jpg` es hoy una **foto de stock** (Pexels). Sustituir por una **foto real de Nacho frente a otra persona** con el mismo estilo (set up de podcast, luz tenue/dramática, 16:9). Basta con reemplazar el archivo con el mismo nombre.
 - (Opcional) **Cuentas + base de datos** (Supabase) — detallado en sección 18 (Opción C).
 - Sustituir la imagen base del certificado por el original en máxima calidad si Iñaki lo tiene en PNG/JPG.
 
