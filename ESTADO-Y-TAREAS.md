@@ -2,7 +2,19 @@
 
 > Estado completo del curso online de ETC: **producto, diseño, flujos, planes (premium/básico) y todo lo que queda por hacer**.
 > Proyecto **independiente** de la plataforma terapéutica de Juan (ETC-Plataforma).
-> Última actualización: **30 junio 2026**.
+> Última actualización: **4 julio 2026**.
+
+---
+
+## 🆕 NOVEDADES (4-jul-2026) — venta 100% operativa + pulido
+
+- **✅ Email de bienvenida FUNCIONANDO de punta a punta.** Probado con pago real: al pagar llega el correo automático. Se arreglaron las variables de Vercel (`STRIPE_SECRET_KEY` con una `sk_live_` nueva creada en Stripe, `RESEND_API_KEY`) — el fallo era una clave de Stripe incorrecta. Diagnóstico temporal ya retirado.
+- **🖼️ Logo del email = sello circular blanco con el logo ETC original, sobre verde `#C8EDE4`.** Clave: es una **imagen opaca en alta resolución** (`images/logo-etc-badge-circle.png`, ~1020px, generada desde `logo-etc-real.png`) → **a prueba de modo oscuro** (los clientes de correo oscurecen fondos/texto pero NO los píxeles de una imagen opaca). Sin sombra, logo centrado ópticamente, tamaño fijado en el `style` para que no se estire.
+- **👤 El nombre ya NO se pide en `success.html`.** `success.html` solo da bienvenida + botón **"¡Empieza ya el curso!"**. El nombre se pide **al entrar al curso** (`dashboard.html`): una "puerta" obligatoria (*"Lo primero de todo, ¿cómo te llamas?"*, nombre+apellidos → `etc_name`, sin opción a saltar) que aparece antes de pintar el curso y pone las iniciales en el avatar.
+- **⏱️ Duración corregida en el dashboard:** chip "15 clases · ~8 horas" → **"+3 horas"**, y las duraciones por clase bajadas a 10-14 min (suma ≈ 3 h).
+- **🔗 Links de pago con MARCA (`/premium` y `/basico`).** Al compartir por WhatsApp/redes salían feos (`buy.stripe.com` → "Stripe Checkout"). Ahora se comparten `curso.equilibratucamino.com/premium` y `/basico`: páginas ligeras con **tarjeta Open Graph** (imagen `images/og-curso.png` — charcoal+dorado, "SE ACABÓ EL JUEGO", 5,0★) que **redirigen al instante** a Stripe (redirección solo por JS, sin `meta refresh` — así el robot de preview lee la tarjeta). Añadido `vercel.json` con `cleanUrls:true` (URLs sin `.html`).
+- **🖼️ `og:image` añadida también al `funel.html`** (misma tarjeta de marca).
+- Nota WhatsApp: cachea la preview; para forzar refresco al probar, añadir `?v=2` a la URL.
 
 ---
 
@@ -91,18 +103,21 @@ Tono de marca: directo, cercano, sin tecnicismos, "de alguien que lo ha vivido".
 ### Enlaces
 - **Home (landing original):** `https://curso.equilibratucamino.com` (= `index.html`)
 - **Funnel / página de VENTA:** `https://curso.equilibratucamino.com/funel.html` ⭐ (la nueva, donde se vende)
-- **Premium:** `https://curso.equilibratucamino.com/dashboard.html?plan=premium`
-- **Básico:** `https://curso.equilibratucamino.com/dashboard.html?plan=basic`
-- **Empezar de 0 (demo):** añade `&reset=1` (borra progreso/notas/nombre y arranca en la clase 1)
+- **🔗 Link de pago Premium (para compartir):** `https://curso.equilibratucamino.com/premium` → tarjeta de marca + redirige a Stripe 219€
+- **🔗 Link de pago Básico (para compartir):** `https://curso.equilibratucamino.com/basico` → tarjeta de marca + redirige a Stripe 190€
+- **Dashboard Premium:** `https://curso.equilibratucamino.com/dashboard.html?plan=premium`
+- **Dashboard Básico:** `https://curso.equilibratucamino.com/dashboard.html?plan=basic`
+- **Empezar de 0 (demo):** añade `?reset=1` (borra progreso/notas/nombre y arranca en la clase 1)
 - **Certificado:** `https://curso.equilibratucamino.com/certificate.html` (requiere 15/15)
 
-> `?plan=` fija la versión en ese navegador (en real lo fijará la compra). `?reset=1` reinicia el curso a 0 para demos.
+> `?plan=` fija la versión en ese navegador (en real lo fija la compra). `?reset=1` reinicia el curso a 0 para demos.
+> **URLs limpias** (`vercel.json` → `cleanUrls:true`): `/premium`, `/basico`, `/dashboard`, etc. funcionan sin `.html` (las `.html` redirigen con 308).
 
 ---
 
 ## 4. Arquitectura técnica
 
-- **Sitio estático**: HTML + CSS + JavaScript puro. **Sin backend propio, sin login, sin base de datos.**
+- **Sitio estático**: HTML + CSS + JavaScript puro. **Sin login ni base de datos.** Única pieza de servidor: la **función serverless `/api/send-welcome.js`** (Vercel) que manda el email de bienvenida (Stripe + Resend).
 - Todo el estado (progreso, notas, nombre, plan) se guarda en el **navegador del alumno** (`localStorage`). → Implicación: el progreso/notas **no** siguen al alumno entre dispositivos, y Iñaki **no** ve las respuestas. Para eso haría falta cuentas + BD (ver Pendiente).
 - Fuentes: Google Fonts (**Fraunces** display/serif + **Inter** cuerpo; **Great Vibes** solo para el nombre del certificado).
 - Dependencias externas solo por CDN y bajo demanda: **html2canvas + jsPDF** (descarga del certificado en PDF). El reproductor de vídeo es el embed **lite de YouTube** (carga el iframe solo al hacer clic).
@@ -178,8 +193,9 @@ const BOOK_URL = '';                       // ← URL del calendario de reserva
 Mientras estén vacías, los botones de plan llevan a **WhatsApp** (+34 611 847 645). En cuanto se peguen los links de Stripe, compran por ahí. **Esto es lo que falta para vender (ver sección 18).**
 
 ### `dashboard.html` — Mi curso
+- **Puerta de nombre (obligatoria) al entrar** si no hay `etc_name`: *"Lo primero de todo, ¿cómo te llamas?"* → nombre+apellidos → `etc_name` (certificado) + iniciales en el avatar. Sin opción a saltar.
 - Bento: **hero** (saludo dinámico + ilustración + "continuar"), **panel de progreso** (anillo + X/15), **cuadro de sesión** (premium/básico, ver flujos) y **webinar**.
-- **"Tus 15 clases"**: tarjetas tipo curso (portada de color, número grande, estado: completada / actual / bloqueada).
+- **"Tus 15 clases"**: tarjetas tipo curso (portada de color, número grande, estado: completada / actual / bloqueada). Chip **"15 clases · +3 horas"**; duraciones 10-14 min.
 - **Bloque dorado de sesión final** (solo premium + 15/15) entre las clases y el certificado.
 - **Banner de certificado** → `certificate.html`.
 
@@ -198,6 +214,15 @@ Mientras estén vacías, los botones de plan llevan a **WhatsApp** (+34 611 847 
 
 ### `reserva.html` — Reserva
 - Página dentro del curso que **embebe** (de momento) la reserva de la plataforma. Muestra el precio según plan (premium 0€ / básico 65€). Pendiente: sustituir por el calendario propio (ver Pendiente).
+
+### `success.html` — Gracias (post-pago)
+- Adonde manda Stripe tras pagar. Lee `?plan=` y `?session_id=`, guarda `etc_plan`, muestra plan + lo que incluye + botón **"¡Empieza ya el curso!"** (una línea en móvil) → `dashboard.html?plan=…`. Llama a `/api/send-welcome` para enviar el email. **No pide el nombre** (se pide en el dashboard).
+
+### `premium.html` / `basico.html` — Links de pago con marca
+- Se comparten como `/premium` y `/basico`. Llevan **tarjeta Open Graph** (`images/og-curso.png`) para que WhatsApp/redes muestren una previa profesional, y **redirigen al instante** (JS) al Payment Link de Stripe correspondiente. Splash con logo mientras redirige + enlace "Continuar al pago".
+
+### `/api/send-welcome.js` — Email de bienvenida (serverless)
+- Recibe `{sessionId, plan}`, pide el email a Stripe y lo envía con Resend. Ver sección 18.
 
 ---
 
@@ -315,7 +340,11 @@ Mientras estén vacías, los botones de plan llevan a **WhatsApp** (+34 611 847 
 - Responsive (desktop, tablet, móvil).
 - **`funel.html`** (NUEVA): página de venta completa — hero+VSL, autoridad (logos prensa), countdown, stats, para-quién, mockup del curso real (iMac+iPhone con iframes), ¿qué incluye?, programa, instructores, collage de prensa, casos de éxito, planes (Básico/Premium con sesión 1h gratis destacada), garantía, FAQ. Botones de compra listos para Stripe (hoy → WhatsApp).
 - Capturas de prensa reales integradas en `funel.html` y en la home oficial (`etc-landing`).
-- Duración corregida a ~3 h; frase del dashboard → "Empieza tu camino, Se acabó el Juego.".
+- Duración corregida a ~3 h (funnel **y** dashboard: chip "+3 horas" + clases 10-14 min); frase del dashboard → "Empieza tu camino, Se acabó el Juego.".
+- **Venta activada de punta a punta:** funnel → Stripe → `success.html` → **email de bienvenida automático** (Resend + Stripe, variables de Vercel OK, probado con pago real).
+- **Puerta de nombre** obligatoria al entrar al curso (`dashboard.html`) → `etc_name` para el certificado; iniciales en el avatar.
+- **Email branded** con sello circular del logo ETC sobre verde, en alta resolución y **a prueba de modo oscuro**.
+- **Links de pago con marca** `/premium` y `/basico` (tarjeta OG `og-curso.png` + redirección a Stripe); `og:image` también en el funnel; `vercel.json` con URLs limpias.
 
 ---
 
@@ -333,14 +362,16 @@ Por cada clase, cuando Iñaki envíe la grabación:
 - **Plan acordado:** cuando el de la web esté confirmado y funcionando (Google Calendar + Stripe), **copiarlo tal cual** al curso.
 - Directo al calendario (sin las 3 preguntas). Premium 0€ / Básico 65€ (producto Stripe "Sesión final con Nacho").
 
-### 🔴 Poner el curso EN VENTA (pago + email + acceso) → **ver sección 18**
-- Crear productos/Payment Links en Stripe (190€ / 219€ / 65€) y pegarlos en `funel.html`.
-- Email automático tras pagar + decidir modelo de acceso (sin login / código / cuentas Supabase).
-- Conectar `etc_plan` con el plan comprado de verdad y proteger el acceso a las clases.
+### ✅ Poner el curso EN VENTA (pago + email) — HECHO → **ver sección 18**
+- Payment Links de Stripe (190€ / 219€) en `funel.html` + links de marca `/premium` `/basico`. ✅
+- Email automático tras pagar (Resend + Stripe, variables de Vercel) — **probado con pago real**. ✅
+- **Queda** (por Iñaki): archivar el link de prueba de 1€ (o dejarlo apuntando al Premium, como hizo) y confirmar que ambos Payment Links reales tienen la Success URL con `&session_id={CHECKOUT_SESSION_ID}`.
+- **Queda (gran bloque):** acceso real / proteger la URL de `dashboard.html` + progreso en la nube (Supabase, sección 18).
 
 ### 🟢 Otros
 - `funel.html`: sustituir el iMac CSS por el **mockup hiperrealista de Canva** si Iñaki exporta el PNG.
-- `index.html` (landing original): actualizar "+8 h" → "+3 h" (el funnel ya está corregido); valorar añadir tabla de planes + FAQ.
+- `index.html` (landing original): actualizar "+8 h" → "+3 h" (el funnel y el dashboard ya están corregidos); valorar añadir tabla de planes + FAQ.
+- (Opcional) Producto Stripe "Sesión final con Nacho" 65€ para el plan Básico (aún sin crear).
 - (Opcional) **Cuentas + base de datos** (Supabase) — detallado en sección 18 (Opción C).
 - Sustituir la imagen base del certificado por el original en máxima calidad si Iñaki lo tiene en PNG/JPG.
 
@@ -377,26 +408,29 @@ Por cada clase, cuando Iñaki envíe la grabación:
 
 ## 18. Puesta en venta del curso (pago + email + acceso)
 
-### ✅ HECHO (2-jul-2026) — el curso YA se puede comprar
-Flujo completo funcionando: **funnel → pago Stripe → página de gracias → email de bienvenida.**
+### ✅ HECHO (2–4 jul-2026) — el curso se compra y el email FUNCIONA
+Flujo completo **probado con pago real**: **funnel/link → pago Stripe → `success.html` → email de bienvenida → entra al curso → puerta de nombre.**
 
-- **Pago (Stripe Payment Links).** En `funel.html`, al final, están los enlaces:
+- **Pago (Stripe Payment Links).** En `funel.html`, al final:
   ```js
   const STRIPE = {
     basic:   'https://buy.stripe.com/4gM7sN64c6hC9PMeMe2go01',   // 190€
-    premium: 'https://buy.stripe.com/00w28tdwE7lG6DA5bE2go00'    // 219€
+    premium: 'https://buy.stripe.com/00w28tdwE7lG6DA5bE2go00'    // 219€ (cupón MARCOS10 = −10€)
   };
   ```
-  Cupón **`MARCOS10`** (−10€) activado **solo en el Premium** (para quien viene de Marcos Agudo). Nota con asterisco bajo el precio Premium.
-- **`success.html`** — página de éxito (estilo curso: Fraunces+Inter, paleta dashboard). Lee `?plan=` y `?session_id=` de la URL, guarda `etc_plan`, y **abre un modal que pide nombre+apellidos → `etc_name`** (el mismo que usa el certificado). Botón → `dashboard.html?plan=…`.
-- **`/api/send-welcome.js`** — función serverless (Vercel). La llama `success.html` con el `session_id`; pide a **Stripe** el email del comprador (con `STRIPE_SECRET_KEY`) y envía el **email de bienvenida branded** con **Resend** (`RESEND_API_KEY`). Cabecera del email: **verde suave `#C8EDE4`** con el **logo real de ETC** (`images/logo-etc-real.png`, transparente, sin recuadro). Envía desde `hola@equilibratucamino.com` (dominio verificado en Resend).
-- **Variables en Vercel** (`etc-curso` → Settings → Environment Variables): `STRIPE_SECRET_KEY` (sk_live_…) y `RESEND_API_KEY` (re_…). Tras añadirlas → **Redeploy**.
+  Cupón **`MARCOS10`** (−10€) **solo Premium**. El link de **prueba de 1€** Iñaki lo dejó apuntando al **mismo thankful URL del Premium** (se puede archivar en Stripe).
+- **Links de marca para compartir:** `premium.html` (`/premium`) y `basico.html` (`/basico`) → tarjeta OG (`images/og-curso.png`) + redirección JS a Stripe. Ver NOVEDADES 4-jul.
+- **`success.html`** — página de éxito (Fraunces+Inter). Lee `?plan=` y `?session_id=`, guarda `etc_plan`, muestra plan+incluye y botón **"¡Empieza ya el curso!"** → `dashboard.html?plan=…`. **Ya NO pide el nombre** (se pide en el dashboard). Llama a `/api/send-welcome` con el `session_id`.
+- **Puerta de nombre en `dashboard.html`** — al entrar sin `etc_name`, aparece un overlay obligatorio (*"Lo primero de todo, ¿cómo te llamas?"*, nombre+apellidos, sin saltar) → guarda `etc_name` (certificado) + iniciales en el avatar. Se pinta antes que el curso (sin parpadeo para quien ya lo tiene).
+- **`/api/send-welcome.js`** — función serverless (Vercel). Pide a **Stripe** el email del comprador (`STRIPE_SECRET_KEY`) y envía el **email branded** con **Resend** (`RESEND_API_KEY`) desde `Nacho · ETC. <hola@equilibratucamino.com>` (dominio verificado en Resend). Cabecera: **verde `#C8EDE4`** (fondo CSS de la celda) + **sello circular blanco** con el logo ETC original en **alta resolución** (`images/logo-etc-badge-circle.png`, ~1020px) → **a prueba de modo oscuro** (imagen opaca).
+- **Variables en Vercel** (`etc-curso` → Settings → Environment Variables, Production+Preview): `STRIPE_SECRET_KEY` (`sk_live_…`, clave nueva creada 4-jul) y `RESEND_API_KEY` (`re_…`). Cambiar una variable requiere **Redeploy**.
 - **Success URLs en Stripe** (After payment → Redirect), con `&session_id={CHECKOUT_SESSION_ID}`:
   - Básico: `https://curso.equilibratucamino.com/success.html?plan=basic&session_id={CHECKOUT_SESSION_ID}`
   - Premium: `https://curso.equilibratucamino.com/success.html?plan=premium&session_id={CHECKOUT_SESSION_ID}`
 
-> Falta hacer un **pago de prueba de punta a punta** para confirmar que llega el email.
-> Detalle menor pendiente: el modal de nombre en `success.html` aún tiene el enlace "añadir después"; Iñaki quiere el nombre **obligatorio** (quitar el "saltar").
+> ✅ **Probado:** pago real → el email llega (revisar spam la 1ª vez). El diagnóstico temporal de la función ya se retiró.
+> 🔒 **Seguridad:** las claves `sk_live_`/`re_` solo van en Stripe y en Vercel — nunca en chat/email/repo.
+> ⏳ **Por Iñaki:** confirmar las 2 Success URLs reales (Básico/Premium) con el `session_id`; archivar el link de 1€ de prueba.
 
 ### ⏳ PENDIENTE — el gran bloque siguiente: acceso real + progreso + vídeos
 Hoy el acceso **sigue abierto**: cualquiera con la URL de `dashboard.html` entra sin pagar, y el progreso vive en `localStorage` (por dispositivo, **no le sigue** si cambia de móvil a ordenador). Decisión de Iñaki (2-jul): como al principio se venderán pocos cursos, **el riesgo de que se comparta la URL es bajo** → se deja para más adelante, junto con las grabaciones de julio.
