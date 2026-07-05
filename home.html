@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="512x512" href="images/favicon.png">
+  <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+  <title>Curso ETC. — Programa de Recuperación de la Ludopatía</title>
+  <meta name="description" content="El único programa en español creado por exludópatas. 15 clases para recuperar el control de tu vida.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,400;1,9..144,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 16px; scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+    body { font-family: 'Inter', -apple-system, sans-serif; color: #1A1A1A; background: #0A0F0D; overflow-x: hidden; }
+    a { text-decoration: none; color: inherit; }
+    img { display: block; max-width: 100%; }
+
+    :root {
+      --teal:  #32B48C;
+      --teal-d:#1e8a68;
+      --blue:  #2563EB;
+      --gold:  #E8A900;
+      --dark:  #0A0F0D;
+      --mono:  'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    /* ════════ NAV ════════ */
+    /* ── NAV — blanco sobre hero blanco ── */
+    .nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+      height: 60px;
+      background: rgba(250,250,248,0.92);
+      backdrop-filter: blur(20px);
+      display: flex; align-items: center;
+      padding: 0 40px; gap: 32px;
+      border-bottom: 1px solid rgba(0,0,0,0.07);
+      transition: background .3s, border-color .3s;
+    }
+    .nav.dark-nav {
+      background: rgba(10,15,13,0.92);
+      border-bottom-color: rgba(255,255,255,.05);
+    }
+    .nav__logo img { height: 26px; width: auto; }
+    .nav__links { display: flex; align-items: center; gap: 28px; margin-left: auto; }
+    .nav__link { font-size: 0.82rem; font-weight: 300; color: #6B7280; transition: color .15s; }
+    .nav__link:hover { color: #1A1A1A; }
+    .nav.dark-nav .nav__link { color: rgba(255,255,255,.65); }
+    .nav.dark-nav .nav__link:hover { color: #fff; }
+    .nav__cta {
+      background: var(--teal); color: #fff; font-size: 0.85rem; font-weight: 500;
+      padding: 9px 22px; border-radius: 999px;
+      transition: background .18s, transform .15s;
+      box-shadow: 0 4px 16px rgba(50,180,140,.28);
+    }
+    .nav__cta:hover { background: var(--teal-d); transform: translateY(-1px); }
+    @media(max-width:640px){ .nav__links{display:none;} .nav{padding:0 20px;} }
+
+    /* ════════ HERO — FONDO BLANCO ════════ */
+    .hero {
+      min-height: 100svh;
+      display: flex; align-items: center; justify-content: center;
+      padding: 72px 24px 56px;
+      position: relative; overflow: hidden;
+      background: #FAFAF8;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 70% 55% at 50% 0%, rgba(50,180,140,.10) 0%, transparent 65%),
+        radial-gradient(ellipse 45% 35% at 90% 85%, rgba(37,99,235,.06) 0%, transparent 55%),
+        radial-gradient(ellipse 35% 30% at 5% 75%, rgba(50,180,140,.06) 0%, transparent 50%);
+      pointer-events: none;
+    }
+    .hero__noise { display: none; }
+
+    /* ── WELLNESS BUBBLES ── */
+    .bubble {
+      position: absolute;
+      border-radius: 50%;
+      pointer-events: none;
+      background: radial-gradient(circle at 38% 32%,
+        rgba(50,180,140,0.38) 0%,
+        rgba(50,180,140,0.12) 55%,
+        transparent 100%);
+      border: 1.5px solid rgba(50,180,140,0.3);
+      will-change: transform, opacity;
+      z-index: 0;
+    }
+    /* ── Bubble flow animations — movimiento amplio, orgánico ── */
+    @keyframes bub1 {
+      0%   { transform: translate(0,0) scale(1);          opacity: var(--op); }
+      18%  { transform: translate(60px,-80px) scale(1.12);  opacity: calc(var(--op)*1.4); }
+      38%  { transform: translate(-40px,-150px) scale(0.9); opacity: calc(var(--op)*0.85); }
+      58%  { transform: translate(90px,-110px) scale(1.08); opacity: calc(var(--op)*1.2); }
+      78%  { transform: translate(-60px,-60px) scale(0.94); opacity: calc(var(--op)*0.75); }
+      100% { transform: translate(0,0) scale(1);          opacity: var(--op); }
+    }
+    @keyframes bub2 {
+      0%   { transform: translate(0,0) scale(1);           opacity: var(--op); }
+      22%  { transform: translate(-80px,-60px) scale(1.1);  opacity: calc(var(--op)*1.3); }
+      45%  { transform: translate(50px,-130px) scale(0.88); opacity: calc(var(--op)*0.8); }
+      65%  { transform: translate(-30px,-90px) scale(1.14); opacity: calc(var(--op)*1.5); }
+      85%  { transform: translate(70px,-40px) scale(0.96);  opacity: calc(var(--op)*0.9); }
+      100% { transform: translate(0,0) scale(1);           opacity: var(--op); }
+    }
+    @keyframes bub3 {
+      0%   { transform: translate(0,0) scale(1);            opacity: var(--op); }
+      15%  { transform: translate(-100px,-50px) scale(1.06); opacity: calc(var(--op)*1.2); }
+      40%  { transform: translate(70px,-120px) scale(0.92);  opacity: calc(var(--op)*0.7); }
+      62%  { transform: translate(-50px,-160px) scale(1.1);  opacity: calc(var(--op)*1.4); }
+      80%  { transform: translate(40px,-80px) scale(0.95);   opacity: calc(var(--op)*0.85); }
+      100% { transform: translate(0,0) scale(1);            opacity: var(--op); }
+    }
+    @keyframes bub4 {
+      0%   { transform: translate(0,0) scale(1);            opacity: var(--op); }
+      25%  { transform: translate(110px,-70px) scale(0.9);   opacity: calc(var(--op)*0.8); }
+      50%  { transform: translate(-60px,-140px) scale(1.15); opacity: calc(var(--op)*1.5); }
+      75%  { transform: translate(80px,-100px) scale(0.92);  opacity: calc(var(--op)*1.1); }
+      100% { transform: translate(0,0) scale(1);            opacity: var(--op); }
+    }
+    .hero__inner {
+      position: relative; z-index: 1;
+      text-align: center; max-width: 800px;
+    }
+
+    .badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 0.7rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--teal); background: rgba(50,180,140,.08);
+      border: 1px solid rgba(50,180,140,.22);
+      padding: 6px 16px; border-radius: 100px; margin-bottom: 32px;
+    }
+    .badge__pulse { width: 6px; height: 6px; border-radius: 50%; background: var(--teal); animation: pulse 2s ease-in-out infinite; }
+    @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.25;transform:scale(.6)} }
+    @keyframes floatHero { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-12px)} }
+
+    .hero__h1 {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: clamp(3.6rem, 10vw, 8.6rem);
+      font-weight: 600; line-height: 1.0; letter-spacing: -0.04em;
+      color: #14160F; margin-bottom: 0;
+    }
+    .hero__h1 em { font-style: italic; font-weight: 700; color: var(--teal); display: block; }
+    .hero__h1 span { display: block; }
+
+    .hero__divider {
+      display: flex; align-items: center; justify-content: center; gap: 12px;
+      margin: 20px 0;
+    }
+    .hero__divider-line { flex: 1; max-width: 80px; height: 1px; background: rgba(0,0,0,.1); }
+    .hero__divider-dot { font-size: 0.7rem; color: rgba(0,0,0,.2); }
+
+    .hero__sub {
+      font-size: clamp(1rem, 2vw, 1.15rem); font-weight: 300;
+      color: #6B7280; line-height: 1.8;
+      max-width: 500px; margin: 0 auto 36px;
+    }
+    .hero__sub strong { font-weight: 500; color: #1A1A1A; }
+
+    .proof {
+      display: flex; align-items: center; justify-content: center;
+      gap: 16px; margin-bottom: 36px; flex-wrap: wrap;
+    }
+    .av-row { display: flex; }
+    .av {
+      width: 36px; height: 36px; border-radius: 50%;
+      border: 2.5px solid #FAFAF8;
+      margin-left: -9px; overflow: hidden;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.72rem; font-weight: 600; color: #fff; flex-shrink: 0;
+    }
+    .av:first-child { margin-left: 0; }
+    .av img { width: 100%; height: 100%; object-fit: cover; }
+    .c1{background:#228A6A;} .c2{background:#2563EB;} .c3{background:#9333EA;}
+    .c4{background:#D97706;} .c5{background:#DC2626;} .cm{background:#E5E7E3;color:#6B7280;font-size:.6rem;}
+    .proof__rating { text-align: left; }
+    .proof__stars { color: #F5C21B; font-size: 1rem; letter-spacing: 1.5px; line-height: 1; margin-bottom: 3px; }
+    .proof__text { font-size: 0.75rem; font-weight: 300; color: #9CA3AF; }
+    .proof__text strong { color: #1A1A1A; font-weight: 500; }
+
+    .ctas { display: flex; align-items: center; justify-content: center; gap: 12px; flex-wrap: wrap; }
+    .btn-big {
+      display: inline-flex; align-items: center; gap: 12px;
+      background: var(--teal); color: #fff;
+      font-size: 1.25rem; font-weight: 600; padding: 22px 52px; border-radius: 999px;
+      box-shadow: 0 10px 36px rgba(50,180,140,.38);
+      transition: background .18s, transform .18s, box-shadow .18s;
+      animation: btnPulse 2.4s ease-in-out infinite;
+    }
+    @keyframes btnPulse {
+      0%,100% { transform: translateY(0); box-shadow: 0 10px 36px rgba(50,180,140,.38); }
+      50%     { transform: translateY(-3px); box-shadow: 0 16px 48px rgba(50,180,140,.5); }
+    }
+    @media (prefers-reduced-motion: reduce) { .btn-big { animation: none; } }
+    .btn-big:hover { background: var(--teal-d); filter: brightness(1.05); animation-play-state: paused; box-shadow: 0 18px 52px rgba(50,180,140,.55); transform: translateY(-3px); }
+    /* CTA principal del hero: más grande + con movimiento para que llame */
+    .ctas .btn-big { font-size: 1.2rem; font-weight: 600; padding: 21px 52px; animation: ctaPulse 2.6s ease-in-out infinite; }
+    .ctas .btn-big:hover { animation-play-state: paused; }
+    @keyframes ctaPulse {
+      0%,100% { transform: translateY(0) scale(1); box-shadow: 0 8px 30px rgba(50,180,140,.32); }
+      50%     { transform: translateY(-4px) scale(1.025); box-shadow: 0 20px 52px rgba(50,180,140,.5); }
+    }
+    @media (prefers-reduced-motion: reduce) { .ctas .btn-big { animation: none; } }
+    .btn-big__arrow {
+      width: 24px; height: 24px; background: rgba(255,255,255,.22);
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      transition: transform .2s;
+    }
+    .btn-big:hover .btn-big__arrow { transform: translateX(3px); }
+    .btn-outline {
+      display: inline-flex; align-items: center; gap: 6px;
+      color: #6B7280; font-size: 0.9rem; font-weight: 300;
+      padding: 16px 22px; border-radius: 999px;
+      border: 1px solid rgba(0,0,0,.12);
+      transition: color .15s, border-color .15s;
+    }
+    .btn-outline:hover { color: var(--teal); border-color: rgba(50,180,140,.3); }
+
+    .hero__stats {
+      display: flex; align-items: center; justify-content: center;
+      gap: 0; margin-top: 52px; flex-wrap: wrap;
+    }
+    .hero__stat {
+      padding: 16px 32px; text-align: center;
+      border-right: 1px solid rgba(0,0,0,.08);
+    }
+    .hero__stat:last-child { border-right: none; }
+    .hero__stat-n { font-family: 'Fraunces', serif; font-size: 1.8rem; font-weight: 400; color: #1A1A1A; line-height: 1; }
+    .hero__stat-n span { color: var(--teal); }
+    .hero__stat-l { font-size: 0.72rem; font-weight: 300; color: #9CA3AF; margin-top: 4px; }
+    @media (max-width: 560px) {
+      .hero__stats { display: grid; grid-template-columns: 1fr 1fr; gap: 0; }
+      .hero__stat { padding: 16px 18px; border-right: none; }
+      .hero__stat:nth-child(1) { border-right: 1px solid rgba(0,0,0,.08); }
+      .hero__stat:nth-child(3) { grid-column: 1 / -1; border-top: 1px solid rgba(0,0,0,.08); }
+    }
+
+    /* ════════ DIVIDER SECTION ════════ */
+    .section-divider {
+      background: rgba(255,255,255,.03);
+      border-top: 1px solid rgba(255,255,255,.05);
+      border-bottom: 1px solid rgba(255,255,255,.05);
+      padding: 18px 40px;
+      display: flex; align-items: center; justify-content: center;
+      gap: 48px; flex-wrap: wrap;
+    }
+    .div-item { display: flex; align-items: center; gap: 10px; }
+    .div-icon { display: inline-flex; align-items: center; color: var(--teal); }
+    .div-text { font-size: 0.82rem; font-weight: 300; color: rgba(255,255,255,.72); }
+
+    /* ════════ SHARED ════════ */
+    .container { max-width: 1060px; margin: 0 auto; }
+    .s-label { font-size: 0.68rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; }
+    .s-title { font-family: 'Fraunces', serif; font-weight: 400; line-height: 1.12; letter-spacing: -0.022em; }
+
+    /* ════════ WHAT'S INSIDE — dark section ════════ */
+    .inside {
+      background: var(--dark); padding: 96px 24px;
+      border-top: 1px solid rgba(255,255,255,.05);
+    }
+    .inside .s-label { color: var(--teal); margin-bottom: 10px; }
+    .inside .s-title { font-size: clamp(1.8rem,3.5vw,2.8rem); color: #fff; margin-bottom: 14px; }
+    .inside .s-title em { font-style: italic; color: var(--teal); }
+    .inside__sub { font-size: 0.95rem; font-weight: 300; color: rgba(255,255,255,.72); line-height: 1.75; margin-bottom: 52px; max-width: 460px; }
+    .inside__grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
+
+    .feat-list { display: flex; flex-direction: column; gap: 14px; }
+    .feat {
+      display: flex; align-items: flex-start; gap: 14px;
+      padding: 18px 20px;
+      background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.07);
+      border-radius: 14px; transition: border-color .15s;
+    }
+    .feat:hover { border-color: rgba(50,180,140,.2); }
+    .feat__icon { width: 36px; height: 36px; border-radius: 9px; background: rgba(50,180,140,.1); color: var(--teal); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .feat__title { font-size: 0.9rem; font-weight: 500; color: #fff; margin-bottom: 3px; }
+    .feat__desc { font-size: 0.82rem; font-weight: 300; color: rgba(255,255,255,.72); line-height: 1.55; }
+
+    .mod-list { display: flex; flex-direction: column; gap: 3px; }
+    .mod-lbl { font-size: 0.67rem; font-weight: 500; letter-spacing: 0.11em; text-transform: uppercase; color: rgba(255,255,255,.35); margin-bottom: 10px; padding-left: 14px; }
+    .mod-r {
+      display: flex; align-items: center; gap: 12px;
+      padding: 11px 14px; border-radius: 10px;
+      background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.05);
+      font-size: 0.86rem; font-weight: 300; color: rgba(255,255,255,.75);
+      transition: background .12s, border-color .12s;
+    }
+    .mod-r:hover { background: rgba(50,180,140,.05); border-color: rgba(50,180,140,.12); }
+    .mod-r.dim { color: rgba(255,255,255,.3); }
+    .mod-n {
+      width: 24px; height: 24px; border-radius: 50%; flex-shrink: 0;
+      background: rgba(50,180,140,.1); border: 1px solid rgba(50,180,140,.2);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.65rem; font-weight: 600; color: var(--teal);
+    }
+    .mod-r.dim .mod-n { background: rgba(255,255,255,.04); border-color: rgba(255,255,255,.07); color: rgba(255,255,255,.3); }
+    .mod-dur { font-size: 0.7rem; color: rgba(255,255,255,.3); margin-left: auto; flex-shrink: 0; }
+    .mod-more { padding: 10px 14px; font-size: 0.78rem; font-weight: 400; color: var(--teal); text-decoration: none; }
+
+    @media(max-width:768px){ .inside__grid{grid-template-columns:1fr;gap:32px;} }
+
+    /* Curso — métricas + fases */
+    .metric { background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.08); border-radius: 16px; padding: 22px 16px; text-align: center; }
+    .metric__n { font-family: 'Fraunces', serif; font-size: 2rem; font-weight: 500; color: #fff; line-height: 1; letter-spacing: -0.02em; }
+    .metric__l { font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,.5); margin-top: 9px; }
+    .phase { background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.08); border-radius: 18px; padding: 24px; transition: border-color .25s, transform .25s; }
+    .phase:hover { border-color: rgba(50,180,140,.3); transform: translateY(-3px); }
+    .phase__hd { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
+    .phase__tag { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--teal); }
+    .phase__time { font-family: var(--mono); font-size: 0.66rem; color: rgba(255,255,255,.4); }
+    .phase__name { font-family: 'Fraunces', serif; font-size: 1.3rem; color: #fff; letter-spacing: -0.01em; }
+    .phase__sub { font-size: 0.8rem; font-weight: 300; color: rgba(255,255,255,.6); line-height: 1.5; margin: 6px 0 12px; }
+    .phase__list { display: flex; flex-direction: column; }
+    .cl { display: flex; align-items: center; gap: 11px; padding: 10px 0; border-top: 1px solid rgba(255,255,255,.06); }
+    .cl__n { font-family: var(--mono); font-size: 0.68rem; color: rgba(255,255,255,.4); width: 18px; flex-shrink: 0; }
+    .cl__t { font-size: 0.85rem; color: rgba(255,255,255,.86); flex: 1; line-height: 1.3; }
+    .cl__d { font-family: var(--mono); font-size: 0.66rem; color: rgba(255,255,255,.35); flex-shrink: 0; }
+    .incl-row { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 36px; }
+    .incl { display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.08); border-radius: 999px; padding: 9px 16px; font-size: 0.8rem; color: rgba(255,255,255,.82); }
+    .incl svg { color: var(--teal); flex-shrink: 0; }
+
+    /* Reveal al hacer scroll — envolvente, escalonado */
+    .reveal { opacity: 0; transform: translateY(26px) scale(.985); transition: opacity .7s cubic-bezier(.22,1,.36,1), transform .8s cubic-bezier(.34,1.4,.64,1); }
+    .reveal.in { opacity: 1; transform: none; }
+    .reveal.d1 { transition-delay: .1s; }
+    .reveal.d2 { transition-delay: .2s; }
+    .reveal.d3 { transition-delay: .3s; }
+    .reveal.d4 { transition-delay: .4s; }
+
+    /* Reveal con giro de hoja (fases) — aparecen de izq. a dcha. por orden */
+    .reveal-flip { opacity: 0; transform: perspective(1300px) rotateY(-26deg) translateY(8px); transform-origin: left center; transition: opacity .7s cubic-bezier(.22,1,.36,1), transform .9s cubic-bezier(.34,1.18,.5,1); }
+    .reveal-flip.in { opacity: 1; transform: perspective(1300px) rotateY(0deg) translateY(0); }
+    .reveal-flip.d1 { transition-delay: .16s; }
+    .reveal-flip.d2 { transition-delay: .32s; }
+
+    @media (prefers-reduced-motion: reduce) { .reveal, .reveal-flip { opacity: 1; transform: none; transition: none; } }
+
+    /* Casos de éxito — vídeos */
+    .vid-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px,1fr)); gap: 22px; margin: 44px 0 44px; }
+    .vid-card { display: flex; flex-direction: column; gap: 11px; }
+    .vid-label { font-family: var(--mono); font-size: 0.6rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--teal); }
+    .vid-desc { font-family: 'Fraunces', serif; font-size: 0.98rem; font-weight: 500; color: #fff; line-height: 1.35; letter-spacing: -0.01em; }
+    .yt-wrap { position: relative; border-radius: 16px; overflow: hidden; aspect-ratio: 16/9; background: #000; cursor: pointer; box-shadow: 0 12px 30px -14px rgba(0,0,0,0.28); }
+    .yt-thumb { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .4s ease, opacity .3s; }
+    .yt-wrap:hover .yt-thumb { transform: scale(1.04); opacity: .9; }
+    .yt-play { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; pointer-events: none; }
+    .yt-play-btn { width: 56px; height: 56px; border-radius: 50%; background: rgba(255,255,255,.95); display: flex; align-items: center; justify-content: center; box-shadow: 0 8px 28px rgba(0,0,0,.35); transition: transform .2s; }
+    .yt-wrap:hover .yt-play-btn { transform: scale(1.1); }
+    .yt-play-btn svg { width: 20px; height: 20px; fill: #1A1A1A; margin-left: 3px; }
+    .yt-wrap iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+    .rev-card { transition: transform .25s cubic-bezier(.22,1,.36,1), box-shadow .25s; }
+    .rev-card:hover { transform: translateY(-4px); }
+
+    /* ════════ INSTRUCTORS — alternating light ════════ */
+    .instructors { background: #F7F9F7; padding: 68px 24px; }
+    .instructors__hd { text-align: center; margin-bottom: 40px; }
+    .instructors__hd .s-label { color: var(--teal); margin-bottom: 10px; }
+    .instructors__hd .s-title { font-size: clamp(1.8rem,3.2vw,2.5rem); color: #1A1A1A; margin-bottom: 14px; }
+    .instructors__hd .s-title em { font-style: italic; color: var(--teal); }
+    .instructors__hd p { font-size: 0.95rem; font-weight: 300; color: #6B7280; max-width: 480px; margin: 0 auto; line-height: 1.75; }
+
+    .inst-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; max-width: 760px; margin: 0 auto; }
+    .inst-card { background: #fff; border: 1px solid rgba(0,0,0,.08); border-radius: 18px; overflow: hidden; transition: box-shadow .2s, transform .2s; }
+    .inst-card:hover { box-shadow: 0 8px 28px rgba(0,0,0,.07); transform: translateY(-3px); }
+    .inst-photo { width: 100%; height: 190px; overflow: hidden; background: #F0F4F2; }
+    .inst-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center top; transition: transform .4s; }
+    .inst-card:hover .inst-photo img { transform: scale(1.03); }
+    .inst-body { padding: 18px 20px; }
+    .inst-role { font-size: 0.62rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--teal); margin-bottom: 5px; }
+    .inst-name { font-family: 'Fraunces', serif; font-size: 1.2rem; font-weight: 400; color: #1A1A1A; margin-bottom: 8px; }
+    .inst-bio { font-size: 0.82rem; font-weight: 300; color: #6B7280; line-height: 1.65; margin-bottom: 12px; }
+    .inst-tags { display: flex; gap: 6px; flex-wrap: wrap; }
+    .tag { font-size: 0.68rem; font-weight: 400; color: #6B7280; background: #F4F4F0; border: 1px solid rgba(0,0,0,.07); padding: 3px 10px; border-radius: 100px; }
+
+    @media(max-width:640px){ .inst-grid{grid-template-columns:1fr;} }
+
+    /* ════════ CERTIFICADO — dark ════════ */
+    .cert-section { background: var(--dark); padding: 96px 24px; border-top: 1px solid rgba(255,255,255,.05); }
+    .cert-inner { max-width: 940px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; }
+
+    /* Diploma */
+    .diploma {
+      background: #0D1A15;
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 8px;
+      box-shadow: 0 24px 64px rgba(0,0,0,.4);
+      padding: 0;
+      position: relative;
+    }
+    .diploma__border {
+      margin: 14px;
+      border: 1px solid rgba(180,145,60,.3);
+      border-radius: 4px;
+      padding: 28px 30px;
+    }
+    .diploma__border::before, .diploma__border::after { content: '✦'; position: absolute; font-size: 0.7rem; color: rgba(180,145,60,.4); }
+    .diploma__border::before { top: 20px; left: 20px; }
+    .diploma__border::after  { bottom: 20px; right: 20px; }
+    .diploma__logo { display: flex; justify-content: center; margin-bottom: 10px; }
+    .diploma__logo img { height: 22px; width: auto; filter: brightness(1.8); opacity: .8; }
+    .diploma__orn { text-align: center; color: rgba(180,145,60,.35); letter-spacing: 5px; font-size: 0.55rem; margin-bottom: 12px; }
+    .diploma__cert { text-align: center; font-size: 0.68rem; font-weight: 400; letter-spacing: 0.07em; text-transform: uppercase; color: rgba(255,255,255,.35); margin-bottom: 6px; }
+    .diploma__name { text-align: center; font-family: 'Fraunces', serif; font-size: 1.3rem; font-weight: 400; font-style: italic; color: #fff; border-bottom: 1px solid rgba(180,145,60,.25); padding-bottom: 8px; margin-bottom: 10px; }
+    .diploma__course { text-align: center; font-size: 0.72rem; font-weight: 300; color: rgba(255,255,255,.65); line-height: 1.6; margin-bottom: 18px; }
+    .diploma__course strong { color: rgba(255,255,255,.7); font-weight: 500; }
+    .diploma__sigs { display: flex; justify-content: space-around; margin-bottom: 12px; }
+    .diploma__sig { text-align: center; }
+    .diploma__sig-line { width: 72px; height: 1px; background: rgba(255,255,255,.12); margin: 0 auto 5px; }
+    .diploma__sig-name { font-size: 0.62rem; font-weight: 500; color: rgba(255,255,255,.6); }
+    .diploma__sig-role { font-size: 0.55rem; font-weight: 300; color: rgba(255,255,255,.3); }
+    .diploma__seal { position: absolute; bottom: 22px; right: 24px; width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg,#b4913c,#e8c96d); display: flex; align-items: center; justify-content: center; font-size: 1rem; box-shadow: 0 2px 10px rgba(180,145,60,.25); }
+
+    .cert-copy .s-label { color: var(--gold); margin-bottom: 10px; }
+    .cert-copy .s-title { font-size: clamp(1.5rem,2.8vw,2.2rem); color: #fff; margin-bottom: 14px; }
+    .cert-copy .s-title em { font-style: italic; color: var(--teal); }
+    .cert-copy p { font-size: 0.92rem; font-weight: 300; color: rgba(255,255,255,.72); line-height: 1.75; margin-bottom: 22px; }
+    .cert-perks { display: flex; flex-direction: column; gap: 10px; }
+    .cp { display: flex; align-items: center; gap: 10px; font-size: 0.86rem; font-weight: 300; color: rgba(255,255,255,.75); }
+    .cp-tick { width: 18px; height: 18px; border-radius: 50%; background: rgba(50,180,140,.1); border: 1px solid rgba(50,180,140,.25); display: flex; align-items: center; justify-content: center; font-size: 0.58rem; font-weight: 600; color: var(--teal); flex-shrink: 0; }
+
+    @media(max-width:700px){ .cert-inner{grid-template-columns:1fr;} }
+
+    /* ════════ REVIEWS — light ════════ */
+    .reviews { background: var(--dark); padding: 88px 24px; }
+    .reviews__hd { text-align: center; margin-bottom: 44px; }
+    .reviews__hd .s-label { color: var(--teal); margin-bottom: 10px; }
+    .reviews__hd .s-title { font-size: clamp(1.8rem,3.2vw,2.4rem); color: #fff; margin-bottom: 20px; }
+    .reviews__hd .s-title em { font-style: italic; color: var(--teal); }
+    .reviews__sub { color: rgba(255,255,255,.65) !important; }
+    .reviews__proof { display: flex; align-items: center; justify-content: center; gap: 14px; flex-wrap: wrap; }
+    .rev-row { display: flex; }
+    .rev-av { width: 40px; height: 40px; border-radius: 50%; border: 2.5px solid #fff; margin-left: -10px; overflow: hidden; display: flex; align-items: center; justify-content: center; font-size: 0.72rem; font-weight: 600; color: #fff; }
+    .rev-av:first-child { margin-left: 0; }
+    .rev-av img { width: 100%; height: 100%; object-fit: cover; }
+    .r1{background:#228A6A;} .r2{background:#2563EB;} .r3{background:#9333EA;} .r4{background:#D97706;} .r5{background:#DC2626;} .r6{background:#0891B2;} .rm{background:#9CA3AF;font-size:.6rem;}
+    .rev-stars-big { color: #F5C21B; font-size: 1.1rem; letter-spacing: 2px; margin-bottom: 3px; }
+    .rev-score { font-size: 0.78rem; font-weight: 300; color: #6B7280; }
+    .rev-score strong { font-weight: 600; color: #1A1A1A; }
+    .rev-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 18px; max-width: 900px; margin: 36px auto 0; }
+    .rev-card { background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.09); border-radius: 16px; padding: 22px; transition: box-shadow .18s, border-color .2s; }
+    .rev-card:hover { border-color: rgba(50,180,140,.3); }
+    .rev-s { color: #F5C21B; font-size: 0.82rem; margin-bottom: 10px; }
+    .rev-t { font-size: 0.88rem; font-weight: 300; color: rgba(255,255,255,.8); line-height: 1.65; margin-bottom: 14px; font-style: italic; }
+    .rev-a { display: flex; align-items: center; gap: 10px; }
+    .rev-dot { width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.7rem; font-weight: 600; color: #fff; flex-shrink: 0; }
+    .rev-n { font-size: 0.8rem; font-weight: 500; color: #fff; }
+    .rev-src { font-size: 0.68rem; font-weight: 300; color: rgba(255,255,255,.45); }
+    @media(max-width:700px){ .rev-grid{grid-template-columns:1fr;} }
+
+    /* ════════ FINAL CTA — impactante ════════ */
+    .final {
+      background: var(--dark); padding: 112px 24px;
+      text-align: center; position: relative; overflow: hidden;
+    }
+    .final::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse 70% 55% at 50% 50%, rgba(50,180,140,.15) 0%, transparent 55%);
+      pointer-events: none;
+    }
+    .final__inner { position: relative; z-index: 1; }
+    .final__h { font-family: 'Fraunces', serif; font-size: clamp(2.2rem,6vw,4.5rem); font-weight: 400; line-height: 1.1; letter-spacing: -0.03em; color: #fff; margin-bottom: 18px; }
+    .final__h em { font-style: italic; color: var(--teal); }
+    .final__sub { font-size: 1rem; font-weight: 300; color: rgba(255,255,255,.72); margin-bottom: 40px; line-height: 1.7; }
+    .final__note { margin-top: 14px; font-size: 0.75rem; font-weight: 300; color: rgba(255,255,255,.2); }
+
+    /* ════════ FOOTER ════════ */
+    .footer { background: #060A08; padding: 24px 40px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; border-top: 1px solid rgba(255,255,255,.04); }
+    .footer__logo img { height: 20px; width: auto; opacity: .45; }
+    .footer__copy { font-size: 0.72rem; font-weight: 300; color: rgba(255,255,255,.22); }
+    .footer a { font-size: 0.75rem; font-weight: 300; color: rgba(255,255,255,.3); transition: color .15s; }
+    .footer a:hover { color: var(--teal); }
+  </style>
+</head>
+<body>
+
+<!-- (Menú superior eliminado a propósito — hero limpio y directo) -->
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero__noise"></div>
+
+  <!-- ── WELLNESS BUBBLES ── -->
+  <div class="bubble" style="width:200px;height:200px;left:5%;top:12%;--op:0.85;animation:bub1 11s ease-in-out infinite;filter:blur(4px);"></div>
+  <div class="bubble" style="width:100px;height:100px;left:14%;top:58%;--op:0.75;animation:bub2 8s ease-in-out infinite -3s;filter:blur(2px);"></div>
+  <div class="bubble" style="width:150px;height:150px;left:22%;top:76%;--op:0.7;animation:bub3 13s ease-in-out infinite -6s;filter:blur(3px);"></div>
+  <div class="bubble" style="width:70px;height:70px;left:40%;top:8%;--op:0.8;animation:bub1 9s ease-in-out infinite -2s;filter:blur(1.5px);"></div>
+  <div class="bubble" style="width:120px;height:120px;left:56%;top:6%;--op:0.72;animation:bub2 12s ease-in-out infinite -5s;filter:blur(2.5px);"></div>
+  <div class="bubble" style="width:85px;height:85px;left:70%;top:20%;--op:0.8;animation:bub3 7.5s ease-in-out infinite -1.5s;filter:blur(1.5px);"></div>
+  <div class="bubble" style="width:170px;height:170px;left:80%;top:45%;--op:0.68;animation:bub1 14s ease-in-out infinite -7s;filter:blur(5px);"></div>
+  <div class="bubble" style="width:55px;height:55px;left:87%;top:12%;--op:0.82;animation:bub2 6.5s ease-in-out infinite -4s;filter:blur(1px);"></div>
+  <div class="bubble" style="width:110px;height:110px;left:91%;top:72%;--op:0.72;animation:bub3 10s ease-in-out infinite -8s;filter:blur(2.5px);"></div>
+  <div class="bubble" style="width:135px;height:135px;left:48%;top:78%;--op:0.65;animation:bub1 9.5s ease-in-out infinite -3.5s;filter:blur(3.5px);"></div>
+  <div class="bubble" style="width:62px;height:62px;left:2%;top:40%;--op:0.78;animation:bub2 7s ease-in-out infinite -0.5s;filter:blur(1.5px);"></div>
+  <div class="bubble" style="width:92px;height:92px;left:58%;top:65%;--op:0.7;animation:bub3 11.5s ease-in-out infinite -9s;filter:blur(2px);"></div>
+
+  <!-- Mascots flotantes -->
+  <img src="images/mascot-heart.webp" alt="" aria-hidden="true" style="
+    position:absolute; bottom: 60px; left: clamp(16px, 6vw, 80px);
+    width: clamp(80px, 12vw, 160px); height: auto;
+    opacity: 0.85; pointer-events: none; z-index: 1;
+    filter: drop-shadow(0 8px 24px rgba(50,180,140,.25));
+    animation: floatHero 4s ease-in-out infinite;
+  ">
+  <img src="images/mascot-slot.webp" alt="" aria-hidden="true" style="
+    position:absolute; bottom: 80px; right: clamp(16px, 6vw, 80px);
+    width: clamp(60px, 9vw, 120px); height: auto;
+    opacity: 0.55; pointer-events: none; z-index: 1;
+    filter: drop-shadow(0 6px 16px rgba(0,0,0,.4)) grayscale(0.2);
+    animation: floatHero 4s ease-in-out infinite 1.2s;
+  ">
+
+  <div class="hero__inner">
+    <h1 class="hero__h1">
+      <span>15 clases para</span>
+      <em>cerrar una etapa.</em>
+    </h1>
+
+    <div class="hero__divider">
+      <div class="hero__divider-line"></div>
+      <div class="hero__divider-dot">✦</div>
+      <div class="hero__divider-line"></div>
+    </div>
+
+    <p class="hero__sub">Creado por <strong>Nacho y Marcos Agudo</strong> — personas que han vivido la adicción al juego y saben exactamente lo que necesitas para salir.</p>
+
+    <div class="proof">
+      <div style="display:inline-flex;align-items:center;gap:10px;background:#fff;border:1px solid #E8E8E8;border-radius:12px;padding:7px 13px;box-shadow:0 2px 8px rgba(0,0,0,0.06);">
+        <svg width="20" height="20" viewBox="0 0 48 48" aria-hidden="true">
+          <path fill="#4285F4" d="M45.12 24.5c0-1.56-.14-3.06-.4-4.5H24v8.51h11.84c-.51 2.75-2.06 5.08-4.39 6.64v5.52h7.11c4.16-3.83 6.56-9.47 6.56-16.17z"/>
+          <path fill="#34A853" d="M24 46c5.94 0 10.92-1.97 14.56-5.33l-7.11-5.52c-1.97 1.32-4.49 2.1-7.45 2.1-5.73 0-10.58-3.87-12.31-9.07H4.34v5.7C7.96 41.07 15.4 46 24 46z"/>
+          <path fill="#FBBC05" d="M11.69 28.18C11.25 26.86 11 25.45 11 24s.25-2.86.69-4.18v-5.7H4.34C2.85 17.09 2 20.45 2 24s.85 6.91 2.34 9.88l7.35-5.7z"/>
+          <path fill="#EA4335" d="M24 10.75c3.23 0 6.13 1.11 8.41 3.29l6.31-6.31C34.91 4.18 29.93 2 24 2 15.4 2 7.96 6.93 4.34 14.12l7.35 5.7c1.73-5.2 6.58-9.07 12.31-9.07z"/>
+        </svg>
+        <div style="text-align:left;line-height:1.15;">
+          <div style="display:flex;align-items:center;gap:6px;">
+            <span style="font-weight:700;font-size:0.9rem;color:#1A1A1A;">5,0</span>
+            <span style="color:#FBBC04;font-size:0.85rem;letter-spacing:1px;">★★★★★</span>
+          </div>
+          <div style="font-size:0.7rem;color:#70757A;">47 reseñas en Google</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ctas">
+      <a href="dashboard.html" class="btn-big">
+        Accede al curso
+        <span class="btn-big__arrow">→</span>
+      </a>
+      <a href="#instructores" class="btn-outline">Conocer los instructores ↓</a>
+    </div>
+
+    <div class="hero__stats">
+      <div class="hero__stat"><div class="hero__stat-n">15</div><div class="hero__stat-l">clases en vídeo</div></div>
+      <div class="hero__stat"><div class="hero__stat-n">500<span>+</span></div><div class="hero__stat-l">personas atendidas</div></div>
+      <div class="hero__stat"><div class="hero__stat-n">∞</div><div class="hero__stat-l">acceso de por vida</div></div>
+    </div>
+  </div>
+</section>
+
+
+<!-- WHAT'S INSIDE -->
+<section class="inside" id="curso">
+  <div class="container" style="max-width:1120px;">
+    <div style="text-align:center;max-width:600px;margin:0 auto;">
+      <div class="s-label" style="color:var(--teal);margin-bottom:10px;">El programa</div>
+      <h2 class="s-title" style="font-size:clamp(1.8rem,3.5vw,2.8rem);color:#fff;margin-bottom:14px;">15 clases. <em>Un método.</em></h2>
+      <p style="font-size:0.95rem;font-weight:300;color:rgba(255,255,255,.7);line-height:1.7;">Un recorrido estructurado en 3 fases. Cada clase construye sobre la anterior, con vídeo en profundidad y ejercicios prácticos.</p>
+    </div>
+
+    <!-- MÉTRICAS -->
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin:42px 0 18px;">
+      <div class="metric reveal"><div class="metric__n">15</div><div class="metric__l">clases en vídeo</div></div>
+      <div class="metric reveal d1"><div class="metric__n" style="color:var(--teal);">+8 h</div><div class="metric__l">de contenido</div></div>
+      <div class="metric reveal d2"><div class="metric__n">60<span style="font-size:1.3rem;">+</span></div><div class="metric__l">ejercicios prácticos</div></div>
+      <div class="metric reveal d3"><div class="metric__n">∞</div><div class="metric__l">acceso de por vida</div></div>
+    </div>
+
+    <!-- FASES -->
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-top:18px;">
+
+      <div class="phase reveal-flip">
+        <div class="phase__hd"><span class="phase__tag">Fase 01</span><span class="phase__time">2 h 37 min</span></div>
+        <div class="phase__name">Entender</div>
+        <div class="phase__sub">Comprende qué te pasa, y por qué.</div>
+        <div class="phase__list">
+          <div class="cl"><span class="cl__n">01</span><span class="cl__t">Aceptar la realidad</span><span class="cl__d">28m</span></div>
+          <div class="cl"><span class="cl__n">02</span><span class="cl__t">La mente de un ludópata</span><span class="cl__d">32m</span></div>
+          <div class="cl"><span class="cl__n">03</span><span class="cl__t">Dopamina y cerebro</span><span class="cl__d">30m</span></div>
+          <div class="cl"><span class="cl__n">04</span><span class="cl__t">Las mentiras que te cuentas</span><span class="cl__d">35m</span></div>
+          <div class="cl"><span class="cl__n">05</span><span class="cl__t">Romper el ciclo</span><span class="cl__d">32m</span></div>
+        </div>
+      </div>
+
+      <div class="phase reveal-flip d1">
+        <div class="phase__hd"><span class="phase__tag">Fase 02</span><span class="phase__time">2 h 58 min</span></div>
+        <div class="phase__name">Reconstruir</div>
+        <div class="phase__sub">Trabaja las emociones y recupera el control.</div>
+        <div class="phase__list">
+          <div class="cl"><span class="cl__n">06</span><span class="cl__t">Gestión de impulsos</span><span class="cl__d">38m</span></div>
+          <div class="cl"><span class="cl__n">07</span><span class="cl__t">Ansiedad, culpa y vergüenza</span><span class="cl__d">36m</span></div>
+          <div class="cl"><span class="cl__n">08</span><span class="cl__t">Reconstruir la confianza</span><span class="cl__d">34m</span></div>
+          <div class="cl"><span class="cl__n">09</span><span class="cl__t">Dinero y recuperación</span><span class="cl__d">40m</span></div>
+          <div class="cl"><span class="cl__n">10</span><span class="cl__t">La nueva identidad</span><span class="cl__d">30m</span></div>
+        </div>
+      </div>
+
+      <div class="phase reveal-flip d2">
+        <div class="phase__hd"><span class="phase__tag">Fase 03</span><span class="phase__time">2 h 45 min</span></div>
+        <div class="phase__name">Avanzar</div>
+        <div class="phase__sub">Construye la vida que quieres, sin juego.</div>
+        <div class="phase__list">
+          <div class="cl"><span class="cl__n">11</span><span class="cl__t">Crear nuevos hábitos</span><span class="cl__d">33m</span></div>
+          <div class="cl"><span class="cl__n">12</span><span class="cl__t">Familia y entorno</span><span class="cl__d">37m</span></div>
+          <div class="cl"><span class="cl__n">13</span><span class="cl__t">Prevenir recaídas</span><span class="cl__d">35m</span></div>
+          <div class="cl"><span class="cl__n">14</span><span class="cl__t">Diseñar una nueva vida</span><span class="cl__d">32m</span></div>
+          <div class="cl"><span class="cl__n">15</span><span class="cl__t">El futuro empieza hoy</span><span class="cl__d">28m</span></div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- INCLUYE -->
+    <div class="incl-row">
+      <span class="incl"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0Z"/><path d="M17 5h3v2a3 3 0 0 1-3 3M7 5H4v2a3 3 0 0 0 3 3"/></svg>Certificado oficial</span>
+      <span class="incl"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>Ejercicios en cada clase</span>
+      <span class="incl"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2Z"/></svg>Sesiones 1 a 1</span>
+      <span class="incl"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="2.5"/><path d="M6.3 6.3a8 8 0 0 0 0 11.4M17.7 6.3a8 8 0 0 1 0 11.4"/></svg>Webinars mensuales</span>
+      <span class="incl"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>100% privado</span>
+    </div>
+
+    <div style="text-align:center;margin-top:42px;">
+      <a href="dashboard.html" class="btn-big" style="display:inline-flex;">Empezar el programa <span class="btn-big__arrow">→</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- INSTRUCTORES -->
+<section class="instructors" id="instructores" style="position:relative;overflow:hidden;">
+  <!-- Bubbles bloque instructores (fondo blanco) -->
+  <div class="bubble" style="width:180px;height:180px;left:2%;top:10%;--op:0.72;animation:bub2 13s ease-in-out infinite;filter:blur(4px);"></div>
+  <div class="bubble" style="width:90px;height:90px;left:8%;top:65%;--op:0.65;animation:bub4 9s ease-in-out infinite -4s;filter:blur(2px);"></div>
+  <div class="bubble" style="width:130px;height:130px;left:85%;top:8%;--op:0.68;animation:bub1 11s ease-in-out infinite -2s;filter:blur(3.5px);"></div>
+  <div class="bubble" style="width:65px;height:65px;left:90%;top:55%;--op:0.75;animation:bub3 8s ease-in-out infinite -6s;filter:blur(1.5px);"></div>
+  <div class="bubble" style="width:50px;height:50px;left:48%;top:5%;--op:0.6;animation:bub2 7s ease-in-out infinite -1s;filter:blur(1px);"></div>
+  <div class="bubble" style="width:110px;height:110px;left:70%;top:80%;--op:0.62;animation:bub4 12s ease-in-out infinite -8s;filter:blur(3px);"></div>
+  <div class="container">
+    <div class="instructors__hd">
+      <div class="s-label">Los instructores</div>
+      <h2 class="s-title" style="font-size:clamp(1.8rem,3.2vw,2.5rem);color:#1A1A1A;margin-bottom:14px;">Te entienden porque<br><em>lo han vivido.</em></h2>
+      <p>No hay teoría sin experiencia. Nacho y Marcos combinan el conocimiento de haber estado ahí con años de acompañar a otras personas.</p>
+    </div>
+    <div class="inst-grid">
+      <div class="inst-card">
+        <div class="inst-photo"><img src="images/nacho-bg.webp" alt="Nacho — Fundador de ETC."></div>
+        <div class="inst-body">
+          <div class="inst-role">Fundador · Ex-ludópata recuperado</div>
+          <div class="inst-name">Nacho</div>
+          <p class="inst-bio">Convivió con la ludopatía desde la adolescencia. Hoy lidera ETC desde la única perspectiva que importa: la de alguien que ha estado ahí. 500+ personas atendidas.</p>
+          <div class="inst-tags"><span class="tag">20+ años de experiencia</span><span class="tag">Fundador ETC.</span></div>
+        </div>
+      </div>
+      <div class="inst-card">
+        <div class="inst-photo"><img src="images/marcos-agudo.webp" alt="Marcos Agudo — Especialista"></div>
+        <div class="inst-body">
+          <div class="inst-role">Especialista · Referente nacional</div>
+          <div class="inst-name">Marcos Agudo</div>
+          <p class="inst-bio">Profesional más reconocido en el tratamiento de la adicción al juego en España. Autor, conferenciante con 50+ charlas, habitual en TV y radio.</p>
+          <div class="inst-tags"><span class="tag">Autor publicado</span><span class="tag">50+ charlas</span><span class="tag">TV y radio</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CERTIFICADO -->
+<section class="cert-section">
+  <div class="container">
+    <div class="cert-inner">
+      <div class="diploma">
+        <div class="diploma__border">
+          <div class="diploma__logo"><img src="images/logo-etc-transparent.webp" alt="ETC."></div>
+          <div class="diploma__orn">· · · ✦ · · ·</div>
+          <div class="diploma__cert">Certifica que</div>
+          <div class="diploma__name">Tu nombre aquí</div>
+          <div class="diploma__course">ha completado con éxito el<br><strong>Programa de Recuperación ETC.</strong><br>15 clases · Nacho & Marcos Agudo</div>
+          <div class="diploma__sigs">
+            <div class="diploma__sig"><div class="diploma__sig-line"></div><div class="diploma__sig-name">Nacho</div><div class="diploma__sig-role">Fundador · ETC.</div></div>
+            <div class="diploma__sig"><div class="diploma__sig-line"></div><div class="diploma__sig-name">Marcos Agudo</div><div class="diploma__sig-role">Especialista · ETC.</div></div>
+          </div>
+          <div class="diploma__orn" style="margin-bottom:0;">· · · ✦ · · ·</div>
+        </div>
+        <div class="diploma__seal">🏅</div>
+      </div>
+      <div class="cert-copy">
+        <div class="s-label" style="color:var(--gold);margin-bottom:10px;">Al completar el programa</div>
+        <h2 class="s-title" style="font-size:clamp(1.5rem,2.8vw,2.2rem);color:#fff;margin-bottom:14px;">Tu certificado<br><em>de recuperación.</em></h2>
+        <p style="font-size:0.92rem;font-weight:300;color:rgba(255,255,255,.72);line-height:1.75;margin-bottom:22px;">Cuando termines las 15 clases recibirás un certificado personalizado firmado por Nacho y Marcos. El reconocimiento real de algo que conseguiste.</p>
+        <div class="cert-perks">
+          <div class="cp"><div class="cp-tick">✓</div>Certificado con tu nombre personalizado</div>
+          <div class="cp"><div class="cp-tick">✓</div>Firmado por Nacho y Marcos Agudo</div>
+          <div class="cp"><div class="cp-tick">✓</div>Descargable en PDF · Compartible</div>
+          <div class="cp"><div class="cp-tick">✓</div>Reconocimiento real de tu progreso</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WEBINARS -->
+<section id="webinars" style="background:#FFFFFF;padding:64px 24px;position:relative;overflow:hidden;">
+  <div class="container" style="max-width:680px;">
+    <div style="text-align:center;max-width:560px;margin:0 auto 28px;">
+      <div class="s-label" style="color:var(--gold);margin-bottom:9px;">Sesiones grupales</div>
+      <h2 class="s-title" style="font-size:clamp(1.4rem,2.6vw,2rem);color:#1A1A1A;margin-bottom:12px;">Además, webinars <em style="font-style:italic;color:var(--gold);">en directo.</em></h2>
+      <p style="font-size:0.9rem;font-weight:300;color:#666;line-height:1.65;">Cada mes, Nacho se conecta en directo con los alumnos: resuelve dudas, comparte experiencias reales y te acompaña con el apoyo del grupo.</p>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));background:linear-gradient(160deg,#FCF8EF,#F4ECDB);border:1px solid rgba(160,126,42,0.22);border-radius:20px;overflow:hidden;box-shadow:0 18px 40px -28px rgba(120,95,30,0.45);">
+      <!-- Perks -->
+      <div style="padding:26px 28px;">
+        <div style="font-family:'Fraunces',serif;font-size:1.1rem;font-weight:500;color:#1A1A1A;margin-bottom:15px;letter-spacing:-0.01em;">Sesión grupal mensual</div>
+        <div style="display:flex;flex-direction:column;gap:11px;">
+          <div style="display:flex;gap:10px;align-items:flex-start;font-size:0.84rem;color:#4A3F1E;line-height:1.4;"><span style="color:#A07E2A;font-weight:700;">✓</span> Nacho en directo, contigo y el grupo</div>
+          <div style="display:flex;gap:10px;align-items:flex-start;font-size:0.84rem;color:#4A3F1E;line-height:1.4;"><span style="color:#A07E2A;font-weight:700;">✓</span> Pregunta lo que necesites, sin filtros</div>
+          <div style="display:flex;gap:10px;align-items:flex-start;font-size:0.84rem;color:#4A3F1E;line-height:1.4;"><span style="color:#A07E2A;font-weight:700;">✓</span> Experiencias reales de otros alumnos</div>
+          <div style="display:flex;gap:10px;align-items:flex-start;font-size:0.84rem;color:#4A3F1E;line-height:1.4;"><span style="color:#A07E2A;font-weight:700;">✓</span> Una sesión al mes · solo alumnos</div>
+        </div>
+      </div>
+      <!-- Precio -->
+      <div style="background:rgba(255,255,255,0.45);padding:26px 24px;text-align:center;display:flex;flex-direction:column;justify-content:center;border-left:1px solid rgba(160,126,42,0.14);">
+        <div style="font-family:var(--mono);font-size:0.56rem;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:#8A6A1C;margin-bottom:7px;">Precio alumnos</div>
+        <div style="font-family:'Fraunces',serif;font-size:2.5rem;font-weight:600;color:#1A1A1A;line-height:1;letter-spacing:-0.02em;">25€</div>
+        <div style="font-size:0.76rem;color:#6E5212;margin-bottom:3px;">por sesión</div>
+        <div style="font-size:0.74rem;color:#888;margin-bottom:16px;">Menos que una sesión privada</div>
+        <a href="https://wa.me/34611847645?text=Hola%2C%20soy%20alumno%20del%20curso%20ETC%20y%20me%20interesa%20el%20pr%C3%B3ximo%20webinar%20de%2025%E2%82%AC." target="_blank" rel="noopener" style="display:inline-flex;align-items:center;justify-content:center;gap:8px;background:linear-gradient(180deg,#D4B05A 0%,#B08C38 100%);color:#241C06;font-size:0.85rem;font-weight:700;padding:12px 20px;border-radius:11px;text-decoration:none;border:1px solid rgba(140,110,40,0.45);box-shadow:0 6px 18px -8px rgba(150,120,40,0.55);transition:transform .2s,filter .2s;" onmouseover="this.style.transform='translateY(-2px)';this.style.filter='brightness(1.05)';" onmouseout="this.style.transform='';this.style.filter='';">Reservar mi plaza →</a>
+        <div style="font-size:0.7rem;color:#8A6A1C;margin-top:10px;">Plazas limitadas cada mes</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section class="reviews" id="opiniones" style="position:relative;overflow:hidden;">
+  <!-- Bubbles reviews (fondo blanco) -->
+  <div class="bubble" style="width:160px;height:160px;left:1%;top:20%;--op:0.7;animation:bub3 14s ease-in-out infinite -3s;filter:blur(4px);"></div>
+  <div class="bubble" style="width:75px;height:75px;left:5%;top:72%;--op:0.65;animation:bub1 8.5s ease-in-out infinite -7s;filter:blur(2px);"></div>
+  <div class="bubble" style="width:120px;height:120px;left:88%;top:15%;--op:0.68;animation:bub4 10s ease-in-out infinite -1s;filter:blur(3px);"></div>
+  <div class="bubble" style="width:55px;height:55px;left:93%;top:60%;--op:0.72;animation:bub2 7.5s ease-in-out infinite -5s;filter:blur(1.5px);"></div>
+  <div class="container">
+    <div class="reviews__hd reveal">
+      <div class="s-label">Casos de éxito</div>
+      <h2 class="s-title" style="font-size:clamp(1.8rem,3.2vw,2.4rem);color:#1A1A1A;margin-bottom:0;">Resultados reales.<br><em>Personas reales.</em></h2>
+      <p style="font-size:0.95rem;font-weight:300;color:rgba(255,255,255,.65);line-height:1.7;max-width:520px;margin:16px auto 0;">Entrevistas, casos reales y testimonios que demuestran que el método funciona.</p>
+    </div>
+
+    <!-- Casos de éxito · vídeos -->
+    <div class="vid-grid">
+      <div class="vid-card reveal">
+        <div class="yt-wrap" data-id="LC-jGG2ztBw" data-start="2960" role="button" tabindex="0" aria-label="Ver entrevista en podcast">
+          <img class="yt-thumb" src="https://img.youtube.com/vi/LC-jGG2ztBw/hqdefault.jpg" alt="Caso de éxito en Argentina que dejó de apostar con ETC." loading="lazy">
+          <div class="yt-play"><div class="yt-play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+        </div>
+        <div class="vid-label">Podcast · Caso real</div>
+        <div class="vid-desc">Un caso de éxito en Argentina cuenta su experiencia.</div>
+      </div>
+      <div class="vid-card reveal d1">
+        <div class="yt-wrap" data-id="I_zWGSli3Bs" data-start="25" role="button" tabindex="0" aria-label="Ver entrevista con Nacho">
+          <img class="yt-thumb" src="https://img.youtube.com/vi/I_zWGSli3Bs/hqdefault.jpg" alt="Nacho cuenta cómo superó su adicción al juego y fundó ETC." loading="lazy">
+          <div class="yt-play"><div class="yt-play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+        </div>
+        <div class="vid-label">Podcast · Entrevista</div>
+        <div class="vid-desc">Nacho cuenta su historia y el origen del método.</div>
+      </div>
+      <div class="vid-card reveal d2">
+        <div class="yt-wrap" data-id="fLFICwNGS1g" data-start="90" role="button" tabindex="0" aria-label="Ver casos de éxito ETC.">
+          <img class="yt-thumb" src="https://img.youtube.com/vi/fLFICwNGS1g/hqdefault.jpg" alt="Testimonios de personas que superaron la adicción al juego con ETC." loading="lazy">
+          <div class="yt-play"><div class="yt-play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+        </div>
+        <div class="vid-label">Casos de éxito</div>
+        <div class="vid-desc">Pacientes reales que superaron la ludopatía. Sin filtros.</div>
+      </div>
+    </div>
+
+    <div class="rev-grid">
+      <div class="rev-card reveal"><div class="rev-s">★★★★★</div><p class="rev-t">"Muchas gracias Nacho por tu cercanía y tu apoyo. Estoy mejorando un montón gracias a todo el equipo."</p><div class="rev-a"><div><div class="rev-n">Manuel A.</div><div class="rev-src">Google · Alumno verificado</div></div></div></div>
+      <div class="rev-card reveal d1"><div class="rev-s">★★★★★</div><p class="rev-t">"Desde Argentina quiero recomendar y agradecer al programa ETC. por ayudarme a salir del juego para siempre."</p><div class="rev-a"><div><div class="rev-n">Tomás R.</div><div class="rev-src">Google · Alumno verificado</div></div></div></div>
+      <div class="rev-card reveal d2"><div class="rev-s">★★★★★</div><p class="rev-t">"Best team. You are my savior, forever grateful. Thank you so much for everything you have done for me."</p><div class="rev-a"><div><div class="rev-n">Aitor I.</div><div class="rev-src">Google · Alumno verificado</div></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final">
+  <div class="final__inner">
+    <h2 class="final__h">El primer paso<br><em>ya lo diste.</em></h2>
+    <p class="final__sub">El curso te espera. 15 clases, a tu ritmo, con los mejores guías que podrías tener.</p>
+    <a href="dashboard.html" class="btn-big" style="display:inline-flex;">Accede al curso →<span class="btn-big__arrow">→</span></a>
+    <p class="final__note">Acceso de por vida · a tu ritmo</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <a href="https://app.equilibratucamino.com" class="footer__logo"><img src="images/logo-etc-transparent.webp" alt="ETC."></a>
+  <div class="footer__copy">© 2026 ETC. Equilibra Tu Camino</div>
+  <a href="https://app.equilibratucamino.com">Web principal →</a>
+</footer>
+
+<script>
+// Nav cambia a oscuro al salir del hero blanco
+(function(){
+  const nav = document.querySelector('.nav');
+  const hero = document.querySelector('.hero');
+  if (!nav || !hero) return;
+  const io = new IntersectionObserver(([e]) => {
+    nav.classList.toggle('dark-nav', !e.isIntersecting);
+  }, { threshold: 0.05 });
+  io.observe(hero);
+})();
+</script>
+
+<script>
+// Reveal escalonado al hacer scroll
+(function(){
+  const els = document.querySelectorAll('.reveal, .reveal-flip');
+  if (!('IntersectionObserver' in window)) { els.forEach(el => el.classList.add('in')); return; }
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.14, rootMargin: '0px 0px -8% 0px' });
+  els.forEach(el => io.observe(el));
+})();
+
+// YouTube lite — carga el iframe solo al hacer clic
+(function(){
+  document.querySelectorAll('.yt-wrap').forEach(el => {
+    const play = () => {
+      const iframe = document.createElement('iframe');
+      const start = el.dataset.start || 0;
+      iframe.src = `https://www.youtube-nocookie.com/embed/${el.dataset.id}?autoplay=1&start=${start}&rel=0`;
+      iframe.allow = 'autoplay; fullscreen';
+      iframe.allowFullscreen = true;
+      el.innerHTML = '';
+      el.appendChild(iframe);
+    };
+    el.addEventListener('click', play);
+    el.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); play(); } });
+  });
+})();
+</script>
+</body>
+</html>

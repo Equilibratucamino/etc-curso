@@ -1,4 +1,8 @@
 {
   "cleanUrls": true,
-  "trailingSlash": false
+  "trailingSlash": false,
+  "redirects": [
+    { "source": "/funel", "destination": "/", "permanent": true },
+    { "source": "/funel.html", "destination": "/", "permanent": true }
+  ]
 }
