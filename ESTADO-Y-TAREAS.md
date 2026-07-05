@@ -111,8 +111,8 @@ Tono de marca: directo, cercano, sin tecnicismos, "de alguien que lo ha vivido".
 - Estaba activada la **Deployment Protection (Vercel Authentication)** → bloqueaba todo con login (401). Se **desactivó** (Settings → Deployment Protection → Require Log In = OFF). Ahora es público.
 
 ### Enlaces
-- **Home (landing original):** `https://curso.equilibratucamino.com` (= `index.html`)
-- **Funnel / página de VENTA:** `https://curso.equilibratucamino.com/funel.html` ⭐ (la nueva, donde se vende)
+- **⭐ Funnel / página de VENTA = LA RAÍZ:** `https://curso.equilibratucamino.com` (ahora la funnel es `index.html`, la home del subdominio). `/funel` y `/funel.html` **redirigen** a la raíz (301). La funnel limpia sola los parámetros `_gl`/`utm`/`gclid` de la barra al cargar.
+- **Home antigua (explicación del curso):** `https://curso.equilibratucamino.com/home` (= `home.html`, antes era `index.html`). Los enlaces "Volver a la explicación del curso" del dashboard/reserva apuntan aquí.
 - **🔗 Link de pago Premium (para compartir):** `https://curso.equilibratucamino.com/premium` → tarjeta de marca + redirige a Stripe 219€
 - **🔗 Link de pago Básico (para compartir):** `https://curso.equilibratucamino.com/basico` → tarjeta de marca + redirige a Stripe 190€
 - **Dashboard Premium:** `https://curso.equilibratucamino.com/dashboard.html?plan=premium`
