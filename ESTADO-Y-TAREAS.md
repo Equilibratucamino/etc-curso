@@ -6,6 +6,16 @@
 
 ---
 
+## 🆕 NOVEDADES (4-jul-2026, tarde) — prensa, favicon, home + VENTA CONFIRMADA con pago real
+
+- **✅✅ VENTA CONFIRMADA CON PAGO REAL.** Iñaki hizo una compra real (1€) y el flujo funcionó de punta a punta: pago → `success.html` → función `/api/send-welcome` devolvió **200** (log de Vercel) → **email enviado**. El correo llegó a la **dirección que se escribió en el checkout de Stripe** (por eso al principio "no llegaba": se buscaba en otra cuenta). Comportamiento correcto. *(Los logs de Vercel van en UTC; +3h para hora local.)*
+- **🔎 Cómo depurar envíos:** logs de la función en Vercel (`get_runtime_logs`, proyecto `etc-curso`) muestran cada POST a `/api/send-welcome` y su status (200 = enviado, 500 = clave/sesión mal, 400 = sin sessionId). Y **Resend → Emails/Logs** muestra el destinatario real y si se entregó.
+- **🎙️ Sección de prensa del funnel rediseñada** (`funel.html`, `#prensa`): **banner cinematográfico de podcast** (`images/podcast-studio.jpg`, foto de stock libre de Pexels — dos personas, micros, luz dramática) con titular dorado encima; y los **recortes de periódico ahora pequeños, sutiles (66% opacidad) y en carrusel automático continuo** (`.press-mq`/`.pclip`, se pausan al pasar el ratón). Antes era un collage estático grande.
+- **🔖 Favicon ETC** (cuadrado charcoal redondeado con "ETC." blanco) en la **pestaña del navegador** de todas las páginas: `images/favicon.png` / `favicon-32.png` / `apple-touch-icon.png`.
+- **🌐 Web oficial (`etc-landing`), sección "El curso":** añadido un punto **bonus destacado** debajo de la lista — **"+" amarillo (mismo estilo que los ticks) · "1 sesión final con Nacho GRATIS"** en una sola línea (también en móvil). Refuerza el gancho de la sesión gratis del Premium.
+
+---
+
 ## 🆕 NOVEDADES (4-jul-2026) — venta 100% operativa + pulido
 
 - **✅ Email de bienvenida FUNCIONANDO de punta a punta.** Probado con pago real: al pagar llega el correo automático. Se arreglaron las variables de Vercel (`STRIPE_SECRET_KEY` con una `sk_live_` nueva creada en Stripe, `RESEND_API_KEY`) — el fallo era una clave de Stripe incorrecta. Diagnóstico temporal ya retirado.
@@ -350,12 +360,18 @@ Mientras estén vacías, los botones de plan llevan a **WhatsApp** (+34 611 847 
 
 ## 14. Pendiente ⏳
 
-### 🔴 Julio — grabaciones (prioridad máxima)
-Por cada clase, cuando Iñaki envíe la grabación:
-1. **Alojar el vídeo** → ID de YouTube en `VIDEOS` de `modulo.html`.
-2. **Analizar** el contenido de la grabación.
-3. **Crear el contenido real** en `CONTENT[n]`: título/descripción, "lo que trabajarás" y **ejercicios a medida de esa clase**.
-> Los textos actuales son placeholder.
+> **Lo esencial YA está hecho y la venta funciona.** Lo que queda es sobre todo **contenido/material que Iñaki grabará en las próximas semanas** (3 cosas):
+
+### 🎯 LO QUE FALTA (próximas semanas) — material de Iñaki
+1. **🎬 Vídeo HOOK / VSL de la funnel** (`funel.html`, zona hero). Hoy hay un placeholder. Cuando Iñaki grabe el vídeo de gancho, se incrusta ahí.
+2. **📸 Foto real estilo podcast** para el banner de prensa del funnel → sustituir `images/podcast-studio.jpg` (hoy foto de stock) por una **foto real de Nacho frente a otra persona**, mismo estilo (set up de podcast, luz tenue/dramática, 16:9). Basta con reemplazar el archivo con el mismo nombre.
+3. **🎥 Los 15 vídeos de las clases** (clase por clase). Por cada grabación que envíe Iñaki:
+   - **Alojar el vídeo** (Vimeo/Mux recomendado, no YouTube — ver sección 18) → referencia en `VIDEOS` de `modulo.html`.
+   - **Analizar** el contenido de esa clase.
+   - **Crear el contenido real** en `CONTENT[n]`: título/descripción, "lo que trabajarás" y **ejercicios a medida de esa clase** (los textos actuales son placeholder).
+
+### 🟢 Más adelante / opcional
+- **Acceso real + progreso en la nube** (Supabase login + vídeos protegidos) → sección 18. Se monta junto con los vídeos.
 
 ### 🟡 Calendario de reserva
 - Hacerlo **igual que el de la web** (`app.equilibratucamino.com/reserva/`) pero **conectado al Google Calendar de Iñaki**.
