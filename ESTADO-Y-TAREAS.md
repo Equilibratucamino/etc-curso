@@ -373,10 +373,15 @@ Mientras estén vacías, los botones de plan llevan a **WhatsApp** (+34 611 847 
 ### 🟢 Más adelante / opcional
 - **Acceso real + progreso en la nube** (Supabase login + vídeos protegidos) → sección 18. Se monta junto con los vídeos.
 
-### 🟡 Calendario de reserva
+### 🟡 Calendario de reserva + "consumir" la sesión gratis (Premium)
 - Hacerlo **igual que el de la web** (`app.equilibratucamino.com/reserva/`) pero **conectado al Google Calendar de Iñaki**.
 - **Plan acordado:** cuando el de la web esté confirmado y funcionando (Google Calendar + Stripe), **copiarlo tal cual** al curso.
 - Directo al calendario (sin las 3 preguntas). Premium 0€ / Básico 65€ (producto Stripe "Sesión final con Nacho").
+- **URL del booking la monta Juan** — Iñaki la pasará más adelante (posible iframe o link).
+- **REGLA CLAVE (Premium):** al completar la clase 15 se desbloquea el bloque dorado → reserva la sesión final **GRATIS** en el calendario → una vez reserva, la sesión gratis debe **"consumirse"** (desaparecer del curso) para que **no pueda volver y reservar otra gratis**.
+  - **Nivel curso (front, cuando llegue la URL):** flag `etc_session_booked` → el bloque pasa a *"✓ Sesión ya reservada"*, sin botón de reservar gratis. ⚠️ NO a prueba de trampas (localStorage se resetea al borrar caché / en otro dispositivo).
+  - **Nivel fiable (recomendado):** que **el booking de Juan** imponga **1 reserva gratuita por email/persona**; o guardar `sesion_gratis_usada` por usuario cuando existan **cuentas Supabase** (bloque de acceso real, sección 18).
+  - **Pedir a Juan:** si su sistema devuelve **confirmación** (webhook / redirect "reserva OK") para poder marcar "usada" de forma fiable desde el curso.
 
 ### ✅ Poner el curso EN VENTA (pago + email) — HECHO → **ver sección 18**
 - Payment Links de Stripe (190€ / 219€) en `funel.html` + links de marca `/premium` `/basico`. ✅
