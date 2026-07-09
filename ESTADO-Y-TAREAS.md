@@ -2,7 +2,21 @@
 
 > Estado completo del curso online de ETC: **producto, diseño, flujos, planes (premium/básico) y todo lo que queda por hacer**.
 > Proyecto **independiente** de la plataforma terapéutica de Juan (ETC-Plataforma).
-> Última actualización: **4 julio 2026**.
+> Última actualización: **9 julio 2026**.
+
+---
+
+## 🆕 NOVEDADES (9-jul-2026) — URL limpia, favicon amarillo, animación, WhatsApp, menú web + fixes
+
+- **🔗 URL del curso LIMPIA:** la **funnel es ahora la RAÍZ** → **`curso.equilibratucamino.com`** (antes `/funel`, un typo feo). La home explicativa antigua pasó a **`/home`** (`home.html`) y sigue accesible desde el dashboard ("← Volver a la explicación del curso"). Se añadió **redirect `/funel` → `/`** (301) para no romper enlaces antiguos. Ficheros: `funel.html` → `index.html` (raíz); `index.html` antiguo → `home.html`. `vercel.json` con `cleanUrls` + `redirects`.
+- **🧹 Script anti-basura en la URL:** al cargar la funnel, un script quita de la barra los parámetros de tracking (`_gl`, `_gcl_au`, `utm_*`, `gclid`…) **sin romper GA** (corre después de que Analytics los lea). Antes salía `...?_gl=1*...` al venir de la web.
+- **🎬 Titular del hero con entrada escalonada dramática:** "DEJA DE JUGAR." entra desde la izquierda y "RECUPERA TU VIDA." desde la derecha (con blur→nítido). Respeta `prefers-reduced-motion`.
+- **🔖 Favicon:** ahora **fondo AMARILLO del curso (`#FFB300`) con "ETC." negro** (estilo funnel), y el "ETC." **más grande**. En todas las páginas.
+- **💬 Tarjeta de WhatsApp/OG:** la frase de la imagen `og-curso.png` pasó de *"el curso para dejar la ludopatía"* a **"Ya se acabaron las excusas."**; también `og:title`/`twitter:title`. El keyword SEO "ludopatía" se mantiene solo en el `<title>`. (WhatsApp cachea la previa → usar `?v=2` para forzar refresco al probar.)
+- **🌐 Web oficial (`etc-landing`):** añadido **"Nuestro curso"** al menú (escritorio + móvil), en **dorado**, que lleva a la **raíz** del curso; y en la sección "El curso" un **punto bonus** con "+" amarillo: *"1 sesión final con Nacho — GRATIS"* (en una sola línea).
+- **🔧 Fix dashboard/clase:** el botón inferior derecho dentro de una clase (`modulo.html`) que ponía **"Mi cuenta"** con `href="#"` (no llevaba a nada) ahora es **"Certificado"** → `certificate.html`.
+- **📣 Publicidad:** creada la **estrategia de anuncios** (Google + Meta + redes) → `Escritorio/Archivos Md Claude/ETC — Estrategia de Anuncios (Google + Meta + Redes).md`. El trabajo de anuncios se lleva en un **proyecto de Claude aparte**.
+- **🔌 Plataforma de Juan a producción:** Iñaki completó su parte (DNS `plataforma.equilibratucamino.com` → 76.76.21.21; claves `pk_live`/`sk_live`; webhooks Live + Sandbox → `whsec`; producto **"Sesión Nacho Individual" 65€** en Live → `price_`). Esa plataforma será el **booking de la sesión final** del curso (ver sección 14 · consumir sesión gratis).
 
 ---
 
