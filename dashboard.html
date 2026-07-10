@@ -217,6 +217,8 @@
       font-size: 0.85rem; font-weight: 600; padding: 12px; border-radius: 13px;
       transition: transform 0.2s var(--ease), filter 0.2s; margin-top: auto;
     }
+    /* nowrap solo en los botones de acción reales (no en el bloqueado de texto largo) */
+    .btn-tile.gold, .btn-tile.teal { white-space: nowrap; }
     .btn-tile:hover { transform: translateY(-2px); filter: brightness(1.04); }
     .btn-tile.teal { background: linear-gradient(180deg, var(--teal), var(--teal-d)); color: #fff; box-shadow: 0 6px 16px -5px rgba(47,169,127,0.5); }
     .btn-tile.gold {
@@ -375,7 +377,7 @@
       .t-ring { grid-column: span 1; flex-direction: row; }
       .support-pair { grid-column: span 1; gap: 12px; }
       .support-pair .tile { padding: 18px 16px; }
-      .support-pair .btn-tile { font-size: 0.76rem; padding: 11px 8px; gap: 5px; }
+      .support-pair .btn-tile { font-size: 0.72rem; padding: 11px 6px; gap: 4px; }
       .t-hero__art { max-height: 230px; max-width: 300px; margin: 4px auto 0; }
       .classes { grid-template-columns: 1fr; }
       .tile { padding: 22px; }
