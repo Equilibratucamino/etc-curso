@@ -716,7 +716,7 @@ if (completed.length === 0) {
     sBtn.textContent = 'Reservar mi sesión →';
     sBtn.href = CALENDAR_URL || WA_SESSION;
   } else {
-    sLabel.textContent = 'Última sesión · Premium';
+    sLabel.innerHTML = 'Última sesión · <em style="font-style:italic">Plan Premium</em>';
     sTitle.textContent = 'Tendrás tu sesión final GRATIS cuando acabes la clase 15';
     lockBtn('🔒 Se desbloquea al terminar las 15');
   }
