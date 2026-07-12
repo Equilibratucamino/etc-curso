@@ -425,8 +425,10 @@
   </div>
 </div>
 <script>
-  /* Se ejecuta al instante: si no hay nombre guardado, abre la puerta antes de pintar el curso */
+  /* Se ejecuta al instante: si no hay nombre guardado, abre la puerta antes de pintar el curso.
+     Excepción: ?mockup=1 (previsualización del curso en la funnel) NO muestra la puerta. */
   (function(){
+    if(location.search.indexOf('mockup')>-1) return;
     var saved=''; try{ saved=localStorage.getItem('etc_name')||''; }catch(e){}
     if(!saved){
       var g=document.getElementById('nameGate');
@@ -581,6 +583,7 @@
     const av = document.getElementById('userInitials');
     if (av && full) av.textContent = initials(full).toUpperCase() || 'TÚ';
   }
+  if (location.search.indexOf('mockup')>-1) return; // previsualización en la funnel: sin puerta de nombre
   let saved=''; try{ saved=localStorage.getItem('etc_name')||''; }catch(e){}
   if (saved) { applyAvatar(saved); return; }
 
