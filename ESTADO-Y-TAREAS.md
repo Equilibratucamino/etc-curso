@@ -388,10 +388,13 @@ Mientras estén vacías, los botones de plan llevan a **WhatsApp** (+34 611 847 
 - **Acceso real + progreso en la nube** (Supabase login + vídeos protegidos) → sección 18. Se monta junto con los vídeos.
 
 ### 🟡 Calendario de reserva + "consumir" la sesión gratis (Premium)
-- Hacerlo **igual que el de la web** (`app.equilibratucamino.com/reserva/`) pero **conectado al Google Calendar de Iñaki**.
-- **Plan acordado:** cuando el de la web esté confirmado y funcionando (Google Calendar + Stripe), **copiarlo tal cual** al curso.
-- Directo al calendario (sin las 3 preguntas). Premium 0€ / Básico 65€ (producto Stripe "Sesión final con Nacho").
-- **URL del booking la monta Juan** — Iñaki la pasará más adelante (posible iframe o link).
+- **✅ CALENDARIO EN PRODUCCIÓN (jul-2026):** el booking de Juan está vivo en **`https://plataforma.equilibratucamino.com/agendar?journey=<origen>`** (responde 200). El botón usa un parámetro **`?journey=`** que define el contexto/precio. Juan dio `journey=landing_compra` para la web.
+- **✅ WEB PRINCIPAL HECHA:** el botón "Reserva ya →" de la home de `etc-landing` (`index.html`) ya apunta a `…/agendar?journey=landing_compra` (antes iba a `/reserva/`). Commit en etc-landing.
+- **⏳ CURSO — pendiente de valores de Juan:** cablear los botones de sesión del curso al `/agendar` con el `journey` correcto. Puntos a cablear:
+  - `dashboard.html` → bloque dorado **"Reservar mi sesión GRATIS →"** (Premium, 15/15) y el tile de sesión (hoy `CALENDAR_URL='reserva.html'`).
+  - `index.html` (funnel) → bloque **"¿Prefieres tener una sesión?"** (hoy WhatsApp `book`).
+  - `reserva.html` → hoy incrusta el `/leads` viejo; migrar a `/agendar` o redirigir.
+- **❓ PEDIR A JUAN (bloqueante para cablear el curso):** (1) URL/`journey` de la **sesión final GRATIS Premium** (debe salir 0€); (2) URL/`journey` de la **sesión Básico 65€**; (3) cómo se **consume** la gratis (1 por email en `/agendar`, o marcar desde el curso); (4) opcional: `journey` de la sesión previa del funnel.
 - **REGLA CLAVE (Premium):** al completar la clase 15 se desbloquea el bloque dorado → reserva la sesión final **GRATIS** en el calendario → una vez reserva, la sesión gratis debe **"consumirse"** (desaparecer del curso) para que **no pueda volver y reservar otra gratis**.
   - **Nivel curso (front, cuando llegue la URL):** flag `etc_session_booked` → el bloque pasa a *"✓ Sesión ya reservada"*, sin botón de reservar gratis. ⚠️ NO a prueba de trampas (localStorage se resetea al borrar caché / en otro dispositivo).
   - **Nivel fiable (recomendado):** que **el booking de Juan** imponga **1 reserva gratuita por email/persona**; o guardar `sesion_gratis_usada` por usuario cuando existan **cuentas Supabase** (bloque de acceso real, sección 18).
