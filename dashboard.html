@@ -612,21 +612,21 @@
 /* ═══════════ PROGRESS ENGINE ═══════════ */
 const STORAGE_KEY = 'etc_progress_v1';
 const MODULES = [
-  { n:1,  title:'Aceptar la realidad',         dur:'10 min' },
-  { n:2,  title:'La mente de un ludópata',      dur:'12 min' },
-  { n:3,  title:'Dopamina y cerebro',           dur:'11 min' },
-  { n:4,  title:'Las mentiras que te cuentas',  dur:'13 min' },
-  { n:5,  title:'Romper el ciclo',              dur:'12 min' },
-  { n:6,  title:'Gestión de impulsos',          dur:'14 min' },
-  { n:7,  title:'Ansiedad, culpa y vergüenza',  dur:'13 min' },
-  { n:8,  title:'Reconstruir la confianza',     dur:'12 min' },
-  { n:9,  title:'Dinero y recuperación',        dur:'14 min' },
-  { n:10, title:'La nueva identidad',           dur:'11 min' },
-  { n:11, title:'Crear nuevos hábitos',         dur:'12 min' },
-  { n:12, title:'Familia y entorno',            dur:'13 min' },
-  { n:13, title:'Prevenir recaídas',            dur:'13 min' },
-  { n:14, title:'Diseñar una nueva vida',       dur:'12 min' },
-  { n:15, title:'El futuro empieza hoy',        dur:'10 min' },
+  { n:1,  title:'La historia de Nacho',           dur:'12 min' },
+  { n:2,  title:'La historia de Marcos',          dur:'12 min' },
+  { n:3,  title:'Entender la adicción',           dur:'11 min' },
+  { n:4,  title:'Diferencia entre juegos',        dur:'13 min' },
+  { n:5,  title:'Círculo cercano',                dur:'12 min' },
+  { n:6,  title:'La autoprohibición',             dur:'13 min' },
+  { n:7,  title:'Las deudas',                     dur:'12 min' },
+  { n:8,  title:'El tiempo libre',                dur:'13 min' },
+  { n:9,  title:'La comparación',                 dur:'12 min' },
+  { n:10, title:'Amistades',                      dur:'11 min' },
+  { n:11, title:'Objetivos',                      dur:'12 min' },
+  { n:12, title:'Regulación emocional',           dur:'13 min' },
+  { n:13, title:'Reconstrucción de identidad',    dur:'13 min' },
+  { n:14, title:'Prevención de recaídas',         dur:'12 min' },
+  { n:15, title:'Analizando casos reales',        dur:'14 min' },
 ];
 function getProgress(){ try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {completed:[]}; } catch { return {completed:[]}; } }
 
