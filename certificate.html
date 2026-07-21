@@ -118,6 +118,9 @@
 </div>
 
 <script>
+/* Acceso — redirige si no hay token de compra */
+(function(){ var ok=''; try{ ok=localStorage.getItem('etc_access')||''; }catch(e){} if(ok!=='granted') location.replace('/'); })();
+
 (function(){
   const KEY='etc_progress_v1', NAME='etc_name';
   const load=k=>{try{return JSON.parse(localStorage.getItem(k))||{}}catch(e){return{}}};

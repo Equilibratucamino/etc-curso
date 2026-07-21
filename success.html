@@ -286,8 +286,9 @@
       const plan      = params.get('plan') === 'premium' ? 'premium' : 'basic';
       const sessionId = params.get('session_id') || '';
 
-      // Guardar plan en localStorage
+      // Guardar plan + token de acceso en localStorage
       try { localStorage.setItem('etc_plan', plan); } catch(e) {}
+      try { localStorage.setItem('etc_access', 'granted'); } catch(e) {}
 
       // ── 2. Rellenar UI según plan ──
       const config = {

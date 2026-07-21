@@ -565,6 +565,9 @@
 
 <script src="js/app.js"></script>
 <script>
+/* Acceso — redirige si no hay token de compra */
+(function(){ var ok=''; try{ ok=localStorage.getItem('etc_access')||''; }catch(e){} if(ok!=='granted') location.replace('/'); })();
+
 /* ═══════════ MOTOR DE LA CLASE ═══════════ */
 (function() {
   const KEY='etc_progress_v1', NKEY='etc_notes_v1', AKEY='etc_answers_v1';

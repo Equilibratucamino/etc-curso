@@ -425,6 +425,15 @@
   </div>
 </div>
 <script>
+  /* Comprobación de acceso — redirige a la funnel si no hay token de compra.
+     Excepciones: ?mockup=1 (preview funnel) y ?reset=1 (test dev). */
+  (function(){
+    var p = location.search;
+    if(p.indexOf('mockup')>-1 || p.indexOf('reset')>-1) return;
+    var ok=''; try{ ok=localStorage.getItem('etc_access')||''; }catch(e){}
+    if(ok!=='granted') { location.replace('/'); return; }
+  })();
+
   /* Se ejecuta al instante: si no hay nombre guardado, abre la puerta antes de pintar el curso.
      Excepción: ?mockup=1 (previsualización del curso en la funnel) NO muestra la puerta. */
   (function(){
