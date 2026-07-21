@@ -556,7 +556,7 @@
       <div class="final-session__eyebrow">Has terminado el curso · incluida en tu plan</div>
       <div class="final-session__title">Reserva tu <em>última sesión</em> con Nacho — GRATIS</div>
       <p class="final-session__desc">Tu sesión final 1 a 1 con Nacho está incluida. Elige el día y la hora que mejor te vengan.</p>
-      <a href="reserva.html" class="btn-final">Reservar mi sesión GRATIS →</a>
+      <a href="https://plataforma.equilibratucamino.com/agendar?journey=landing_compra" class="btn-final" target="_blank" rel="noopener">Reservar mi sesión GRATIS →</a>
     </div>
   </div>
 
@@ -698,10 +698,7 @@ if (completed.length === 0) {
   if (planParam) localStorage.setItem('etc_plan', planParam);
   const PLAN = localStorage.getItem('etc_plan') || 'premium';
 
-  // ▶ Página de reserva DENTRO del curso (incrusta el calendario de ETC Plataforma).
-  //   La URL real del calendario se configura en reserva.html (iframe).
-  const CALENDAR_URL = 'reserva.html';
-  const WA_SESSION = 'https://wa.me/34611847645?text=Hola%20Nacho%2C%20acabo%20de%20terminar%20el%20curso%20ETC%20y%20me%20gustar%C3%ADa%20reservar%20mi%20sesi%C3%B3n%20final%20contigo.';
+  const CALENDAR_URL = 'https://plataforma.equilibratucamino.com/agendar?journey=landing_compra';
 
   const tile = document.getElementById('sessionTile');
   const sLabel = document.getElementById('sessionLabel');
