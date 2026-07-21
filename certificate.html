@@ -152,7 +152,8 @@
     fitName();
   }
 
-  // Siempre arranca vacío → "Tu nombre" (no se recuerda el nombre anterior)
+  // Pre-rellena con el nombre guardado en la puerta del dashboard
+  try { const saved = localStorage.getItem(NAME); if (saved) input.value = saved; } catch(e) {}
   render();
   input.addEventListener('input', render);
   window.addEventListener('resize', fitName);
