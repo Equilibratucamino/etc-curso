@@ -49,8 +49,8 @@ export default async function handler(req, res) {
   const firstName   = name ? name.split(' ')[0] : '';
   const dashboardUrl = `https://curso.equilibratucamino.com/dashboard.html?plan=${plan}&access=granted`;
   const subject     = isPremium
-    ? '¡Ya tienes acceso! Tu sesión 1:1 con Nacho te espera 🎓'
-    : '¡Ya tienes acceso a Se Acabó el Juego! 🎓';
+    ? `${firstName ? firstName + ', tu' : 'Tu'} acceso al curso + sesión con Nacho`
+    : `${firstName ? firstName + ', tu' : 'Tu'} acceso al curso Se Acabó el Juego`;
 
   // ── 3. Enviar emails en paralelo: bienvenida al comprador + notificación a Nacho ──
   const price = isPremium ? '219€' : '190€';
@@ -62,7 +62,7 @@ export default async function handler(req, res) {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${process.env.RESEND_API_KEY}` },
         body: JSON.stringify({
-          from: 'Nacho · ETC. <hola@equilibratucamino.com>',
+          from: 'Nacho <hola@equilibratucamino.com>',
           to: email,
           subject,
           html: buildEmailHTML({ firstName, plan, isPremium, dashboardUrl }),
