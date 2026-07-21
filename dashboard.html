@@ -426,10 +426,11 @@
 </div>
 <script>
   /* Comprobación de acceso — redirige a la funnel si no hay token de compra.
-     Excepciones: ?mockup=1 (preview funnel) y ?reset=1 (test dev). */
+     Excepciones: ?mockup, ?reset, ?access=granted (link del email de bienvenida). */
   (function(){
     var p = location.search;
     if(p.indexOf('mockup')>-1 || p.indexOf('reset')>-1) return;
+    if(p.indexOf('access=granted')>-1) { try{ localStorage.setItem('etc_access','granted'); }catch(e){} return; }
     var ok=''; try{ ok=localStorage.getItem('etc_access')||''; }catch(e){}
     if(ok!=='granted') { location.replace('/'); return; }
   })();

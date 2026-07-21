@@ -47,7 +47,7 @@ export default async function handler(req, res) {
   // ── 2. Preparar contenido del email ──
   const isPremium   = plan === 'premium';
   const firstName   = name ? name.split(' ')[0] : '';
-  const dashboardUrl = `https://curso.equilibratucamino.com/dashboard.html?plan=${plan}`;
+  const dashboardUrl = `https://curso.equilibratucamino.com/dashboard.html?plan=${plan}&access=granted`;
   const subject     = isPremium
     ? '¡Ya tienes acceso! Tu sesión 1:1 con Nacho te espera 🎓'
     : '¡Ya tienes acceso a Se Acabó el Juego! 🎓';
