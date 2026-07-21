@@ -52,21 +52,47 @@ export default async function handler(req, res) {
     ? '¡Ya tienes acceso! Tu sesión 1:1 con Nacho te espera 🎓'
     : '¡Ya tienes acceso a Se Acabó el Juego! 🎓';
 
-  // ── 3. Enviar email con Resend ──
+  // ── 3. Enviar emails en paralelo: bienvenida al comprador + notificación a Nacho ──
+  const price = isPremium ? '219€' : '190€';
+
   try {
-    const resendRes = await fetch('https://api.resend.com/emails', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${process.env.RESEND_API_KEY}`,
-      },
-      body: JSON.stringify({
-        from: 'Nacho · ETC. <hola@equilibratucamino.com>',
-        to: email,
-        subject,
-        html: buildEmailHTML({ firstName, plan, isPremium, dashboardUrl }),
+    const [resendRes] = await Promise.all([
+      // Email de bienvenida al comprador
+      fetch('https://api.resend.com/emails', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${process.env.RESEND_API_KEY}` },
+        body: JSON.stringify({
+          from: 'Nacho · ETC. <hola@equilibratucamino.com>',
+          to: email,
+          subject,
+          html: buildEmailHTML({ firstName, plan, isPremium, dashboardUrl }),
+        }),
       }),
-    });
+      // Notificación a Nacho
+      fetch('https://api.resend.com/emails', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${process.env.RESEND_API_KEY}` },
+        body: JSON.stringify({
+          from: 'ETC. Curso <hola@equilibratucamino.com>',
+          to: 'equilibratucamino@gmail.com',
+          subject: `💰 Nueva venta — ${isPremium ? 'Plan Premium' : 'Plan Básico'} (${price})`,
+          html: `
+            <div style="font-family:Arial,sans-serif;max-width:480px;margin:0 auto;padding:32px 24px;background:#f9f9f9;border-radius:12px;">
+              <h2 style="margin:0 0 16px;font-size:1.4rem;color:#1E211D;">💰 Nueva venta del curso</h2>
+              <table style="width:100%;border-collapse:collapse;font-size:.9rem;">
+                <tr><td style="padding:8px 0;color:#666;border-bottom:1px solid #eee;width:40%">Plan</td>
+                    <td style="padding:8px 0;font-weight:600;border-bottom:1px solid #eee;color:${isPremium?'#92640a':'#1E211D'}">${isPremium ? '⭐ Premium' : 'Básico'} — ${price}</td></tr>
+                <tr><td style="padding:8px 0;color:#666;border-bottom:1px solid #eee">Comprador</td>
+                    <td style="padding:8px 0;border-bottom:1px solid #eee">${name || '—'}</td></tr>
+                <tr><td style="padding:8px 0;color:#666">Email</td>
+                    <td style="padding:8px 0"><a href="mailto:${email}" style="color:#2FA97F">${email}</a></td></tr>
+              </table>
+              <p style="margin:20px 0 0;font-size:.8rem;color:#999;">Stripe session: ${sessionId}</p>
+            </div>
+          `,
+        }),
+      }),
+    ]);
 
     if (!resendRes.ok) {
       const err = await resendRes.json();
