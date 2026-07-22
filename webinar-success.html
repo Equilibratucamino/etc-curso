@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Plaza confirmada — Webinar ETC.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,500;0,700;1,400;1,500&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    body{font-family:'Inter',sans-serif;background:#F2F3F2;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px;}
+    .card{background:#fff;border-radius:24px;border:1px solid #E5E4DF;box-shadow:0 8px 40px rgba(0,0,0,.08);max-width:480px;width:100%;overflow:hidden;}
+    .card-header{background:linear-gradient(135deg,#D4B05A,#B08C38);padding:32px 40px;text-align:center;}
+    .card-header img{width:110px;height:auto;display:block;margin:0 auto;filter:brightness(0) invert(1);}
+    .card-header p{margin:14px 0 0;font-size:.65rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.7);}
+    .card-body{padding:36px 40px;}
+    .emoji{font-size:3rem;text-align:center;display:block;margin-bottom:16px;}
+    .eyebrow{font-size:.65rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:#B08C38;text-align:center;margin-bottom:8px;}
+    h1{font-family:'Fraunces',Georgia,serif;font-size:1.9rem;font-weight:500;color:#1A1A1A;line-height:1.2;letter-spacing:-.03em;text-align:center;margin-bottom:12px;}
+    h1 em{font-style:italic;color:#2FA97F;}
+    .sub{font-size:.9rem;color:#6B7280;text-align:center;line-height:1.7;margin-bottom:28px;}
+    .date-card{background:linear-gradient(135deg,#fffbeb,#fef3c7);border:1.5px solid #fde68a;border-radius:14px;padding:18px 20px;text-align:center;margin-bottom:24px;}
+    .date-card .label{font-size:.65rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#B08C38;margin-bottom:6px;}
+    .date-card .date{font-size:1.2rem;font-weight:700;color:#241C06;letter-spacing:-.01em;}
+    .date-card .time{font-size:.9rem;color:#92640a;margin-top:4px;font-weight:500;}
+    .info-box{background:#eef9f5;border:1px solid rgba(47,169,127,.2);border-radius:12px;padding:14px 18px;font-size:.82rem;color:#1e6649;line-height:1.65;margin-bottom:24px;}
+    .btn{display:block;width:100%;text-align:center;background:linear-gradient(180deg,#D4B05A,#B08C38);color:#241C06;font-size:.95rem;font-weight:700;padding:14px 20px;border-radius:12px;border:none;cursor:pointer;text-decoration:none;box-shadow:0 6px 18px -8px rgba(150,120,40,.5);}
+    .note{font-size:.72rem;color:#A1A399;text-align:center;margin-top:12px;line-height:1.6;}
+    @media(max-width:480px){.card-body{padding:28px 20px;}.card-header{padding:24px 20px;}h1{font-size:1.6rem;}}
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="card-header">
+      <img src="images/logo-etc-badge-circle.png" alt="ETC."/>
+      <p>Webinar en directo</p>
+    </div>
+    <div class="card-body" id="content">
+      <span class="emoji" id="mainEmoji">⏳</span>
+      <div class="eyebrow" id="eyebrow">Procesando...</div>
+      <h1 id="title">Un momento</h1>
+      <p class="sub" id="sub">Estamos confirmando tu plaza.</p>
+    </div>
+  </div>
+
+  <script>
+    var params = new URLSearchParams(window.location.search);
+    var sessionId = params.get('session_id');
+    var cancelled = params.get('cancelled');
+
+    if (cancelled) {
+      showCancelled();
+    } else if (sessionId) {
+      sendEmail(sessionId);
+    } else {
+      showError();
+    }
+
+    function sendEmail(sid) {
+      fetch('/api/send-webinar', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ sessionId: sid }),
+      })
+      .then(function(r){ return r.json(); })
+      .then(function(data){
+        if (data.ok) showSuccess();
+        else showError();
+      })
+      .catch(function(){ showError(); });
+    }
+
+    function showSuccess() {
+      document.getElementById('mainEmoji').textContent = '🎉';
+      document.getElementById('eyebrow').textContent = 'Plaza confirmada';
+      document.getElementById('title').innerHTML = '¡Ya eres parte<br>del <em>Webinar!</em>';
+      document.getElementById('sub').textContent = 'Te hemos enviado un email de confirmación. Nos vemos el 28 de agosto.';
+      document.getElementById('content').innerHTML += `
+        <div class="date-card">
+          <div class="label">Sesión grupal en directo con Nacho</div>
+          <div class="date">28 de agosto de 2026</div>
+          <div class="time">19:00h (España)</div>
+        </div>
+        <div class="info-box">📩 <strong>Recibirás el link de acceso</strong> unos días antes del webinar en tu email. Estate atento.</div>
+        <a href="https://equilibratucamino.com" class="btn">Volver a ETC. →</a>
+        <p class="note">¿Dudas? <a href="https://wa.me/34611847645" style="color:#2FA97F;text-decoration:none;">Escríbenos por WhatsApp</a></p>
+      `;
+    }
+
+    function showCancelled() {
+      document.getElementById('mainEmoji').textContent = '↩️';
+      document.getElementById('eyebrow').textContent = 'Pago cancelado';
+      document.getElementById('title').innerHTML = 'No hemos<br>cobrado nada.';
+      document.getElementById('sub').textContent = 'Si quieres reservar tu plaza puedes volver cuando quieras.';
+      document.getElementById('content').innerHTML += `
+        <a href="javascript:history.back()" class="btn">← Volver</a>
+      `;
+    }
+
+    function showError() {
+      document.getElementById('mainEmoji').textContent = '📩';
+      document.getElementById('eyebrow').textContent = 'Pago recibido';
+      document.getElementById('title').innerHTML = '¡Gracias!<br><em>Tu plaza es tuya.</em>';
+      document.getElementById('sub').textContent = 'Recibirás un email de confirmación en breve. Si no llega, contáctanos.';
+      document.getElementById('content').innerHTML += `
+        <div class="info-box">📩 <strong>Recibirás el link de acceso</strong> unos días antes del webinar en tu email.</div>
+        <a href="https://wa.me/34611847645" class="btn">Contactar por WhatsApp →</a>
+      `;
+    }
+  </script>
+</body>
+</html>

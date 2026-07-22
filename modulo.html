@@ -833,10 +833,21 @@ function wmSubmit2(){
   var name=document.getElementById('wmName2').value.trim();
   var email=document.getElementById('wmEmail2').value.trim();
   if(!name||!email){ alert('Por favor rellena tu nombre y email.'); return; }
-  var tipo=_wmType2==='activos'?'clientes activos':'familiares';
-  var msg='Hola Nacho, quiero reservar una plaza en el webinar del 28 de agosto ('+tipo+'). Mi nombre es: '+name+' · Mi email es: '+email;
-  window.open('https://wa.me/34611847645?text='+encodeURIComponent(msg),'_blank');
-  closeWebinarModal();
+  var tipo=_wmType2;
+  var btn=document.querySelector('#wmStep2 .wm-submit');
+  btn.textContent='Redirigiendo al pago…';
+  btn.disabled=true;
+  fetch('/api/webinar-checkout',{
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({name:name,email:email,tipo:tipo})
+  })
+  .then(function(r){return r.json();})
+  .then(function(d){
+    if(d.url){ window.location.href=d.url; }
+    else{ btn.textContent='Reservar mi plaza — 25€ →'; btn.disabled=false; alert('Error al crear el pago. Inténtalo de nuevo.'); }
+  })
+  .catch(function(){ btn.textContent='Reservar mi plaza — 25€ →'; btn.disabled=false; alert('Error de red. Inténtalo de nuevo.'); });
 }
 </script>
 </body>
