@@ -101,9 +101,9 @@ function buildWebinarEmailHTML({ firstName, tipoLabel }) {
         <!-- Header dorado -->
         <tr>
           <td style="background:linear-gradient(135deg,#D4B05A,#B08C38);padding:34px 40px 30px;text-align:center;">
-            <img src="https://curso.equilibratucamino.com/images/logo-etc-badge-circle.png"
+            <img src="https://curso.equilibratucamino.com/images/logo-etc-white.png"
                  alt="ETC." width="130"
-                 style="display:block;margin:0 auto;width:130px;max-width:130px;height:auto;border:0;filter:brightness(0) invert(1);"/>
+                 style="display:block;margin:0 auto;width:130px;max-width:130px;height:auto;border:0;"/>
             <p style="margin:16px 0 0;font-size:.75rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.75);">Webinar en directo</p>
           </td>
         </tr>
