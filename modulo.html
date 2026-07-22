@@ -531,15 +531,15 @@
 
       <!-- Webinar -->
       <div class="sidebar-card" style="background:linear-gradient(135deg,#12101e,#1e1a2e);border-color:rgba(130,100,200,0.2);">
-        <div class="sidebar-card__header" style="border-color:rgba(130,100,200,0.15);color:#a78bfa;">Webinar en directo</div>
+        <div class="sidebar-card__header" style="border-color:rgba(130,100,200,0.15);color:#a78bfa;">Sesión Grupal en directo con Nacho · Webinar</div>
         <div class="sidebar-card__body">
           <p style="font-size:0.82rem;color:var(--text-muted);margin-bottom:var(--s2);line-height:1.55;">
             Sesión grupal mensual con Nacho.
           </p>
           <p style="font-size:1.3rem;font-weight:700;font-family:var(--font-serif);color:#a78bfa;margin-bottom:var(--s4);">25€</p>
-          <a href="https://wa.me/34611847645?text=Hola%2C%20me%20interesa%20el%20pr%C3%B3ximo%20webinar%20de%2025%E2%82%AC." class="btn w-full" style="font-size:0.82rem;background:#7c3aed;color:#fff;" target="_blank" rel="noopener">
-            Apuntarme →
-          </a>
+          <button onclick="openWebinarModal()" class="btn w-full" style="font-size:0.82rem;background:#7c3aed;color:#fff;cursor:pointer;border:none;">
+            Reservar mi plaza →
+          </button>
         </div>
       </div>
 
@@ -731,6 +731,113 @@
     }
   }
 })();
+</script>
+
+<!-- ── WEBINAR MODAL ── -->
+<style>
+.wm-overlay{position:fixed;inset:0;background:rgba(0,0,0,.75);backdrop-filter:blur(6px);z-index:9999;display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;transition:opacity .25s;}
+.wm-overlay.wm-in{opacity:1;}
+.wm-box{background:#fff;border-radius:24px;padding:36px 32px;max-width:440px;width:100%;position:relative;transform:translateY(16px) scale(.97);transition:transform .28s cubic-bezier(.22,1,.36,1);box-shadow:0 32px 80px rgba(0,0,0,.3);}
+.wm-overlay.wm-in .wm-box{transform:none;}
+.wm-close{position:absolute;top:16px;right:18px;background:none;border:none;font-size:1.4rem;color:#aaa;cursor:pointer;line-height:1;padding:4px 8px;border-radius:8px;transition:background .15s;}
+.wm-close:hover{background:#f0f0f0;color:#333;}
+.wm-eyebrow{font-size:.65rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#B08C38;margin-bottom:8px;}
+.wm-title{font-family:'Fraunces',Georgia,serif;font-size:1.5rem;font-weight:500;color:#1A1A1A;line-height:1.2;margin-bottom:6px;letter-spacing:-.02em;}
+.wm-title em{font-style:italic;color:#2FA97F;}
+.wm-sub{font-size:.88rem;color:#6B7280;margin-bottom:24px;line-height:1.55;}
+.wm-types{display:flex;flex-direction:column;gap:10px;}
+.wm-type-btn{display:flex;flex-direction:column;align-items:flex-start;gap:3px;padding:16px 18px;border:1.5px solid #E5E4DF;border-radius:14px;background:#FAFAF8;cursor:pointer;text-align:left;transition:border-color .18s,background .18s;}
+.wm-type-btn:hover{border-color:#2FA97F;background:#f0fdf8;}
+.wm-type-btn strong{font-size:.95rem;color:#1A1A1A;font-weight:600;}
+.wm-type-btn span{font-size:.78rem;color:#9CA3AF;font-weight:300;}
+.wm-back{display:inline-flex;align-items:center;gap:5px;font-size:.8rem;color:#9CA3AF;background:none;border:none;cursor:pointer;padding:0;margin-bottom:20px;transition:color .15s;}
+.wm-back:hover{color:#1A1A1A;}
+.wm-date-card{display:flex;align-items:center;gap:10px;background:linear-gradient(135deg,#f0fdf8,#e6f7f1);border:1px solid rgba(47,169,127,.2);border-radius:12px;padding:13px 16px;margin-bottom:20px;font-size:.88rem;color:#1e6649;font-weight:500;}
+.wm-date-card svg{flex-shrink:0;color:#2FA97F;}
+.wm-selected-type{font-size:.72rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#2FA97F;margin-bottom:16px;}
+.wm-field{display:flex;flex-direction:column;gap:5px;margin-bottom:13px;}
+.wm-field label{font-size:.7rem;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:#9CA3AF;}
+.wm-field input{border:1.5px solid #E5E4DF;border-radius:10px;padding:11px 14px;font-size:.9rem;color:#1A1A1A;outline:none;transition:border-color .18s;font-family:inherit;}
+.wm-field input:focus{border-color:#2FA97F;}
+.wm-submit{width:100%;margin-top:18px;background:linear-gradient(180deg,#D4B05A,#B08C38);color:#241C06;font-size:.95rem;font-weight:700;padding:14px 20px;border-radius:12px;border:1px solid rgba(140,110,40,.4);cursor:pointer;box-shadow:0 6px 18px -8px rgba(150,120,40,.5);transition:transform .18s,filter .18s;}
+.wm-submit:hover{transform:translateY(-2px);filter:brightness(1.06);}
+.wm-note{font-size:.72rem;color:#9CA3AF;text-align:center;margin-top:10px;}
+@media(max-width:480px){.wm-box{padding:28px 20px;border-radius:18px;}.wm-title{font-size:1.3rem;}}
+</style>
+
+<div id="webinarModal" class="wm-overlay" style="display:none;" onclick="if(event.target===this)closeWebinarModal()">
+  <div class="wm-box">
+    <button class="wm-close" onclick="closeWebinarModal()">×</button>
+    <div id="wmStep1">
+      <div class="wm-eyebrow">Webinar · 25€</div>
+      <div class="wm-title">Sesión grupal en directo<br>con <em>Nacho.</em></div>
+      <div class="wm-sub">¿Para quién quieres reservar la plaza?</div>
+      <div class="wm-types">
+        <button class="wm-type-btn" onclick="wmSelectType('activos')">
+          <strong>Webinar para clientes activos</strong>
+          <span>Alumnos del curso o en tratamiento con ETC.</span>
+        </button>
+        <button class="wm-type-btn" onclick="wmSelectType('familiares')">
+          <strong>Webinar para familiares</strong>
+          <span>Familia y entorno cercano de la persona afectada</span>
+        </button>
+      </div>
+    </div>
+    <div id="wmStep2" style="display:none;">
+      <button class="wm-back" onclick="wmGoBack()">← Volver</button>
+      <div class="wm-eyebrow">Webinar · 25€</div>
+      <div class="wm-title">Reserva tu <em>plaza.</em></div>
+      <div id="wmSelectedType" class="wm-selected-type"></div>
+      <div class="wm-date-card">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+        28 de agosto de 2026 · 19:00h (España)
+      </div>
+      <div class="wm-field"><label for="wmName2">Tu nombre</label><input id="wmName2" type="text" placeholder="Nombre completo" autocomplete="name"></div>
+      <div class="wm-field"><label for="wmEmail2">Tu email</label><input id="wmEmail2" type="email" placeholder="correo@ejemplo.com" autocomplete="email"></div>
+      <button class="wm-submit" onclick="wmSubmit2()">Reservar mi plaza — 25€ →</button>
+      <div class="wm-note">Nacho te enviará el link de pago y acceso al webinar</div>
+    </div>
+  </div>
+</div>
+
+<script>
+var _wmType2='';
+function openWebinarModal(){
+  var m=document.getElementById('webinarModal');
+  m.style.display='flex';
+  requestAnimationFrame(function(){ requestAnimationFrame(function(){ m.classList.add('wm-in'); }); });
+  document.body.style.overflow='hidden';
+  document.getElementById('wmStep1').style.display='block';
+  document.getElementById('wmStep2').style.display='none';
+  document.getElementById('wmName2').value='';
+  document.getElementById('wmEmail2').value='';
+  _wmType2='';
+}
+function closeWebinarModal(){
+  var m=document.getElementById('webinarModal');
+  m.classList.remove('wm-in');
+  setTimeout(function(){ m.style.display='none'; document.body.style.overflow=''; },250);
+}
+function wmSelectType(type){
+  _wmType2=type;
+  document.getElementById('wmStep1').style.display='none';
+  document.getElementById('wmStep2').style.display='block';
+  document.getElementById('wmSelectedType').textContent=
+    type==='activos'?'Webinar para clientes activos':'Webinar para familiares';
+}
+function wmGoBack(){
+  document.getElementById('wmStep1').style.display='block';
+  document.getElementById('wmStep2').style.display='none';
+}
+function wmSubmit2(){
+  var name=document.getElementById('wmName2').value.trim();
+  var email=document.getElementById('wmEmail2').value.trim();
+  if(!name||!email){ alert('Por favor rellena tu nombre y email.'); return; }
+  var tipo=_wmType2==='activos'?'clientes activos':'familiares';
+  var msg='Hola Nacho, quiero reservar una plaza en el webinar del 28 de agosto ('+tipo+'). Mi nombre es: '+name+' · Mi email es: '+email;
+  window.open('https://wa.me/34611847645?text='+encodeURIComponent(msg),'_blank');
+  closeWebinarModal();
+}
 </script>
 </body>
 </html>
