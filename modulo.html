@@ -720,8 +720,8 @@
   if(n<15 && (completed.includes(n) || (n+1)<=firstIncomplete)) next.onclick=()=>location.href='modulo.html?n='+(n+1);
   else { next.disabled=true; next.style.opacity='.4'; next.style.cursor='default'; }
 
-  // Bloque especial clase 15
-  if(n===15){
+  // Bloque especial clase 15 — solo visible al completarla
+  if(n===15 && isDone){
     const b=$('class15Block'); if(b) b.style.display='block';
     // Sesión con Nacho: Premium ve su bloque gratuito, Básico ve el de pago
     let plan='basic'; try{ plan=localStorage.getItem('etc_plan')||'basic'; }catch(e){}
