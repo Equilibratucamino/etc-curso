@@ -34,7 +34,8 @@ export default async function handler(req, res) {
   }
 
   const WEBINAR_DATE = process.env.WEBINAR_DATE || '28 de agosto de 2026 · 19:00h (España)';
-  const WEBINAR_DAY  = WEBINAR_DATE.split('·')[0].trim(); // "28 de agosto de 2026"
+  const WEBINAR_DAY  = WEBINAR_DATE.split('·')[0].trim();
+  const WEBINAR_LINK = process.env.WEBINAR_LINK || '';
   const firstName    = name ? name.split(' ')[0] : '';
   const tipoLabel    = tipo === 'activos' ? 'Clientes activos' : 'Familiares';
   const subject      = firstName
@@ -50,7 +51,7 @@ export default async function handler(req, res) {
           from: 'Nacho <hola@equilibratucamino.com>',
           to: email,
           subject,
-          html: buildWebinarEmailHTML({ firstName, tipoLabel }),
+          html: buildWebinarEmailHTML({ firstName, tipoLabel, webinarDate: WEBINAR_DATE, webinarDay: WEBINAR_DAY, webinarLink: WEBINAR_LINK }),
         }),
       }),
       fetch('https://api.resend.com/emails', {
@@ -80,7 +81,7 @@ export default async function handler(req, res) {
   }
 }
 
-function buildWebinarEmailHTML({ firstName, tipoLabel }) {
+function buildWebinarEmailHTML({ firstName, tipoLabel, webinarDate, webinarDay, webinarLink }) {
   const greeting = firstName ? `¡${firstName}, tienes tu plaza!` : '¡Tienes tu plaza!';
 
   return `<!DOCTYPE html>
@@ -124,7 +125,7 @@ function buildWebinarEmailHTML({ firstName, tipoLabel }) {
             </h1>
             <p style="margin:0 0 28px;font-size:15px;font-weight:300;line-height:1.75;color:#6E7168;">
               Tu plaza en el webinar de ETC. está reservada.<br>
-              Nos vemos el <strong style="color:#1E211D;">${WEBINAR_DAY}</strong>.
+              Nos vemos el <strong style="color:#1E211D;">${webinarDay}</strong>.
             </p>
           </td>
         </tr>
@@ -136,7 +137,7 @@ function buildWebinarEmailHTML({ firstName, tipoLabel }) {
               <tr>
                 <td style="background:linear-gradient(135deg,#fffbeb,#fef3c7);border:1.5px solid #fde68a;border-radius:16px;padding:22px 24px;text-align:center;">
                   <p style="margin:0 0 4px;font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:#B08C38;">Sesión grupal en directo · ${tipoLabel}</p>
-                  <p style="margin:0;font-size:1.35rem;font-weight:700;color:#241C06;letter-spacing:-.02em;">${WEBINAR_DATE}</p>
+                  <p style="margin:0;font-size:1.35rem;font-weight:700;color:#241C06;letter-spacing:-.02em;">${webinarDate}</p>
                   <p style="margin:6px 0 0;font-size:1rem;color:#92640a;font-weight:500;">Con Nacho</p>
                 </td>
               </tr>
@@ -176,18 +177,25 @@ function buildWebinarEmailHTML({ firstName, tipoLabel }) {
           </td>
         </tr>
 
-        <!-- Nota link -->
+        <!-- Link de acceso -->
         <tr>
-          <td style="padding:0 40px 32px;">
-            <table width="100%" cellpadding="0" cellspacing="0" role="presentation">
-              <tr>
-                <td style="background:#eef9f5;border:1px solid rgba(47,169,127,.2);border-radius:12px;padding:16px 20px;">
-                  <p style="margin:0;font-size:.85rem;color:#1e6649;line-height:1.65;">
-                    📩 <strong>Recibirás el link de acceso</strong> unos días antes del webinar directamente en este email. Estate atento.
-                  </p>
-                </td>
-              </tr>
-            </table>
+          <td style="padding:0 40px 32px;text-align:center;">
+            ${webinarLink
+              ? `<a href="${webinarLink}"
+                   style="display:inline-block;background:linear-gradient(135deg,#1a73e8,#1557b0);color:#ffffff;font-size:16px;font-weight:600;text-decoration:none;padding:16px 40px;border-radius:999px;box-shadow:0 6px 20px rgba(26,115,232,.3);font-family:Arial,Helvetica,sans-serif;">
+                   Unirte al webinar · Google Meet →
+                 </a>
+                 <p style="margin:12px 0 0;font-size:11px;color:#A1A399;">Guarda este correo — aquí está tu acceso al webinar</p>`
+              : `<table width="100%" cellpadding="0" cellspacing="0" role="presentation">
+                   <tr>
+                     <td style="background:#eef9f5;border:1px solid rgba(47,169,127,.2);border-radius:12px;padding:16px 20px;">
+                       <p style="margin:0;font-size:.85rem;color:#1e6649;line-height:1.65;">
+                         📩 <strong>Recibirás el link de Google Meet</strong> unos días antes del webinar directamente en este email. Estate atento.
+                       </p>
+                     </td>
+                   </tr>
+                 </table>`
+            }
           </td>
         </tr>
 
