@@ -82,7 +82,7 @@ export default async function handler(req, res) {
 }
 
 function buildWebinarEmailHTML({ firstName, tipoLabel, webinarDate, webinarDay, webinarLink }) {
-  const greeting = firstName ? `¡${firstName}, tienes tu plaza!` : '¡Tienes tu plaza!';
+  const greeting = firstName ? `¡${firstName}, ya tienes tu plaza confirmada!` : '¡Ya tienes tu plaza confirmada!';
 
   return `<!DOCTYPE html>
 <html lang="es">
