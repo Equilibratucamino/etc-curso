@@ -852,7 +852,7 @@ document.querySelectorAll('[data-reveal]').forEach((el, i) => {
       <div id="wmSelectedType" class="wm-selected-type"></div>
       <div class="wm-date-card">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
-        28 de agosto de 2026 · 19:00h (España)
+        <span id="wmDateLabel">Cargando fecha…</span>
       </div>
       <div class="wm-field">
         <label for="wmName">Tu nombre</label>
@@ -880,6 +880,10 @@ function openWebinarModal(){
   document.getElementById('wmName').value='';
   document.getElementById('wmEmail').value='';
   _wmType='';
+  fetch('/api/webinar-config').then(function(r){return r.json();}).then(function(d){
+    var el=document.getElementById('wmDateLabel');
+    if(el&&d.date) el.textContent=d.date;
+  }).catch(function(){});
 }
 function closeWebinarModal(){
   var m=document.getElementById('webinarModal');

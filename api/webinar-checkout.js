@@ -28,7 +28,7 @@ export default async function handler(req, res) {
         'line_items[0][price_data][currency]': 'eur',
         'line_items[0][price_data][unit_amount]': '2500',
         'line_items[0][price_data][product_data][name]': 'Webinar ETC. — 28 de agosto de 2026',
-        'line_items[0][price_data][product_data][description]': `Sesión grupal en directo con Nacho · ${tipo === 'activos' ? 'Clientes activos' : 'Familiares'} · 19:00h (España)`,
+        'line_items[0][price_data][product_data][description]': `Sesión grupal en directo con Nacho · ${tipo === 'activos' ? 'Clientes activos' : 'Familiares'} · ${process.env.WEBINAR_DATE || '28 de agosto de 2026 · 19:00h (España)'}`,
         'line_items[0][quantity]': '1',
         'customer_email': email,
         'metadata[name]': name,

@@ -44,6 +44,10 @@
   </div>
 
   <script>
+    fetch('/api/webinar-config').then(function(r){return r.json();}).then(function(d){
+      var el=document.getElementById('successDate');
+      if(el&&d.date) el.textContent=d.date;
+    }).catch(function(){});
     var params = new URLSearchParams(window.location.search);
     var sessionId = params.get('session_id');
     var cancelled = params.get('cancelled');
@@ -78,8 +82,7 @@
       document.getElementById('content').innerHTML += `
         <div class="date-card">
           <div class="label">Sesión grupal en directo con Nacho</div>
-          <div class="date">28 de agosto de 2026</div>
-          <div class="time">19:00h (España)</div>
+          <div class="date" id="successDate">28 de agosto de 2026 · 19:00h (España)</div>
         </div>
         <div class="info-box">📩 <strong>Recibirás el link de acceso</strong> unos días antes del webinar en tu email. Estate atento.</div>
         <a href="https://equilibratucamino.com" class="btn">Volver a ETC. →</a>

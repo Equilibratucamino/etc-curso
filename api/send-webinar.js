@@ -33,11 +33,13 @@ export default async function handler(req, res) {
     return res.status(500).json({ error: 'Stripe fetch failed' });
   }
 
-  const firstName   = name ? name.split(' ')[0] : '';
-  const tipoLabel   = tipo === 'activos' ? 'Clientes activos' : 'Familiares';
-  const subject     = firstName
-    ? `${firstName}, tienes tu plaza en el Webinar del 28 de agosto`
-    : 'Tu plaza en el Webinar del 28 de agosto — ETC.';
+  const WEBINAR_DATE = process.env.WEBINAR_DATE || '28 de agosto de 2026 · 19:00h (España)';
+  const WEBINAR_DAY  = WEBINAR_DATE.split('·')[0].trim(); // "28 de agosto de 2026"
+  const firstName    = name ? name.split(' ')[0] : '';
+  const tipoLabel    = tipo === 'activos' ? 'Clientes activos' : 'Familiares';
+  const subject      = firstName
+    ? `${firstName}, tienes tu plaza en el Webinar del ${WEBINAR_DAY}`
+    : `Tu plaza en el Webinar del ${WEBINAR_DAY} — ETC.`;
 
   try {
     await Promise.all([
@@ -122,7 +124,7 @@ function buildWebinarEmailHTML({ firstName, tipoLabel }) {
             </h1>
             <p style="margin:0 0 28px;font-size:15px;font-weight:300;line-height:1.75;color:#6E7168;">
               Tu plaza en el webinar de ETC. está reservada.<br>
-              Nos vemos el <strong style="color:#1E211D;">28 de agosto</strong>.
+              Nos vemos el <strong style="color:#1E211D;">${WEBINAR_DAY}</strong>.
             </p>
           </td>
         </tr>
@@ -134,8 +136,8 @@ function buildWebinarEmailHTML({ firstName, tipoLabel }) {
               <tr>
                 <td style="background:linear-gradient(135deg,#fffbeb,#fef3c7);border:1.5px solid #fde68a;border-radius:16px;padding:22px 24px;text-align:center;">
                   <p style="margin:0 0 4px;font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:#B08C38;">Sesión grupal en directo · ${tipoLabel}</p>
-                  <p style="margin:0;font-size:1.35rem;font-weight:700;color:#241C06;letter-spacing:-.02em;">28 de agosto de 2026</p>
-                  <p style="margin:6px 0 0;font-size:1rem;color:#92640a;font-weight:500;">19:00h (España) · Con Nacho</p>
+                  <p style="margin:0;font-size:1.35rem;font-weight:700;color:#241C06;letter-spacing:-.02em;">${WEBINAR_DATE}</p>
+                  <p style="margin:6px 0 0;font-size:1rem;color:#92640a;font-weight:500;">Con Nacho</p>
                 </td>
               </tr>
             </table>
