@@ -15,7 +15,7 @@ export default async function handler(req, res) {
   }
 
   // ── 1. Recuperar datos del comprador desde Stripe ──
-  let email, name;
+  let email, name, orderRef;
   try {
     const stripeRes = await fetch(
       `https://api.stripe.com/v1/checkout/sessions/${sessionId}`,
@@ -35,6 +35,7 @@ export default async function handler(req, res) {
     const session = await stripeRes.json();
     email = session.customer_details?.email;
     name  = session.customer_details?.name || '';
+    orderRef = '#' + sessionId.slice(-6).toUpperCase();
 
     if (!email) {
       return res.status(400).json({ error: 'No email in Stripe session' });
@@ -65,7 +66,7 @@ export default async function handler(req, res) {
           from: 'Nacho <hola@equilibratucamino.com>',
           to: email,
           subject,
-          html: buildEmailHTML({ firstName, plan, isPremium, dashboardUrl, email }),
+          html: buildEmailHTML({ firstName, plan, isPremium, dashboardUrl, email, orderRef }),
         }),
       }),
       // Notificación a Nacho
@@ -108,7 +109,7 @@ export default async function handler(req, res) {
 }
 
 // ── Plantilla del email ──────────────────────────────────────────────────────
-function buildEmailHTML({ firstName, isPremium, dashboardUrl, email }) {
+function buildEmailHTML({ firstName, isPremium, dashboardUrl, email, orderRef }) {
   const greeting = firstName ? `${firstName}, ya` : 'Ya';
 
   const extraItems = isPremium
@@ -256,8 +257,16 @@ function buildEmailHTML({ firstName, isPremium, dashboardUrl, email }) {
                 <td style="background:#f0fdf8;border:1.5px solid #6ee7c0;border-radius:14px;padding:18px 20px;">
                   <p style="margin:0 0 6px;font-size:10px;font-weight:700;letter-spacing:1.8px;text-transform:uppercase;color:#1F8C68;">Cómo reservar tu sesión gratuita</p>
                   <p style="margin:0 0 12px;font-size:.88rem;color:#1e6649;line-height:1.65;">
-                    Al terminar la clase 15, escríbenos desde <strong>${email}</strong> — el mismo con el que compraste — y te reservamos tu sesión de 1h con Nacho.
+                    Al terminar la clase 15, escríbenos con tu número de pedido y te reservamos tu sesión de 1h con Nacho.
                   </p>
+                  <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:12px;">
+                    <tr>
+                      <td style="background:#d1fae5;border-radius:8px;padding:10px 14px;text-align:center;">
+                        <span style="font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#1F8C68;display:block;margin-bottom:4px;">Nº de pedido</span>
+                        <span style="font-size:22px;font-weight:700;color:#1e6649;letter-spacing:1px;">${orderRef}</span>
+                      </td>
+                    </tr>
+                  </table>
                   <p style="margin:0;font-size:.8rem;color:#2FA97F;">
                     📧 <a href="mailto:equilibratucamino@gmail.com" style="color:#1F8C68;text-decoration:none;font-weight:600;">equilibratucamino@gmail.com</a>
                     &nbsp;·&nbsp;
@@ -283,11 +292,12 @@ function buildEmailHTML({ firstName, isPremium, dashboardUrl, email }) {
             <p style="margin:0 0 6px;font-size:11px;color:#A1A399;line-height:1.6;">
               100% privado y confidencial · Nadie sabe que estás aquí
             </p>
-            <p style="margin:0;font-size:11px;color:#A1A399;line-height:1.6;">
+            <p style="margin:0 0 10px;font-size:11px;color:#A1A399;line-height:1.6;">
               ¿Tienes alguna duda? Escríbenos a
               <a href="mailto:equilibratucamino@gmail.com" style="color:#2FA97F;text-decoration:none;">equilibratucamino@gmail.com</a>
               o por <a href="https://wa.me/34611847645" style="color:#2FA97F;text-decoration:none;">WhatsApp</a>
             </p>
+            <p style="margin:0;font-size:10px;color:#C4C5C2;">Nº de pedido: ${orderRef}</p>
           </td>
         </tr>
 
