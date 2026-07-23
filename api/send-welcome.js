@@ -65,7 +65,7 @@ export default async function handler(req, res) {
           from: 'Nacho <hola@equilibratucamino.com>',
           to: email,
           subject,
-          html: buildEmailHTML({ firstName, plan, isPremium, dashboardUrl }),
+          html: buildEmailHTML({ firstName, plan, isPremium, dashboardUrl, email }),
         }),
       }),
       // Notificación a Nacho
@@ -108,7 +108,7 @@ export default async function handler(req, res) {
 }
 
 // ── Plantilla del email ──────────────────────────────────────────────────────
-function buildEmailHTML({ firstName, isPremium, dashboardUrl }) {
+function buildEmailHTML({ firstName, isPremium, dashboardUrl, email }) {
   const greeting = firstName ? `${firstName}, ya` : 'Ya';
 
   const extraItems = isPremium
@@ -246,6 +246,29 @@ function buildEmailHTML({ firstName, isPremium, dashboardUrl }) {
         </tr>
 
         ${premiumBanner}
+
+        ${isPremium ? `
+        <!-- Sesión 1:1 — cómo reservarla -->
+        <tr>
+          <td style="padding:0 40px 28px;">
+            <table width="100%" cellpadding="0" cellspacing="0">
+              <tr>
+                <td style="background:#f0fdf8;border:1.5px solid #6ee7c0;border-radius:14px;padding:18px 20px;">
+                  <p style="margin:0 0 6px;font-size:10px;font-weight:700;letter-spacing:1.8px;text-transform:uppercase;color:#1F8C68;">Cómo reservar tu sesión gratuita</p>
+                  <p style="margin:0 0 10px;font-size:.88rem;color:#1e6649;line-height:1.65;">
+                    Al terminar la clase 15, escríbenos desde <strong>${email}</strong> — ese email es tu credencial de acceso — y te reservamos la sesión de 1h con Nacho.
+                  </p>
+                  <p style="margin:0;font-size:.8rem;color:#2FA97F;">
+                    📧 <a href="mailto:equilibratucamino@gmail.com" style="color:#1F8C68;text-decoration:none;font-weight:600;">equilibratucamino@gmail.com</a>
+                    &nbsp;·&nbsp;
+                    💬 <a href="https://wa.me/34611847645" style="color:#1F8C68;text-decoration:none;font-weight:600;">WhatsApp</a>
+                  </p>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+        ` : ''}
 
         <!-- Divisor -->
         <tr>
