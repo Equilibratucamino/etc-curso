@@ -65,7 +65,7 @@ export default async function handler(req, res) {
           from: 'Nacho <hola@equilibratucamino.com>',
           to: email,
           subject,
-          html: buildEmailHTML({ firstName, plan, isPremium, dashboardUrl, email }),
+          html: buildEmailHTML({ firstName, plan, isPremium, dashboardUrl, email, sessionId }),
         }),
       }),
       // Notificación a Nacho
@@ -108,7 +108,7 @@ export default async function handler(req, res) {
 }
 
 // ── Plantilla del email ──────────────────────────────────────────────────────
-function buildEmailHTML({ firstName, isPremium, dashboardUrl, email }) {
+function buildEmailHTML({ firstName, isPremium, dashboardUrl, email, sessionId }) {
   const greeting = firstName ? `${firstName}, ya` : 'Ya';
 
   const extraItems = isPremium
@@ -255,9 +255,17 @@ function buildEmailHTML({ firstName, isPremium, dashboardUrl, email }) {
               <tr>
                 <td style="background:#f0fdf8;border:1.5px solid #6ee7c0;border-radius:14px;padding:18px 20px;">
                   <p style="margin:0 0 6px;font-size:10px;font-weight:700;letter-spacing:1.8px;text-transform:uppercase;color:#1F8C68;">Cómo reservar tu sesión gratuita</p>
-                  <p style="margin:0 0 10px;font-size:.88rem;color:#1e6649;line-height:1.65;">
-                    Al terminar la clase 15, escríbenos desde <strong>${email}</strong> — ese email es tu credencial de acceso — y te reservamos la sesión de 1h con Nacho.
+                  <p style="margin:0 0 12px;font-size:.88rem;color:#1e6649;line-height:1.65;">
+                    Al terminar la clase 15, escríbenos con tu <strong>código de pedido</strong> y te reservamos la sesión de 1h con Nacho.
                   </p>
+                  <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:12px;">
+                    <tr>
+                      <td style="background:#d1fae5;border-radius:8px;padding:10px 14px;">
+                        <span style="font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#1F8C68;display:block;margin-bottom:3px;">Tu código de pedido</span>
+                        <span style="font-size:11px;font-family:monospace;color:#1e6649;word-break:break-all;">${sessionId}</span>
+                      </td>
+                    </tr>
+                  </table>
                   <p style="margin:0;font-size:.8rem;color:#2FA97F;">
                     📧 <a href="mailto:equilibratucamino@gmail.com" style="color:#1F8C68;text-decoration:none;font-weight:600;">equilibratucamino@gmail.com</a>
                     &nbsp;·&nbsp;
