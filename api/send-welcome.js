@@ -85,10 +85,12 @@ export default async function handler(req, res) {
                     <td style="padding:8px 0;font-weight:600;border-bottom:1px solid #eee;color:${isPremium?'#92640a':'#1E211D'}">${isPremium ? '⭐ Premium' : 'Básico'} — ${price}</td></tr>
                 <tr><td style="padding:8px 0;color:#666;border-bottom:1px solid #eee">Comprador</td>
                     <td style="padding:8px 0;border-bottom:1px solid #eee">${name || '—'}</td></tr>
-                <tr><td style="padding:8px 0;color:#666">Email</td>
-                    <td style="padding:8px 0"><a href="mailto:${email}" style="color:#2FA97F">${email}</a></td></tr>
+                <tr><td style="padding:8px 0;color:#666;border-bottom:1px solid #eee">Email</td>
+                    <td style="padding:8px 0;border-bottom:1px solid #eee"><a href="mailto:${email}" style="color:#2FA97F">${email}</a></td></tr>
+                <tr><td style="padding:8px 0;color:#666">Nº pedido</td>
+                    <td style="padding:8px 0;font-weight:700;font-size:1.1rem;color:#1E211D;">${orderRef}</td></tr>
               </table>
-              <p style="margin:20px 0 0;font-size:.8rem;color:#999;">Stripe session: ${sessionId}</p>
+              <p style="margin:20px 0 0;font-size:.75rem;color:#bbb;">Stripe: ${sessionId}</p>
             </div>
           `,
         }),
