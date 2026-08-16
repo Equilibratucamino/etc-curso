@@ -1,19 +1,36 @@
 // /api/webinar-checkout.js
 // Crea una sesión de Stripe Checkout para el webinar (25€)
 
-export default async function handler(req, res) {
-  if (req.method !== 'POST') {
-    return res.status(405).json({ error: 'Method not allowed' });
-  }
+const ALLOWED_ORIGINS = [
+  'https://curso.equilibratucamino.com',
+  'https://app.equilibratucamino.com',
+];
 
-  const { name, email, tipo } = req.body || {};
+export default async function handler(req, res) {
+  const origin = req.headers.origin || '';
+  if (ALLOWED_ORIGINS.includes(origin)) {
+    res.setHeader('Access-Control-Allow-Origin', origin);
+  }
+  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+
+  if (req.method === 'OPTIONS') return res.status(200).end();
+  if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
+
+  const { name, email, tipo, titulo, fecha } = req.body || {};
 
   if (!name || !email || !tipo) {
     return res.status(400).json({ error: 'Missing fields' });
   }
 
+  const fechaLabel = fecha || process.env.WEBINAR_DATE || '';
+  const tipoLabel  = tipo === 'adictos' ? 'Pacientes y exludópatas' : 'Familias y entorno cercano';
+  const tituloStr  = titulo ? `${titulo}` : 'Webinar ETC.';
+  const productName = `${tituloStr} — ${tipoLabel}`;
+  const productDesc = fechaLabel ? `${fechaLabel} · En directo con Nacho` : 'En directo con Nacho';
+
   const successUrl = `https://curso.equilibratucamino.com/webinar-success.html?session_id={CHECKOUT_SESSION_ID}`;
-  const cancelUrl  = `https://curso.equilibratucamino.com/webinar-success.html?cancelled=1`;
+  const cancelUrl  = `https://app.equilibratucamino.com/webinars/`;
 
   try {
     const stripeRes = await fetch('https://api.stripe.com/v1/checkout/sessions', {
@@ -27,14 +44,16 @@ export default async function handler(req, res) {
         'payment_method_types[]': 'card',
         'line_items[0][price_data][currency]': 'eur',
         'line_items[0][price_data][unit_amount]': '2500',
-        'line_items[0][price_data][product_data][name]': `Webinar ETC. — ${process.env.WEBINAR_DATE || '28 de agosto de 2026 · 19:00h (España)'}`,
-        'line_items[0][price_data][product_data][description]': `Sesión grupal en directo con Nacho · ${tipo === 'activos' ? 'Clientes activos' : 'Familiares'} · ${process.env.WEBINAR_DATE || '28 de agosto de 2026 · 19:00h (España)'}`,
+        'line_items[0][price_data][product_data][name]': productName,
+        'line_items[0][price_data][product_data][description]': productDesc,
         'line_items[0][quantity]': '1',
         'customer_email': email,
         'metadata[name]': name,
         'metadata[tipo]': tipo,
+        'metadata[titulo]': tituloStr,
+        'metadata[fecha]': fechaLabel,
         success_url: successUrl,
-        cancel_url: cancelUrl,
+        cancel_url:  cancelUrl,
       }).toString(),
     });
 
