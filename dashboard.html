@@ -317,10 +317,25 @@
     .ccard__arrow { color: var(--teal-d); opacity: 0; transform: translateX(-4px); transition: all 0.2s var(--ease); }
     .ccard.clickable:hover .ccard__arrow, .ccard.current .ccard__arrow { opacity: 1; transform: translateX(0); }
 
-    /* cover palettes — restringidas: neutro + teal */
-    .cv-stone   { background: linear-gradient(150deg, var(--stone-bg), var(--stone-bg2)); color: var(--stone-ink); }
-    .cv-current { background: linear-gradient(150deg, var(--mint-bg), #C6EBDC); color: var(--teal-d); }
-    .cv-done    { background: linear-gradient(150deg, var(--teal), var(--teal-d)); color: #fff; }
+    /* cover palettes — bloqueada: neutro */
+    .cv-stone { background: linear-gradient(150deg, var(--stone-bg), var(--stone-bg2)); color: var(--stone-ink); }
+
+    /* cover con foto real (desbloqueada) */
+    .cv-photo { background: #111; }
+    .cv-photo img {
+      position: absolute; inset: 0; width: 100%; height: 100%;
+      object-fit: cover; object-position: center 30%;
+    }
+    .cv-photo::before {
+      content: ''; position: absolute; inset: 0; z-index: 1;
+      background: linear-gradient(120deg, rgba(8,20,14,.62) 0%, rgba(8,20,14,.32) 100%);
+    }
+    .cv-photo .ccard__num { color: #fff; position: relative; z-index: 2; text-shadow: 0 2px 8px rgba(0,0,0,.4); }
+    .cv-photo .ccard__statribbon { z-index: 3; }
+    /* tint verde en clase actual */
+    .ccard.current .cv-photo::before {
+      background: linear-gradient(120deg, rgba(10,60,40,.68) 0%, rgba(15,100,65,.38) 100%);
+    }
 
     /* ── CERTIFICATE feature ── */
     .cert {
@@ -749,8 +764,8 @@ MODULES.forEach(m => {
   if (!isLocked) card.href = 'modulo.html?n=' + m.n;
   card.className = 'ccard ' + (isLocked ? 'locked' : 'clickable') + (isCurrent ? ' current' : '');
 
-  // Portada restringida: teal (hecha/actual) o neutro (bloqueada)
-  const coverClass = isDone ? 'cv-done' : isCurrent ? 'cv-current' : 'cv-stone';
+  const coverClass = isLocked ? 'cv-stone' : 'cv-photo';
+  const coverImg = isLocked ? '' : `<img src="images/portada-curso-${m.n % 2 === 0 ? 2 : 1}.png" alt="" loading="lazy">`;
   const numContent = String(m.n).padStart(2,'0');
   let ribbon, statusHTML;
   if (isDone) {
@@ -766,6 +781,7 @@ MODULES.forEach(m => {
 
   card.innerHTML = `
     <div class="ccard__cover ${coverClass}">
+      ${coverImg}
       <span class="ccard__num">${numContent}</span>
       ${ribbon}
     </div>
