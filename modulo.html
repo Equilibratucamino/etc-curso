@@ -590,18 +590,75 @@
     {n:14, title:'Prevención de recaídas',       dur:'12 min'},
     {n:15, title:'Analizando casos reales',      dur:'14 min'},
   ];
-  // ▶ Cuando estén grabados los vídeos, añade aquí el ID de YouTube por clase:
-  //   ej.  const VIDEOS = { 1:'abc123', 2:'def456', ... };
-  const VIDEOS = {};
+  // IDs de Google Drive — embed: https://drive.google.com/file/d/ID/preview
+  const VIDEOS = {
+    1:  '1WyFvGA2pMoLpU0Ktw5eEh1NDioanggpw',
+    2:  '1W6aTHAsjWCS_otrf2Of4maoKI7d42qSO',
+    3:  '1qqwyhzYyvBKH9j2z_Am4f50WYgMb53NJ',
+    4:  '16jvItUF_q97XyGWUuYUg3wQ8XwKZnjT7',
+    5:  '1l1_EDW8RbGL4BrrjTI0Pqii90X7jmN-h',
+    6:  '150nnIABzIkV1ewig-dYl_oaoa1X4KY9k',
+    7:  '1SZL-mG0AmLArmQPdiki8ropnT3JIDcpe',
+    8:  '1_ZJes4xgiSz8pSoTfi_Tmm5L8fGZmTuq',
+    9:  '1B3ADKAk52uelFNugRmiLUv13raCcXDg5',
+    10: '1pK-2q4-fqFmhScwq145Uyt8n-x-hCU1t',
+    11: '1YVPxfYsbRKeLAIiYzALM7LW30qomw0UT',
+    12: '1X1FQt6aYMgc9my6EJwbO2HrgmD5WSeuP',
+    13: '12-qf7VbUDW_GLicw30CACjW7hnxXxp1W',
+    14: '1Rx053AmQ-3oNH4hLWXfrZ5A2CiwrWybe',
+    15: '1izE_D5i4RHf3NwMzptUu8IRVQt4pTJZQ',
+  };
   const DEFAULT_CONTENT = {
     desc:'En esta clase trabajarás un paso clave de tu recuperación. Tómate tu tiempo, ve el vídeo completo y haz los ejercicios — ahí está el verdadero cambio.',
     learn:['La idea central de esta clase y por qué importa en tu proceso.','Cómo aplicarla a tu situación concreta, no solo en teoría.','Un primer paso práctico que puedes dar hoy mismo.'],
     exercises:['¿Qué te ha removido o resonado de esta clase? Escríbelo.','Describe una situación real tuya donde puedas aplicar lo aprendido.','Define un pequeño compromiso concreto para esta semana.']
   };
   const CONTENT = {
-    5:{ desc:'En esta clase entenderás por qué la adicción al juego no es un problema de voluntad, sino un ciclo neurológico que se retroalimenta. Aprenderás a identificar cuándo se activa el ciclo — y cómo interrumpirlo antes de que tome el control.',
-        learn:['Cómo funciona el ciclo automático de la adicción y por qué se mantiene solo.','Los 3 detonantes más comunes que activan el impulso de jugar.','La técnica de "pausa e intervención" para crear distancia entre impulso y conducta.','Por qué la fuerza de voluntad sola no funciona — y qué hacer en su lugar.'],
-        exercises:['Escribe los 3 momentos del último mes en que sentiste más urgencia de jugar. ¿Qué estabas haciendo? ¿Cómo te sentías?','Identifica tu detonante principal (aburrimiento / estrés / soledad / celebración) y ponle nombre.','Diseña tu "pausa de 10 minutos": ¿qué harás exactamente cuando sientas el impulso?'] }
+    1:{ desc:'Nacho comparte su historia real con la ludopatía: cómo empezó, cómo se hundió y cómo lo superó. Una historia sin filtros que te hará sentir que no estás solo.',
+        learn:['Conocer el punto de partida real de Nacho y cómo la adicción lo afectó.','Por qué contar la historia en voz alta tiene poder sanador.','Reconocer los primeros síntomas que pasamos por alto.','La importancia de dar el primer paso aunque no te sientas preparado.'],
+        exercises:['✉️ Carta del pasado: Escríbele una carta a tu yo de antes, al que empezó a jugar. Despídete de esa versión de ti con honestidad y sin juicio. No tienes que compartirla con nadie — es tuya. Escribe al menos un párrafo.','¿Cuándo fue la primera vez que jugaste? ¿Qué sentiste? ¿Qué buscabas en ese momento?','¿Qué parte de la historia de Nacho te ha resonado más? ¿Por qué crees que es esa parte?'] },
+    2:{ desc:'Marcos cuenta su proceso desde el otro lado. Una perspectiva complementaria que amplía la visión de la recuperación y te recuerda que no hay un único camino.',
+        learn:['Ver la adicción desde fuera, con los ojos de quien acompaña.','La diferencia entre apoyar y enablear (sostener la adicción sin querer).','Cómo la recuperación cambia inevitablemente las relaciones.','Por qué necesitas construir tu propia historia, no copiar la de nadie más.'],
+        exercises:['¿Qué parte de la historia de Marcos te ha sorprendido o removido? ¿Por qué?','¿Cómo crees que ha afectado tu adicción a las personas más cercanas a ti? Sé honesto.','Si pudieras hablar con alguien de tu entorno sobre tu proceso ahora mismo, ¿qué le dirías?'] },
+    3:{ desc:'La adicción no es un problema de voluntad. En esta clase entenderás la neurociencia detrás del juego patológico: qué hace la dopamina, cómo se forma el hábito y por qué el cerebro adicto toma sus propias decisiones.',
+        learn:['Qué ocurre en el cerebro cuando juegas y por qué el placer se convierte en trampa.','La diferencia entre querer parar y poder parar — y por qué no es lo mismo.','Cómo se instala un hábito y qué hace falta para desinstalarlo.','Por qué esto no es una cuestión de fuerza de voluntad, sino de neurología.'],
+        exercises:['¿Alguna vez sentiste que una parte de ti quería parar pero otra seguía jugando? Descríbelo con tus palabras.','¿Qué sensación física notabas antes o durante el juego? (tensión, adrenalina, calma, evasión...)','Ahora que entiendes el mecanismo neurológico, ¿qué cambia en la forma en que te ves a ti mismo?'] },
+    4:{ desc:'No todas las adicciones al juego son iguales. Máquinas, apuestas deportivas, poker, casino online — cada modalidad crea un patrón diferente. Entender cuál es el tuyo cambia la estrategia.',
+        learn:['Las diferencias clave entre tipos de juego y sus mecanismos de enganche.','Por qué las apuestas deportivas y el juego online son especialmente adictivos.','Cómo identificar tu modalidad principal y sus detonantes específicos.','Qué estrategias son más efectivas para cada tipo de juego.'],
+        exercises:['¿Cuál era tu modalidad principal de juego? Descríbela y explica qué te gustaba o qué buscabas en ella.','¿Hubo momentos en que cambiaste de tipo de juego? ¿Por qué crees que lo hiciste?','¿Qué situaciones, horarios o estados de ánimo estaban más ligados a tus episodios de juego?'] },
+    5:{ desc:'La adicción no la sufres solo tú. En esta clase hablaremos del impacto en las personas más cercanas y cómo gestionar esas relaciones durante la recuperación — sin culpa, con honestidad.',
+        learn:['Cómo la adicción afecta a la familia y al entorno cercano de formas que no siempre vemos.','Las mentiras como mecanismo de protección y las consecuencias que generan a largo plazo.','Cómo tener conversaciones difíciles con quienes más quieres.','Cuándo y cómo pedir apoyo sin sentir vergüenza.'],
+        exercises:['Haz una lista de las personas más afectadas por tu adicción. Para cada una, escribe cómo crees que las ha impactado.','¿Has mentido a alguien cercano por culpa del juego? ¿Cómo te sientes con eso ahora que tienes perspectiva?','¿Hay alguien a quien quieras contarle tu proceso de recuperación? ¿Qué le dirías si lo hicieras?'] },
+    6:{ desc:'La autoprohibición es la herramienta más potente que existe para poner distancia con el juego. En esta clase aprenderás qué es, cómo funciona en España y cómo usarla como escudo, no como condena.',
+        learn:['Qué es el RGIAJ (Registro General de Interdicciones de Acceso al Juego) y cómo inscribirse.','Por qué la autoprohibición funciona como barrera de seguridad real.','Cómo complementar la autoprohibición con otras herramientas digitales y físicas.','La autoprohibición como acto de amor propio, no de castigo.'],
+        exercises:['¿Estás ya inscrito en el RGIAJ? Si no, ¿qué te ha frenado hasta ahora? Escríbelo honestamente.','¿Qué otras barreras físicas o digitales puedes poner entre tú y el juego? (bloqueos en el móvil, apps de control, entregar tarjetas...)','Escribe 3 razones por las que la autoprohibición es un regalo que te haces a ti mismo.'] },
+    7:{ desc:'Las deudas son uno de los factores que más angustia generan en la recuperación. En esta clase aprenderás a afrontarlas con cabeza, qué opciones existen y por qué la deuda no define tu valor.',
+        learn:['Los tipos de deuda más comunes en la ludopatía y cómo priorizarlas.','Cómo tener conversaciones honestas con acreedores y familiares.','Herramientas legales y de ayuda disponibles en España.','Por qué el secreto de las deudas es más destructivo que las deudas mismas.'],
+        exercises:['Haz un inventario honesto de tus deudas actuales (importes, con quién). Solo para ti — no tienes que compartirlo con nadie.','¿Has podido hablar con alguien de confianza sobre tus deudas? ¿Qué pasó o qué crees que pasaría si lo hicieras?','¿Cuál es el primer paso concreto que podrías dar esta semana para empezar a gestionar aunque sea una deuda?'] },
+    8:{ desc:'El tiempo libre es el enemigo número uno en los primeros meses de recuperación. En esta clase aprenderás a estructurar tu tiempo de forma que el juego no tenga espacio para entrar.',
+        learn:['Por qué el aburrimiento y el vacío son los principales detonantes de recaída.','Cómo diseñar una rutina que proteja tu proceso de forma activa.','Actividades que generan dopamina sana y llenan el vacío que dejó el juego.','La diferencia entre ocupar el tiempo y disfrutar el tiempo.'],
+        exercises:['¿En qué momentos del día o la semana sientes más ganas de jugar? ¿Qué estás haciendo (o no haciendo) en esos momentos?','Diseña tu "plan de tiempo libre" para esta semana: escribe qué harás cada tarde/noche en lugar de jugar.','Escribe 5 cosas que disfrutabas antes de que el juego ocupara tanto espacio. ¿Cuál podrías retomar esta semana?'] },
+    9:{ desc:'Compararte con otros — con quien "puede jugar normal", con quien ya lo superó, con quien no tiene deudas — es una trampa que te paraliza. En esta clase aprenderás a salir de ese círculo.',
+        learn:['Por qué la comparación es un mecanismo de sabotaje que la mente usa para justificar recaídas.','Cómo la adicción distorsiona la percepción de la realidad y de los demás.','La diferencia entre inspiración sana y comparación destructiva.','Cómo centrarte en tu propio proceso sin mirar a los lados.'],
+        exercises:['¿Con quién te comparas habitualmente? ¿Qué historia te cuentas cuando lo haces?','¿Alguna vez has usado la comparación para justificar volver a jugar ("si él puede, yo también")? Descríbelo.','Escribe 3 avances propios de las últimas semanas, por pequeños que parezcan. Solo los tuyos, sin comparar.'] },
+    10:{ desc:'La recuperación cambia las amistades — y eso da miedo. En esta clase hablaremos de cómo gestionar las relaciones que estaban ligadas al juego y cómo construir un entorno que te apoye.',
+         learn:['Cómo identificar qué amistades representan un riesgo real para tu recuperación.','Cómo alejarte de entornos de juego sin perder la conexión social.','Cómo construir nuevas relaciones desde la autenticidad y sin mentiras.','La soledad como factor de riesgo y herramientas concretas para gestionarla.'],
+         exercises:['¿Hay amigos o grupos con los que jugabas? ¿Sigues en contacto con ellos? ¿Cómo lo gestionas actualmente?','¿Tienes amistades que apoyan tu recuperación o al menos la respetan? Descríbelas.','¿Qué tipo de entorno social necesitas construir para que tu recuperación sea sostenible a largo plazo?'] },
+    11:{ desc:'Recuperarse necesita un "para qué". Los objetivos bien definidos son la brújula que te mantiene en el camino cuando el impulso aparece. En esta clase aprenderás a fijar metas reales y alcanzables.',
+         learn:['Por qué los objetivos vagos no funcionan y cómo transformarlos en algo concreto y medible.','La diferencia entre objetivos a corto, medio y largo plazo y cómo combinarlos.','Cómo usar los objetivos como motivación en los momentos más difíciles.','Cómo celebrar los pequeños avances sin minimizarlos ni ignorarlos.'],
+         exercises:['Escribe tu objetivo principal de recuperación para los próximos 3 meses. Sé muy específico: ¿qué quieres conseguir exactamente?','¿Qué te motiva más en este momento para seguir adelante? (una persona, un sueño, una deuda que quieres saldar, tu propia dignidad...)','Define un objetivo para esta semana que puedas medir. ¿Cómo sabrás el domingo que lo has cumplido?'] },
+    12:{ desc:'El juego era tu forma de gestionar emociones: el estrés, el aburrimiento, la tristeza, la euforia. En esta clase aprenderás herramientas reales para regular las emociones sin necesitar el juego.',
+         learn:['Cómo identificar las emociones detrás del impulso de jugar.','Técnicas de regulación emocional que puedes usar en el momento, cuando más las necesitas.','Cómo construir tolerancia a la frustración y a las emociones difíciles.','Por qué las emociones difíciles no son el enemigo — son información valiosa.'],
+         exercises:['Haz una lista de las emociones que más frecuentemente precedían tus sesiones de juego. ¿Qué buscabas aliviar o intensificar?','La próxima vez que sientas una emoción difícil, prueba esto: para, respira 4 veces profundo y escribe lo que sientes. Descríbelo aquí cuando lo hagas.','¿Qué actividad concreta te ayuda a calmarte o a sentirte mejor sin jugar? (deporte, música, una ducha, hablar con alguien...) Define tu "kit de emergencia emocional".'] },
+    13:{ desc:'La ludopatía te quitó parte de quien eras. La recuperación es también una oportunidad para reconstruir tu identidad desde cero — más honesta, más tuya, más libre.',
+         learn:['Cómo la adicción erosiona la identidad y la autoestima con el tiempo.','El proceso de reconstrucción del yo más allá de la adicción.','Cómo separar lo que hiciste de lo que eres — la conducta no te define.','Quién quieres ser: ejercicios de visualización e identidad futura.'],
+         exercises:['¿Cómo te describirías a ti mismo antes de que la adicción tomara tanto espacio? ¿Qué partes de esa persona quieres recuperar?','Escribe 5 valores que quieres que definan tu vida de ahora en adelante. ¿Qué tipo de persona quieres ser?','Describe cómo te ves dentro de 1 año si sigues en tu proceso de recuperación. ¿Cómo es tu vida? ¿Cómo te sientes? ¿Qué tienes?'] },
+    14:{ desc:'La recaída no es el fracaso — es parte del proceso para muchas personas. Pero se puede prevenir. En esta clase aprenderás a identificar las señales de alerta y a tener un plan concreto para cuando el impulso aparezca.',
+         learn:['Las señales de alerta tempranas de una posible recaída y cómo reconocerlas.','Cómo crear tu plan personal de prevención de recaídas paso a paso.','Qué hacer si ocurre una recaída — cómo levantarse sin destruirte.','El papel del apoyo externo en la prevención y por qué no tienes que hacerlo solo.'],
+         exercises:['¿Cuáles son tus 3 señales de alerta más claras de que estás en riesgo? (un estado de ánimo, una situación, un pensamiento concreto...)','Diseña tu "plan de emergencia": ¿qué harás exactamente si sientes que vas a ceder? (a quién llamas, qué haces, adónde vas, qué te dices)','Si alguna vez tienes una recaída, ¿cómo quieres tratarte a ti mismo? Escríbetelo ahora, en frío, como una nota para ese momento.'] },
+    15:{ desc:'En la clase final, Nacho y Marcos analizan casos reales de recuperación. Aprenderás de sus experiencias y sacarás conclusiones definitivas para tu propio camino.',
+         learn:['Patrones comunes en las historias de recuperación exitosa y qué tienen en común.','Errores frecuentes en el proceso y cómo evitarlos.','Cómo aplicar todo lo aprendido en el curso a tu situación concreta.','El siguiente paso: qué viene después del curso y cómo mantener lo conseguido.'],
+         exercises:['De todo lo que has aprendido en estas 15 clases, ¿qué es lo que más ha cambiado en tu forma de verte o de ver la adicción?','¿Cuál ha sido el ejercicio o la clase que más impacto ha tenido en ti? ¿Por qué?','✉️ Carta de compromiso: escríbete una carta a ti mismo comprometiéndote con tu recuperación. ¿A qué te comprometes a partir de hoy?'] },
   };
 
   const load=k=>{ try{return JSON.parse(localStorage.getItem(k))||{}}catch(e){return {}} };
@@ -641,7 +698,7 @@
   if(vid){
     playBtn.addEventListener('click',()=>{
       const f=document.createElement('iframe');
-      f.src='https://www.youtube-nocookie.com/embed/'+vid+'?autoplay=1&rel=0';
+      f.src='https://drive.google.com/file/d/'+vid+'/preview';
       f.allow='autoplay; fullscreen'; f.allowFullscreen=true;
       f.style.cssText='position:absolute;inset:0;width:100%;height:100%;border:0;';
       const va=$('videoArea'); va.innerHTML=''; va.appendChild(f);
