@@ -329,6 +329,110 @@
       .lesson-nav__progress { max-width: none; }
       .lesson-nav__back span, .lesson-nav__back { font-size: 0.82rem; }
     }
+
+    /* ── EJERCICIOS ENRIQUECIDOS ─────────────────────────────────── */
+    .ex-card {
+      background: var(--bg-2);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 24px;
+      margin-bottom: 20px;
+    }
+    .ex-card__header { display:flex; align-items:flex-start; gap:12px; margin-bottom:14px; }
+    .ex-card__icon { font-size:1.4rem; flex-shrink:0; line-height:1; }
+    .ex-card__meta {}
+    .ex-card__title { font-size:.95rem; font-weight:700; color:var(--text); margin-bottom:4px; }
+    .ex-card__prompt { font-size:.84rem; color:var(--text-muted); line-height:1.65; }
+    /* textarea base reutilizable */
+    .ex-ta {
+      width:100%; background:var(--bg-3); border:1px solid var(--border);
+      border-radius:10px; color:var(--text); font-size:.88rem; line-height:1.6;
+      padding:12px 14px; resize:vertical; outline:none; font-family:inherit;
+      min-height:72px; transition:border-color .2s;
+    }
+    .ex-ta:focus { border-color:rgba(50,180,140,.5); }
+    .ex-ta::placeholder { color:var(--text-subtle); }
+    /* Carta */
+    .ex-letter-wrap {
+      background:#071410; border:1px solid rgba(50,180,140,.18);
+      border-radius:12px; padding:20px 24px;
+    }
+    .ex-letter-wrap .ex-ta {
+      background:transparent; border:none; min-height:160px;
+      font-family:'Georgia',serif; font-style:italic; font-size:.92rem; line-height:1.85;
+    }
+    /* Campos estructurados */
+    .ex-field { margin-bottom:14px; }
+    .ex-field:last-child { margin-bottom:0; }
+    .ex-field__label {
+      font-size:.74rem; font-weight:700; letter-spacing:.06em; text-transform:uppercase;
+      color:var(--text-subtle); margin-bottom:6px;
+    }
+    /* Checklist */
+    .ex-checks { display:flex; flex-direction:column; gap:2px; }
+    .ex-check-row {
+      display:flex; align-items:flex-start; gap:12px;
+      padding:10px 0; border-bottom:1px solid var(--border); cursor:pointer;
+    }
+    .ex-check-row:last-of-type { border-bottom:none; }
+    .ex-check-box {
+      width:20px; height:20px; border-radius:5px;
+      border:1.5px solid var(--border-md); flex-shrink:0; margin-top:1px;
+      display:flex; align-items:center; justify-content:center;
+      font-size:.75rem; font-weight:700; color:var(--teal);
+      transition:all .15s;
+    }
+    .ex-check-box.on { background:var(--teal-lt); border-color:rgba(50,180,140,.5); }
+    .ex-check-label { font-size:.87rem; color:var(--text-muted); line-height:1.5; }
+    .ex-check-row.on .ex-check-label { color:var(--text-subtle); text-decoration:line-through; }
+    /* Tabla de filas */
+    .ex-table-wrap { overflow-x:auto; }
+    .ex-tbl { width:100%; border-collapse:collapse; }
+    .ex-tbl th {
+      font-size:.7rem; letter-spacing:.09em; text-transform:uppercase;
+      color:var(--text-subtle); padding:6px 8px; text-align:left;
+      border-bottom:1px solid var(--border-md);
+    }
+    .ex-tbl td { padding:4px 4px; }
+    .ex-tbl input {
+      width:100%; background:var(--bg-3); border:1px solid var(--border);
+      border-radius:7px; color:var(--text); font-size:.84rem; padding:8px 10px;
+      outline:none; font-family:inherit; transition:border-color .2s;
+    }
+    .ex-tbl input:focus { border-color:rgba(50,180,140,.45); }
+    /* Balance decisional */
+    .ex-balance { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:4px; }
+    .ex-balance-q { border-radius:10px; padding:14px; }
+    .ex-balance-q.green { background:rgba(50,180,140,.07); border:1px solid rgba(50,180,140,.18); }
+    .ex-balance-q.red   { background:rgba(220,60,60,.06);  border:1px solid rgba(220,60,60,.15); }
+    .ex-balance-q h5 {
+      font-size:.7rem; letter-spacing:.08em; text-transform:uppercase;
+      margin-bottom:8px;
+    }
+    .ex-balance-q.green h5 { color:rgba(50,180,140,.8); }
+    .ex-balance-q.red   h5 { color:rgba(220,80,80,.8); }
+    .ex-balance-q .ex-ta { min-height:80px; font-size:.84rem; background:transparent; border:none; padding:4px 0; }
+    /* Escala / sliders */
+    .ex-scale-row { margin-bottom:18px; }
+    .ex-scale-row:last-child { margin-bottom:0; }
+    .ex-scale-row__label { font-size:.84rem; color:var(--text-muted); margin-bottom:8px; }
+    .ex-scale-ends { display:flex; justify-content:space-between; font-size:.72rem; color:var(--text-subtle); margin-bottom:4px; }
+    .ex-scale-val { text-align:center; font-size:1.1rem; font-weight:700; color:var(--teal); margin-top:4px; }
+    input[type=range].ex-slider {
+      width:100%; accent-color:var(--teal); cursor:pointer;
+    }
+    /* Plan de pasos */
+    .ex-step { display:flex; align-items:flex-start; gap:12px; margin-bottom:12px; }
+    .ex-step__num {
+      width:26px; height:26px; border-radius:50%; flex-shrink:0;
+      background:var(--teal-lt); border:1px solid rgba(50,180,140,.3);
+      display:flex; align-items:center; justify-content:center;
+      font-size:.72rem; font-weight:700; color:var(--teal);
+    }
+    .ex-step__content { flex:1; }
+    @media(max-width:600px){
+      .ex-balance { grid-template-columns:1fr; }
+    }
   </style>
 </head>
 <body>
@@ -611,54 +715,408 @@
   const DEFAULT_CONTENT = {
     desc:'En esta clase trabajarás un paso clave de tu recuperación. Tómate tu tiempo, ve el vídeo completo y haz los ejercicios — ahí está el verdadero cambio.',
     learn:['La idea central de esta clase y por qué importa en tu proceso.','Cómo aplicarla a tu situación concreta, no solo en teoría.','Un primer paso práctico que puedes dar hoy mismo.'],
-    exercises:['¿Qué te ha removido o resonado de esta clase? Escríbelo.','Describe una situación real tuya donde puedas aplicar lo aprendido.','Define un pequeño compromiso concreto para esta semana.']
+    exercises:[
+      {type:'textarea',icon:'💬',title:'Reflexión de clase',prompt:'¿Qué te ha removido o resonado de esta clase? Escríbelo.',placeholder:'Lo que más me ha impactado...'},
+      {type:'textarea',icon:'🎯',title:'Aplicación personal',prompt:'Describe una situación real tuya donde puedas aplicar lo aprendido hoy.',placeholder:'En mi caso específico...'},
+      {type:'textarea',icon:'📌',title:'Compromiso de la semana',prompt:'Define un compromiso concreto y medible para los próximos 7 días.',placeholder:'Esta semana voy a...'}
+    ]
   };
   const CONTENT = {
-    1:{ desc:'Nacho comparte su historia real con la ludopatía: cómo empezó, cómo se hundió y cómo lo superó. Una historia sin filtros que te hará sentir que no estás solo.',
-        learn:['Conocer el punto de partida real de Nacho y cómo la adicción lo afectó.','Por qué contar la historia en voz alta tiene poder sanador.','Reconocer los primeros síntomas que pasamos por alto.','La importancia de dar el primer paso aunque no te sientas preparado.'],
-        exercises:['✉️ Carta del pasado: Escríbele una carta a tu yo de antes, al que empezó a jugar. Despídete de esa versión de ti con honestidad y sin juicio. No tienes que compartirla con nadie — es tuya. Escribe al menos un párrafo.','¿Cuándo fue la primera vez que jugaste? ¿Qué sentiste? ¿Qué buscabas en ese momento?','¿Qué parte de la historia de Nacho te ha resonado más? ¿Por qué crees que es esa parte?'] },
-    2:{ desc:'Marcos cuenta su proceso desde el otro lado. Una perspectiva complementaria que amplía la visión de la recuperación y te recuerda que no hay un único camino.',
-        learn:['Ver la adicción desde fuera, con los ojos de quien acompaña.','La diferencia entre apoyar y enablear (sostener la adicción sin querer).','Cómo la recuperación cambia inevitablemente las relaciones.','Por qué necesitas construir tu propia historia, no copiar la de nadie más.'],
-        exercises:['¿Qué parte de la historia de Marcos te ha sorprendido o removido? ¿Por qué?','¿Cómo crees que ha afectado tu adicción a las personas más cercanas a ti? Sé honesto.','Si pudieras hablar con alguien de tu entorno sobre tu proceso ahora mismo, ¿qué le dirías?'] },
-    3:{ desc:'La adicción no es un problema de voluntad. En esta clase entenderás la neurociencia detrás del juego patológico: qué hace la dopamina, cómo se forma el hábito y por qué el cerebro adicto toma sus propias decisiones.',
-        learn:['Qué ocurre en el cerebro cuando juegas y por qué el placer se convierte en trampa.','La diferencia entre querer parar y poder parar — y por qué no es lo mismo.','Cómo se instala un hábito y qué hace falta para desinstalarlo.','Por qué esto no es una cuestión de fuerza de voluntad, sino de neurología.'],
-        exercises:['¿Alguna vez sentiste que una parte de ti quería parar pero otra seguía jugando? Descríbelo con tus palabras.','¿Qué sensación física notabas antes o durante el juego? (tensión, adrenalina, calma, evasión...)','Ahora que entiendes el mecanismo neurológico, ¿qué cambia en la forma en que te ves a ti mismo?'] },
-    4:{ desc:'No todas las adicciones al juego son iguales. Máquinas, apuestas deportivas, poker, casino online — cada modalidad crea un patrón diferente. Entender cuál es el tuyo cambia la estrategia.',
-        learn:['Las diferencias clave entre tipos de juego y sus mecanismos de enganche.','Por qué las apuestas deportivas y el juego online son especialmente adictivos.','Cómo identificar tu modalidad principal y sus detonantes específicos.','Qué estrategias son más efectivas para cada tipo de juego.'],
-        exercises:['¿Cuál era tu modalidad principal de juego? Descríbela y explica qué te gustaba o qué buscabas en ella.','¿Hubo momentos en que cambiaste de tipo de juego? ¿Por qué crees que lo hiciste?','¿Qué situaciones, horarios o estados de ánimo estaban más ligados a tus episodios de juego?'] },
-    5:{ desc:'La adicción no la sufres solo tú. En esta clase hablaremos del impacto en las personas más cercanas y cómo gestionar esas relaciones durante la recuperación — sin culpa, con honestidad.',
-        learn:['Cómo la adicción afecta a la familia y al entorno cercano de formas que no siempre vemos.','Las mentiras como mecanismo de protección y las consecuencias que generan a largo plazo.','Cómo tener conversaciones difíciles con quienes más quieres.','Cuándo y cómo pedir apoyo sin sentir vergüenza.'],
-        exercises:['Haz una lista de las personas más afectadas por tu adicción. Para cada una, escribe cómo crees que las ha impactado.','¿Has mentido a alguien cercano por culpa del juego? ¿Cómo te sientes con eso ahora que tienes perspectiva?','¿Hay alguien a quien quieras contarle tu proceso de recuperación? ¿Qué le dirías si lo hicieras?'] },
-    6:{ desc:'La autoprohibición es la herramienta más potente que existe para poner distancia con el juego. En esta clase aprenderás qué es, cómo funciona en España y cómo usarla como escudo, no como condena.',
-        learn:['Qué es el RGIAJ (Registro General de Interdicciones de Acceso al Juego) y cómo inscribirse.','Por qué la autoprohibición funciona como barrera de seguridad real.','Cómo complementar la autoprohibición con otras herramientas digitales y físicas.','La autoprohibición como acto de amor propio, no de castigo.'],
-        exercises:['¿Estás ya inscrito en el RGIAJ? Si no, ¿qué te ha frenado hasta ahora? Escríbelo honestamente.','¿Qué otras barreras físicas o digitales puedes poner entre tú y el juego? (bloqueos en el móvil, apps de control, entregar tarjetas...)','Escribe 3 razones por las que la autoprohibición es un regalo que te haces a ti mismo.'] },
-    7:{ desc:'Las deudas son uno de los factores que más angustia generan en la recuperación. En esta clase aprenderás a afrontarlas con cabeza, qué opciones existen y por qué la deuda no define tu valor.',
-        learn:['Los tipos de deuda más comunes en la ludopatía y cómo priorizarlas.','Cómo tener conversaciones honestas con acreedores y familiares.','Herramientas legales y de ayuda disponibles en España.','Por qué el secreto de las deudas es más destructivo que las deudas mismas.'],
-        exercises:['Haz un inventario honesto de tus deudas actuales (importes, con quién). Solo para ti — no tienes que compartirlo con nadie.','¿Has podido hablar con alguien de confianza sobre tus deudas? ¿Qué pasó o qué crees que pasaría si lo hicieras?','¿Cuál es el primer paso concreto que podrías dar esta semana para empezar a gestionar aunque sea una deuda?'] },
-    8:{ desc:'El tiempo libre es el enemigo número uno en los primeros meses de recuperación. En esta clase aprenderás a estructurar tu tiempo de forma que el juego no tenga espacio para entrar.',
-        learn:['Por qué el aburrimiento y el vacío son los principales detonantes de recaída.','Cómo diseñar una rutina que proteja tu proceso de forma activa.','Actividades que generan dopamina sana y llenan el vacío que dejó el juego.','La diferencia entre ocupar el tiempo y disfrutar el tiempo.'],
-        exercises:['¿En qué momentos del día o la semana sientes más ganas de jugar? ¿Qué estás haciendo (o no haciendo) en esos momentos?','Diseña tu "plan de tiempo libre" para esta semana: escribe qué harás cada tarde/noche en lugar de jugar.','Escribe 5 cosas que disfrutabas antes de que el juego ocupara tanto espacio. ¿Cuál podrías retomar esta semana?'] },
-    9:{ desc:'Compararte con otros — con quien "puede jugar normal", con quien ya lo superó, con quien no tiene deudas — es una trampa que te paraliza. En esta clase aprenderás a salir de ese círculo.',
-        learn:['Por qué la comparación es un mecanismo de sabotaje que la mente usa para justificar recaídas.','Cómo la adicción distorsiona la percepción de la realidad y de los demás.','La diferencia entre inspiración sana y comparación destructiva.','Cómo centrarte en tu propio proceso sin mirar a los lados.'],
-        exercises:['¿Con quién te comparas habitualmente? ¿Qué historia te cuentas cuando lo haces?','¿Alguna vez has usado la comparación para justificar volver a jugar ("si él puede, yo también")? Descríbelo.','Escribe 3 avances propios de las últimas semanas, por pequeños que parezcan. Solo los tuyos, sin comparar.'] },
-    10:{ desc:'La recuperación cambia las amistades — y eso da miedo. En esta clase hablaremos de cómo gestionar las relaciones que estaban ligadas al juego y cómo construir un entorno que te apoye.',
-         learn:['Cómo identificar qué amistades representan un riesgo real para tu recuperación.','Cómo alejarte de entornos de juego sin perder la conexión social.','Cómo construir nuevas relaciones desde la autenticidad y sin mentiras.','La soledad como factor de riesgo y herramientas concretas para gestionarla.'],
-         exercises:['¿Hay amigos o grupos con los que jugabas? ¿Sigues en contacto con ellos? ¿Cómo lo gestionas actualmente?','¿Tienes amistades que apoyan tu recuperación o al menos la respetan? Descríbelas.','¿Qué tipo de entorno social necesitas construir para que tu recuperación sea sostenible a largo plazo?'] },
-    11:{ desc:'Recuperarse necesita un "para qué". Los objetivos bien definidos son la brújula que te mantiene en el camino cuando el impulso aparece. En esta clase aprenderás a fijar metas reales y alcanzables.',
-         learn:['Por qué los objetivos vagos no funcionan y cómo transformarlos en algo concreto y medible.','La diferencia entre objetivos a corto, medio y largo plazo y cómo combinarlos.','Cómo usar los objetivos como motivación en los momentos más difíciles.','Cómo celebrar los pequeños avances sin minimizarlos ni ignorarlos.'],
-         exercises:['Escribe tu objetivo principal de recuperación para los próximos 3 meses. Sé muy específico: ¿qué quieres conseguir exactamente?','¿Qué te motiva más en este momento para seguir adelante? (una persona, un sueño, una deuda que quieres saldar, tu propia dignidad...)','Define un objetivo para esta semana que puedas medir. ¿Cómo sabrás el domingo que lo has cumplido?'] },
-    12:{ desc:'El juego era tu forma de gestionar emociones: el estrés, el aburrimiento, la tristeza, la euforia. En esta clase aprenderás herramientas reales para regular las emociones sin necesitar el juego.',
-         learn:['Cómo identificar las emociones detrás del impulso de jugar.','Técnicas de regulación emocional que puedes usar en el momento, cuando más las necesitas.','Cómo construir tolerancia a la frustración y a las emociones difíciles.','Por qué las emociones difíciles no son el enemigo — son información valiosa.'],
-         exercises:['Haz una lista de las emociones que más frecuentemente precedían tus sesiones de juego. ¿Qué buscabas aliviar o intensificar?','La próxima vez que sientas una emoción difícil, prueba esto: para, respira 4 veces profundo y escribe lo que sientes. Descríbelo aquí cuando lo hagas.','¿Qué actividad concreta te ayuda a calmarte o a sentirte mejor sin jugar? (deporte, música, una ducha, hablar con alguien...) Define tu "kit de emergencia emocional".'] },
-    13:{ desc:'La ludopatía te quitó parte de quien eras. La recuperación es también una oportunidad para reconstruir tu identidad desde cero — más honesta, más tuya, más libre.',
-         learn:['Cómo la adicción erosiona la identidad y la autoestima con el tiempo.','El proceso de reconstrucción del yo más allá de la adicción.','Cómo separar lo que hiciste de lo que eres — la conducta no te define.','Quién quieres ser: ejercicios de visualización e identidad futura.'],
-         exercises:['¿Cómo te describirías a ti mismo antes de que la adicción tomara tanto espacio? ¿Qué partes de esa persona quieres recuperar?','Escribe 5 valores que quieres que definan tu vida de ahora en adelante. ¿Qué tipo de persona quieres ser?','Describe cómo te ves dentro de 1 año si sigues en tu proceso de recuperación. ¿Cómo es tu vida? ¿Cómo te sientes? ¿Qué tienes?'] },
-    14:{ desc:'La recaída no es el fracaso — es parte del proceso para muchas personas. Pero se puede prevenir. En esta clase aprenderás a identificar las señales de alerta y a tener un plan concreto para cuando el impulso aparezca.',
-         learn:['Las señales de alerta tempranas de una posible recaída y cómo reconocerlas.','Cómo crear tu plan personal de prevención de recaídas paso a paso.','Qué hacer si ocurre una recaída — cómo levantarse sin destruirte.','El papel del apoyo externo en la prevención y por qué no tienes que hacerlo solo.'],
-         exercises:['¿Cuáles son tus 3 señales de alerta más claras de que estás en riesgo? (un estado de ánimo, una situación, un pensamiento concreto...)','Diseña tu "plan de emergencia": ¿qué harás exactamente si sientes que vas a ceder? (a quién llamas, qué haces, adónde vas, qué te dices)','Si alguna vez tienes una recaída, ¿cómo quieres tratarte a ti mismo? Escríbetelo ahora, en frío, como una nota para ese momento.'] },
-    15:{ desc:'En la clase final, Nacho y Marcos analizan casos reales de recuperación. Aprenderás de sus experiencias y sacarás conclusiones definitivas para tu propio camino.',
-         learn:['Patrones comunes en las historias de recuperación exitosa y qué tienen en común.','Errores frecuentes en el proceso y cómo evitarlos.','Cómo aplicar todo lo aprendido en el curso a tu situación concreta.','El siguiente paso: qué viene después del curso y cómo mantener lo conseguido.'],
-         exercises:['De todo lo que has aprendido en estas 15 clases, ¿qué es lo que más ha cambiado en tu forma de verte o de ver la adicción?','¿Cuál ha sido el ejercicio o la clase que más impacto ha tenido en ti? ¿Por qué?','✉️ Carta de compromiso: escríbete una carta a ti mismo comprometiéndote con tu recuperación. ¿A qué te comprometes a partir de hoy?'] },
+    1:{
+      desc:'Nacho comparte su historia real con la ludopatía: cómo empezó, cómo se hundió y cómo lo superó. Una historia sin filtros que te hará sentir que no estás solo.',
+      learn:['Conocer el punto de partida real de Nacho y cómo la adicción lo afectó.','Por qué contar la historia en voz alta tiene poder sanador.','Reconocer los primeros síntomas que pasamos por alto.','La importancia de dar el primer paso aunque no te sientas preparado.'],
+      exercises:[
+        {type:'letter',icon:'✉️',title:'Carta a tu yo del pasado',
+         prompt:'Escríbele una carta al que empezó a jugar. Despídete de esa versión de ti con honestidad y sin juicio. No tienes que compartirla con nadie — es solo tuya. Empieza con "Querido yo..."',
+         placeholder:'Querido yo...\n\nRecuerdo el día en que todo empezó...'},
+        {type:'fields',icon:'🔍',title:'El inicio de mi historia',
+         prompt:'Reconstruye el origen de tu relación con el juego. Responde con honestidad, no hay respuestas correctas o incorrectas.',
+         fields:[
+           {label:'¿Cuándo jugué por primera vez? ¿Qué edad tenía?',placeholder:'Tenía... años y fue en...'},
+           {label:'¿Qué sentí en ese primer momento? ¿Qué buscaba?',placeholder:'Sentí... porque en ese momento buscaba...'},
+           {label:'¿Hubo un momento en que noté que el juego ya no era solo ocio?',placeholder:'Me di cuenta cuando...'}
+         ]},
+        {type:'checklist',icon:'🔔',title:'Síntomas que reconozco',
+         prompt:'Los investigadores usan estos 9 criterios para identificar el juego patológico. Marca honestamente los que has experimentado. Esto no es un juicio — es información para conocerte mejor.',
+         items:[
+           'Necesitaba apostar cantidades cada vez mayores para sentir la misma emoción',
+           'Me ponía irritable o ansioso cuando intentaba reducir o parar',
+           'Intenté parar o controlar el juego sin conseguirlo',
+           'Pensaba en el juego constantemente (planificar la próxima vez, recordar partidas)',
+           'Jugaba cuando me sentía mal: ansioso, culpable, deprimido o estresado',
+           'Después de perder, volvía otro día a intentar recuperar lo perdido ("perseguir pérdidas")',
+           'Mentí a familiares o personas cercanas para ocultar el alcance del problema',
+           'Puse en riesgo o perdí relaciones importantes, trabajo o estudios por el juego',
+           'Dependí de otros para conseguir dinero y salir de situaciones económicas críticas por el juego'
+         ]}
+      ]
+    },
+    2:{
+      desc:'Marcos cuenta su proceso desde el otro lado. Una perspectiva complementaria que amplía la visión de la recuperación y te recuerda que no hay un único camino.',
+      learn:['Ver la adicción desde fuera, con los ojos de quien acompaña.','La diferencia entre apoyar y enablear (sostener la adicción sin querer).','Cómo la recuperación cambia inevitablemente las relaciones.','Por qué necesitas construir tu propia historia, no copiar la de nadie más.'],
+      exercises:[
+        {type:'textarea',icon:'🪞',title:'Lo que me ha resonado de Marcos',
+         prompt:'¿Qué parte de la historia de Marcos te ha sorprendido, removido o tocado? ¿Hay algo en lo que te ves reflejado, aunque sea ligeramente?',
+         placeholder:'Lo que más me ha impactado es...'},
+        {type:'table',icon:'💔',title:'El impacto en mi círculo',
+         prompt:'La adicción no la sufriste solo tú. Nombra las personas más afectadas y describe honestamente cómo crees que las ha impactado. Esta tabla es solo tuya.',
+         cols:['Persona','¿Cómo creo que le afectó mi adicción?'],
+         rows:5},
+        {type:'balance',icon:'⚖️',title:'Balance decisional: ¿seguir o parar?',
+         prompt:'Este ejercicio de la Entrevista Motivacional te ayuda a ver con claridad. Completa los 4 cuadrantes con lo primero que te venga.',
+         quads:[
+           {label:'✅ Ventajas de seguir jugando',cls:'red',ph:'Lo que el juego me daba (evasión, adrenalina, ilusión de control...)'},
+           {label:'🚫 Desventajas de seguir jugando',cls:'green',ph:'Lo que el juego me costó (deudas, relaciones, salud, tiempo...)'},
+           {label:'😰 Desventajas de dejarlo',cls:'red',ph:'Lo que me da miedo perder si dejo de jugar...'},
+           {label:'🌱 Ventajas de dejarlo',cls:'green',ph:'Lo que gano con la recuperación (paz, confianza, dinero, relaciones...)'}
+         ]}
+      ]
+    },
+    3:{
+      desc:'La adicción no es un problema de voluntad. En esta clase entenderás la neurociencia detrás del juego patológico: qué hace la dopamina, cómo se forma el hábito y por qué el cerebro adicto toma sus propias decisiones.',
+      learn:['Qué ocurre en el cerebro cuando juegas y por qué el placer se convierte en trampa.','La diferencia entre querer parar y poder parar — y por qué no es lo mismo.','Cómo se instala un hábito y qué hace falta para desinstalarlo.','Por qué esto no es una cuestión de fuerza de voluntad, sino de neurología.'],
+      exercises:[
+        {type:'fields',icon:'🧠',title:'Mi ciclo de la adicción',
+         prompt:'El ciclo adicción → alivio → culpa → promesa → recaída es universal. Describe el tuyo con tus propias palabras. Entender el ciclo es el primer paso para romperlo.',
+         fields:[
+           {label:'DETONANTE — ¿Qué situación, emoción o pensamiento precedía al impulso?',placeholder:'Me sentía... o pasaba que...'},
+           {label:'IMPULSO — ¿Cómo describías ese momento de "necesito jugar"?',placeholder:'Era como una tensión en... o un pensamiento que decía...'},
+           {label:'JUEGO — ¿Qué sentías mientras jugabas? ¿Cambiaba a lo largo de la sesión?',placeholder:'Al principio... después...'},
+           {label:'CONSECUENCIA — ¿Qué venía justo después? (físico, emocional, económico)',placeholder:'Terminaba sintiendo... y pensando...'},
+           {label:'PROMESA — ¿Qué te decías a ti mismo para cerrar el ciclo?',placeholder:'Me prometía que era la última vez... o que mañana...'}
+         ]},
+        {type:'textarea',icon:'💊',title:'Desmontando la culpa',
+         prompt:'Ahora que entiendes que la adicción es un mecanismo neurológico — no una debilidad moral — ¿qué cambia en la forma en que te ves a ti mismo? ¿Qué le dirías a alguien que te culpaba (incluido tú) por no poder parar?',
+         placeholder:'Entender la neurociencia me hace ver que...'},
+        {type:'textarea',icon:'⚡',title:'Mis sensaciones físicas',
+         prompt:'¿Qué sensaciones físicas notabas antes, durante y después del juego? (tensión en el pecho, calor, latidos acelerados, calma artificial, vacío...) Describir el cuerpo ayuda a reconocer el impulso antes de actuar.',
+         placeholder:'Antes de jugar sentía... / Durante... / Después...'}
+      ]
+    },
+    4:{
+      desc:'No todas las adicciones al juego son iguales. Máquinas, apuestas deportivas, poker, casino online — cada modalidad crea un patrón diferente. Entender cuál es el tuyo cambia la estrategia.',
+      learn:['Las diferencias clave entre tipos de juego y sus mecanismos de enganche.','Por qué las apuestas deportivas y el juego online son especialmente adictivos.','Cómo identificar tu modalidad principal y sus detonantes específicos.','Qué estrategias son más efectivas para cada tipo de juego.'],
+      exercises:[
+        {type:'fields',icon:'🎰',title:'Análisis funcional de mi juego',
+         prompt:'El análisis funcional es una herramienta de la terapia cognitivo-conductual. Te ayuda a ver el patrón exacto de tu comportamiento. Complétalo con tu modalidad principal.',
+         fields:[
+           {label:'¿Cuál era tu modalidad principal? (apuestas deportivas, casino online, máquinas, poker...)',placeholder:'Mi juego principal era...'},
+           {label:'¿Cuándo jugabas? (horarios, días, contextos)',placeholder:'Principalmente por las noches... o los fines de semana cuando...'},
+           {label:'¿Dónde jugabas? (en casa solo, en el móvil, en locales...)',placeholder:'Casi siempre en...'},
+           {label:'¿Qué sentías justo antes? ¿Qué detonaba el impulso?',placeholder:'Solía empezar cuando me sentía... o después de...'},
+           {label:'¿Qué buscabas exactamente? (dinero, evasión, emoción, control, compañía...)',placeholder:'En el fondo buscaba...'}
+         ]},
+        {type:'checklist',icon:'⚠️',title:'Mis situaciones de alto riesgo',
+         prompt:'Marca las situaciones que para ti representan mayor riesgo de recaída. Conocerlas es la mitad de la defensa.',
+         items:[
+           'Estar solo en casa por la noche sin nada planeado',
+           'Ver publicidad de apuestas (anuncios, patrocinios deportivos, redes sociales)',
+           'Cobrar el sueldo o tener dinero disponible de repente',
+           'Discusión fuerte o conflicto con alguien cercano',
+           'Sentirme muy estresado por trabajo o situación económica',
+           'Momentos de euforia o celebración (ganar algo, buenas noticias)',
+           'Consumir alcohol o estar en ambiente de fiesta',
+           'Ver un partido de fútbol u otro evento deportivo',
+           'Aburrimiento profundo, no saber qué hacer',
+           'Sentirme excluido, solo o infravalorado'
+         ],custom:true,customLabel:'Añade las tuyas (una por línea):'}
+      ]
+    },
+    5:{
+      desc:'La adicción no la sufres solo tú. En esta clase hablaremos del impacto en las personas más cercanas y cómo gestionar esas relaciones durante la recuperación — sin culpa, con honestidad.',
+      learn:['Cómo la adicción afecta a la familia y al entorno cercano de formas que no siempre vemos.','Las mentiras como mecanismo de protección y las consecuencias que generan a largo plazo.','Cómo tener conversaciones difíciles con quienes más quieres.','Cuándo y cómo pedir apoyo sin sentir vergüenza.'],
+      exercises:[
+        {type:'fields',icon:'👥',title:'Mapa de mi círculo cercano',
+         prompt:'Escribe quiénes forman tu círculo y cómo la adicción afectó la relación con cada uno. La honestidad en este ejercicio es la base para reparar lo que haya que reparar.',
+         fields:[
+           {label:'Persona más afectada #1 y cómo la impacté',placeholder:'[Nombre/rol]: Creo que le afectó principalmente...'},
+           {label:'Persona más afectada #2 y cómo la impacté',placeholder:'[Nombre/rol]: Lo que noto es que...'},
+           {label:'¿Hay alguien con quien la relación sea hoy muy difícil a causa del juego?',placeholder:'Con... la relación está... porque...'},
+           {label:'¿Quién de tu entorno sabe la verdad de tu situación?',placeholder:'Hasta ahora solo sabe... / Nadie sabe porque...'}
+         ]},
+        {type:'letter',icon:'📩',title:'Carta a un ser querido',
+         prompt:'Escríbele una carta a alguien de tu entorno — pareja, padre, madre, amigo — a quien quieras contarle (o explicarle) tu proceso. No tienes que enviarla. El acto de escribirla ya tiene efecto.',
+         placeholder:'Querida/o...\n\nSé que mi situación con el juego te ha afectado y quiero contarte cómo me encuentro ahora...'},
+        {type:'textarea',icon:'🗣️',title:'La conversación que necesito tener',
+         prompt:'¿Hay una conversación pendiente con alguien que has estado evitando? Descríbela: ¿con quién, sobre qué, qué tienes miedo de decir y qué resultado esperas o deseas?',
+         placeholder:'La conversación que necesito tener es con... y lo que quiero decirle es...'}
+      ]
+    },
+    6:{
+      desc:'La autoprohibición es la herramienta más potente que existe para poner distancia con el juego. En esta clase aprenderás qué es, cómo funciona en España y cómo usarla como escudo, no como condena.',
+      learn:['Qué es el RGIAJ (Registro General de Interdicciones de Acceso al Juego) y cómo inscribirse.','Por qué la autoprohibición funciona como barrera de seguridad real.','Cómo complementar la autoprohibición con otras herramientas digitales y físicas.','La autoprohibición como acto de amor propio, no de castigo.'],
+      exercises:[
+        {type:'checklist',icon:'🛡️',title:'Mi plan de barreras — checklist de acciones',
+         prompt:'Estas son las barreras más efectivas documentadas contra la recaída. Marca las que ya tienes activas y úsalas como lista de tareas para las demás.',
+         items:[
+           '✅ Inscrito en el RGIAJ (Registro de Interdicciones de Acceso al Juego)',
+           '📱 Apps de juego eliminadas del móvil y tablet',
+           '🔒 Control parental o app bloqueadora activada (Gamban, BetBlocker, etc.)',
+           '💳 Límites de gasto o bloqueo en banca online para transferencias a casas de apuestas',
+           '🏦 Tarjeta de débito entregada a persona de confianza',
+           '💰 Dinero en efectivo limitado (solo lo necesario para el día)',
+           '🔔 App de seguimiento de días sin jugar instalada',
+           '📵 Notificaciones de casas de apuestas desactivadas o bloqueadas',
+           '👤 Persona de confianza que sabe mi situación y puede apoyarme'
+         ]},
+        {type:'fields',icon:'📋',title:'Mi compromiso de autoprohibición',
+         prompt:'Escribe tu plan personal con las acciones concretas que vas a tomar. Ponerlo por escrito multiplica la probabilidad de que lo hagas.',
+         fields:[
+           {label:'¿Estás inscrito en el RGIAJ? Si no, ¿cuándo lo harás? (semana.juego.es)',placeholder:'Ya estoy inscrito / Lo haré el [fecha] porque...'},
+           {label:'¿Qué barreras digitales activarás esta semana?',placeholder:'Esta semana voy a instalar/activar...'},
+           {label:'¿Quién es tu persona de apoyo? ¿Le has contado tu situación?',placeholder:'Mi persona de apoyo es... y [sí/no] sabe mi situación'},
+           {label:'¿Qué harás si sientes un impulso fuerte de jugar?',placeholder:'Si siento el impulso, haré primero...'}
+         ]},
+        {type:'textarea',icon:'💌',title:'Una carta de amor propio',
+         prompt:'La autoprohibición no es un castigo — es un acto de amor hacia ti mismo. Escríbete una nota desde esa perspectiva: ¿por qué te mereces esta protección?',
+         placeholder:'Me pongo estas barreras porque me importo. Lo hago porque...'}
+      ]
+    },
+    7:{
+      desc:'Las deudas son uno de los factores que más angustia generan en la recuperación. En esta clase aprenderás a afrontarlas con cabeza, qué opciones existen y por qué la deuda no define tu valor.',
+      learn:['Los tipos de deuda más comunes en la ludopatía y cómo priorizarlas.','Cómo tener conversaciones honestas con acreedores y familiares.','Herramientas legales y de ayuda disponibles en España.','Por qué el secreto de las deudas es más destructivo que las deudas mismas.'],
+      exercises:[
+        {type:'table',icon:'📊',title:'Inventario de mis deudas',
+         prompt:'Sacar las deudas de la cabeza y ponerlas en papel reduce la ansiedad que generan. Esta tabla es solo tuya — nadie más la verá. Sé lo más honesto que puedas.',
+         cols:['Acreedor / A quién debo','Importe aprox. (€)','Tipo (familiar, banco, online...)','Estado (pagando/pendiente)'],
+         rows:6},
+        {type:'plan',icon:'🗺️',title:'Mi plan de acción para las deudas',
+         prompt:'No tienes que resolverlo todo a la vez. Un plan realista con pasos pequeños funciona mejor que querer saldar todo de golpe. Define tus próximos movimientos.',
+         steps:[
+           {label:'Esta semana (acción pequeña y concreta)',placeholder:'Esta semana voy a hablar con... / calcular exactamente cuánto debo a...'},
+           {label:'Este mes (primer paso real)',placeholder:'Este mes llamaré a... / empezaré a reservar... € al mes'},
+           {label:'En 3-6 meses (objetivo alcanzable)',placeholder:'Para [mes] quiero haber liquidado... o acordado un plan de pago con...'},
+           {label:'Persona o recurso que me puede ayudar',placeholder:'Puedo hablar con... / Contactaré con ADICAE o el Juzgado de lo Mercantil si...'}
+         ]},
+        {type:'textarea',icon:'🗣️',title:'La conversación sobre las deudas',
+         prompt:'¿Hay alguien (pareja, familia) que no sabe la realidad de tus deudas? ¿Qué pasaría si lo supiera? ¿Qué te impide contárselo? Escribe lo que llevas dentro sobre este tema.',
+         placeholder:'Sobre mis deudas, la persona que más necesitaría saberlo es... y lo que me frena es...'}
+      ]
+    },
+    8:{
+      desc:'El tiempo libre es el enemigo número uno en los primeros meses de recuperación. En esta clase aprenderás a estructurar tu tiempo de forma que el juego no tenga espacio para entrar.',
+      learn:['Por qué el aburrimiento y el vacío son los principales detonantes de recaída.','Cómo diseñar una rutina que proteja tu proceso de forma activa.','Actividades que generan dopamina sana y llenan el vacío que dejó el juego.','La diferencia entre ocupar el tiempo y disfrutar el tiempo.'],
+      exercises:[
+        {type:'table',icon:'📅',title:'Mi horario de la semana sin juego',
+         prompt:'Diseña cómo serán tus tardes y noches esta semana. Los momentos vacíos son los más peligrosos — llénalos ahora, en frío, antes de que lleguen.',
+         cols:['Día','Tarde (17h-21h)','Noche (21h-23h)'],
+         rows:7,
+         rowLabels:['Lunes','Martes','Miércoles','Jueves','Viernes','Sábado','Domingo']},
+        {type:'checklist',icon:'⚡',title:'Mi kit anti-impulso: 10 distracciones',
+         prompt:'Cuando el impulso de jugar aparece, tienes una ventana de 10-15 minutos para redirigirlo. Tu "kit" son actividades que puedes hacer inmediatamente. Marca las que funcionan para ti y añade las tuyas.',
+         items:[
+           'Salir a caminar o correr al menos 20 minutos',
+           'Llamar a un amigo o familiar (no sobre el juego, solo para hablar)',
+           'Ducha fría o alternando temperatura',
+           'Ver un episodio de una serie que me engancha',
+           'Ir al gimnasio o hacer ejercicio en casa',
+           'Escuchar música con auriculares en un volumen que no deje pensar',
+           'Cocinar algo que requiera concentración',
+           'Salir de casa a cualquier lugar (cafetería, biblioteca, centro comercial)',
+           'Escribir cómo me siento en este momento (soltar el impulso en papel)',
+           'Técnica 5-4-3-2-1: nombra 5 cosas que ves, 4 que puedes tocar, 3 que oyes, 2 que hueles, 1 que saboras'
+         ],custom:true,customLabel:'Añade tus propias actividades que sé que funcionan:'},
+        {type:'fields',icon:'🌱',title:'Lo que disfrutaba antes del juego',
+         prompt:'El juego desplaza todo lo demás. Recuperar aficiones antiguas es una de las estrategias más potentes de la terapia cognitivo-conductual.',
+         fields:[
+           {label:'Afición o actividad que disfrutaba antes del juego #1',placeholder:'Antes me gustaba mucho...'},
+           {label:'Afición o actividad que disfrutaba antes del juego #2',placeholder:'También solía disfrutar de...'},
+           {label:'Afición o actividad que disfrutaba antes del juego #3',placeholder:'En algún momento también...'},
+           {label:'¿Cuál de estas podría retomar esta semana, aunque sea mínimamente?',placeholder:'Esta semana voy a intentar...'}
+         ]}
+      ]
+    },
+    9:{
+      desc:'Compararte con otros — con quien "puede jugar normal", con quien ya lo superó, con quien no tiene deudas — es una trampa que te paraliza. En esta clase aprenderás a salir de ese círculo.',
+      learn:['Por qué la comparación es un mecanismo de sabotaje que la mente usa para justificar recaídas.','Cómo la adicción distorsiona la percepción de la realidad y de los demás.','La diferencia entre inspiración sana y comparación destructiva.','Cómo centrarte en tu propio proceso sin mirar a los lados.'],
+      exercises:[
+        {type:'fields',icon:'🧩',title:'Reestructuración cognitiva: la trampa de la comparación',
+         prompt:'La terapia cognitivo-conductual usa este ejercicio para identificar pensamientos automáticos y transformarlos. Trabaja el pensamiento de comparación que más te persigue.',
+         fields:[
+           {label:'El pensamiento de comparación que más me visita',placeholder:'Ejemplo: "Él puede jugar una vez al mes y no pasa nada, yo debería poder también"'},
+           {label:'¿Qué evidencia tengo de que ese pensamiento NO es del todo cierto?',placeholder:'La realidad es que yo... / Lo que no sé de esa persona es... / Lo que he olvidado es...'},
+           {label:'¿Cómo usé esa comparación alguna vez para justificar volver a jugar?',placeholder:'Me dije que si otros podían, yo también... y lo que pasó fue...'},
+           {label:'Pensamiento alternativo más útil para ti',placeholder:'Una versión más honesta y útil sería: "Yo tengo mi propio proceso y lo que importa es..."'}
+         ]},
+        {type:'textarea',icon:'🏆',title:'Mis 3 victorias de esta semana',
+         prompt:'El cerebro en recuperación tiende a ver solo lo que falta. Este ejercicio lo entrena para ver también lo que avanza. Escribe 3 avances reales de los últimos 7 días, por pequeños que parezcan — solo los tuyos, sin comparar.',
+         placeholder:'Victoria 1: ...\nVictoria 2: ...\nVictoria 3: ...'},
+        {type:'textarea',icon:'📏',title:'Mi propio metro de medida',
+         prompt:'Si dejaras de compararte con nadie y solo te midieras respecto a cómo estabas hace 1, 3 y 6 meses, ¿qué verías? ¿Qué ha mejorado, aunque sea imperfectamente?',
+         placeholder:'Hace 6 meses... / Hace 3 meses... / Hace 1 mes... / Hoy...'}
+      ]
+    },
+    10:{
+      desc:'La recuperación cambia las amistades — y eso da miedo. En esta clase hablaremos de cómo gestionar las relaciones que estaban ligadas al juego y cómo construir un entorno que te apoye.',
+      learn:['Cómo identificar qué amistades representan un riesgo real para tu recuperación.','Cómo alejarte de entornos de juego sin perder la conexión social.','Cómo construir nuevas relaciones desde la autenticidad y sin mentiras.','La soledad como factor de riesgo y herramientas concretas para gestionarla.'],
+      exercises:[
+        {type:'table',icon:'🗺️',title:'Mapa de mis amistades',
+         prompt:'Clasifica a las personas de tu entorno social. Sin juzgar a nadie — solo para tener claridad sobre en qué relaciones apoyarte y cuáles requieren más cuidado en este momento.',
+         cols:['Nombre / Rol','¿Ligada al juego?','¿Apoya mi recuperación?','¿Qué necesito de esta relación ahora?'],
+         rows:6},
+        {type:'fields',icon:'🗣️',title:'El guión para decir no',
+         prompt:'Cuando alguien del entorno te proponga ir a un lugar de juego o apostas, necesitas una respuesta preparada. Escríbela aquí. Cuanto más ensayada, más fácil en el momento.',
+         fields:[
+           {label:'Situación: te invitan a un bar donde siempre hubo máquinas. ¿Qué dices?',placeholder:'Puedo decir: "Hoy no puedo/quiero, quedamos en otro sitio..."'},
+           {label:'Situación: alguien del grupo te insiste o pregunta por qué has cambiado',placeholder:'Puedo responder: "Estoy en un proceso personal y prefiero..."'},
+           {label:'Situación: ves publicidad de apuestas y sientes el tirón. ¿Qué haces y qué te dices?',placeholder:'En ese momento voy a... y me recuerdo que...'},
+           {label:'¿A quién puedes llamar si estás en una situación social complicada y necesitas apoyo?',placeholder:'Mi persona de apoyo en esos momentos es...'}
+         ]},
+        {type:'textarea',icon:'🌐',title:'Mi entorno social en recuperación',
+         prompt:'¿Qué tipo de entorno social quieres construir a largo plazo? ¿Dónde puedes conocer gente sin que el juego sea el centro? ¿Qué primer paso social puedes dar esta semana?',
+         placeholder:'El entorno que quiero construir es... / Esta semana podría...'}
+      ]
+    },
+    11:{
+      desc:'Recuperarse necesita un "para qué". Los objetivos bien definidos son la brújula que te mantiene en el camino cuando el impulso aparece. En esta clase aprenderás a fijar metas reales y alcanzables.',
+      learn:['Por qué los objetivos vagos no funcionan y cómo transformarlos en algo concreto y medible.','La diferencia entre objetivos a corto, medio y largo plazo y cómo combinarlos.','Cómo usar los objetivos como motivación en los momentos más difíciles.','Cómo celebrar los pequeños avances sin minimizarlos ni ignorarlos.'],
+      exercises:[
+        {type:'scale',icon:'🎯',title:'Rueda de la vida — ¿dónde estoy ahora?',
+         prompt:'Puntúa cada área de tu vida del 1 (muy mal) al 10 (excelente) según cómo estás HOY. Sin filtros. Esta es tu foto de punto de partida.',
+         items:[
+           {label:'Salud física y energía',left:'Muy deteriorada',right:'Excelente'},
+           {label:'Salud mental y emocional',left:'Muy deteriorada',right:'Excelente'},
+           {label:'Situación económica',left:'Crisis grave',right:'Estable y sana'},
+           {label:'Relaciones familiares',left:'Muy dañadas',right:'Sólidas y cercanas'},
+           {label:'Amistades y vida social',left:'Casi inexistentes',right:'Ricas y nutritivas'},
+           {label:'Trabajo / estudios / proyecto',left:'Muy mal',right:'Satisfecho y activo'},
+           {label:'Tiempo libre y disfrute',left:'Sin espacio para mí',right:'Disfruto de la vida'},
+           {label:'Crecimiento personal',left:'Estancado',right:'En constante evolución'}
+         ]},
+        {type:'plan',icon:'🗺️',title:'Mis objetivos de recuperación',
+         prompt:'Un objetivo vago ("quiero estar mejor") no se puede medir. Un objetivo SMART sí. Define el tuyo con precisión.',
+         steps:[
+           {label:'Mi objetivo principal de recuperación (¿qué quiero conseguir en 3 meses?)',placeholder:'Ser específico: "Para [mes] quiero haber..."'},
+           {label:'¿Por qué este objetivo? ¿Qué significa para ti conseguirlo?',placeholder:'Lo que más me motiva es... / Lo que cambiaría en mi vida si lo logro es...'},
+           {label:'¿Qué haré esta semana para acercarme a ese objetivo?',placeholder:'Esta semana doy el paso de...'},
+           {label:'¿Cómo sabrás el domingo que avanzaste? ¿Qué habrá pasado?',placeholder:'Habré completado... / Podré decir que...'}
+         ]},
+        {type:'textarea',icon:'🔥',title:'Mi "para qué" más profundo',
+         prompt:'¿Qué es lo que más te motiva a seguir? No el objetivo, sino la razón detrás. Puede ser una persona, un sueño, tu dignidad, poder mirarte al espejo. Escríbelo como si tuvieras que leerlo en el peor momento.',
+         placeholder:'Me esfuerzo porque... / Lo que no quiero perder es... / Lo que quiero ser capaz de hacer es...'}
+      ]
+    },
+    12:{
+      desc:'El juego era tu forma de gestionar emociones: el estrés, el aburrimiento, la tristeza, la euforia. En esta clase aprenderás herramientas reales para regular las emociones sin necesitar el juego.',
+      learn:['Cómo identificar las emociones detrás del impulso de jugar.','Técnicas de regulación emocional que puedes usar en el momento, cuando más las necesitas.','Cómo construir tolerancia a la frustración y a las emociones difíciles.','Por qué las emociones difíciles no son el enemigo — son información valiosa.'],
+      exercises:[
+        {type:'table',icon:'🌡️',title:'Mapa emoción → impulso de jugar',
+         prompt:'Este ejercicio viene de la Terapia Dialéctico-Conductual (DBT). Identifica las emociones que más frecuentemente activaban el impulso, cómo respondías antes y cómo quieres responder ahora.',
+         cols:['Emoción que activaba el impulso','Intensidad (1-10)','Respuesta antigua','Nueva respuesta sin juego'],
+         rows:5},
+        {type:'checklist',icon:'🧰',title:'Mi kit de emergencia emocional',
+         prompt:'Estas son técnicas respaldadas por la psicología para regular emociones difíciles en el momento. Marca las que ya usas o quieres probar.',
+         items:[
+           '🫁 Respiración 4-7-8: inhala 4s, aguanta 7s, exhala 8s — repite 3 veces',
+           '👁️ Técnica 5-4-3-2-1: 5 cosas que ves, 4 que tocas, 3 que oyes, 2 que hueles, 1 que saboreas',
+           '🚶 Movimiento físico inmediato: 10 minutos caminando o corriendo',
+           '🧊 Agua fría en la cara o muñecas para cortar la activación del sistema nervioso',
+           '📞 Llamar a alguien de confianza aunque no hable del juego',
+           '📓 Escribir la emoción tal cual la sientes durante 5 minutos sin censura',
+           '🎵 Música que cambie el estado emocional de forma consciente',
+           '🧘 Escaneo corporal: 2 minutos cerrando ojos y recorriendo el cuerpo de pies a cabeza',
+           '🌿 Salir al exterior: aire fresco, cambio de espacio físico',
+           '🛁 Ducha (temperature contrast o simplemente agua caliente 10 minutos)'
+         ]},
+        {type:'fields',icon:'⛑️',title:'Mi protocolo anti-impulso emocional',
+         prompt:'Diseña tu secuencia personal para cuando una emoción difícil dispara el impulso de jugar. Cuanto más concreto, más útil en el momento.',
+         fields:[
+           {label:'La emoción que más me activa el impulso es...',placeholder:'Cuando siento... es cuando más peligro tengo'},
+           {label:'La señal física que me avisa de que el impulso viene',placeholder:'En el cuerpo lo noto como... (tensión en, calor en, necesidad de...)'},
+           {label:'Paso 1: lo primero que haré cuando note esa señal',placeholder:'Inmediatamente voy a...'},
+           {label:'Paso 2: si 15 minutos después sigo con el impulso',placeholder:'Si no baja, haré...'},
+           {label:'Paso 3: mi última línea de defensa',placeholder:'Si todo lo demás falla, llamaré a... o haré...'}
+         ]}
+      ]
+    },
+    13:{
+      desc:'La ludopatía te quitó parte de quien eras. La recuperación es también una oportunidad para reconstruir tu identidad desde cero — más honesta, más tuya, más libre.',
+      learn:['Cómo la adicción erosiona la identidad y la autoestima con el tiempo.','El proceso de reconstrucción del yo más allá de la adicción.','Cómo separar lo que hiciste de lo que eres — la conducta no te define.','Quién quieres ser: ejercicios de visualización e identidad futura.'],
+      exercises:[
+        {type:'fields',icon:'🧬',title:'Yo antes y yo ahora',
+         prompt:'Este ejercicio de la Terapia de Aceptación y Compromiso (ACT) ayuda a recuperar los valores y la identidad que existían antes de que la adicción tomara tanto espacio.',
+         fields:[
+           {label:'¿Cómo te describirías a ti mismo antes de que el juego ocupara tanto espacio?',placeholder:'Era alguien que... / Me importaba mucho... / Tenía la capacidad de...'},
+           {label:'¿Qué partes de esa persona quieres recuperar o reconstruir?',placeholder:'Quiero volver a ser alguien que... / Lo que más echo de menos de mí es...'},
+           {label:'¿Qué cosas has aprendido en este proceso que el "yo de antes" no sabía?',placeholder:'Este proceso me ha enseñado que... / Ahora sé sobre mí mismo que...'},
+           {label:'¿Qué te diferencia hoy de quien eras en los peores momentos?',placeholder:'La diferencia más grande es que ahora...'}
+         ]},
+        {type:'checklist',icon:'🧭',title:'Mis valores fundamentales',
+         prompt:'Los valores son los principios que quieres que guíen tu vida, no metas a conseguir. Marca los 5-7 que más resuenan contigo como la persona que quieres ser.',
+         items:[
+           'Honestidad — ser auténtico y transparente conmigo y con los demás',
+           'Responsabilidad — hacerme cargo de mis actos y sus consecuencias',
+           'Familia — priorizar y cuidar a las personas que amo',
+           'Salud — cuidar mi cuerpo y mi mente como base de todo',
+           'Crecimiento — aprender, mejorar y no quedarme estancado',
+           'Conexión — tener relaciones reales, profundas y sin mentiras',
+           'Coraje — enfrentar lo difícil en lugar de evitarlo',
+           'Libertad — no depender de nada ni nadie para estar bien',
+           'Dignidad — respetarme a mí mismo en cómo actúo y pienso',
+           'Contribución — ser útil para los demás y dejar huella positiva',
+           'Paz interior — vivir sin la angustia constante del secreto y la deuda',
+           'Presencia — estar de verdad en mi vida y con las personas que quiero'
+         ]},
+        {type:'letter',icon:'🔮',title:'Carta a tu yo futuro',
+         prompt:'Escríbele una carta a ti mismo dentro de 1 año, cuando hayas avanzado en tu recuperación. Cuéntale a ese "yo futuro" cómo es su vida, cómo se siente y qué ha logrado. Escribe en presente, como si ya hubiera pasado.',
+         placeholder:'Querido yo (agosto de 2027)...\n\nHan pasado 12 meses desde que tomé la decisión y hoy...'}
+      ]
+    },
+    14:{
+      desc:'La recaída no es el fracaso — es parte del proceso para muchas personas. Pero se puede prevenir. En esta clase aprenderás a identificar las señales de alerta y a tener un plan concreto para cuando el impulso aparezca.',
+      learn:['Las señales de alerta tempranas de una posible recaída y cómo reconocerlas.','Cómo crear tu plan personal de prevención de recaídas paso a paso.','Qué hacer si ocurre una recaída — cómo levantarse sin destruirte.','El papel del apoyo externo en la prevención y por qué no tienes que hacerlo solo.'],
+      exercises:[
+        {type:'fields',icon:'🚨',title:'Mi sistema de alerta temprana',
+         prompt:'El modelo de Marlatt para la prevención de recaídas usa tres niveles de señal. Define los tuyos específicos — cuanto más concretos, más útiles para reconocerlos a tiempo.',
+         fields:[
+           {label:'🟡 AMARILLO — señal suave (empiezo a estar en riesgo)',placeholder:'Ej: "Llevo varios días sin hacer ejercicio, me aíslo un poco, pienso más en el juego"'},
+           {label:'🟠 NARANJA — señal media (el riesgo es real)',placeholder:'Ej: "Estoy buscando excusas, estoy irritable, empiezo a mirar webs de apuestas"'},
+           {label:'🔴 ROJO — señal crítica (actúo ahora mismo)',placeholder:'Ej: "Tengo el móvil en la mano, he entrado en la web, tengo dinero disponible"'},
+           {label:'¿Qué situación, emoción o evento histórico ha precedido mis recaídas?',placeholder:'Cuando estoy en riesgo real suele ser porque... / Lo que siempre precede es...'}
+         ]},
+        {type:'plan',icon:'🆘',title:'Mi tarjeta de crisis — plan de emergencia',
+         prompt:'Escribe esto como si fuera una tarjeta que llevas en el bolsillo para el peor momento. En una crisis, el cerebro no razona bien — necesita instrucciones claras escritas en frío.',
+         steps:[
+           {label:'Paso 1: Lo primero que haré (acción física inmediata)',placeholder:'Inmediatamente: [salir del lugar / cerrar el navegador / llamar a...]'},
+           {label:'Paso 2: A quién llamo (nombre y por qué esa persona)',placeholder:'Llamo a [nombre] porque...'},
+           {label:'Paso 3: Qué me digo a mí mismo (frase de anclaje)',placeholder:'Me recuerdo que... / Lo que no quiero volver a perder es...'},
+           {label:'Paso 4: Qué hago con el tiempo que sigue (próximas 2 horas)',placeholder:'Las siguientes 2 horas las paso haciendo...'},
+           {label:'Si a pesar de todo hay recaída: cómo me trato',placeholder:'No me destruyo. Lo que haré es...'}
+         ]},
+        {type:'letter',icon:'🤍',title:'Carta de compasión para el peor momento',
+         prompt:'Escríbete esta carta ahora, en frío, para leerla si tienes una recaída. Escríbela con la misma compasión que tendrías con un amigo. La recaída no te define — define cómo te levantas.',
+         placeholder:'Si estás leyendo esto es porque algo ha pasado. Y quiero que sepas que...'}
+      ]
+    },
+    15:{
+      desc:'En la clase final, Nacho y Marcos analizan casos reales de recuperación. Aprenderás de sus experiencias y sacarás conclusiones definitivas para tu propio camino.',
+      learn:['Patrones comunes en las historias de recuperación exitosa y qué tienen en común.','Errores frecuentes en el proceso y cómo evitarlos.','Cómo aplicar todo lo aprendido en el curso a tu situación concreta.','El siguiente paso: qué viene después del curso y cómo mantener lo conseguido.'],
+      exercises:[
+        {type:'fields',icon:'🔭',title:'Mi mayor transformación: antes y después',
+         prompt:'Comparar dónde estabas al empezar y dónde estás ahora es uno de los ejercicios más poderosos del cierre. Sé honesto en ambas columnas.',
+         fields:[
+           {label:'¿Cómo estaba mi vida cuando empecé este curso? (emocionalmente, económicamente, en relaciones)',placeholder:'Al empezar estaba...'},
+           {label:'¿Qué ha cambiado en mi forma de verme a mí mismo?',placeholder:'Antes me veía como... / Ahora me veo como...'},
+           {label:'¿Qué herramienta o clase ha tenido más impacto en mi proceso? ¿Por qué?',placeholder:'Lo que más me ha cambiado ha sido... porque...'},
+           {label:'¿Qué sé ahora que ojalá hubiera sabido antes?',placeholder:'Si pudiera decirle algo a quien era hace X meses le diría...'}
+         ]},
+        {type:'checklist',icon:'🛡️',title:'Mi plan de mantenimiento post-curso',
+         prompt:'La recuperación no termina con el curso — empieza. Marca los compromisos que te llevas y añade los tuyos.',
+         items:[
+           'Mantener las barreras de autoprohibición activas indefinidamente',
+           'Tener siempre activo mi kit anti-impulso (las 10 distracciones)',
+           'Seguir en contacto con mi persona de apoyo',
+           'Revisar mi plan de deudas al menos una vez al mes',
+           'Mantener el horario semanal estructurado para no caer en vacíos',
+           'Usar la carta de crisis si alguna vez la necesito',
+           'Celebrar los hitos: 1 mes, 3 meses, 6 meses, 1 año sin jugar',
+           'Si en algún momento me tambaleo, pedir ayuda antes de recaer'
+         ],custom:true,customLabel:'Mis compromisos personales adicionales:'},
+        {type:'letter',icon:'🌟',title:'Carta de compromiso — el cierre del programa',
+         prompt:'Esta es la última carta. Escríbela como un contrato contigo mismo. ¿A qué te comprometes hoy, después de todo lo que has trabajado? Empieza con "Me comprometo a..."',
+         placeholder:'Me comprometo a...\n\nSé que no será fácil, pero...\n\nLo que más me motiva a mantenerlo es...\n\nFirma: [tu nombre] — [fecha de hoy]'}
+      ]
+    }
   };
 
   const load=k=>{ try{return JSON.parse(localStorage.getItem(k))||{}}catch(e){return {}} };
@@ -717,35 +1175,157 @@
     tl.appendChild(d);
   });
 
-  // Ejercicios con respuesta guardable
+  // ── Ejercicios enriquecidos multi-tipo ──────────────────────────
   const stored=load(AKEY); const ans=stored[n]||{};
   const exList=$('exerciseList');
-  content.exercises.forEach((q,i)=>{
-    const wrap=document.createElement('div'); wrap.className='action-item';
-    wrap.style.cssText='flex-direction:column;align-items:stretch;gap:10px;';
-    const lab=document.createElement('div'); lab.className='action-text'; lab.textContent=q;
+
+  function saveAns(i,val){ const a=load(AKEY); a[n]=a[n]||{}; a[n][i]=val; save(AKEY,a); flash(); }
+
+  function makeTa(val,ph,minH,extraCls){
     const ta=document.createElement('textarea');
-    ta.value=ans[i]||''; ta.placeholder='Tu respuesta...';
-    ta.style.cssText='width:100%;min-height:58px;background:var(--bg-2);border:1px solid var(--border);border-radius:10px;color:var(--text);font-size:0.88rem;line-height:1.5;padding:10px 12px;resize:vertical;outline:none;font-family:inherit;';
-    ta.addEventListener('input',()=>{ const a=load(AKEY); a[n]=a[n]||{}; a[n][i]=ta.value; save(AKEY,a); flash(); });
-    wrap.appendChild(lab); wrap.appendChild(ta);
-    exList.appendChild(wrap);
-  });
+    ta.className='ex-ta'+(extraCls?' '+extraCls:'');
+    ta.value=val||''; ta.placeholder=ph||'Escribe aquí...';
+    if(minH) ta.style.minHeight=minH+'px';
+    return ta;
+  }
+
+  function exHeader(card,ex){
+    const h=document.createElement('div'); h.className='ex-card__header';
+    if(ex.icon){ const ic=document.createElement('div'); ic.className='ex-card__icon'; ic.textContent=ex.icon; h.appendChild(ic); }
+    const m=document.createElement('div'); m.className='ex-card__meta';
+    const t=document.createElement('div'); t.className='ex-card__title'; t.textContent=ex.title; m.appendChild(t);
+    if(ex.prompt){ const p=document.createElement('div'); p.className='ex-card__prompt'; p.textContent=ex.prompt; m.appendChild(p); }
+    h.appendChild(m); card.appendChild(h);
+  }
+
+  function renderEx(ex, i){
+    const card=document.createElement('div'); card.className='ex-card';
+    exHeader(card,ex);
+    const saved=ans[i];
+
+    if(ex.type==='textarea'||ex.type==='letter'){
+      const wrap=ex.type==='letter'?document.createElement('div'):null;
+      if(wrap){ wrap.className='ex-letter-wrap'; card.appendChild(wrap); }
+      const ta=makeTa(saved,ex.placeholder, ex.type==='letter'?160:80);
+      ta.addEventListener('input',()=>saveAns(i,ta.value));
+      (wrap||card).appendChild(ta);
+    }
+
+    else if(ex.type==='fields'){
+      const data=saved||{};
+      ex.fields.forEach((f,fi)=>{
+        const row=document.createElement('div'); row.className='ex-field';
+        const lbl=document.createElement('div'); lbl.className='ex-field__label'; lbl.textContent=f.label; row.appendChild(lbl);
+        const ta=makeTa(data[fi],f.placeholder,56);
+        ta.addEventListener('input',()=>{ data[fi]=ta.value; saveAns(i,data); });
+        row.appendChild(ta); card.appendChild(row);
+      });
+    }
+
+    else if(ex.type==='checklist'){
+      const data=saved||{checked:[],custom:''};
+      if(!Array.isArray(data.checked)) data.checked=[];
+      const list=document.createElement('div'); list.className='ex-checks';
+      ex.items.forEach((item,ci)=>{
+        const row=document.createElement('div'); row.className='ex-check-row'+(data.checked[ci]?' on':'');
+        const box=document.createElement('div'); box.className='ex-check-box'+(data.checked[ci]?' on':'');
+        box.textContent=data.checked[ci]?'✓':'';
+        const lbl=document.createElement('div'); lbl.className='ex-check-label'; lbl.textContent=item;
+        row.appendChild(box); row.appendChild(lbl);
+        row.addEventListener('click',()=>{
+          data.checked[ci]=!data.checked[ci];
+          box.className='ex-check-box'+(data.checked[ci]?' on':''); box.textContent=data.checked[ci]?'✓':'';
+          row.className='ex-check-row'+(data.checked[ci]?' on':'');
+          saveAns(i,data);
+        });
+        list.appendChild(row);
+      });
+      card.appendChild(list);
+      if(ex.custom){
+        const cl=document.createElement('div'); cl.className='ex-field'; cl.style.marginTop='16px';
+        const lb=document.createElement('div'); lb.className='ex-field__label'; lb.textContent=ex.customLabel||'Añade las tuyas:'; cl.appendChild(lb);
+        const ta=makeTa(data.custom,ex.customLabel||'Escribe aquí...',52);
+        ta.addEventListener('input',()=>{ data.custom=ta.value; saveAns(i,data); });
+        cl.appendChild(ta); card.appendChild(cl);
+      }
+    }
+
+    else if(ex.type==='table'){
+      const data=saved||(()=>{ const d=[]; for(let r=0;r<ex.rows;r++){ const row={}; ex.cols.forEach((_,c)=>row[c]=''); d.push(row); } return d; })();
+      const wrap=document.createElement('div'); wrap.className='ex-table-wrap';
+      const tbl=document.createElement('table'); tbl.className='ex-tbl';
+      const thead=document.createElement('thead'); const tr=document.createElement('tr');
+      ex.cols.forEach(c=>{ const th=document.createElement('th'); th.textContent=c; tr.appendChild(th); });
+      thead.appendChild(tr); tbl.appendChild(thead);
+      const tbody=document.createElement('tbody');
+      for(let r=0;r<ex.rows;r++){
+        const tr2=document.createElement('tr');
+        if(ex.rowLabels){ const td=document.createElement('td'); const inp=document.createElement('input'); inp.value=ex.rowLabels[r]||''; inp.readOnly=true; inp.style.background='var(--bg-4)'; inp.style.color='var(--text-subtle)'; td.appendChild(inp); tr2.appendChild(td); }
+        ex.cols.forEach((_,c)=>{
+          const td=document.createElement('td'); const inp=document.createElement('input');
+          inp.value=(data[r]&&data[r][c])||''; inp.placeholder='...';
+          inp.addEventListener('input',()=>{ if(!data[r])data[r]={}; data[r][c]=inp.value; saveAns(i,data); });
+          td.appendChild(inp); tr2.appendChild(td);
+        });
+        tbody.appendChild(tr2);
+      }
+      tbl.appendChild(tbody); wrap.appendChild(tbl); card.appendChild(wrap);
+    }
+
+    else if(ex.type==='balance'){
+      const data=saved||{};
+      const grid=document.createElement('div'); grid.className='ex-balance';
+      ex.quads.forEach((q,qi)=>{
+        const cell=document.createElement('div'); cell.className='ex-balance-q '+(q.cls||'green');
+        const h=document.createElement('h5'); h.textContent=q.label; cell.appendChild(h);
+        const ta=makeTa(data[qi],q.ph,80);
+        ta.addEventListener('input',()=>{ data[qi]=ta.value; saveAns(i,data); });
+        cell.appendChild(ta); grid.appendChild(cell);
+      });
+      card.appendChild(grid);
+    }
+
+    else if(ex.type==='scale'){
+      const data=saved||{};
+      ex.items.forEach((item,si)=>{
+        const row=document.createElement('div'); row.className='ex-scale-row';
+        const lbl=document.createElement('div'); lbl.className='ex-scale-row__label'; lbl.textContent=item.label; row.appendChild(lbl);
+        const ends=document.createElement('div'); ends.className='ex-scale-ends';
+        ends.innerHTML='<span>'+item.left+'</span><span>'+item.right+'</span>'; row.appendChild(ends);
+        const slider=document.createElement('input'); slider.type='range'; slider.className='ex-slider';
+        slider.min=1; slider.max=10; slider.value=data[si]||5;
+        const val=document.createElement('div'); val.className='ex-scale-val'; val.textContent=slider.value+' / 10';
+        slider.addEventListener('input',()=>{ val.textContent=slider.value+' / 10'; data[si]=slider.value; saveAns(i,data); });
+        row.appendChild(slider); row.appendChild(val); card.appendChild(row);
+      });
+    }
+
+    else if(ex.type==='plan'){
+      ex.steps.forEach((step,si)=>{
+        const data=saved||{};
+        const row=document.createElement('div'); row.className='ex-step';
+        const num=document.createElement('div'); num.className='ex-step__num'; num.textContent=si+1; row.appendChild(num);
+        const cnt=document.createElement('div'); cnt.className='ex-step__content';
+        const lbl=document.createElement('div'); lbl.className='ex-field__label'; lbl.style.marginBottom='6px'; lbl.textContent=step.label; cnt.appendChild(lbl);
+        const ta=makeTa((saved&&saved[si]),step.placeholder,56);
+        ta.addEventListener('input',()=>{ const d=saved||{}; d[si]=ta.value; saveAns(i,d); });
+        cnt.appendChild(ta); row.appendChild(cnt); card.appendChild(row);
+      });
+    }
+
+    exList.appendChild(card);
+  }
+
+  content.exercises.forEach((ex,i)=>renderEx(ex,i));
 
   // Notas
   const na=$('notesArea'); na.value=(load(NKEY)[n])||'';
   na.addEventListener('input',()=>{ const x=load(NKEY); x[n]=na.value; save(NKEY,x); flash(); });
   const saveBtn=$('saveNotesBtn'), hint=$('notesHint');
   if (saveBtn) saveBtn.addEventListener('click',()=>{
-    // Guardar notas
     const x=load(NKEY); x[n]=na.value; save(NKEY,x);
-    // Guardar todas las respuestas de ejercicios
-    const allTA=document.querySelectorAll('#exerciseList textarea');
-    const a=load(AKEY); a[n]=a[n]||{};
-    allTA.forEach((ta,i)=>{ a[n][i]=ta.value; });
-    save(AKEY,a);
     flash();
-    if (hint){ hint.textContent='✓ Todo guardado — notas y ejercicios'; hint.style.color='var(--teal)';
+    if (hint){ hint.textContent='✓ Todo guardado'; hint.style.color='var(--teal)';
       setTimeout(()=>{ hint.textContent='Se guardan en este dispositivo y siguen aquí cuando vuelvas.'; hint.style.color='var(--text-subtle)'; }, 2500); }
   });
 
