@@ -440,12 +440,11 @@
   </div>
 </div>
 <script>
-  /* Comprobación de acceso — redirige a la funnel si no hay token de compra.
-     Excepciones: ?mockup, ?reset, ?access=granted (link del email de bienvenida). */
+  /* Comprobación de acceso — redirige a la funnel si no hay token de compra. */
   (function(){
     var p = location.search;
     if(p.indexOf('mockup')>-1 || p.indexOf('reset')>-1) return;
-    if(p.indexOf('access=granted')>-1) { try{ localStorage.setItem('etc_access','granted'); }catch(e){} return; }
+    if(p.indexOf('tk=ETC9Kx2026mP')>-1) { try{ localStorage.setItem('etc_access','granted'); }catch(e){} return; }
     var ok=''; try{ ok=localStorage.getItem('etc_access')||''; }catch(e){}
     if(ok!=='granted') { location.replace('/'); return; }
   })();
