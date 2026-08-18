@@ -527,11 +527,11 @@
     </div>
 
     <div class="hero__media">
-      <div class="vsl yt-wrap" data-id="I_zWGSli3Bs" data-start="25" role="button" tabindex="0" aria-label="Ver el vídeo de presentación">
-        <img src="https://img.youtube.com/vi/I_zWGSli3Bs/maxresdefault.jpg" onerror="this.src='https://img.youtube.com/vi/I_zWGSli3Bs/hqdefault.jpg'" alt="Nacho explica el método Se Acabó el Juego">
-        <div class="vsl__ov">
-          <div class="vsl__btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-          <div class="vsl__cap">Por qué funciona</div>
+      <div class="vsl vsl-native" id="vslBox">
+        <video id="vslVideo" src="videos/cebo-vsl.mp4" autoplay muted playsinline loop preload="auto" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border:0;"></video>
+        <div class="vsl__ov" id="vslOv" style="cursor:pointer;" onclick="vslUnmute()">
+          <div class="vsl__btn" id="vslBtn"><svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z"/></svg></div>
+          <div class="vsl__cap">Toca para activar el sonido</div>
         </div>
       </div>
       <div class="gtag">
@@ -1102,6 +1102,22 @@ document.querySelectorAll('[data-book]').forEach(b=>b.addEventListener('click',(
     if(!op){it.classList.add('open');a.style.maxHeight=a.scrollHeight+'px';}
   }));
 })();
+</script>
+<!-- VSL nativo: activa sonido al hacer clic -->
+<script>
+function vslUnmute(){
+  var v=document.getElementById('vslVideo');
+  var ov=document.getElementById('vslOv');
+  if(!v)return;
+  v.muted=false;
+  v.loop=false;
+  if(ov) ov.style.opacity='0';
+  setTimeout(function(){ if(ov) ov.style.display='none'; }, 400);
+}
+document.getElementById('vslVideo') && document.getElementById('vslVideo').addEventListener('ended',function(){
+  var ov=document.getElementById('vslOv');
+  if(ov){ ov.style.display='flex'; ov.style.opacity='1'; }
+});
 </script>
 <!-- Limpia la URL: quita los parámetros de tracking (_gl de Google, utm, gclid…) de la barra de direcciones tras cargar (GA ya los ha leído) -->
 <script>
