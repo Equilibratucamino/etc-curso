@@ -119,10 +119,15 @@
     .vsl{position:relative;border-radius:18px;overflow:hidden;aspect-ratio:4/5;background:#000;box-shadow:0 40px 90px -30px rgba(0,0,0,.8),0 0 0 1px rgba(255,255,255,.06);cursor:pointer;}
     .vsl img{width:100%;height:100%;object-fit:cover;transition:transform .5s,opacity .3s;}
     .vsl:hover img{transform:scale(1.04);opacity:.9;}
-    .vsl__unmute-banner{position:absolute;bottom:0;left:0;right:0;z-index:5;background:linear-gradient(0deg,rgba(0,0,0,.72) 0%,rgba(0,0,0,0) 100%);display:flex;align-items:flex-end;justify-content:center;padding:18px 12px 14px;cursor:pointer;border:0;}
-    .vsl__unmute-inner{display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.13);backdrop-filter:blur(6px);border:1.5px solid rgba(255,255,255,.35);border-radius:40px;padding:10px 20px;animation:pulse-border 1.6s ease-in-out infinite;}
-    .vsl__unmute-inner svg{width:22px;height:22px;fill:#fff;flex-shrink:0;}
-    .vsl__unmute-inner span{font-size:.88rem;font-weight:700;color:#fff;letter-spacing:.04em;text-transform:uppercase;white-space:nowrap;}
+    /* Sound gate — cubre toda la pantalla, fuerza 1 clic para arrancar con sonido */
+    .sound-gate{position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,.82);backdrop-filter:blur(6px);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;cursor:pointer;-webkit-tap-highlight-color:transparent;}
+    .sound-gate__ring{width:96px;height:96px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center;animation:sgPulse 1.4s ease-in-out infinite;box-shadow:0 0 0 0 rgba(255,179,0,.7);}
+    .sound-gate__ring svg{width:44px;height:44px;fill:#1A1205;margin-left:5px;}
+    @keyframes sgPulse{0%{box-shadow:0 0 0 0 rgba(255,179,0,.7);}70%{box-shadow:0 0 0 22px rgba(255,179,0,0);}100%{box-shadow:0 0 0 0 rgba(255,179,0,0);}}
+    .sound-gate__txt{color:#fff;font-size:1.18rem;font-weight:800;letter-spacing:.04em;text-align:center;line-height:1.35;}
+    .sound-gate__sub{color:rgba(255,255,255,.55);font-size:.82rem;text-align:center;}
+    /* mini control mute tras el gate */
+    .vsl__unmute-banner{display:none;}
     @keyframes pulse-border{0%,100%{box-shadow:0 0 0 0 rgba(255,255,255,.4);}50%{box-shadow:0 0 0 6px rgba(255,255,255,0);}}
     .vsl__controls{position:absolute;top:10px;right:10px;z-index:6;display:none;gap:6px;}
     .vsl__ctrl{background:rgba(0,0,0,.45);border:none;border-radius:50%;width:32px;height:32px;display:flex;align-items:center;justify-content:center;cursor:pointer;backdrop-filter:blur(4px);}
@@ -1127,22 +1132,24 @@ document.querySelectorAll('[data-book]').forEach(b=>b.addEventListener('click',(
   }));
 })();
 </script>
-<!-- VSL: intenta sonido desde inicio; si bloqueado, banner unmute -->
+<!-- VSL: sound gate → 1 clic del usuario = video con sonido desde segundo 0 -->
 <script>
-function vslShowControls(){
-  document.getElementById('vslControls').style.display='flex';
-  document.getElementById('vslUnmuteBanner').style.display='none';
-}
-function vslShowBanner(){
-  document.getElementById('vslControls').style.display='none';
-  document.getElementById('vslUnmuteBanner').style.display='flex';
-}
-function vslActivateSound(){
+function vslStartWithSound(){
+  var gate=document.getElementById('soundGate');
   var v=document.getElementById('vslVideo');
   if(!v)return;
+  gate.style.display='none';
+  v.currentTime=0;
   v.muted=false;
   v.loop=false;
-  vslShowControls();
+  v.play().then(function(){
+    document.getElementById('vslControls').style.display='flex';
+  }).catch(function(){
+    // Fallback muy raro: reproduce muted
+    v.muted=true;
+    v.play().catch(function(){});
+    document.getElementById('vslControls').style.display='flex';
+  });
 }
 function vslToggleMute(){
   var v=document.getElementById('vslVideo');
@@ -1151,7 +1158,6 @@ function vslToggleMute(){
   if(v.muted){v.loop=true;}else{v.loop=false;}
   document.getElementById('icoMuted').style.display=v.muted?'':'none';
   document.getElementById('icoUnmuted').style.display=v.muted?'none':'';
-  if(v.muted){vslShowBanner();}
 }
 function vslTogglePause(){
   var v=document.getElementById('vslVideo');
@@ -1163,19 +1169,11 @@ function vslTogglePause(){
 document.addEventListener('DOMContentLoaded',function(){
   var v=document.getElementById('vslVideo');
   if(!v)return;
-  // Intenta con sonido primero
-  v.muted=false;
-  v.play().then(function(){
-    // Sonido OK — muestra controles
-    vslShowControls();
-  }).catch(function(){
-    // Bloqueado por el browser — arranca muted con banner
-    v.muted=true;
-    v.play().catch(function(){});
-  });
+  // Arranca muted en segundo plano mientras el gate está visible
+  v.muted=true;
+  v.play().catch(function(){});
   v.addEventListener('ended',function(){
     v.muted=true; v.loop=true; v.currentTime=0; v.play().catch(function(){});
-    vslShowBanner();
     document.getElementById('icoMuted').style.display='';
     document.getElementById('icoUnmuted').style.display='none';
   });
@@ -1196,5 +1194,14 @@ document.addEventListener('DOMContentLoaded',function(){
   }catch(e){}
 })();
 </script>
+
+<!-- SOUND GATE: overlay pantalla completa, 1 clic → video con sonido desde el inicio -->
+<div class="sound-gate" id="soundGate" onclick="vslStartWithSound()">
+  <div class="sound-gate__ring">
+    <svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
+  </div>
+  <div class="sound-gate__txt">Pulsa para escuchar el vídeo</div>
+  <div class="sound-gate__sub">Descubre por qué 40.000€ en deudas fue el punto de inflexión</div>
+</div>
 </body>
 </html>
