@@ -93,7 +93,10 @@
     .hero{position:relative;overflow:hidden;background:var(--ink);padding:60px 24px 70px;}
     .hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 50% at 20% 0%,rgba(255,179,0,.14) 0%,transparent 60%),radial-gradient(ellipse 50% 60% at 95% 100%,rgba(255,179,0,.07) 0%,transparent 60%);pointer-events:none;}
     .hero::after{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.022) 1px,transparent 1px);background-size:100% 44px;pointer-events:none;opacity:.6;}
-    .hero__in{position:relative;z-index:2;max-width:1120px;margin:0 auto;display:grid;grid-template-columns:1.08fr .92fr;gap:50px;align-items:center;}
+    .hero__in{position:relative;z-index:2;max-width:1120px;margin:0 auto;display:grid;grid-template-columns:1.08fr .92fr;grid-template-rows:auto 1fr;grid-template-areas:"copy-top media" "copy-bot media";gap:40px 50px;}
+    .hero__copy-top{grid-area:copy-top;}
+    .hero__copy-bot{grid-area:copy-bot;}
+    .hero__media{grid-area:media;position:relative;z-index:2;}
     .hero__h1{font-size:clamp(2.6rem,5.6vw,4.9rem);color:#fff;margin:18px 0 20px;}
     .hero__h1 .ln{display:block;}
     /* Entrada escalonada y dramática del titular: L1 desde la izquierda, L2 desde la derecha */
@@ -116,8 +119,13 @@
     .vsl{position:relative;border-radius:18px;overflow:hidden;aspect-ratio:4/5;background:#000;box-shadow:0 40px 90px -30px rgba(0,0,0,.8),0 0 0 1px rgba(255,255,255,.06);cursor:pointer;}
     .vsl img{width:100%;height:100%;object-fit:cover;transition:transform .5s,opacity .3s;}
     .vsl:hover img{transform:scale(1.04);opacity:.9;}
-    .vsl__mute{position:absolute;bottom:12px;right:12px;z-index:5;background:rgba(0,0,0,.5);border:none;border-radius:50%;width:36px;height:36px;display:flex;align-items:center;justify-content:center;cursor:pointer;backdrop-filter:blur(4px);transition:opacity .2s;}
-    .vsl__mute svg{width:18px;height:18px;fill:#fff;}
+    .vsl__unmute-banner{position:absolute;bottom:0;left:0;right:0;z-index:5;background:linear-gradient(0deg,rgba(0,0,0,.72) 0%,rgba(0,0,0,0) 100%);display:flex;align-items:flex-end;justify-content:center;padding:18px 12px 14px;cursor:pointer;border:0;}
+    .vsl__unmute-inner{display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.13);backdrop-filter:blur(6px);border:1.5px solid rgba(255,255,255,.35);border-radius:40px;padding:10px 20px;animation:pulse-border 1.6s ease-in-out infinite;}
+    .vsl__unmute-inner svg{width:22px;height:22px;fill:#fff;flex-shrink:0;}
+    .vsl__unmute-inner span{font-size:.88rem;font-weight:700;color:#fff;letter-spacing:.04em;text-transform:uppercase;white-space:nowrap;}
+    @keyframes pulse-border{0%,100%{box-shadow:0 0 0 0 rgba(255,255,255,.4);}50%{box-shadow:0 0 0 6px rgba(255,255,255,0);}}
+    .vsl__mute-small{position:absolute;top:10px;right:10px;z-index:6;background:rgba(0,0,0,.45);border:none;border-radius:50%;width:32px;height:32px;display:none;align-items:center;justify-content:center;cursor:pointer;backdrop-filter:blur(4px);}
+    .vsl__mute-small svg{width:16px;height:16px;fill:#fff;}
     .vsl iframe{position:absolute;inset:0;width:100%;height:100%;border:0;}
     .gtag{position:absolute;bottom:-18px;left:50%;transform:translateX(-50%);z-index:3;display:flex;align-items:center;gap:10px;background:#fff;border-radius:12px;padding:10px 16px;box-shadow:0 18px 44px -16px rgba(0,0,0,.6);white-space:nowrap;}
     .gtag b{font-weight:900;font-size:1rem;color:var(--text);}
@@ -125,14 +133,14 @@
     .gtag .sub{font-size:.66rem;color:var(--subtle);}
 
     @media(max-width:880px){
-      .hero__in{grid-template-columns:1fr;gap:0;text-align:center;}
+      .hero__in{display:flex;flex-direction:column;gap:0;text-align:center;}
+      .hero__copy-top{padding:24px 0 18px;text-align:center;}
+      .hero__copy-bot{padding:20px 0 0;text-align:center;}
       .hero__sub{margin-left:auto;margin-right:auto;}
       .hero__ticks{align-self:center;align-items:flex-start;}
       .hero__cta,.hero__guar{justify-content:center;}
-      /* Video primero en móvil */
-      .hero__copy{order:2;padding-top:28px;}
-      .hero__media{order:1;max-width:100%;margin:0;width:100%;}
-      .vsl{aspect-ratio:16/9;border-radius:0;box-shadow:none;}
+      .hero__media{width:100%;margin:0;}
+      .vsl{aspect-ratio:4/5;border-radius:0;box-shadow:none;}
       .gtag{bottom:-14px;font-size:.82rem;}
     }
 
@@ -507,13 +515,35 @@
 <!-- HERO -->
 <section class="hero">
   <div class="hero__in">
-    <div class="hero__copy">
+    <div class="hero__copy-top">
       <span class="kick kick--l">Programa creado por exludópatas</span>
       <h1 class="disp hero__h1">
         <span class="ln">Deja de jugar.</span>
         <span class="ln"><span class="hl-gold">Recupera tu vida.</span></span>
       </h1>
       <p class="hero__sub">El único programa en español hecho por <b>quienes han vivido la ludopatía</b>. 15 clases para salir del juego de verdad — y no recaer.</p>
+    </div>
+
+    <div class="hero__media">
+      <div class="vsl vsl-native" id="vslBox">
+        <video id="vslVideo" src="videos/cebo-vsl-new.mp4" autoplay muted playsinline loop preload="auto" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top center;border:0;"></video>
+        <button class="vsl__unmute-banner" id="vslUnmuteBanner" onclick="vslActivateSound()" aria-label="Activar sonido">
+          <div class="vsl__unmute-inner">
+            <svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
+            <span>Pulsa para activar el sonido</span>
+          </div>
+        </button>
+        <button class="vsl__mute-small" id="vslMuteSmall" onclick="vslMuteVideo()" aria-label="Silenciar">
+          <svg viewBox="0 0 24 24"><path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/></svg>
+        </button>
+      </div>
+      <div class="gtag">
+        <svg width="24" height="24" viewBox="0 0 48 48" aria-hidden="true"><path fill="#4285F4" d="M45.12 24.5c0-1.56-.14-3.06-.4-4.5H24v8.51h11.84c-.51 2.75-2.06 5.08-4.39 6.64v5.52h7.11c4.16-3.83 6.56-9.47 6.56-16.17z"/><path fill="#34A853" d="M24 46c5.94 0 10.92-1.97 14.56-5.33l-7.11-5.52c-1.97 1.32-4.49 2.1-7.45 2.1-5.73 0-10.58-3.87-12.31-9.07H4.34v5.7C7.96 41.07 15.4 46 24 46z"/><path fill="#FBBC05" d="M11.69 28.18C11.25 26.86 11 25.45 11 24s.25-2.86.69-4.18v-5.7H4.34C2.85 17.09 2 20.45 2 24s.85 6.91 2.34 9.88l7.35-5.7z"/><path fill="#EA4335" d="M24 10.75c3.23 0 6.13 1.11 8.41 3.29l6.31-6.31C34.91 4.18 29.93 2 24 2 15.4 2 7.96 6.93 4.34 14.12l7.35 5.7c1.73-5.2 6.58-9.07 12.31-9.07z"/></svg>
+        <div><div style="display:flex;align-items:center;gap:6px;"><b>5,0</b><span class="st">★★★★★</span></div><div class="sub">47 reseñas reales</div></div>
+      </div>
+    </div>
+
+    <div class="hero__copy-bot">
       <ul class="hero__ticks">
         <li><span class="tk">✓</span> 15 clases en vídeo · +3 h de contenido</li>
         <li><span class="tk">✓</span> Sesión 1:1 de 1 h con Nacho <b style="color:var(--gold)">GRATIS</b></li>
@@ -524,20 +554,6 @@
         <a href="#programa" class="btn btn--lg btn--ghost">Ver qué incluye</a>
       </div>
       <div class="hero__guar"><span>⭐</span><span><b>5,0 en Google</b> · +500 personas ya atendidas</span></div>
-    </div>
-
-    <div class="hero__media">
-      <div class="vsl vsl-native" id="vslBox">
-        <video id="vslVideo" src="videos/cebo-vsl-new.mp4" autoplay muted playsinline loop preload="auto" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border:0;"></video>
-        <button class="vsl__mute" id="vslMuteBtn" onclick="vslToggleMute()" aria-label="Activar sonido">
-          <svg id="icoMuted" viewBox="0 0 24 24"><path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/></svg>
-          <svg id="icoUnmuted" viewBox="0 0 24 24" style="display:none"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
-        </button>
-      </div>
-      <div class="gtag">
-        <svg width="24" height="24" viewBox="0 0 48 48" aria-hidden="true"><path fill="#4285F4" d="M45.12 24.5c0-1.56-.14-3.06-.4-4.5H24v8.51h11.84c-.51 2.75-2.06 5.08-4.39 6.64v5.52h7.11c4.16-3.83 6.56-9.47 6.56-16.17z"/><path fill="#34A853" d="M24 46c5.94 0 10.92-1.97 14.56-5.33l-7.11-5.52c-1.97 1.32-4.49 2.1-7.45 2.1-5.73 0-10.58-3.87-12.31-9.07H4.34v5.7C7.96 41.07 15.4 46 24 46z"/><path fill="#FBBC05" d="M11.69 28.18C11.25 26.86 11 25.45 11 24s.25-2.86.69-4.18v-5.7H4.34C2.85 17.09 2 20.45 2 24s.85 6.91 2.34 9.88l7.35-5.7z"/><path fill="#EA4335" d="M24 10.75c3.23 0 6.13 1.11 8.41 3.29l6.31-6.31C34.91 4.18 29.93 2 24 2 15.4 2 7.96 6.93 4.34 14.12l7.35 5.7c1.73-5.2 6.58-9.07 12.31-9.07z"/></svg>
-        <div><div style="display:flex;align-items:center;gap:6px;"><b>5,0</b><span class="st">★★★★★</span></div><div class="sub">47 reseñas reales</div></div>
-      </div>
     </div>
   </div>
 </section>
@@ -1103,15 +1119,24 @@ document.querySelectorAll('[data-book]').forEach(b=>b.addEventListener('click',(
   }));
 })();
 </script>
-<!-- VSL: autoplay muted, botón esquina para activar sonido -->
+<!-- VSL: autoplay muted, banner grande para activar sonido -->
 <script>
-function vslToggleMute(){
+function vslActivateSound(){
   var v=document.getElementById('vslVideo');
   if(!v)return;
-  v.muted=!v.muted;
-  if(!v.muted){v.loop=false;}
-  document.getElementById('icoMuted').style.display=v.muted?'':'none';
-  document.getElementById('icoUnmuted').style.display=v.muted?'none':'';
+  v.muted=false;
+  v.loop=false;
+  document.getElementById('vslUnmuteBanner').style.display='none';
+  var sm=document.getElementById('vslMuteSmall');
+  sm.style.display='flex';
+}
+function vslMuteVideo(){
+  var v=document.getElementById('vslVideo');
+  if(!v)return;
+  v.muted=true;
+  v.loop=true;
+  document.getElementById('vslMuteSmall').style.display='none';
+  document.getElementById('vslUnmuteBanner').style.display='flex';
 }
 document.addEventListener('DOMContentLoaded',function(){
   var v=document.getElementById('vslVideo');
@@ -1119,8 +1144,8 @@ document.addEventListener('DOMContentLoaded',function(){
   v.play().catch(function(){});
   v.addEventListener('ended',function(){
     v.muted=true; v.loop=true; v.currentTime=0; v.play().catch(function(){});
-    document.getElementById('icoMuted').style.display='';
-    document.getElementById('icoUnmuted').style.display='none';
+    document.getElementById('vslMuteSmall').style.display='none';
+    document.getElementById('vslUnmuteBanner').style.display='flex';
   });
 });
 </script>
