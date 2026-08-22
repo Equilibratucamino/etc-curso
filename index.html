@@ -121,7 +121,7 @@
     .vsl:hover img{transform:scale(1.04);opacity:.9;}
     /* Botón "Mira esto" encima del vídeo */
     .sound-gate{display:none;}
-    .vsl__mira{position:absolute;bottom:20px;left:50%;transform:translateX(-50%);z-index:8;display:flex;align-items:center;gap:10px;background:var(--gold);color:#1A1205;font-family:'Roboto',sans-serif;font-weight:900;font-size:1rem;letter-spacing:.04em;padding:12px 22px;border-radius:999px;border:none;cursor:pointer;box-shadow:0 4px 24px rgba(0,0,0,.45);animation:miraPulse 1.6s ease-in-out infinite;-webkit-tap-highlight-color:transparent;white-space:nowrap;}
+    .vsl__mira{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:8;display:flex;align-items:center;gap:10px;background:var(--gold);color:#1A1205;font-family:'Roboto',sans-serif;font-weight:900;font-size:1rem;letter-spacing:.04em;padding:12px 22px;border-radius:999px;border:none;cursor:pointer;box-shadow:0 4px 24px rgba(0,0,0,.45);animation:miraPulse 1.6s ease-in-out infinite;-webkit-tap-highlight-color:transparent;white-space:nowrap;}
     .vsl__mira svg{width:20px;height:20px;fill:#1A1205;flex-shrink:0;}
     @keyframes miraPulse{0%,100%{box-shadow:0 4px 24px rgba(0,0,0,.45),0 0 0 0 rgba(255,179,0,.6);}60%{box-shadow:0 4px 24px rgba(0,0,0,.45),0 0 0 14px rgba(255,179,0,0);}}
     /* mini control mute tras el gate */
