@@ -119,13 +119,11 @@
     .vsl{position:relative;border-radius:18px;overflow:hidden;aspect-ratio:4/5;background:#000;box-shadow:0 40px 90px -30px rgba(0,0,0,.8),0 0 0 1px rgba(255,255,255,.06);cursor:pointer;}
     .vsl img{width:100%;height:100%;object-fit:cover;transition:transform .5s,opacity .3s;}
     .vsl:hover img{transform:scale(1.04);opacity:.9;}
-    /* Sound gate — cubre toda la pantalla, fuerza 1 clic para arrancar con sonido */
-    .sound-gate{position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,.82);backdrop-filter:blur(6px);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;cursor:pointer;-webkit-tap-highlight-color:transparent;}
-    .sound-gate__ring{width:96px;height:96px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center;animation:sgPulse 1.4s ease-in-out infinite;box-shadow:0 0 0 0 rgba(255,179,0,.7);}
-    .sound-gate__ring svg{width:44px;height:44px;fill:#1A1205;margin-left:5px;}
-    @keyframes sgPulse{0%{box-shadow:0 0 0 0 rgba(255,179,0,.7);}70%{box-shadow:0 0 0 22px rgba(255,179,0,0);}100%{box-shadow:0 0 0 0 rgba(255,179,0,0);}}
-    .sound-gate__txt{color:#fff;font-size:1.18rem;font-weight:800;letter-spacing:.04em;text-align:center;line-height:1.35;}
-    .sound-gate__sub{color:rgba(255,255,255,.55);font-size:.82rem;text-align:center;}
+    /* Botón "Mira esto" encima del vídeo */
+    .sound-gate{display:none;}
+    .vsl__mira{position:absolute;bottom:20px;left:50%;transform:translateX(-50%);z-index:8;display:flex;align-items:center;gap:10px;background:var(--gold);color:#1A1205;font-family:'Roboto',sans-serif;font-weight:900;font-size:1rem;letter-spacing:.04em;padding:12px 22px;border-radius:999px;border:none;cursor:pointer;box-shadow:0 4px 24px rgba(0,0,0,.45);animation:miraPulse 1.6s ease-in-out infinite;-webkit-tap-highlight-color:transparent;white-space:nowrap;}
+    .vsl__mira svg{width:20px;height:20px;fill:#1A1205;flex-shrink:0;}
+    @keyframes miraPulse{0%,100%{box-shadow:0 4px 24px rgba(0,0,0,.45),0 0 0 0 rgba(255,179,0,.6);}60%{box-shadow:0 4px 24px rgba(0,0,0,.45),0 0 0 14px rgba(255,179,0,0);}}
     /* mini control mute tras el gate */
     .vsl__unmute-banner{display:none;}
     @keyframes pulse-border{0%,100%{box-shadow:0 0 0 0 rgba(255,255,255,.4);}50%{box-shadow:0 0 0 6px rgba(255,255,255,0);}}
@@ -219,7 +217,7 @@
     /* iMac moderno */
     .imac{width:100%;}
     .imac__display{position:relative;background:#0c0d0f;border-radius:18px;padding:13px 13px 0;box-shadow:0 50px 90px -34px rgba(0,0,0,.6),0 0 0 1px rgba(255,255,255,.04);}
-    .imac__screen{position:relative;width:100%;aspect-ratio:16/9;overflow:hidden;border-radius:5px;background:#F3F5F2;}
+    .imac__screen{position:relative;width:100%;aspect-ratio:16/9;overflow:hidden;border-radius:5px;background:#0c0d0f;}
     .imac__screen iframe{position:absolute;top:0;left:0;border:0;transform-origin:top left;pointer-events:none;}
     .imac__chin{height:34px;margin:0 -13px;background:linear-gradient(180deg,#eceef1,#ced1d6);border-radius:0 0 16px 16px;display:flex;align-items:center;justify-content:center;border-top:1px solid rgba(0,0,0,.05);}
     .imac__apple{width:14px;height:14px;fill:#9aa0a6;opacity:.8;}
@@ -533,6 +531,10 @@
     <div class="hero__media">
       <div class="vsl vsl-native" id="vslBox">
         <video id="vslVideo" src="videos/cebo-vsl-new.mp4" playsinline loop preload="auto" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top center;border:0;"></video>
+        <button class="vsl__mira" id="miraBtnEl" onclick="vslStartWithSound()" aria-label="Activar sonido">
+          <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+          Mira esto
+        </button>
         <button class="vsl__unmute-banner" id="vslUnmuteBanner" onclick="vslActivateSound()" aria-label="Activar sonido">
           <div class="vsl__unmute-inner">
             <svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
@@ -653,7 +655,7 @@
       <div class="devices">
         <div class="imac">
           <div class="imac__display">
-            <div class="imac__screen"><img src="images/podcast-landing hide.png" alt="El curso por dentro" style="width:100%;height:100%;object-fit:cover;display:block;"></div>
+            <div class="imac__screen"><img src="images/podcast-landing hide.png" alt="El curso por dentro" style="width:100%;height:100%;object-fit:cover;object-position:top center;display:block;"></div>
             <div class="imac__chin"><svg class="imac__apple" viewBox="0 0 170 170" aria-hidden="true"><path d="M150.37 130.25c-2.45 5.66-5.35 10.87-8.71 15.66-4.58 6.53-8.33 11.05-11.22 13.56-4.48 4.12-9.28 6.23-14.42 6.35-3.69 0-8.14-1.05-13.32-3.18-5.2-2.12-9.97-3.17-14.34-3.17-4.58 0-9.49 1.05-14.75 3.17-5.26 2.13-9.5 3.24-12.74 3.35-4.93.21-9.84-1.96-14.75-6.52-3.13-2.73-7.04-7.41-11.73-14.04-5.04-7.08-9.17-15.29-12.41-24.65-3.47-10.11-5.21-19.9-5.21-29.38 0-10.86 2.35-20.22 7.04-28.07 3.7-6.3 8.61-11.28 14.76-14.93 6.15-3.65 12.79-5.51 19.95-5.63 3.91 0 9.05 1.21 15.43 3.59 6.36 2.39 10.45 3.6 12.24 3.6 1.34 0 5.88-1.42 13.57-4.24 7.27-2.62 13.42-3.7 18.45-3.27 13.63 1.1 23.87 6.47 30.68 16.15-12.19 7.39-18.22 17.73-18.1 31 .11 10.34 3.86 18.94 11.23 25.77 3.34 3.17 7.07 5.62 11.22 7.36-.9 2.61-1.85 5.11-2.86 7.51zM119.11 7.24c0 8.1-2.96 15.67-8.86 22.67-7.12 8.32-15.73 13.13-25.07 12.37a25.2 25.2 0 0 1-.19-3.07c0-7.78 3.39-16.1 9.4-22.91 3-3.45 6.82-6.31 11.45-8.6 4.62-2.25 8.99-3.5 13.1-3.71.12 1.08.16 2.17.16 3.24z"/></svg></div>
           </div>
         </div>
@@ -1135,17 +1137,16 @@ document.querySelectorAll('[data-book]').forEach(b=>b.addEventListener('click',(
 <!-- VSL: sound gate → 1 clic del usuario = video con sonido desde segundo 0 -->
 <script>
 function vslStartWithSound(){
-  var gate=document.getElementById('soundGate');
+  var btn=document.getElementById('miraBtnEl');
   var v=document.getElementById('vslVideo');
   if(!v)return;
-  gate.style.display='none';
+  if(btn)btn.style.display='none';
   v.currentTime=0;
   v.muted=false;
   v.loop=false;
   v.play().then(function(){
     document.getElementById('vslControls').style.display='flex';
   }).catch(function(){
-    // Fallback muy raro: reproduce muted
     v.muted=true;
     v.play().catch(function(){});
     document.getElementById('vslControls').style.display='flex';
@@ -1195,13 +1196,5 @@ document.addEventListener('DOMContentLoaded',function(){
 })();
 </script>
 
-<!-- SOUND GATE: overlay pantalla completa, 1 clic → video con sonido desde el inicio -->
-<div class="sound-gate" id="soundGate" onclick="vslStartWithSound()">
-  <div class="sound-gate__ring">
-    <svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
-  </div>
-  <div class="sound-gate__txt">Pulsa para escuchar el vídeo</div>
-  <div class="sound-gate__sub">Descubre por qué 40.000€ en deudas fue el punto de inflexión</div>
-</div>
 </body>
 </html>
