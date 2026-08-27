@@ -493,13 +493,6 @@
         </div>
       </div>
     </div>
-    <!-- Fallback para iOS Safari (bloquea cookies de terceros de Google Drive) -->
-    <div id="vidFallback" style="display:none;padding:12px 20px;text-align:center;background:var(--bg-2);border-top:1px solid var(--border);">
-      <a id="vidFallbackLink" href="#" target="_blank" rel="noopener"
-         style="color:var(--teal);font-size:0.88rem;text-decoration:none;font-weight:500;">
-        ¿No se ve el vídeo? → Ábrelo aquí
-      </a>
-    </div>
   </section>
 
   <!-- ── CONTENT ──────────────────────────────────────────────────── -->
@@ -1187,11 +1180,6 @@
       f.allow='autoplay; fullscreen'; f.allowFullscreen=true;
       f.style.cssText='position:absolute;inset:0;width:100%;height:100%;border:0;';
       const va=$('videoArea'); va.innerHTML=''; va.appendChild(f);
-      // En móvil mostrar enlace de emergencia (iOS Safari bloquea cookies de Drive)
-      if(window.innerWidth<=900){
-        const fb=$('vidFallback'), fbl=$('vidFallbackLink');
-        if(fb && fbl){ fbl.href='https://drive.google.com/file/d/'+vid+'/view'; fb.style.display='block'; }
-      }
     });
   } else {
     vidNote.textContent='El vídeo de esta clase estará disponible muy pronto';
