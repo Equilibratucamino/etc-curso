@@ -155,6 +155,8 @@ function buildEmailHTML({ firstName, isPremium, dashboardUrl, email, orderRef })
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
   <title>Acceso a tu curso — ETC.</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@1,9..144,500&display=swap" rel="stylesheet"/>
+  <style>@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@1,9..144,500&display=swap');</style>
 </head>
 <body style="margin:0;padding:0;background:#F2F3F2;font-family:Arial,Helvetica,sans-serif;-webkit-font-smoothing:antialiased;">
 
@@ -186,7 +188,7 @@ function buildEmailHTML({ firstName, isPremium, dashboardUrl, email, orderRef })
             <p style="margin:0 0 6px;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#2FA97F;">Pago confirmado</p>
             <h1 style="margin:10px 0 14px;font-size:28px;font-weight:700;line-height:1.15;color:#1E211D;letter-spacing:-.5px;">
               ${greeting} eres parte de<br>
-              <span style="color:#2FA97F;font-style:italic;">Se Acabó el Juego.</span>
+              <span style="color:#2FA97F;font-style:italic;font-family:'Fraunces',Georgia,serif;font-weight:500;">Se Acabó el Juego.</span>
             </h1>
             <p style="margin:0 0 28px;font-size:15px;font-weight:300;line-height:1.75;color:#6E7168;">
               Las 15 clases están listas para ti. Empieza cuando quieras, a tu ritmo y con total privacidad.
