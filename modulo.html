@@ -1164,11 +1164,35 @@
   const vid=VIDEOS[n], playBtn=$('playBtn'), vidNote=$('vidNote');
   if(vid){
     playBtn.addEventListener('click',()=>{
-      const f=document.createElement('iframe');
-      f.src='https://drive.google.com/file/d/'+vid+'/preview';
-      f.allow='autoplay; fullscreen'; f.allowFullscreen=true;
-      f.style.cssText='position:absolute;inset:0;width:100%;height:100%;border:0;';
-      const va=$('videoArea'); va.innerHTML=''; va.appendChild(f);
+      // Móvil: overlay a pantalla completa para que los controles de Google Drive sean siempre visibles
+      if(window.innerWidth <= 900){
+        const ov=document.createElement('div');
+        ov.style.cssText='position:fixed;inset:0;z-index:9999;background:#000;display:flex;flex-direction:column;';
+        const bar=document.createElement('div');
+        bar.style.cssText='display:flex;align-items:center;justify-content:space-between;padding:10px 16px;background:rgba(0,0,0,.85);flex-shrink:0;gap:12px;';
+        const lbl=document.createElement('span');
+        lbl.style.cssText='color:rgba(255,255,255,.7);font-size:.82rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;flex:1;';
+        lbl.textContent='Clase '+pad(n)+' — '+mod.title;
+        const cls=document.createElement('button');
+        cls.style.cssText='color:#fff;font-size:1.8rem;line-height:1;padding:2px 6px;background:rgba(255,255,255,.12);border:none;border-radius:8px;cursor:pointer;flex-shrink:0;';
+        cls.innerHTML='&times;';
+        cls.onclick=()=>{ document.body.removeChild(ov); document.body.style.overflow=''; };
+        bar.appendChild(lbl); bar.appendChild(cls);
+        const f=document.createElement('iframe');
+        f.src='https://drive.google.com/file/d/'+vid+'/preview';
+        f.allow='autoplay; fullscreen'; f.allowFullscreen=true;
+        f.style.cssText='flex:1;width:100%;border:0;min-height:0;';
+        ov.appendChild(bar); ov.appendChild(f);
+        document.body.appendChild(ov);
+        document.body.style.overflow='hidden';
+      } else {
+        // Escritorio: reproduce en el sitio habitual
+        const f=document.createElement('iframe');
+        f.src='https://drive.google.com/file/d/'+vid+'/preview';
+        f.allow='autoplay; fullscreen'; f.allowFullscreen=true;
+        f.style.cssText='position:absolute;inset:0;width:100%;height:100%;border:0;';
+        const va=$('videoArea'); va.innerHTML=''; va.appendChild(f);
+      }
     });
   } else {
     vidNote.textContent='El vídeo de esta clase estará disponible muy pronto';
