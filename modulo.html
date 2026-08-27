@@ -1178,10 +1178,22 @@
       fs.setAttribute('aria-label','Pantalla completa');
       fs.style.cssText='position:absolute;bottom:10px;right:10px;background:rgba(0,0,0,.6);border:none;border-radius:6px;padding:7px 8px;line-height:0;cursor:pointer;';
       fs.innerHTML='<svg width="18" height="18" viewBox="0 0 18 18" fill="white"><path d="M1 1h5v2H3v3H1V1zm11 0h5v5h-2V3h-3V1zM1 12h2v3h3v2H1v-5zm14 3h-3v2h5v-5h-2v3z"/></svg>';
+      const iconEnter='<svg width="18" height="18" viewBox="0 0 18 18" fill="white"><path d="M1 1h5v2H3v3H1V1zm11 0h5v5h-2V3h-3V1zM1 12h2v3h3v2H1v-5zm14 3h-3v2h5v-5h-2v3z"/></svg>';
+      const iconExit='<svg width="18" height="18" viewBox="0 0 18 18" fill="white"><path d="M4 1H2v3H-1v2h5V1zM14 1h2v3h3v2h-5V1zM4 17H2v-3H-1v-2h5v5zM14 17h2v-3h3v-2h-5v5z" transform="translate(1,0)"/><path d="M6 1v5H1V4h3V1h2zm10 0v3h3v2h-5V1h2zM6 17v-5H1v2h3v3h2zm10 0v-3h3v-2h-5v5h2z"/></svg>';
       fs.addEventListener('click',(e)=>{
         e.stopPropagation();
-        const req=va.requestFullscreen||va.webkitRequestFullscreen||va.mozRequestFullScreen;
-        if(req) req.call(va).catch(()=>{});
+        if(document.fullscreenElement||document.webkitFullscreenElement){
+          (document.exitFullscreen||document.webkitExitFullscreen).call(document);
+        } else {
+          const req=va.requestFullscreen||va.webkitRequestFullscreen;
+          if(req) req.call(va).catch(()=>{});
+        }
+      });
+      document.addEventListener('fullscreenchange',()=>{
+        fs.innerHTML=document.fullscreenElement?iconExit:iconEnter;
+      });
+      document.addEventListener('webkitfullscreenchange',()=>{
+        fs.innerHTML=document.webkitFullscreenElement?iconExit:iconEnter;
       });
 
       ov.addEventListener('click',()=>{
