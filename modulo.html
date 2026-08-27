@@ -1172,19 +1172,16 @@
   document.title='Clase '+pad(n)+' — '+mod.title+' · ETC';
 
   // Vídeo (placeholder hasta que estén grabados)
-  const vid=VIDEOS[n], playBtn=$('playBtn'), vidNote=$('vidNote');
+  const vid=VIDEOS[n], vidNote=$('vidNote');
+  const va=$('videoArea');
   if(vid){
-    playBtn.addEventListener('click',()=>{
-      const f=document.createElement('iframe');
-      f.src='https://drive.google.com/file/d/'+vid+'/preview?embedded=true';
-      f.allow='autoplay; fullscreen'; f.allowFullscreen=true;
-      f.style.cssText='position:absolute;inset:0;width:100%;height:100%;border:0;';
-      const va=$('videoArea'); va.innerHTML=''; va.appendChild(f);
-    });
+    const f=document.createElement('iframe');
+    f.src='https://drive.google.com/file/d/'+vid+'/preview?embedded=true';
+    f.allow='autoplay; fullscreen'; f.allowFullscreen=true;
+    f.style.cssText='position:absolute;inset:0;width:100%;height:100%;border:0;';
+    va.innerHTML=''; va.appendChild(f);
   } else {
-    vidNote.textContent='El vídeo de esta clase estará disponible muy pronto';
-    playBtn.style.opacity='.45'; playBtn.style.cursor='not-allowed';
-    playBtn.addEventListener('click',()=>{ vidNote.textContent='Aún estamos grabando esta clase — disponible muy pronto ✦'; });
+    if(vidNote) vidNote.textContent='El vídeo de esta clase estará disponible muy pronto';
   }
 
   // Lo que trabajarás
