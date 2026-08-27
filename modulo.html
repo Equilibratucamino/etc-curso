@@ -330,10 +330,8 @@
       .lesson-nav .pill { display: none; }
       .lesson-nav__progress { max-width: none; }
       .lesson-nav__back span, .lesson-nav__back { font-size: 0.82rem; }
-      /* Vídeo borde a borde, altura exacta 16:9 — barra y botones de Drive
-         quedan fuera del overflow:hidden gracias al desplazamiento del iframe */
       .video-container { padding: 0; }
-      .video-area { border-radius: 0; aspect-ratio: unset; height: 56.25vw; overflow: hidden; }
+      .video-area { border-radius: 0; }
       /* Ejercicios con margen lateral */
       .content-layout { padding: var(--s8) var(--s5) var(--s12); }
     }
@@ -702,23 +700,23 @@
     {n:14, title:'Prevención de recaídas',       dur:'12 min'},
     {n:15, title:'Analizando casos reales',      dur:'14 min'},
   ];
-  // IDs de Google Drive — embed: https://drive.google.com/file/d/ID/preview
+  // IDs de YouTube — embed: https://www.youtube.com/embed/ID
   const VIDEOS = {
-    1:  '1WyFvGA2pMoLpU0Ktw5eEh1NDioanggpw',
-    2:  '1W6aTHAsjWCS_otrf2Of4maoKI7d42qSO',
-    3:  '1qqwyhzYyvBKH9j2z_Am4f50WYgMb53NJ',
-    4:  '16jvItUF_q97XyGWUuYUg3wQ8XwKZnjT7',
-    5:  '1l1_EDW8RbGL4BrrjTI0Pqii90X7jmN-h',
-    6:  '150nnIABzIkV1ewig-dYl_oaoa1X4KY9k',
-    7:  '1SZL-mG0AmLArmQPdiki8ropnT3JIDcpe',
-    8:  '1_ZJes4xgiSz8pSoTfi_Tmm5L8fGZmTuq',
-    9:  '1B3ADKAk52uelFNugRmiLUv13raCcXDg5',
-    10: '1pK-2q4-fqFmhScwq145Uyt8n-x-hCU1t',
-    11: '1YVPxfYsbRKeLAIiYzALM7LW30qomw0UT',
-    12: '1X1FQt6aYMgc9my6EJwbO2HrgmD5WSeuP',
-    13: '12-qf7VbUDW_GLicw30CACjW7hnxXxp1W',
-    14: '1Rx053AmQ-3oNH4hLWXfrZ5A2CiwrWybe',
-    15: '1izE_D5i4RHf3NwMzptUu8IRVQt4pTJZQ',
+    1:  'cfY-TaTRPoM',
+    2:  '0PKsL2xjf3M',
+    3:  '5-47TZtROy4',
+    4:  'g8EY1KB9aLs',
+    5:  'MnT48uFBUT8',
+    6:  'UWnMEZpoFWo',
+    7:  'arEavPFjOCE',
+    8:  'M-T42Xjb1Vw',
+    9:  'hUw4Ljmnv0o',
+    10: 'cQCDyDfmHaw',
+    11: '1lnVFAzhxUE',
+    12: 'QrfCB66tRXs',
+    13: 'DHXZQfF2t1E',
+    14: 'qY4qBoasp7s',
+    15: '7esKunDxkQM',
   };
   const DEFAULT_CONTENT = {
     desc:'En esta clase trabajarás un paso clave de tu recuperación. Tómate tu tiempo, ve el vídeo completo y haz los ejercicios — ahí está el verdadero cambio.',
@@ -1164,14 +1162,9 @@
   if(vid){
     playBtn.addEventListener('click',()=>{
       const f=document.createElement('iframe');
-      f.src='https://drive.google.com/file/d/'+vid+'/preview';
+      f.src='https://www.youtube.com/embed/'+vid+'?autoplay=1&rel=0';
       f.allow='autoplay; fullscreen'; f.allowFullscreen=true;
-      // En móvil: desplazamos el iframe -40px arriba y lo hacemos 110px más alto
-      // para que la barra superior y los botones de Drive queden fuera del clip
-      const mobile=window.innerWidth<=900;
-      f.style.cssText=mobile
-        ? 'position:absolute;top:-40px;left:0;width:100%;height:calc(100% + 110px);border:0;'
-        : 'position:absolute;inset:0;width:100%;height:100%;border:0;';
+      f.style.cssText='position:absolute;inset:0;width:100%;height:100%;border:0;';
       const va=$('videoArea'); va.innerHTML=''; va.appendChild(f);
     });
   } else {
