@@ -328,6 +328,15 @@
       .lesson-nav .pill { display: none; }
       .lesson-nav__progress { max-width: none; }
       .lesson-nav__back span, .lesson-nav__back { font-size: 0.82rem; }
+      /* Márgenes iguales: vídeo = ejercicios */
+      .video-container { padding-left: var(--s4); padding-right: var(--s4); padding-top: var(--s5); padding-bottom: var(--s5); }
+      .content-layout  { padding-left: var(--s4); padding-right: var(--s4); }
+    }
+
+    /* Landscape móvil: vídeo llena el alto disponible para que los controles sean visibles */
+    @media (orientation: landscape) and (max-height: 540px) {
+      .video-container { padding: 0; }
+      .video-area { aspect-ratio: unset; height: calc(100svh - 56px); border-radius: 0; }
     }
 
     /* ── EJERCICIOS ENRIQUECIDOS ─────────────────────────────────── */
