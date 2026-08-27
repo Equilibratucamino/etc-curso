@@ -1164,13 +1164,14 @@
       const f=document.createElement('iframe');
       f.src='https://drive.google.com/file/d/'+vid+'/preview';
       f.allow='autoplay; fullscreen'; f.allowFullscreen=true;
-      // En móvil: extendemos el iframe 56px hacia abajo para que la barra de
-      // controles de Drive quede fuera del overflow:hidden del contenedor
-      const mobile=window.innerWidth<=900;
-      f.style.cssText=mobile
-        ? 'position:absolute;top:0;left:0;width:100%;height:calc(100% + 56px);border:0;'
-        : 'position:absolute;inset:0;width:100%;height:100%;border:0;';
+      f.style.cssText='position:absolute;inset:0;width:100%;height:100%;border:0;';
       const va=$('videoArea'); va.innerHTML=''; va.appendChild(f);
+      // En móvil: abrimos el vídeo en pantalla completa automáticamente.
+      // Los controles de Drive se ocultan solos tras 3s de inactividad.
+      if(window.innerWidth<=900){
+        const req=va.requestFullscreen||va.webkitRequestFullscreen||va.mozRequestFullScreen;
+        if(req) req.call(va).catch(()=>{});
+      }
     });
   } else {
     vidNote.textContent='El vídeo de esta clase estará disponible muy pronto';
