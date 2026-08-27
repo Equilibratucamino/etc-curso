@@ -330,24 +330,11 @@
       .lesson-nav .pill { display: none; }
       .lesson-nav__progress { max-width: none; }
       .lesson-nav__back span, .lesson-nav__back { font-size: 0.82rem; }
-      /* Vídeo de borde a borde */
+      /* Vídeo de borde a borde, aspect-ratio 16/9 como en el base */
       .video-container { padding: 0; }
-      .video-area {
-        border-radius: 0;
-        aspect-ratio: unset;
-        /* 56.25vw = altura 16:9 a pantalla completa. +80px para la cabecera
-           y barra de controles de Google Drive (nunca quedan cortados) */
-        height: calc(56.25vw + 80px);
-        min-height: 300px;
-      }
+      .video-area { border-radius: 0; }
       /* Ejercicios con margen lateral */
       .content-layout { padding: var(--s8) var(--s5) var(--s12); }
-    }
-
-    /* Landscape móvil: altura máxima = viewport menos la barra de nav */
-    @media (max-width: 900px) and (orientation: landscape) {
-      .video-container { padding: 0; }
-      .video-area { border-radius: 0; aspect-ratio: unset; height: calc(100svh - 56px); min-height: unset; }
     }
 
     /* ── EJERCICIOS ENRIQUECIDOS ─────────────────────────────────── */
