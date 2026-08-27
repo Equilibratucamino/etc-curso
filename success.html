@@ -333,15 +333,23 @@
       document.getElementById('ctaBtn').href = 'dashboard.html?plan=' + plan;
 
       // ── 3. Llamar a la API para enviar el email de bienvenida ──
+      // La respuesta incluye el nombre de Stripe → se guarda en localStorage para
+      // que el avatar del curso muestre siempre la inicial correcta, sobreescribiendo
+      // cualquier sesión de prueba anterior.
       if (sessionId) {
         fetch('/api/send-welcome', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ sessionId, plan }),
-        }).catch(err => console.warn('Email API error:', err));
-        // Silencioso: si falla el email, la experiencia del usuario no se interrumpe
+        })
+          .then(r => r.json())
+          .then(d => {
+            if (d.nombre) {
+              try { localStorage.setItem('etc_name', d.nombre); } catch(e) {}
+            }
+          })
+          .catch(err => console.warn('Email API error:', err));
       }
-      // El nombre NO se pide aquí — se pide al entrar al curso (dashboard.html)
     })();
   </script>
 </body>

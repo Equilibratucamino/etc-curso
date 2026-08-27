@@ -103,7 +103,7 @@ export default async function handler(req, res) {
       return res.status(500).json({ error: 'Email send failed' });
     }
 
-    return res.status(200).json({ ok: true, email });
+    return res.status(200).json({ ok: true, email, nombre: firstName });
   } catch (err) {
     console.error('Resend fetch error:', err);
     return res.status(500).json({ error: 'Resend fetch failed' });
