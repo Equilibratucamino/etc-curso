@@ -1168,16 +1168,29 @@
       f.allow='autoplay; fullscreen'; f.allowFullscreen=true;
       f.style.cssText='position:absolute;inset:0;width:100%;height:100%;border:0;';
 
-      // Overlay transparente: bloquea el logo/link de YouTube y gestiona pause/play
+      // Overlay: bloquea logo/link de YouTube, gestiona pause/play y fullscreen
       const ov=document.createElement('div');
       ov.style.cssText='position:absolute;inset:0;z-index:2;cursor:pointer;';
       let playing=true;
+
+      // Botón pantalla completa
+      const fs=document.createElement('button');
+      fs.setAttribute('aria-label','Pantalla completa');
+      fs.style.cssText='position:absolute;bottom:10px;right:10px;background:rgba(0,0,0,.6);border:none;border-radius:6px;padding:7px 8px;line-height:0;cursor:pointer;';
+      fs.innerHTML='<svg width="18" height="18" viewBox="0 0 18 18" fill="white"><path d="M1 1h5v2H3v3H1V1zm11 0h5v5h-2V3h-3V1zM1 12h2v3h3v2H1v-5zm14 3h-3v2h5v-5h-2v3z"/></svg>';
+      fs.addEventListener('click',(e)=>{
+        e.stopPropagation();
+        const req=va.requestFullscreen||va.webkitRequestFullscreen||va.mozRequestFullScreen;
+        if(req) req.call(va).catch(()=>{});
+      });
+
       ov.addEventListener('click',()=>{
         const cmd=playing?'pauseVideo':'playVideo';
         f.contentWindow.postMessage(JSON.stringify({event:'command',func:cmd,args:''}), '*');
         playing=!playing;
       });
 
+      ov.appendChild(fs);
       va.appendChild(f);
       va.appendChild(ov);
     });
