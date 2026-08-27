@@ -331,7 +331,12 @@
       .lesson-nav__progress { max-width: none; }
       .lesson-nav__back span, .lesson-nav__back { font-size: 0.82rem; }
       .video-container { padding: 0; }
-      .video-area { border-radius: 0; }
+      .video-area {
+        border-radius: 0;
+        aspect-ratio: unset;
+        height: calc(56.25vw + 80px);
+        overflow: visible;
+      }
       /* Ejercicios con margen lateral */
       .content-layout { padding: var(--s8) var(--s5) var(--s12); }
     }
@@ -1160,22 +1165,13 @@
   // Vídeo (placeholder hasta que estén grabados)
   const vid=VIDEOS[n], playBtn=$('playBtn'), vidNote=$('vidNote');
   if(vid){
-    const isMobile=window.innerWidth<=900;
-    if(isMobile){
-      // En móvil Drive embed no funciona bien — abrimos el vídeo en la app/navegador
-      vidNote.textContent='Toca para ver el vídeo';
-      playBtn.addEventListener('click',()=>{
-        window.open('https://drive.google.com/file/d/'+vid+'/view','_blank');
-      });
-    } else {
-      playBtn.addEventListener('click',()=>{
-        const f=document.createElement('iframe');
-        f.src='https://drive.google.com/file/d/'+vid+'/preview';
-        f.allow='autoplay; fullscreen'; f.allowFullscreen=true;
-        f.style.cssText='position:absolute;inset:0;width:100%;height:100%;border:0;';
-        const va=$('videoArea'); va.innerHTML=''; va.appendChild(f);
-      });
-    }
+    playBtn.addEventListener('click',()=>{
+      const f=document.createElement('iframe');
+      f.src='https://drive.google.com/file/d/'+vid+'/preview';
+      f.allow='autoplay; fullscreen'; f.allowFullscreen=true;
+      f.style.cssText='position:absolute;inset:0;width:100%;height:100%;border:0;';
+      const va=$('videoArea'); va.innerHTML=''; va.appendChild(f);
+    });
   } else {
     vidNote.textContent='El vídeo de esta clase estará disponible muy pronto';
     playBtn.style.opacity='.45'; playBtn.style.cursor='not-allowed';
