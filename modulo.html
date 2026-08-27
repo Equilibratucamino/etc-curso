@@ -1161,11 +1161,25 @@
   const vid=VIDEOS[n], playBtn=$('playBtn'), vidNote=$('vidNote');
   if(vid){
     playBtn.addEventListener('click',()=>{
+      const va=$('videoArea'); va.innerHTML='';
+
       const f=document.createElement('iframe');
-      f.src='https://www.youtube.com/embed/'+vid+'?autoplay=1&controls=0&rel=0&modestbranding=1&playsinline=1';
+      f.src='https://www.youtube.com/embed/'+vid+'?autoplay=1&controls=0&enablejsapi=1&rel=0&modestbranding=1&playsinline=1&iv_load_policy=3';
       f.allow='autoplay; fullscreen'; f.allowFullscreen=true;
       f.style.cssText='position:absolute;inset:0;width:100%;height:100%;border:0;';
-      const va=$('videoArea'); va.innerHTML=''; va.appendChild(f);
+
+      // Overlay transparente: bloquea el logo/link de YouTube y gestiona pause/play
+      const ov=document.createElement('div');
+      ov.style.cssText='position:absolute;inset:0;z-index:2;cursor:pointer;';
+      let playing=true;
+      ov.addEventListener('click',()=>{
+        const cmd=playing?'pauseVideo':'playVideo';
+        f.contentWindow.postMessage(JSON.stringify({event:'command',func:cmd,args:''}), '*');
+        playing=!playing;
+      });
+
+      va.appendChild(f);
+      va.appendChild(ov);
     });
   } else {
     vidNote.textContent='El vídeo de esta clase estará disponible muy pronto';
