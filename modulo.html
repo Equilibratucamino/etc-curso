@@ -1173,27 +1173,29 @@
       ov.style.cssText='position:absolute;inset:0;z-index:2;cursor:pointer;';
       let playing=true;
 
-      // Botón pantalla completa
-      const fs=document.createElement('button');
-      fs.setAttribute('aria-label','Pantalla completa');
-      fs.style.cssText='position:absolute;bottom:10px;right:10px;background:rgba(0,0,0,.6);border:none;border-radius:6px;padding:7px 8px;line-height:0;cursor:pointer;';
-      fs.innerHTML='<svg width="18" height="18" viewBox="0 0 18 18" fill="white"><path d="M1 1h5v2H3v3H1V1zm11 0h5v5h-2V3h-3V1zM1 12h2v3h3v2H1v-5zm14 3h-3v2h5v-5h-2v3z"/></svg>';
-      const iconEnter='<svg width="18" height="18" viewBox="0 0 18 18" fill="white"><path d="M1 1h5v2H3v3H1V1zm11 0h5v5h-2V3h-3V1zM1 12h2v3h3v2H1v-5zm14 3h-3v2h5v-5h-2v3z"/></svg>';
-      const iconExit='<svg width="18" height="18" viewBox="0 0 18 18" fill="white"><path d="M4 1H2v3H-1v2h5V1zM14 1h2v3h3v2h-5V1zM4 17H2v-3H-1v-2h5v5zM14 17h2v-3h3v-2h-5v5z" transform="translate(1,0)"/><path d="M6 1v5H1V4h3V1h2zm10 0v3h3v2h-5V1h2zM6 17v-5H1v2h3v3h2zm10 0v-3h3v-2h-5v5h2z"/></svg>';
-      fs.addEventListener('click',(e)=>{
+      // Botón fullscreen — grande y claro, cambia a "✕ Salir" cuando está en pantalla completa
+      const fsBtn=document.createElement('button');
+      fsBtn.setAttribute('aria-label','Pantalla completa');
+      fsBtn.style.cssText='position:absolute;bottom:12px;right:12px;background:rgba(0,0,0,.75);color:#fff;border:none;border-radius:8px;padding:8px 12px;font-size:13px;font-weight:600;font-family:inherit;cursor:pointer;letter-spacing:.02em;';
+      fsBtn.textContent='⛶';
+
+      const onFSChange=()=>{
+        const isFS=!!(document.fullscreenElement||document.webkitFullscreenElement);
+        fsBtn.textContent=isFS?'✕ Salir':'⛶';
+        fsBtn.style.padding=isFS?'10px 18px':'8px 12px';
+        fsBtn.style.fontSize=isFS?'15px':'13px';
+      };
+      document.addEventListener('fullscreenchange',onFSChange);
+      document.addEventListener('webkitfullscreenchange',onFSChange);
+
+      fsBtn.addEventListener('click',(e)=>{
         e.stopPropagation();
         if(document.fullscreenElement||document.webkitFullscreenElement){
-          (document.exitFullscreen||document.webkitExitFullscreen).call(document);
+          (document.exitFullscreen||document.webkitExitFullscreen||document.mozCancelFullScreen).call(document);
         } else {
-          const req=va.requestFullscreen||va.webkitRequestFullscreen;
+          const req=va.requestFullscreen||va.webkitRequestFullscreen||va.mozRequestFullScreen;
           if(req) req.call(va).catch(()=>{});
         }
-      });
-      document.addEventListener('fullscreenchange',()=>{
-        fs.innerHTML=document.fullscreenElement?iconExit:iconEnter;
-      });
-      document.addEventListener('webkitfullscreenchange',()=>{
-        fs.innerHTML=document.webkitFullscreenElement?iconExit:iconEnter;
       });
 
       ov.addEventListener('click',()=>{
@@ -1202,7 +1204,7 @@
         playing=!playing;
       });
 
-      ov.appendChild(fs);
+      ov.appendChild(fsBtn);
       va.appendChild(f);
       va.appendChild(ov);
     });
