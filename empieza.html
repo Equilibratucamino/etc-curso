@@ -49,103 +49,85 @@ body{
 .delay-4{transition-delay:.4s;}
 
 /* ══════════════════════════════════════════
-   GATE — estado inicial (formulario)
+   GATE — vídeo de fondo + formulario encima
 ══════════════════════════════════════════ */
 #gate{
-  min-height:100svh;
+  position:relative;min-height:100svh;
   display:flex;flex-direction:column;align-items:center;
-  justify-content:center;
-  padding:48px max(20px,env(safe-area-inset-left,0px));
-  background:var(--bg);
+  justify-content:center;overflow:hidden;
 }
 
-/* Barra de confianza superior */
+/* Vídeo de fondo a pantalla completa */
+#bgVideo{
+  position:absolute;inset:0;width:100%;height:100%;
+  object-fit:cover;object-position:center top;
+  pointer-events:none;
+}
+/* Overlay oscuro + blur */
+.gate-overlay{
+  position:absolute;inset:0;
+  background:rgba(6,12,20,.62);
+  backdrop-filter:blur(3px);
+  -webkit-backdrop-filter:blur(3px);
+}
+
+/* Contenido sobre el vídeo */
+.gate-content{
+  position:relative;z-index:2;
+  width:100%;max-width:460px;
+  padding:40px max(20px,env(safe-area-inset-left,0px));
+  display:flex;flex-direction:column;align-items:center;
+}
+
+/* Barra de confianza */
 .trust-bar{
   display:flex;align-items:center;justify-content:center;
-  gap:16px;flex-wrap:wrap;
-  font-size:.78rem;font-weight:500;color:var(--muted);
-  margin-bottom:36px;
+  gap:12px;flex-wrap:wrap;
+  font-size:.75rem;font-weight:500;color:rgba(255,255,255,.75);
+  margin-bottom:28px;
   animation:fadeIn .5s ease both;
 }
-.trust-bar .sep{opacity:.3;}
+.trust-bar .sep{opacity:.35;}
 .trust-stars{display:flex;gap:2px;}
-.trust-stars svg{width:13px;height:13px;fill:#f59e0b;}
+.trust-stars svg{width:12px;height:12px;fill:#f59e0b;}
 .trust-pill{
   display:inline-flex;align-items:center;gap:5px;
-  background:var(--g-l);color:var(--g-d);
-  font-size:.72rem;font-weight:600;letter-spacing:.04em;
-  padding:4px 10px;border-radius:999px;
+  background:rgba(50,180,140,.25);color:rgba(255,255,255,.9);
+  font-size:.7rem;font-weight:600;letter-spacing:.04em;
+  padding:3px 10px;border-radius:999px;
+  border:1px solid rgba(50,180,140,.4);
 }
-.trust-pill svg{width:12px;height:12px;fill:var(--g);}
+.trust-pill svg{width:11px;height:11px;fill:var(--g);}
 
-/* Logo ETC */
-.gate-logo{
-  width:52px;height:52px;border-radius:50%;
-  background:linear-gradient(135deg,var(--g),var(--g-d));
-  display:flex;align-items:center;justify-content:center;
-  margin:0 auto 28px;
-  box-shadow:0 6px 24px rgba(50,180,140,.3);
-  animation:fadeIn .4s ease both;
-}
-.gate-logo svg{width:26px;height:26px;fill:white;}
-
-/* Headline del gate */
+/* Headline */
 .gate-headline{
   font-family:var(--d);font-weight:900;
-  font-size:clamp(1.65rem,5.5vw,2.3rem);
-  line-height:1.08;letter-spacing:-.04em;
-  color:var(--ink);text-align:center;
-  text-wrap:balance;margin-bottom:12px;
+  font-size:clamp(1.8rem,6vw,2.6rem);
+  line-height:1.05;letter-spacing:-.04em;
+  color:#fff;text-align:center;
+  text-wrap:balance;margin-bottom:10px;
+  text-shadow:0 2px 16px rgba(0,0,0,.4);
   animation:fadeIn .5s .05s ease both;
 }
 .gate-headline .accent{color:var(--g);}
-
 .gate-sub{
-  font-size:.9375rem;font-weight:400;color:var(--ink2);
-  text-align:center;line-height:1.65;
-  max-width:360px;margin:0 auto 32px;
+  font-size:.9rem;color:rgba(255,255,255,.7);
+  text-align:center;line-height:1.6;
+  max-width:340px;margin:0 auto 28px;
   animation:fadeIn .5s .1s ease both;
 }
 
-/* Tarjeta formulario */
+/* Tarjeta formulario con glassmorphism */
 .gate-card{
-  width:100%;max-width:420px;
-  background:var(--card);
-  border:1.5px solid var(--border);
+  width:100%;
+  background:rgba(255,255,255,.12);
+  border:1px solid rgba(255,255,255,.22);
   border-radius:20px;
-  padding:28px 24px 24px;
-  box-shadow:0 4px 6px rgba(0,0,0,.04), 0 24px 60px rgba(0,0,0,.08);
+  padding:24px 20px 20px;
+  backdrop-filter:blur(16px);
+  -webkit-backdrop-filter:blur(16px);
+  box-shadow:0 8px 32px rgba(0,0,0,.35);
   animation:slideUp .55s .15s cubic-bezier(.22,1,.36,1) both;
-}
-
-/* Vídeo de fondo dentro de la card */
-.card-video-wrap{
-  position:relative;border-radius:14px;overflow:hidden;
-  margin-bottom:20px;aspect-ratio:16/9;background:#0d1a16;
-}
-#bgVideo{
-  position:absolute;inset:0;width:100%;height:100%;
-  object-fit:cover;object-position:top center;
-  pointer-events:none;opacity:.85;
-}
-.card-video-overlay{
-  position:absolute;inset:0;
-  background:linear-gradient(to bottom,rgba(8,14,30,.35) 0%,rgba(8,14,30,.65) 100%);
-  display:flex;flex-direction:column;align-items:center;justify-content:center;
-  gap:10px;padding:16px;text-align:center;
-}
-.lock-icon{
-  width:40px;height:40px;border-radius:50%;
-  background:rgba(255,255,255,.12);border:1.5px solid rgba(255,255,255,.25);
-  display:flex;align-items:center;justify-content:center;
-  backdrop-filter:blur(4px);
-}
-.lock-icon svg{width:16px;height:16px;stroke:rgba(255,255,255,.8);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
-.card-video-label{
-  font-family:var(--d);font-weight:800;
-  font-size:clamp(.9rem,3vw,1.05rem);
-  color:#fff;line-height:1.2;text-wrap:balance;
-  text-shadow:0 1px 8px rgba(0,0,0,.4);
 }
 
 /* Form inputs */
@@ -154,31 +136,32 @@ body{
 #optin-form input{
   font-family:var(--r);font-size:.9rem;font-weight:400;
   padding:13px 16px;
-  border:1.5px solid var(--border);border-radius:12px;
-  background:#fff;color:var(--ink);outline:none;width:100%;
-  transition:border-color .2s,box-shadow .2s;
+  border:1px solid rgba(255,255,255,.25);border-radius:12px;
+  background:rgba(255,255,255,.15);
+  color:#fff;outline:none;width:100%;
+  transition:border-color .2s,background .2s,box-shadow .2s;
   -webkit-appearance:none;
 }
-#optin-form input::placeholder{color:#9ca3af;}
+#optin-form input::placeholder{color:rgba(255,255,255,.5);}
 #optin-form input:focus{
-  border-color:var(--g);
-  box-shadow:0 0 0 3px rgba(50,180,140,.12);
+  border-color:var(--g);background:rgba(255,255,255,.22);
+  box-shadow:0 0 0 3px rgba(50,180,140,.2);
 }
+
 .tlf-wrap{position:relative;}
 .tlf-opt{
   position:absolute;right:14px;top:50%;transform:translateY(-50%);
-  font-size:.65rem;font-weight:600;color:#9ca3af;letter-spacing:.05em;
-  pointer-events:none;text-transform:uppercase;
+  font-size:.62rem;font-weight:600;color:rgba(255,255,255,.4);
+  letter-spacing:.05em;pointer-events:none;text-transform:uppercase;
 }
 
 /* Botón submit */
 .btn-submit{
-  font-family:var(--d);font-weight:800;font-size:1.05rem;
-  letter-spacing:-.02em;
+  font-family:var(--d);font-weight:800;font-size:1.05rem;letter-spacing:-.02em;
   padding:16px 24px;border:none;border-radius:12px;
   background:linear-gradient(135deg,#3ecf9e 0%,#28b386 50%,#1a9068 100%);
   color:#fff;cursor:pointer;
-  box-shadow:0 4px 20px rgba(50,180,140,.4), 0 1px 0 rgba(255,255,255,.18) inset;
+  box-shadow:0 4px 20px rgba(50,180,140,.5),0 1px 0 rgba(255,255,255,.18) inset;
   transition:transform .15s,box-shadow .15s;
   position:relative;overflow:hidden;margin-top:4px;
 }
@@ -187,30 +170,35 @@ body{
   background:linear-gradient(90deg,transparent,rgba(255,255,255,.2),transparent);
   transform:skewX(-20deg);animation:shine 3.5s 1.5s infinite;
 }
-.btn-submit:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(50,180,140,.5), 0 1px 0 rgba(255,255,255,.18) inset;}
+.btn-submit:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(50,180,140,.6),0 1px 0 rgba(255,255,255,.18) inset;}
 .btn-submit:active{transform:translateY(0);}
 
 .privacy-note{
-  font-size:.72rem;font-weight:400;color:#9ca3af;
+  font-size:.7rem;color:rgba(255,255,255,.45);
   text-align:center;margin-top:10px;line-height:1.5;
 }
 
 /* Logos de prensa bajo la card */
-.gate-press{margin-top:40px;text-align:center;animation:fadeIn .5s .4s ease both;}
+.gate-press{
+  position:relative;z-index:2;
+  margin-top:32px;text-align:center;
+  animation:fadeIn .5s .4s ease both;
+  padding:0 max(20px,env(safe-area-inset-left,0px));
+}
 .gate-press-label{
-  font-size:.65rem;font-weight:600;letter-spacing:.2em;
-  text-transform:uppercase;color:#9ca3af;margin-bottom:16px;
+  font-size:.62rem;font-weight:600;letter-spacing:.2em;
+  text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:14px;
 }
 .gate-press-logos{
   display:flex;align-items:center;justify-content:center;
-  flex-wrap:wrap;gap:12px 24px;
+  flex-wrap:wrap;gap:10px 20px;
 }
 .press-img{
-  height:22px;width:auto;object-fit:contain;
-  filter:grayscale(1);opacity:.3;
+  height:20px;width:auto;object-fit:contain;
+  filter:grayscale(1) brightness(10);opacity:.35;
   transition:opacity .25s;
 }
-.press-img:hover{opacity:.55;}
+.press-img:hover{opacity:.6;}
 
 /* ══════════════════════════════════════════
    UNLOCKED — video + contenido
@@ -489,70 +477,65 @@ body{
 ════════════════════════════════════ -->
 <section id="gate">
 
-  <!-- Barra de confianza -->
-  <div class="trust-bar">
-    <div class="trust-stars">
-      <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-      <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-      <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-      <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-      <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+  <!-- Vídeo de fondo a pantalla completa -->
+  <video id="bgVideo" autoplay muted loop playsinline preload="auto"
+    aria-hidden="true" onerror="this.style.display='none'">
+    <source src="videos/cebo-vsl-new.mp4" type="video/mp4">
+  </video>
+  <!-- Overlay oscuro con blur -->
+  <div class="gate-overlay"></div>
+
+  <!-- Contenido centrado sobre el vídeo -->
+  <div class="gate-content">
+
+    <!-- Barra de confianza -->
+    <div class="trust-bar">
+      <div class="trust-stars">
+        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+      </div>
+      <span>5,0 · +47 reseñas en Google</span>
+      <span class="sep">·</span>
+      <span class="trust-pill">
+        <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/></svg>
+        100% privado
+      </span>
     </div>
-    <span>5,0 · +47 reseñas en Google</span>
-    <span class="sep">·</span>
-    <span class="trust-pill">
-      <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/></svg>
-      100% privado
-    </span>
-  </div>
 
-  <!-- Logo -->
-  <div class="gate-logo" aria-hidden="true">
-    <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/></svg>
-  </div>
+    <!-- Headline -->
+    <h1 class="gate-headline">
+      Deja de luchar solo.<br>
+      <span class="accent">Hay una salida.</span>
+    </h1>
+    <p class="gate-sub">
+      Accede gratis al vídeo donde Nacho explica exactamente cómo salir de la adicción al juego.
+    </p>
 
-  <!-- Headline -->
-  <h1 class="gate-headline">
-    Deja de luchar solo.<br>
-    <span class="accent">Hay una salida.</span>
-  </h1>
-  <p class="gate-sub">
-    Accede gratis al vídeo donde Nacho explica exactamente cómo salir de la adicción al juego — y por qué ahora es tu momento.
-  </p>
-
-  <!-- Card con formulario -->
-  <div class="gate-card">
-    <div class="card-video-wrap">
-      <video id="bgVideo" autoplay muted loop playsinline preload="auto"
-        aria-hidden="true" onerror="this.style.display='none'">
-        <source src="videos/cebo-vsl-new.mp4" type="video/mp4">
-      </video>
-      <div class="card-video-overlay">
-        <div class="lock-icon">
-          <svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+    <!-- Card formulario glassmorphism -->
+    <div class="gate-card">
+      <form id="optin-form" novalidate>
+        <div class="form-row">
+          <input type="text"  id="nombre"    placeholder="Nombre"    autocomplete="given-name"  required>
+          <input type="text"  id="apellidos" placeholder="Apellidos" autocomplete="family-name" required>
         </div>
-        <p class="card-video-label">Pon tus datos y desbloquea<br>el vídeo completo</p>
-      </div>
+        <input type="email" id="email"    placeholder="Tu correo"   autocomplete="email" required>
+        <div class="tlf-wrap">
+          <input type="tel" id="tlf"      placeholder="Teléfono"    autocomplete="tel" inputmode="numeric">
+          <span class="tlf-opt">opcional</span>
+        </div>
+        <button type="submit" class="btn-submit" id="submit-btn">
+          Ver el vídeo gratis &rarr;
+        </button>
+      </form>
+      <p class="privacy-note">Sin spam · Sin llamadas inesperadas · 100% confidencial</p>
     </div>
 
-    <form id="optin-form" novalidate>
-      <div class="form-row">
-        <input type="text"  id="nombre"    placeholder="Nombre"    autocomplete="given-name"  required>
-        <input type="text"  id="apellidos" placeholder="Apellidos" autocomplete="family-name" required>
-      </div>
-      <input type="email" id="email"    placeholder="Tu correo"   autocomplete="email" required>
-      <div class="tlf-wrap">
-        <input type="tel" id="tlf"      placeholder="Teléfono"    autocomplete="tel" inputmode="numeric">
-        <span class="tlf-opt">opcional</span>
-      </div>
-      <button type="submit" class="btn-submit" id="submit-btn">
-        Ver el vídeo gratis &rarr;
-      </button>
-    </form>
-    <p class="privacy-note">Sin spam · Sin llamadas inesperadas · 100% confidencial</p>
-  </div>
+  </div><!-- /gate-content -->
 
-  <!-- Logos prensa bajo la card -->
+  <!-- Logos prensa, pegados al fondo -->
   <div class="gate-press">
     <p class="gate-press-label">Medios y empresas que nos avalan</p>
     <div class="gate-press-logos">
