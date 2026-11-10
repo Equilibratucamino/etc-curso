@@ -548,6 +548,9 @@ const nombreDisplay=document.getElementById('nombre-display');
 
 function showVideo(nombre){
   if(nombreDisplay && nombre) nombreDisplay.textContent=nombre;
+  // Parar el vídeo de fondo para que no siga sonando de fondo
+  const bg=document.getElementById('bgVideo');
+  if(bg){bg.pause();bg.src='';}
   gateSection.style.transition='opacity .4s ease';
   gateSection.style.opacity='0';
   setTimeout(()=>{
