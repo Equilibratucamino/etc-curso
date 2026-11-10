@@ -260,26 +260,38 @@ body{
 }
 .player-wrap iframe{width:100%;height:100%;border:0;display:block;}
 
-/* Press strip */
+/* Press strip — carrusel */
 .press-strip{
-  padding:36px max(20px,env(safe-area-inset-left,0px));
+  padding:36px 0;
   background:var(--bg);border-top:1px solid var(--border);border-bottom:1px solid var(--border);
-  text-align:center;
+  overflow:hidden;
 }
 .press-strip-label{
   font-size:.65rem;font-weight:600;letter-spacing:.2em;
   text-transform:uppercase;color:#9ca3af;margin-bottom:18px;
+  text-align:center;
+  padding:0 max(20px,env(safe-area-inset-left,0px));
 }
-.press-strip-logos{
-  display:flex;align-items:center;justify-content:center;
-  flex-wrap:wrap;gap:12px 28px;
+.press-track-wrap{
+  position:relative;
+  -webkit-mask:linear-gradient(to right,transparent 0,#000 8%,#000 92%,transparent 100%);
+  mask:linear-gradient(to right,transparent 0,#000 8%,#000 92%,transparent 100%);
+}
+.press-track{
+  display:flex;align-items:center;gap:40px;
+  animation:scrollLogos 22s linear infinite;
+  width:max-content;
+}
+.press-track:hover{animation-play-state:paused;}
+@keyframes scrollLogos{
+  from{transform:translateX(0)}
+  to{transform:translateX(-50%)}
 }
 .press-logo{
-  height:26px;width:auto;object-fit:contain;
-  filter:grayscale(1);opacity:.32;
-  transition:opacity .2s;
+  height:28px;width:auto;object-fit:contain;flex-shrink:0;
+  opacity:.75;transition:opacity .2s;
 }
-.press-logo:hover{opacity:.6;}
+.press-logo:hover{opacity:1;}
 
 /* ── Reviews Google carrusel ── */
 .reviews-section{
@@ -581,17 +593,55 @@ body{
     </div>
   </div>
 
-  <!-- Logos colaboradores -->
+  <!-- CTA — primero, justo tras el vídeo -->
+  <section class="cta-section">
+    <p class="cta-label fade-up">El siguiente paso</p>
+    <h2 class="cta-title fade-up delay-1">¿Estás listo?</h2>
+    <p class="cta-sub fade-up delay-2">Una conversación con Nacho puede ser el punto de inflexión. Sin presiones.</p>
+    <div class="cta-btns fade-up delay-3">
+      <a href="https://wa.me/34611847645?text=Hola%20Nacho%2C%20acabo%20de%20ver%20tu%20v%C3%ADdeo%20y%20quiero%20saber%20m%C3%A1s"
+         class="btn-green" target="_blank" rel="noopener">
+        Hablar con Nacho &rarr;
+      </a>
+      <a href="https://app.equilibratucamino.com" class="btn-dark" target="_blank" rel="noopener">
+        Ver el curso completo &rarr;
+      </a>
+      <a href="https://wa.me/34611847645?text=Hola%2C%20tengo%20una%20duda%20sobre%20ETC."
+         class="btn-wa" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" width="16" height="16"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.123 1.528 5.856L0 24l6.336-1.508A11.955 11.955 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.896 0-3.665-.523-5.176-1.428l-.371-.22-3.763.896.909-3.657-.243-.381A9.934 9.934 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+        No lo tengo claro, escríbenos
+      </a>
+      <div class="or-divider"><span>o</span></div>
+      <button class="btn-back" id="btn-back">
+        No voy a hacer nada, sigo retrocediendo
+      </button>
+      <div class="back-msg" id="back-msg" hidden>
+        Está bien. Cuando estés listo, aquí estaremos.<br>Este enlace no caduca.
+      </div>
+    </div>
+  </section>
+
+  <!-- Logos colaboradores — carrusel en color -->
   <div class="press-strip fade-up">
     <p class="press-strip-label">Medios y empresas que confían en nosotros</p>
-    <div class="press-strip-logos">
-      <img class="press-logo" src="https://app.equilibratucamino.com/images/logo-publico.svg"         alt="Diario Público">
-      <img class="press-logo" src="https://app.equilibratucamino.com/images/logo-canal4.webp"         alt="Canal 4">
-      <img class="press-logo" src="https://app.equilibratucamino.com/images/logo-mamireporter.webp"   alt="mamireporter">
-      <img class="press-logo" src="https://app.equilibratucamino.com/images/logo-lmental.webp"        alt="L-Mental">
-      <img class="press-logo" src="https://app.equilibratucamino.com/images/logo-evermine2.webp"      alt="Ever Mine">
-      <img class="press-logo" src="https://app.equilibratucamino.com/images/logo-mejorinformado.webp" alt="Mejor Informado">
-      <img class="press-logo" src="https://app.equilibratucamino.com/images/logo-caminemos.webp"      alt="Caminamos Juntos">
+    <div class="press-track-wrap">
+      <div class="press-track">
+        <img class="press-logo" src="https://app.equilibratucamino.com/images/logo-publico.svg"         alt="Diario Público">
+        <img class="press-logo" src="https://app.equilibratucamino.com/images/logo-canal4.webp"         alt="Canal 4">
+        <img class="press-logo" src="https://app.equilibratucamino.com/images/logo-mamireporter.webp"   alt="mamireporter">
+        <img class="press-logo" src="https://app.equilibratucamino.com/images/logo-lmental.webp"        alt="L-Mental">
+        <img class="press-logo" src="https://app.equilibratucamino.com/images/logo-evermine2.webp"      alt="Ever Mine">
+        <img class="press-logo" src="https://app.equilibratucamino.com/images/logo-mejorinformado.webp" alt="Mejor Informado">
+        <img class="press-logo" src="https://app.equilibratucamino.com/images/logo-caminemos.webp"      alt="Caminamos Juntos">
+        <!-- duplicado para loop -->
+        <img class="press-logo" src="https://app.equilibratucamino.com/images/logo-publico.svg"         alt="Diario Público">
+        <img class="press-logo" src="https://app.equilibratucamino.com/images/logo-canal4.webp"         alt="Canal 4">
+        <img class="press-logo" src="https://app.equilibratucamino.com/images/logo-mamireporter.webp"   alt="mamireporter">
+        <img class="press-logo" src="https://app.equilibratucamino.com/images/logo-lmental.webp"        alt="L-Mental">
+        <img class="press-logo" src="https://app.equilibratucamino.com/images/logo-evermine2.webp"      alt="Ever Mine">
+        <img class="press-logo" src="https://app.equilibratucamino.com/images/logo-mejorinformado.webp" alt="Mejor Informado">
+        <img class="press-logo" src="https://app.equilibratucamino.com/images/logo-caminemos.webp"      alt="Caminamos Juntos">
+      </div>
     </div>
   </div>
 
@@ -677,33 +727,6 @@ body{
     </div>
   </section>
 
-  <!-- CTA final -->
-  <section class="cta-section">
-    <p class="cta-label fade-up">El siguiente paso</p>
-    <h2 class="cta-title fade-up delay-1">¿Estás listo?</h2>
-    <p class="cta-sub fade-up delay-2">Una conversación con Nacho puede ser el punto de inflexión. Sin presiones.</p>
-    <div class="cta-btns fade-up delay-3">
-      <a href="https://wa.me/34611847645?text=Hola%20Nacho%2C%20acabo%20de%20ver%20tu%20v%C3%ADdeo%20y%20quiero%20saber%20m%C3%A1s"
-         class="btn-green" target="_blank" rel="noopener">
-        Hablar con Nacho &rarr;
-      </a>
-      <a href="https://app.equilibratucamino.com" class="btn-dark" target="_blank" rel="noopener">
-        Ver el curso completo &rarr;
-      </a>
-      <a href="https://wa.me/34611847645?text=Hola%2C%20tengo%20una%20duda%20sobre%20ETC."
-         class="btn-wa" target="_blank" rel="noopener">
-        <svg viewBox="0 0 24 24" width="16" height="16"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.123 1.528 5.856L0 24l6.336-1.508A11.955 11.955 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.896 0-3.665-.523-5.176-1.428l-.371-.22-3.763.896.909-3.657-.243-.381A9.934 9.934 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
-        No lo tengo claro, escríbenos
-      </a>
-      <div class="or-divider"><span>o</span></div>
-      <button class="btn-back" id="btn-back">
-        No voy a hacer nada, sigo retrocediendo
-      </button>
-      <div class="back-msg" id="back-msg" hidden>
-        Está bien. Cuando estés listo, aquí estaremos.<br>Este enlace no caduca.
-      </div>
-    </div>
-  </section>
 
 </div><!-- /unlocked -->
 
