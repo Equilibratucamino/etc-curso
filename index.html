@@ -875,7 +875,7 @@
         <div class="plan__name">Básico</div>
         <div class="plan__tagline">Todo el programa completo, a tu ritmo y para siempre.</div>
         <div class="plan__old">240€</div>
-        <div class="plan__price"><span class="plan__amt">190</span><span class="plan__cur">€</span></div>
+        <div class="plan__price"><span class="plan__amt">159</span><span class="plan__cur">€</span></div>
         <div class="plan__once">Pago único · de por vida</div>
         <div class="plan__feats">
           <div class="pf"><span class="ck">✓</span>Las 15 clases en vídeo (+3 h)</div>
@@ -894,7 +894,7 @@
         <div class="plan__name">Premium</div>
         <div class="plan__tagline">El programa completo + tu sesión final 1:1 con Nacho, GRATIS.</div>
         <div class="plan__old">284€</div>
-        <div class="plan__price"><span class="plan__amt">219</span><span class="plan__cur">€</span></div>
+        <div class="plan__price"><span class="plan__amt">179</span><span class="plan__cur">€</span></div>
         <div class="plan__once">Pago único · de por vida</div>
         <div class="plan__promo">*Código <b>MARCOS10</b> disponible si vienes recomendado por Marcos Agudo</div>
 
@@ -986,13 +986,13 @@
 <script>
 /* ENLACES — rellena cuando los tengas */
 const STRIPE = {
-  basic:   'https://buy.stripe.com/4gM7sN64c6hC9PMeMe2go01',   // Plan Básico 190€
-  premium: 'https://buy.stripe.com/00w28tdwE7lG6DA5bE2go00'    // Plan Premium 219€ (código MARCOS10 = -10€)
+  basic:   'https://buy.stripe.com/4gM7sN64c6hC9PMeMe2go01',   // Plan Básico 159€
+  premium: 'https://buy.stripe.com/00w28tdwE7lG6DA5bE2go00'    // Plan Premium 179€
 };
 const BOOK_URL = '';                      // URL del calendario de reserva
 const WA = {
-  basic:'https://wa.me/34611847645?text='+encodeURIComponent('Hola, quiero comprar el curso ETC — Plan Básico (190€).'),
-  premium:'https://wa.me/34611847645?text='+encodeURIComponent('Hola, quiero comprar el curso ETC — Plan Premium (219€).'),
+  basic:'https://wa.me/34611847645?text='+encodeURIComponent('Hola, quiero comprar el curso ETC — Plan Básico (159€).'),
+  premium:'https://wa.me/34611847645?text='+encodeURIComponent('Hola, quiero comprar el curso ETC — Plan Premium (179€).'),
   book:'https://wa.me/34611847645?text='+encodeURIComponent('Hola, me gustaría agendar una primera sesión antes de empezar el curso.')
 };
 document.querySelectorAll('[data-checkout]').forEach(b=>b.addEventListener('click',()=>{const p=b.dataset.checkout;location.href=STRIPE[p]||WA[p];}));

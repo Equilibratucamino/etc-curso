@@ -54,7 +54,7 @@ export default async function handler(req, res) {
     : `${firstName ? firstName + ', tu' : 'Tu'} acceso al curso Se Acabó el Juego`;
 
   // ── 3. Enviar emails en paralelo: bienvenida al comprador + notificación a Nacho ──
-  const price = isPremium ? '219€' : '190€';
+  const price = isPremium ? '179€' : '159€';
 
   try {
     const [resendRes] = await Promise.all([
