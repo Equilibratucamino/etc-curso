@@ -285,7 +285,7 @@ body{
 .press-track:hover{animation-play-state:paused;}
 @keyframes scrollLogos{
   from{transform:translateX(0)}
-  to{transform:translateX(-50%)}
+  to{transform:translateX(-33.333%)}
 }
 .press-logo{
   height:28px;width:auto;object-fit:contain;flex-shrink:0;
@@ -633,7 +633,13 @@ body{
         <img class="press-logo" src="https://app.equilibratucamino.com/images/logo-evermine2.webp"      alt="Ever Mine">
         <img class="press-logo" src="https://app.equilibratucamino.com/images/logo-mejorinformado.webp" alt="Mejor Informado">
         <img class="press-logo" src="https://app.equilibratucamino.com/images/logo-caminemos.webp"      alt="Caminamos Juntos">
-        <!-- duplicado para loop -->
+        <img class="press-logo" src="https://app.equilibratucamino.com/images/logo-publico.svg"         alt="Diario Público">
+        <img class="press-logo" src="https://app.equilibratucamino.com/images/logo-canal4.webp"         alt="Canal 4">
+        <img class="press-logo" src="https://app.equilibratucamino.com/images/logo-mamireporter.webp"   alt="mamireporter">
+        <img class="press-logo" src="https://app.equilibratucamino.com/images/logo-lmental.webp"        alt="L-Mental">
+        <img class="press-logo" src="https://app.equilibratucamino.com/images/logo-evermine2.webp"      alt="Ever Mine">
+        <img class="press-logo" src="https://app.equilibratucamino.com/images/logo-mejorinformado.webp" alt="Mejor Informado">
+        <img class="press-logo" src="https://app.equilibratucamino.com/images/logo-caminemos.webp"      alt="Caminamos Juntos">
         <img class="press-logo" src="https://app.equilibratucamino.com/images/logo-publico.svg"         alt="Diario Público">
         <img class="press-logo" src="https://app.equilibratucamino.com/images/logo-canal4.webp"         alt="Canal 4">
         <img class="press-logo" src="https://app.equilibratucamino.com/images/logo-mamireporter.webp"   alt="mamireporter">
@@ -787,6 +793,12 @@ form.addEventListener('submit', async e => {
 
   showUnlocked(nombre);
 });
+
+// ?reset limpia el localStorage y muestra el gate desde cero
+if(new URLSearchParams(location.search).has('reset')){
+  try{ localStorage.removeItem('etc_optin'); }catch{}
+  history.replaceState(null,'',location.pathname);
+}
 
 // Ya registrado → ir directo al vídeo
 try {
