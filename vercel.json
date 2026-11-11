@@ -9,7 +9,7 @@
     {
       "source": "/",
       "has": [{ "type": "host", "value": "empieza.equilibratucamino.com" }],
-      "destination": "/empieza.html"
+      "destination": "/empieza"
     }
   ]
 }
