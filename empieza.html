@@ -49,70 +49,118 @@ body{
 .delay-4{transition-delay:.4s;}
 
 /* ══════════════════════════════════════════
-   GATE — sección con fondo oscuro
+   GATE — sección navy moderna
 ══════════════════════════════════════════ */
 #gate{
   min-height:100svh;
   display:flex;flex-direction:column;align-items:center;
   justify-content:center;
-  background:#0a1410;
-  padding:24px max(20px,env(safe-area-inset-left,0px)) 40px;
-  gap:0;
+  background:#06101e;
+  background-image:radial-gradient(circle at 1px 1px,rgba(255,255,255,.045) 1px,transparent 0);
+  background-size:30px 30px;
+  padding:40px max(20px,env(safe-area-inset-left,0px)) 48px;
+  position:relative;overflow:hidden;gap:0;
+}
+#gate::before{
+  content:'';position:absolute;
+  width:700px;height:700px;border-radius:50%;
+  background:radial-gradient(circle,rgba(50,180,140,.14) 0%,transparent 65%);
+  top:-220px;left:-220px;pointer-events:none;z-index:0;
+}
+#gate::after{
+  content:'';position:absolute;
+  width:500px;height:500px;border-radius:50%;
+  background:radial-gradient(circle,rgba(50,180,140,.07) 0%,transparent 65%);
+  bottom:-100px;right:-100px;pointer-events:none;z-index:0;
 }
 
-/* Logo ETC arriba a la izquierda */
+/* Logo ETC arriba */
 .gate-logo-bar{
-  width:100%;max-width:440px;
-  margin-bottom:20px;
+  width:100%;max-width:960px;
+  margin-bottom:32px;
   animation:fadeIn .4s ease both;
+  position:relative;z-index:1;
 }
-.gate-logo-bar img{
-  height:36px;width:auto;display:block;
-}
+.gate-logo-bar img{height:34px;width:auto;display:block;}
 
-/* Contenido centrado */
-.gate-content{
-  width:100%;max-width:440px;
-  display:flex;flex-direction:column;align-items:center;
+/* Wrapper dos columnas */
+.gate-wrapper{
+  width:100%;max-width:960px;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:56px;align-items:center;
+  position:relative;z-index:1;
 }
+@media(max-width:720px){
+  .gate-wrapper{grid-template-columns:1fr;gap:28px;}
+}
+.gate-left{display:flex;flex-direction:column;}
 
 /* Barra de confianza */
 .trust-bar{
-  display:flex;align-items:center;justify-content:center;
-  gap:12px;flex-wrap:wrap;
-  font-size:.75rem;font-weight:500;color:rgba(255,255,255,.65);
-  margin-bottom:24px;
+  display:flex;align-items:center;
+  gap:10px;flex-wrap:wrap;
+  font-size:.75rem;font-weight:500;color:rgba(255,255,255,.6);
+  margin-bottom:20px;
   animation:fadeIn .5s ease both;
 }
 .trust-bar .sep{opacity:.3;}
 .trust-google{display:flex;align-items:center;gap:8px;}
-.tg-logo{width:52px;height:auto;filter:brightness(10);opacity:.8;}
+.tg-logo{width:48px;height:auto;filter:brightness(10);opacity:.75;}
 .trust-stars{display:flex;gap:2px;}
-.trust-stars svg{width:13px;height:13px;fill:#f59e0b;}
+.trust-stars svg{width:12px;height:12px;fill:#f59e0b;}
 
 /* Headline */
 .gate-headline{
   font-family:var(--d);font-weight:900;
-  font-size:clamp(1.8rem,6vw,2.6rem);
-  line-height:1.05;letter-spacing:-.04em;
-  color:#fff;text-align:center;
-  text-wrap:balance;margin-bottom:8px;
+  font-size:clamp(2.2rem,4.5vw,3.4rem);
+  line-height:.98;letter-spacing:-.04em;
+  color:#fff;text-wrap:balance;
+  margin-bottom:16px;
   animation:fadeIn .5s .05s ease both;
 }
 .gate-headline .accent{color:var(--g);}
 .gate-sub{
-  font-size:.875rem;color:rgba(255,255,255,.55);
-  text-align:center;line-height:1.6;
-  max-width:320px;margin:0 auto 24px;
+  font-size:.9375rem;color:rgba(255,255,255,.5);
+  line-height:1.65;max-width:380px;
+  margin-bottom:28px;
   animation:fadeIn .5s .1s ease both;
 }
 
+/* Bullets — qué aprenderás */
+.gate-bullets{
+  list-style:none;
+  display:flex;flex-direction:column;gap:12px;
+  animation:fadeIn .5s .18s ease both;
+}
+.gate-bullets li{
+  display:flex;align-items:flex-start;gap:12px;
+  font-size:.875rem;color:rgba(255,255,255,.6);line-height:1.5;
+}
+.gate-bullets li .bull-icon{
+  flex-shrink:0;width:20px;height:20px;border-radius:50%;
+  background:rgba(50,180,140,.15);
+  border:1px solid rgba(50,180,140,.4);
+  display:flex;align-items:center;justify-content:center;margin-top:1px;
+}
+.gate-bullets li .bull-icon svg{width:10px;height:10px;fill:none;stroke:var(--g);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;}
+
 /* ── Tarjeta con vídeo de fondo blureado ── */
+.gate-right{position:relative;z-index:1;}
 .gate-card{
   position:relative;overflow:hidden;
   width:100%;border-radius:20px;
-  box-shadow:0 8px 40px rgba(0,0,0,.55);
+  box-shadow:
+    0 0 0 1px rgba(50,180,140,.2),
+    0 8px 48px rgba(0,0,0,.6),
+    0 0 80px rgba(50,180,140,.07);
   animation:slideUp .55s .15s cubic-bezier(.22,1,.36,1) both;
+}
+/* Eyebrow del form */
+.card-eyebrow{
+  font-size:.65rem;font-weight:700;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--g);opacity:.9;
+  margin-bottom:14px;
 }
 /* Vídeo de fondo dentro de la card */
 #bgVideo{
@@ -182,8 +230,9 @@ body{
 
 /* Logos de prensa bajo la card */
 .gate-press{
-  margin-top:32px;text-align:center;
-  width:100%;max-width:440px;
+  margin-top:40px;text-align:center;
+  width:100%;max-width:960px;
+  position:relative;z-index:1;
   animation:fadeIn .5s .4s ease both;
 }
 .gate-press-label{
@@ -483,8 +532,9 @@ body{
     <img src="images/logo-etc-white.png" alt="Equilibra Tu Camino" width="160">
   </div>
 
-  <!-- Contenido centrado -->
-  <div class="gate-content">
+  <!-- Dos columnas: copy izquierda + form derecha -->
+  <div class="gate-wrapper">
+  <div class="gate-left">
 
     <!-- Barra de confianza -->
     <div class="trust-bar">
@@ -517,6 +567,25 @@ body{
       Accede gratis al vídeo donde Nacho explica exactamente cómo salir de la adicción al juego.
     </p>
 
+    <!-- Bullets -->
+    <ul class="gate-bullets">
+      <li>
+        <span class="bull-icon"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/><path fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" d="M20 6L9 17l-5-5"/></svg></span>
+        Por qué el juego engancha más de lo que crees
+      </li>
+      <li>
+        <span class="bull-icon"><svg viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" d="M20 6L9 17l-5-5"/></svg></span>
+        El método exacto que usó Nacho para salir de dentro
+      </li>
+      <li>
+        <span class="bull-icon"><svg viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" d="M20 6L9 17l-5-5"/></svg></span>
+        El primer paso real que puedes dar hoy mismo
+      </li>
+    </ul>
+
+  </div><!-- /gate-left -->
+  <div class="gate-right">
+
     <!-- Card con vídeo borroso de fondo -->
     <div class="gate-card">
       <video id="bgVideo" autoplay muted loop playsinline preload="auto"
@@ -525,6 +594,7 @@ body{
       </video>
       <div class="card-overlay"></div>
       <div class="card-inner">
+      <p class="card-eyebrow">Acceso gratuito</p>
       <form id="optin-form" novalidate>
         <div class="form-row">
           <input type="text"  id="nombre"    placeholder="Nombre"    autocomplete="given-name"  required>
@@ -543,7 +613,8 @@ body{
       </div><!-- /card-inner -->
     </div><!-- /gate-card -->
 
-  </div><!-- /gate-content -->
+  </div><!-- /gate-right -->
+  </div><!-- /gate-wrapper -->
 
   <!-- Logos prensa -->
   <div class="gate-press">
