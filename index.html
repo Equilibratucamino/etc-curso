@@ -498,6 +498,22 @@
     .reveal.in{opacity:1;transform:none;}
     .reveal.d1{transition-delay:.08s;}.reveal.d2{transition-delay:.16s;}.reveal.d3{transition-delay:.24s;}
     @media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none;}}
+
+    /* ── Banner código descuento ── */
+    .descuento-banner{background:#FFB300;padding:30px 24px;text-align:center;}
+    .descuento-inner{max-width:860px;margin:0 auto;}
+    .descuento-txt{
+      font-family:'Roboto Condensed',sans-serif;font-weight:900;
+      font-size:clamp(1.9rem,5vw,3.4rem);
+      color:#1A1205;letter-spacing:-.01em;line-height:1.15;
+    }
+    .descuento-mark{
+      position:relative;display:inline;color:#1A1205;background:none;
+    }
+    .descuento-mark::after{
+      content:'';position:absolute;left:-3px;right:-3px;bottom:-5px;height:11px;
+      background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 11' preserveAspectRatio='none'%3E%3Cpath d='M2,8 C25,2 50,10 75,5 C100,0 125,9 150,5 C175,1 200,9 225,5 C250,1 275,9 298,6' stroke='%231A1205' stroke-width='3.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E") center/100% 100% no-repeat;
+    }
   </style>
 </head>
 <body>
@@ -622,6 +638,13 @@
   </div>
 </section>
 
+<!-- BANNER CÓDIGO DESCUENTO 1 -->
+<div class="descuento-banner">
+  <div class="descuento-inner">
+    <span class="descuento-txt">HAY UN GRAN <mark class="descuento-mark">CÓDIGO DESCUENTO</mark></span>
+  </div>
+</div>
+
 <!-- PARA QUIÉN + MOCKUP DEL CURSO -->
 <section class="sec bg-soft">
   <div class="wrap foryou">
@@ -668,6 +691,13 @@
     </div>
   </div>
 </section>
+
+<!-- BANNER CÓDIGO DESCUENTO 2 -->
+<div class="descuento-banner">
+  <div class="descuento-inner">
+    <span class="descuento-txt">HAY UN GRAN <mark class="descuento-mark">CÓDIGO DESCUENTO</mark></span>
+  </div>
+</div>
 
 <!-- LO QUE VAS A CONSEGUIR -->
 <section class="sec bg-ink center">
