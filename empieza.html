@@ -150,6 +150,7 @@ body{
 .gate-card{
   position:relative;overflow:hidden;
   width:100%;border-radius:20px;
+  background:linear-gradient(160deg,#071a14 0%,#0a2018 50%,#061510 100%);
   box-shadow:
     0 0 0 1px rgba(50,180,140,.2),
     0 8px 48px rgba(0,0,0,.6),
@@ -228,24 +229,38 @@ body{
   text-align:center;margin-top:10px;line-height:1.5;
 }
 
-/* Logos prensa — bloque blanco debajo del gate */
+/* Logos prensa — carrusel blanco debajo del gate */
 .logos-strip{
   background:#fff;
-  padding:32px max(20px,env(safe-area-inset-left,0px));
+  padding:28px 0 32px;
   border-bottom:1px solid #f0f0f0;
-  text-align:center;
+  overflow:hidden;
 }
 .logos-strip-label{
   font-size:.6rem;font-weight:600;letter-spacing:.2em;
   text-transform:uppercase;color:#9ca3af;margin-bottom:20px;
+  text-align:center;
+  padding:0 max(20px,env(safe-area-inset-left,0px));
 }
-.logos-grid{
-  display:flex;align-items:center;justify-content:center;
-  flex-wrap:wrap;gap:12px 32px;
+.logos-track-wrap{
+  position:relative;
+  -webkit-mask:linear-gradient(to right,transparent 0,#000 10%,#000 90%,transparent 100%);
+  mask:linear-gradient(to right,transparent 0,#000 10%,#000 90%,transparent 100%);
+}
+.logos-track{
+  display:flex;align-items:center;gap:0;
+  animation:scrollLogosFunnel 20s linear infinite;
+  width:max-content;
+}
+.logos-track:hover{animation-play-state:paused;}
+@keyframes scrollLogosFunnel{
+  from{transform:translateX(0)}
+  to{transform:translateX(-50%)}
 }
 .logo-item{
-  height:36px;width:auto;object-fit:contain;
-  filter:grayscale(1) brightness(.7);opacity:.7;
+  height:40px;width:120px;object-fit:contain;flex-shrink:0;
+  padding:0 20px;
+  filter:grayscale(1) brightness(.6);opacity:.75;
   transition:filter .3s ease,opacity .3s ease;
 }
 .logo-item:hover{filter:none;opacity:1;}
@@ -637,17 +652,27 @@ body{
 
 </section>
 
-<!-- Logos prensa — sección blanca -->
+<!-- Logos prensa — carrusel blanco -->
 <div class="logos-strip">
   <p class="logos-strip-label">Empresas y medios que han confiado en nosotros</p>
-  <div class="logos-grid">
-    <img class="logo-item" src="https://app.equilibratucamino.com/images/logo-publico.svg"         alt="Diario Público">
-    <img class="logo-item" src="https://app.equilibratucamino.com/images/logo-canal4.webp"         alt="Canal 4">
-    <img class="logo-item" src="https://app.equilibratucamino.com/images/logo-mamireporter.webp"   alt="mamireporter">
-    <img class="logo-item" src="https://app.equilibratucamino.com/images/logo-lmental.webp"        alt="L-Mental">
-    <img class="logo-item" src="https://app.equilibratucamino.com/images/logo-evermine2.webp"      alt="Ever Mine">
-    <img class="logo-item" src="https://app.equilibratucamino.com/images/logo-mejorinformado.webp" alt="Mejor Informado">
-    <img class="logo-item" src="https://app.equilibratucamino.com/images/logo-caminemos.webp"      alt="Caminamos Juntos">
+  <div class="logos-track-wrap">
+    <div class="logos-track">
+      <img class="logo-item" src="https://app.equilibratucamino.com/images/logo-publico.svg"         alt="Diario Público">
+      <img class="logo-item" src="https://app.equilibratucamino.com/images/logo-canal4.webp"         alt="Canal 4">
+      <img class="logo-item" src="https://app.equilibratucamino.com/images/logo-mamireporter.webp"   alt="mamireporter">
+      <img class="logo-item" src="https://app.equilibratucamino.com/images/logo-lmental.webp"        alt="L-Mental">
+      <img class="logo-item" src="https://app.equilibratucamino.com/images/logo-evermine2.webp"      alt="Ever Mine">
+      <img class="logo-item" src="https://app.equilibratucamino.com/images/logo-mejorinformado.webp" alt="Mejor Informado">
+      <img class="logo-item" src="https://app.equilibratucamino.com/images/logo-caminemos.webp"      alt="Caminamos Juntos">
+      <!-- duplicado para loop continuo -->
+      <img class="logo-item" src="https://app.equilibratucamino.com/images/logo-publico.svg"         alt="Diario Público">
+      <img class="logo-item" src="https://app.equilibratucamino.com/images/logo-canal4.webp"         alt="Canal 4">
+      <img class="logo-item" src="https://app.equilibratucamino.com/images/logo-mamireporter.webp"   alt="mamireporter">
+      <img class="logo-item" src="https://app.equilibratucamino.com/images/logo-lmental.webp"        alt="L-Mental">
+      <img class="logo-item" src="https://app.equilibratucamino.com/images/logo-evermine2.webp"      alt="Ever Mine">
+      <img class="logo-item" src="https://app.equilibratucamino.com/images/logo-mejorinformado.webp" alt="Mejor Informado">
+      <img class="logo-item" src="https://app.equilibratucamino.com/images/logo-caminemos.webp"      alt="Caminamos Juntos">
+    </div>
   </div>
 </div>
 
@@ -829,6 +854,18 @@ body{
 
 
 <script>
+// ── Forzar autoplay vídeo de fondo en móvil ──
+(function(){
+  const v = document.getElementById('bgVideo');
+  if(!v) return;
+  v.muted = true;
+  const tryPlay = () => v.play().catch(()=>{});
+  tryPlay();
+  // Si el primer intento falla (política del navegador), lo reintenta al primer toque
+  document.addEventListener('touchstart', tryPlay, {once:true});
+  document.addEventListener('click', tryPlay, {once:true});
+})();
+
 // ── Reveal on scroll ──
 const obs = new IntersectionObserver(entries => {
   entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('in'); obs.unobserve(e.target); } });
