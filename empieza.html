@@ -174,7 +174,7 @@ body{
 /* Overlay oscuro sobre el vídeo borroso */
 .card-overlay{
   position:absolute;inset:0;
-  background:rgba(4,10,8,.72);
+  background:rgba(4,10,8,.58);
 }
 /* Contenido del formulario sobre el vídeo */
 .card-inner{
@@ -229,27 +229,28 @@ body{
   text-align:center;margin-top:10px;line-height:1.5;
 }
 
-/* Logos prensa — carrusel blanco debajo del gate */
+/* Logos prensa — carrusel blanco (igual que app.equilibratucamino.com) */
 .logos-strip{
   background:#fff;
-  padding:28px 0 32px;
-  border-bottom:1px solid #f0f0f0;
+  padding:52px 0;
+  border-top:1px solid #e8e8e4;
+  border-bottom:1px solid #e8e8e4;
   overflow:hidden;
 }
 .logos-strip-label{
-  font-size:.6rem;font-weight:600;letter-spacing:.2em;
-  text-transform:uppercase;color:#9ca3af;margin-bottom:20px;
+  font-size:.66rem;font-weight:600;letter-spacing:.2em;
+  text-transform:uppercase;color:#bbbbbb;margin-bottom:40px;
   text-align:center;
   padding:0 max(20px,env(safe-area-inset-left,0px));
 }
 .logos-track-wrap{
   position:relative;
-  -webkit-mask:linear-gradient(to right,transparent 0,#000 10%,#000 90%,transparent 100%);
-  mask:linear-gradient(to right,transparent 0,#000 10%,#000 90%,transparent 100%);
+  -webkit-mask:linear-gradient(90deg,rgba(0,0,0,0) 0,#000 12%,#000 88%,rgba(0,0,0,0) 100%);
+  mask:linear-gradient(90deg,rgba(0,0,0,0) 0,#000 12%,#000 88%,rgba(0,0,0,0) 100%);
 }
 .logos-track{
-  display:flex;align-items:center;gap:0;
-  animation:scrollLogosFunnel 20s linear infinite;
+  display:flex;align-items:center;
+  animation:scrollLogosFunnel 22s linear infinite;
   width:max-content;
 }
 .logos-track:hover{animation-play-state:paused;}
@@ -258,12 +259,15 @@ body{
   to{transform:translateX(-50%)}
 }
 .logo-item{
-  height:40px;width:120px;object-fit:contain;flex-shrink:0;
-  padding:0 20px;
-  filter:grayscale(1) brightness(.6);opacity:.75;
-  transition:filter .3s ease,opacity .3s ease;
+  display:flex;align-items:center;justify-content:center;
+  width:172px;height:72px;padding:0 36px;flex-shrink:0;
+  filter:grayscale(1) saturate(0);
+  transition:filter .35s ease;
 }
-.logo-item:hover{filter:none;opacity:1;}
+.logo-item:hover{filter:none;}
+.logo-item img{
+  height:40px;width:auto;max-width:100%;object-fit:contain;display:block;
+}
 
 /* ══════════════════════════════════════════
    UNLOCKED — video + contenido
@@ -657,21 +661,21 @@ body{
   <p class="logos-strip-label">Empresas y medios que han confiado en nosotros</p>
   <div class="logos-track-wrap">
     <div class="logos-track">
-      <img class="logo-item" src="https://app.equilibratucamino.com/images/logo-publico.svg"         alt="Diario Público">
-      <img class="logo-item" src="https://app.equilibratucamino.com/images/logo-canal4.webp"         alt="Canal 4">
-      <img class="logo-item" src="https://app.equilibratucamino.com/images/logo-mamireporter.webp"   alt="mamireporter">
-      <img class="logo-item" src="https://app.equilibratucamino.com/images/logo-lmental.webp"        alt="L-Mental">
-      <img class="logo-item" src="https://app.equilibratucamino.com/images/logo-evermine2.webp"      alt="Ever Mine">
-      <img class="logo-item" src="https://app.equilibratucamino.com/images/logo-mejorinformado.webp" alt="Mejor Informado">
-      <img class="logo-item" src="https://app.equilibratucamino.com/images/logo-caminemos.webp"      alt="Caminamos Juntos">
+      <div class="logo-item"><img src="https://app.equilibratucamino.com/images/logo-publico.svg"         alt="Diario Público"></div>
+      <div class="logo-item"><img src="https://app.equilibratucamino.com/images/logo-canal4.webp"         alt="Canal 4"></div>
+      <div class="logo-item"><img src="https://app.equilibratucamino.com/images/logo-mamireporter.webp"   alt="mamireporter"></div>
+      <div class="logo-item"><img src="https://app.equilibratucamino.com/images/logo-lmental.webp"        alt="L-Mental"></div>
+      <div class="logo-item"><img src="https://app.equilibratucamino.com/images/logo-evermine2.webp"      alt="Ever Mine"></div>
+      <div class="logo-item"><img src="https://app.equilibratucamino.com/images/logo-mejorinformado.webp" alt="Mejor Informado"></div>
+      <div class="logo-item"><img src="https://app.equilibratucamino.com/images/logo-caminemos.webp"      alt="Caminamos Juntos"></div>
       <!-- duplicado para loop continuo -->
-      <img class="logo-item" src="https://app.equilibratucamino.com/images/logo-publico.svg"         alt="Diario Público">
-      <img class="logo-item" src="https://app.equilibratucamino.com/images/logo-canal4.webp"         alt="Canal 4">
-      <img class="logo-item" src="https://app.equilibratucamino.com/images/logo-mamireporter.webp"   alt="mamireporter">
-      <img class="logo-item" src="https://app.equilibratucamino.com/images/logo-lmental.webp"        alt="L-Mental">
-      <img class="logo-item" src="https://app.equilibratucamino.com/images/logo-evermine2.webp"      alt="Ever Mine">
-      <img class="logo-item" src="https://app.equilibratucamino.com/images/logo-mejorinformado.webp" alt="Mejor Informado">
-      <img class="logo-item" src="https://app.equilibratucamino.com/images/logo-caminemos.webp"      alt="Caminamos Juntos">
+      <div class="logo-item"><img src="https://app.equilibratucamino.com/images/logo-publico.svg"         alt="Diario Público"></div>
+      <div class="logo-item"><img src="https://app.equilibratucamino.com/images/logo-canal4.webp"         alt="Canal 4"></div>
+      <div class="logo-item"><img src="https://app.equilibratucamino.com/images/logo-mamireporter.webp"   alt="mamireporter"></div>
+      <div class="logo-item"><img src="https://app.equilibratucamino.com/images/logo-lmental.webp"        alt="L-Mental"></div>
+      <div class="logo-item"><img src="https://app.equilibratucamino.com/images/logo-evermine2.webp"      alt="Ever Mine"></div>
+      <div class="logo-item"><img src="https://app.equilibratucamino.com/images/logo-mejorinformado.webp" alt="Mejor Informado"></div>
+      <div class="logo-item"><img src="https://app.equilibratucamino.com/images/logo-caminemos.webp"      alt="Caminamos Juntos"></div>
     </div>
   </div>
 </div>
