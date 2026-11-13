@@ -150,7 +150,7 @@ body{
 .gate-card{
   position:relative;overflow:hidden;
   width:100%;border-radius:20px;
-  background:linear-gradient(160deg,#071a14 0%,#0a2018 50%,#061510 100%);
+  background:#071a14;
   box-shadow:
     0 0 0 1px rgba(50,180,140,.2),
     0 8px 48px rgba(0,0,0,.6),
@@ -626,7 +626,8 @@ body{
     <!-- Card con vídeo borroso de fondo -->
     <div class="gate-card">
       <video id="bgVideo" autoplay muted loop playsinline preload="auto"
-        aria-hidden="true" onerror="this.style.display='none'">
+        poster="images/video-poster.jpg"
+        aria-hidden="true">
         <source src="videos/cebo-vsl-new.mp4" type="video/mp4">
       </video>
       <div class="card-overlay"></div>
