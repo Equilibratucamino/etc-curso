@@ -163,13 +163,21 @@ body{
   text-transform:uppercase;color:var(--g);opacity:.9;
   margin-bottom:14px;
 }
-/* Vídeo de fondo dentro de la card */
+/* Imagen de fondo permanente (siempre visible, incluso sin autoplay) */
+#bgPoster{
+  position:absolute;inset:0;width:100%;height:100%;
+  object-fit:cover;object-position:center top;
+  pointer-events:none;
+  filter:blur(10px);
+  transform:scale(1.08);
+}
+/* Vídeo de fondo dentro de la card (encima de la imagen) */
 #bgVideo{
   position:absolute;inset:0;width:100%;height:100%;
   object-fit:cover;object-position:center top;
   pointer-events:none;
   filter:blur(10px);
-  transform:scale(1.08); /* evita bordes blancos del blur */
+  transform:scale(1.08);
 }
 /* Overlay oscuro sobre el vídeo borroso */
 .card-overlay{
@@ -625,8 +633,9 @@ body{
 
     <!-- Card con vídeo borroso de fondo -->
     <div class="gate-card">
+      <!-- Imagen de fondo permanente (fallback para móvil cuando el autoplay está bloqueado) -->
+      <img id="bgPoster" src="images/video-poster.jpg" aria-hidden="true" alt="">
       <video id="bgVideo" autoplay muted loop playsinline preload="auto"
-        poster="images/video-poster.jpg"
         aria-hidden="true">
         <source src="videos/cebo-vsl-new.mp4" type="video/mp4">
       </video>
