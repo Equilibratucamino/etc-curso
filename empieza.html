@@ -228,32 +228,50 @@ body{
   text-align:center;margin-top:10px;line-height:1.5;
 }
 
-/* Logos de prensa bajo la card */
-.gate-press{
-  margin-top:40px;text-align:center;
-  width:100%;max-width:960px;
-  position:relative;z-index:1;
-  animation:fadeIn .5s .4s ease both;
+/* Logos prensa — bloque blanco debajo del gate */
+.logos-strip{
+  background:#fff;
+  padding:32px max(20px,env(safe-area-inset-left,0px));
+  border-bottom:1px solid #f0f0f0;
+  text-align:center;
 }
-.gate-press-label{
-  font-size:.62rem;font-weight:600;letter-spacing:.2em;
-  text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:16px;
+.logos-strip-label{
+  font-size:.6rem;font-weight:600;letter-spacing:.2em;
+  text-transform:uppercase;color:#9ca3af;margin-bottom:20px;
 }
-.gate-press-logos{
+.logos-grid{
   display:flex;align-items:center;justify-content:center;
-  flex-wrap:wrap;gap:14px 24px;
+  flex-wrap:wrap;gap:12px 32px;
 }
-.press-img{
-  height:40px;width:auto;object-fit:contain;
-  filter:none;opacity:.85;
-  transition:opacity .25s;
+.logo-item{
+  height:36px;width:auto;object-fit:contain;
+  filter:grayscale(1) brightness(.7);opacity:.7;
+  transition:filter .3s ease,opacity .3s ease;
 }
-.press-img:hover{opacity:1;}
+.logo-item:hover{filter:none;opacity:1;}
 
 /* ══════════════════════════════════════════
    UNLOCKED — video + contenido
 ══════════════════════════════════════════ */
 #unlocked{background:var(--bg);}
+
+/* Frase emocional de bienvenida */
+.unlock-quote{
+  background:#fff;
+  padding:40px max(20px,env(safe-area-inset-left,0px)) 36px;
+  text-align:center;
+  border-bottom:1px solid #f0f0f0;
+}
+.unlock-quote-text{
+  font-family:var(--d);font-weight:800;
+  font-size:clamp(1.5rem,4.5vw,2.5rem);
+  line-height:1.15;letter-spacing:-.03em;
+  color:var(--ink);text-wrap:balance;
+  max-width:720px;margin:0 auto;
+}
+.unlock-quote-text em{
+  color:var(--g);font-style:normal;
+}
 
 /* Hero del vídeo desbloqueado */
 .unlock-hero{
@@ -616,27 +634,36 @@ body{
   </div><!-- /gate-right -->
   </div><!-- /gate-wrapper -->
 
-  <!-- Logos prensa -->
-  <div class="gate-press">
-    <p class="gate-press-label">Medios y empresas que nos avalan</p>
-    <div class="gate-press-logos">
-      <img class="press-img" src="https://app.equilibratucamino.com/images/logo-publico.svg"         alt="Diario Público">
-      <img class="press-img" src="https://app.equilibratucamino.com/images/logo-canal4.webp"         alt="Canal 4">
-      <img class="press-img" src="https://app.equilibratucamino.com/images/logo-mamireporter.webp"   alt="mamireporter">
-      <img class="press-img" src="https://app.equilibratucamino.com/images/logo-lmental.webp"        alt="L-Mental">
-      <img class="press-img" src="https://app.equilibratucamino.com/images/logo-evermine2.webp"      alt="Ever Mine">
-      <img class="press-img" src="https://app.equilibratucamino.com/images/logo-mejorinformado.webp" alt="Mejor Informado">
-      <img class="press-img" src="https://app.equilibratucamino.com/images/logo-caminemos.webp"      alt="Caminamos Juntos">
-    </div>
-  </div>
 
 </section>
+
+<!-- Logos prensa — sección blanca -->
+<div class="logos-strip">
+  <p class="logos-strip-label">Empresas y medios que han confiado en nosotros</p>
+  <div class="logos-grid">
+    <img class="logo-item" src="https://app.equilibratucamino.com/images/logo-publico.svg"         alt="Diario Público">
+    <img class="logo-item" src="https://app.equilibratucamino.com/images/logo-canal4.webp"         alt="Canal 4">
+    <img class="logo-item" src="https://app.equilibratucamino.com/images/logo-mamireporter.webp"   alt="mamireporter">
+    <img class="logo-item" src="https://app.equilibratucamino.com/images/logo-lmental.webp"        alt="L-Mental">
+    <img class="logo-item" src="https://app.equilibratucamino.com/images/logo-evermine2.webp"      alt="Ever Mine">
+    <img class="logo-item" src="https://app.equilibratucamino.com/images/logo-mejorinformado.webp" alt="Mejor Informado">
+    <img class="logo-item" src="https://app.equilibratucamino.com/images/logo-caminemos.webp"      alt="Caminamos Juntos">
+  </div>
+</div>
 
 
 <!-- ════════════════════════════════════
      UNLOCKED — vídeo desbloqueado
 ════════════════════════════════════ -->
 <div id="unlocked" hidden>
+
+  <!-- Frase emocional -->
+  <div class="unlock-quote">
+    <p class="unlock-quote-text">
+      Acabas de dar un paso hacia adelante.<br>
+      <em>No des otro hacia atrás de nuevo.</em>
+    </p>
+  </div>
 
   <!-- Hero oscuro con título -->
   <div class="unlock-hero">
