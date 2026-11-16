@@ -564,6 +564,105 @@ body{
 @keyframes slideUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
 @keyframes shine{0%{left:-60%}60%,100%{left:120%}}
 
+/* ── Badge ¿Por qué somos únicos? ── */
+@keyframes badgePulse{
+  0%,100%{box-shadow:0 0 0 0 rgba(50,180,140,.55),0 0 0 0 rgba(50,180,140,.25);}
+  55%{box-shadow:0 0 0 14px rgba(50,180,140,.12),0 0 0 28px rgba(50,180,140,0);}
+}
+.why-badge-wrap{
+  background:var(--bg);
+  display:flex;flex-direction:column;align-items:center;
+  padding:52px 20px 0;
+  position:relative;z-index:2;
+}
+.why-badge-circle{
+  width:148px;height:148px;border-radius:50%;
+  background:var(--g);
+  display:flex;align-items:center;justify-content:center;text-align:center;
+  animation:badgePulse 2.2s ease-in-out infinite;
+  cursor:default;
+  flex-shrink:0;
+}
+.why-badge-circle span{
+  font-family:var(--d);font-weight:900;
+  font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;
+  color:#fff;line-height:1.35;
+  padding:0 12px;
+}
+.why-badge-arrow{
+  margin-top:12px;
+  opacity:.7;
+}
+
+/* ── Sección autoridad: casos de éxito ── */
+.authority-section{
+  background:var(--bg);
+  padding:72px max(20px,env(safe-area-inset-left,0px)) 80px;
+  text-align:center;
+}
+.auth-eyebrow{
+  font-size:.62rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--g);margin-bottom:16px;
+}
+.auth-title{
+  font-family:var(--d);font-weight:800;
+  font-size:clamp(1.8rem,4.5vw,3rem);
+  line-height:1.08;letter-spacing:-.03em;
+  color:#fff;text-wrap:balance;
+  max-width:700px;margin:0 auto 48px;
+}
+/* Grid de vídeos */
+.cases-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:20px;
+  max-width:1000px;margin:0 auto 64px;
+}
+@media(max-width:720px){.cases-grid{grid-template-columns:1fr;max-width:420px;}}
+@media(min-width:721px) and (max-width:960px){.cases-grid{grid-template-columns:1fr 1fr;}}
+.case-yt{
+  position:relative;border-radius:14px;overflow:hidden;
+  background:#0a1f17;
+  aspect-ratio:16/9;
+  cursor:pointer;
+  box-shadow:0 4px 24px rgba(0,0,0,.5);
+}
+.case-yt img{
+  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  transition:transform .4s ease,opacity .3s;
+}
+.case-yt:hover img{transform:scale(1.04);opacity:.85;}
+.case-yt-play{
+  position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  background:rgba(0,0,0,.28);
+  transition:background .2s;
+}
+.case-yt:hover .case-yt-play{background:rgba(0,0,0,.18);}
+.case-yt-play svg{width:52px;height:52px;filter:drop-shadow(0 2px 8px rgba(0,0,0,.5));}
+.case-yt-caption{
+  position:absolute;bottom:0;left:0;right:0;
+  padding:28px 14px 14px;
+  background:linear-gradient(to top,rgba(0,0,0,.75),transparent);
+  font-size:.78rem;font-weight:600;color:#fff;text-align:left;line-height:1.3;
+}
+/* Prensa */
+.press-divider{
+  display:flex;align-items:center;gap:16px;
+  max-width:700px;margin:0 auto 48px;
+}
+.press-divider::before,.press-divider::after{content:'';flex:1;height:1px;background:rgba(255,255,255,.12);}
+.press-divider span{font-size:.62rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.35);white-space:nowrap;}
+.press-grid{
+  display:flex;flex-wrap:wrap;align-items:center;justify-content:center;
+  gap:32px 48px;max-width:900px;margin:0 auto;
+}
+.press-logo{
+  opacity:.45;filter:grayscale(1) brightness(2);
+  transition:opacity .3s,filter .3s;
+}
+.press-logo:hover{opacity:.85;filter:grayscale(0) brightness(1);}
+.press-logo img{height:36px;width:auto;display:block;}
+
 /* ── Responsive ── */
 @media(max-width:480px){
   .form-row{grid-template-columns:1fr;}
@@ -571,6 +670,8 @@ body{
   .reviews-grid{grid-template-columns:1fr;}
   .gate-card{padding:22px 18px 20px;}
   .unlock-title{font-size:clamp(2rem,10vw,2.8rem);}
+  .why-badge-circle{width:120px;height:120px;}
+  .why-badge-circle span{font-size:.7rem;}
 }
 </style>
 </head>
@@ -672,6 +773,18 @@ body{
   </div><!-- /gate-right -->
   </div><!-- /gate-wrapper -->
 
+  <!-- Badge pulsante -->
+  <div class="why-badge-wrap">
+    <div class="why-badge-circle">
+      <span>¿Por qué<br>somos<br>únicos?</span>
+    </div>
+    <div class="why-badge-arrow">
+      <svg width="48" height="64" viewBox="0 0 48 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M24 4 C10 4, 4 20, 4 36 C4 50, 16 60, 28 56" stroke="rgba(50,180,140,.7)" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+        <path d="M22 50 L28 58 L36 52" stroke="rgba(50,180,140,.7)" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+  </div>
 
 </section>
 
@@ -704,6 +817,55 @@ body{
   </div>
 </div>
 
+
+<!-- ════════════════════════════════════
+     AUTORIDAD — casos de éxito
+════════════════════════════════════ -->
+<section class="authority-section">
+  <p class="auth-eyebrow">Resultados reales</p>
+  <h2 class="auth-title">Cientos de casos de éxito</h2>
+
+  <!-- Vídeos de YouTube -->
+  <div class="cases-grid">
+
+    <div class="case-yt" data-id="LC-jGG2ztBw" data-start="2960" role="button" tabindex="0" aria-label="Caso real: dejó de apostar con ETC.">
+      <img src="https://img.youtube.com/vi/LC-jGG2ztBw/hqdefault.jpg" alt="Caso de éxito — dejó de apostar con ETC." loading="lazy">
+      <div class="case-yt-play">
+        <svg viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="36" cy="36" r="36" fill="rgba(0,0,0,.55)"/><polygon points="28,22 56,36 28,50" fill="#fff"/></svg>
+      </div>
+      <span class="case-yt-caption">«Dejé de apostar después de 8 años gracias a ETC.»</span>
+    </div>
+
+    <div class="case-yt" data-id="I_zWGSli3Bs" data-start="25" role="button" tabindex="0" aria-label="Nacho cuenta su historia">
+      <img src="https://img.youtube.com/vi/I_zWGSli3Bs/hqdefault.jpg" alt="Nacho — historia personal de superación" loading="lazy">
+      <div class="case-yt-play">
+        <svg viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="36" cy="36" r="36" fill="rgba(0,0,0,.55)"/><polygon points="28,22 56,36 28,50" fill="#fff"/></svg>
+      </div>
+      <span class="case-yt-caption">«Cómo superé mi adicción al juego y fundé ETC.»</span>
+    </div>
+
+    <div class="case-yt" data-id="fLFICwNGS1g" data-start="90" role="button" tabindex="0" aria-label="Testimonios de alumnos">
+      <img src="https://img.youtube.com/vi/fLFICwNGS1g/hqdefault.jpg" alt="Testimonios de personas que superaron la adicción con ETC." loading="lazy">
+      <div class="case-yt-play">
+        <svg viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="36" cy="36" r="36" fill="rgba(0,0,0,.55)"/><polygon points="28,22 56,36 28,50" fill="#fff"/></svg>
+      </div>
+      <span class="case-yt-caption">«Testimonios: personas que ya superaron la adicción»</span>
+    </div>
+
+  </div>
+
+  <!-- Logos prensa -->
+  <div class="press-divider"><span>Presencia en medios</span></div>
+  <div class="press-grid">
+    <div class="press-logo"><img src="https://app.equilibratucamino.com/images/logo-publico.svg" alt="Diario Público"></div>
+    <div class="press-logo"><img src="https://app.equilibratucamino.com/images/logo-canal4.webp" alt="Canal 4"></div>
+    <div class="press-logo"><img src="https://app.equilibratucamino.com/images/logo-mamireporter.webp" alt="mamireporter"></div>
+    <div class="press-logo"><img src="https://app.equilibratucamino.com/images/logo-lmental.webp" alt="L-Mental"></div>
+    <div class="press-logo"><img src="https://app.equilibratucamino.com/images/logo-evermine2.webp" alt="Ever Mine"></div>
+    <div class="press-logo"><img src="https://app.equilibratucamino.com/images/logo-mejorinformado.webp" alt="Mejor Informado"></div>
+    <div class="press-logo"><img src="https://app.equilibratucamino.com/images/logo-caminemos.webp" alt="Caminamos Juntos"></div>
+  </div>
+</section>
 
 <!-- ════════════════════════════════════
      UNLOCKED — vídeo desbloqueado
@@ -969,7 +1131,7 @@ document.getElementById('btn-back').addEventListener('click', function(){
 });
 
 // YouTube click-to-play
-document.querySelectorAll('.yt-wrap').forEach(el => {
+document.querySelectorAll('.yt-wrap, .case-yt').forEach(el => {
   const play = () => {
     const f = document.createElement('iframe');
     f.src = `https://www.youtube-nocookie.com/embed/${el.dataset.id}?autoplay=1&start=${el.dataset.start||0}&rel=0`;
