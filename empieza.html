@@ -113,12 +113,25 @@ body{
 .gate-headline{
   font-family:var(--d);font-weight:700;
   font-size:clamp(2rem,4vw,3rem);
-  line-height:1.05;letter-spacing:-.02em;
+  line-height:1.1;letter-spacing:-.02em;
   color:#fff;text-wrap:balance;
-  margin-bottom:16px;
-  animation:fadeIn .5s .05s ease both;
+  margin-top:24px;margin-bottom:24px;
 }
 .gate-headline .accent{color:var(--g);}
+/* Headline word animation */
+.hl-word{
+  display:inline-block;
+  opacity:0;
+  transform:translateY(28px) skewY(4deg);
+  filter:blur(6px);
+  will-change:opacity,transform,filter;
+}
+@keyframes hlWord{
+  to{opacity:1;transform:none;filter:blur(0);}
+}
+.hl-word.hl-in{
+  animation:hlWord .55s cubic-bezier(.22,1,.36,1) forwards;
+}
 .gate-sub{
   font-size:.9375rem;color:rgba(255,255,255,.5);
   line-height:1.65;max-width:380px;
@@ -1188,6 +1201,39 @@ document.getElementById('btn-back').addEventListener('click', function(){
   document.getElementById('back-msg').hidden = false;
   this.hidden = true;
 });
+
+// Headline palabra por palabra
+(function(){
+  const h1 = document.querySelector('.gate-headline');
+  if(!h1) return;
+  // Wrap each text node word in .hl-word spans, preserving child elements
+  function wrapWords(node){
+    if(node.nodeType===3){
+      const frag=document.createDocumentFragment();
+      node.textContent.split(/(\s+)/).forEach(tok=>{
+        if(!tok.trim()){frag.appendChild(document.createTextNode(tok));return;}
+        const sp=document.createElement('span');
+        sp.className='hl-word';sp.textContent=tok;
+        frag.appendChild(sp);
+        frag.appendChild(document.createTextNode(' '));
+      });
+      node.replaceWith(frag);
+    } else if(node.nodeType===1 && node.tagName!=='BR'){
+      // wrap child text nodes inside spans like .accent and color spans
+      Array.from(node.childNodes).forEach(wrapWords);
+    }
+  }
+  Array.from(h1.childNodes).forEach(wrapWords);
+  const words=h1.querySelectorAll('.hl-word');
+  const obs=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{
+      if(!e.isIntersecting)return;
+      words.forEach((w,i)=>setTimeout(()=>w.classList.add('hl-in'),i*65));
+      obs.unobserve(e.target);
+    });
+  },{threshold:.4});
+  obs.observe(h1);
+})();
 
 // Quote animada frase por frase
 (function(){
