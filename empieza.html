@@ -132,6 +132,19 @@ body{
 .hl-word.hl-in{
   animation:hlWord .55s cubic-bezier(.22,1,.36,1) forwards;
 }
+@keyframes soloDrop{
+  0%  {opacity:0;transform:translateY(-160px) scaleY(1);}
+  55% {opacity:1;transform:translateY(6px) scaleY(.92);}
+  68% {transform:translateY(-22px) scaleY(1.05);}
+  80% {transform:translateY(5px) scaleY(.96);}
+  90% {transform:translateY(-8px) scaleY(1.02);}
+  97% {transform:translateY(2px) scaleY(.99);}
+  100%{opacity:1;transform:translateY(0) scaleY(1);}
+}
+.hl-word.hl-solo.hl-in{
+  animation:soloDrop .95s cubic-bezier(.22,1,.36,1) forwards!important;
+  transform-origin:bottom center;
+}
 .gate-sub{
   font-size:.9375rem;color:rgba(255,255,255,.5);
   line-height:1.65;max-width:380px;
@@ -1295,7 +1308,7 @@ document.getElementById('btn-back').addEventListener('click', function(){
       node.textContent.split(/(\s+)/).forEach(tok=>{
         if(!tok.trim()){frag.appendChild(document.createTextNode(tok));return;}
         const sp=document.createElement('span');
-        sp.className='hl-word';sp.textContent=tok;
+        sp.className='hl-word'+(tok==='solo.'?' hl-solo':'');sp.textContent=tok;
         frag.appendChild(sp);
         frag.appendChild(document.createTextNode(' '));
       });
