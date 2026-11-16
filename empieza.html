@@ -302,7 +302,6 @@ body{
   width:max-content;
   transition:animation-duration .6s ease;
 }
-@media(hover:hover){.logos-track:hover{animation-duration:120s;}}
 @keyframes scrollLogosFunnel{
   from{transform:translateX(0)}
   to{transform:translateX(-50%)}
@@ -652,7 +651,7 @@ body{
 
 /* ── Sección autoridad: casos de éxito ── */
 .authority-section{
-  background:var(--bg);
+  background:#06101e;
   padding:72px max(20px,env(safe-area-inset-left,0px)) 80px;
   text-align:center;
 }
@@ -1374,6 +1373,20 @@ document.querySelectorAll('.yt-wrap, .case-yt').forEach(el => {
   el.addEventListener('click', play);
   el.addEventListener('keydown', e => { if(e.key==='Enter'||e.key===' ') play(); });
 });
+
+// Logos slow-motion on hover/touch — sin reiniciar la animación
+(function(){
+  const track = document.querySelector('.logos-track');
+  if(!track) return;
+  function getAnim(){ return track.getAnimations().find(a=>a.animationName==='scrollLogosFunnel'); }
+  function slow(){ const a=getAnim(); if(a) a.updatePlaybackRate(22/120); }
+  function normal(){ const a=getAnim(); if(a) a.updatePlaybackRate(1); }
+  track.addEventListener('mouseenter', slow);
+  track.addEventListener('mouseleave', normal);
+  track.addEventListener('touchstart', slow, {passive:true});
+  track.addEventListener('touchend', normal, {passive:true});
+  track.addEventListener('touchcancel', normal, {passive:true});
+})();
 </script>
 </body>
 </html>
