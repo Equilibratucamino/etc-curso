@@ -287,8 +287,9 @@ body{
   display:flex;align-items:center;
   animation:scrollLogosFunnel 22s linear infinite;
   width:max-content;
+  transition:animation-duration .6s ease;
 }
-.logos-track:hover{animation-play-state:paused;}
+.logos-track:hover{animation-duration:120s;}
 @keyframes scrollLogosFunnel{
   from{transform:translateX(0)}
   to{transform:translateX(-50%)}
@@ -692,8 +693,8 @@ body{
 .press-slider{overflow:hidden;border-radius:14px;}
 .press-slides{display:flex;transition:transform .4s cubic-bezier(.4,0,.2,1);}
 .press-slide{flex:0 0 100%;background:#fff;border-radius:14px;overflow:hidden;}
-.press-slide img{width:100%;height:420px;object-fit:cover;object-position:top center;display:block;}
-@media(max-width:620px){.press-slide img{height:260px;}}
+.press-slide img{width:100%;height:520px;object-fit:cover;object-position:top center;display:block;}
+@media(max-width:620px){.press-slide img{height:340px;}}
 .press-slide-lbl{padding:14px 18px;background:#111;display:flex;align-items:center;gap:10px;}
 .press-slide-src{font-weight:900;font-size:.7rem;color:#fff;text-transform:uppercase;letter-spacing:.06em;}
 .press-slide-tag{font-size:.65rem;color:rgba(255,255,255,.5);}
@@ -705,7 +706,25 @@ body{
 .press-dots{display:flex;justify-content:center;gap:7px;margin-top:14px;}
 .press-dot{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.25);cursor:pointer;transition:background .2s;}
 .press-dot.on{background:var(--g);}
+/* Press section header */
+.press-section-wrap{
+  margin-top:64px;
+  padding-top:48px;
+  border-top:1px solid rgba(255,255,255,.08);
+}
+.press-section-eyebrow{
+  font-size:.6rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--g);margin:0 0 10px;
+}
+.press-section-title{
+  font-family:var(--d);font-weight:800;
+  font-size:clamp(1.4rem,3.5vw,2rem);
+  line-height:1.1;letter-spacing:-.025em;
+  color:#fff;text-wrap:balance;
+  margin:0 auto 32px;
+}
 .auth-press-label{font-size:.6rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.35);margin:0 0 18px;}
+/* Slides taller */
 
 /* ── Responsive ── */
 @media(max-width:480px){
@@ -905,7 +924,9 @@ body{
   </div>
 
   <!-- Slider de prensa manual -->
-  <p class="auth-press-label">Presencia en medios</p>
+  <div class="press-section-wrap">
+    <p class="press-section-eyebrow">Autoridad & credibilidad</p>
+    <h3 class="press-section-title">Algunas apariciones en prensa</h3>
   <div class="press-slider-wrap">
     <button class="press-nav press-nav-prev" aria-label="Anterior">&#8592;</button>
     <div class="press-slider">
@@ -936,6 +957,7 @@ body{
       <span class="press-dot"></span>
     </div>
   </div>
+  </div><!-- /press-section-wrap -->
 </section>
 
 <!-- ════════════════════════════════════
