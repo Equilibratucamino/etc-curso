@@ -1037,46 +1037,6 @@ body{
     </svg>
   </div>
 
-  <!-- Slider de prensa manual -->
-  <div class="press-section-wrap">
-  <div class="press-phone-frame">
-    <div class="press-slider-wrap">
-      <button class="press-nav press-nav-prev" aria-label="Anterior">&#8592;</button>
-      <div class="press-slider">
-        <div class="press-slides" id="pressSlides">
-          <div class="press-slide">
-            <img src="images/publico-apuestas-2.jpg" alt="Diario Público — Nacho citado sobre las casas de apuestas" loading="lazy">
-            <div class="press-slide-lbl"><span class="press-slide-src">Diario Público</span><span class="press-slide-tag">· Nacho, experto en adicciones</span></div>
-          </div>
-          <div class="press-slide">
-            <img src="images/publico-article.webp" alt="Diario Público — entrevista a Nacho sobre la ludopatía" loading="lazy">
-            <div class="press-slide-lbl"><span class="press-slide-src">Diario Público</span><span class="press-slide-tag">· Entrevista a Nacho</span></div>
-          </div>
-          <div class="press-slide">
-            <img src="images/publico-apuestas-1.jpg" alt="Diario Público — regulación de las apuestas" loading="lazy">
-            <div class="press-slide-lbl"><span class="press-slide-src">Diario Público</span><span class="press-slide-tag">· Regulación de apuestas</span></div>
-          </div>
-          <div class="press-slide">
-            <img src="images/media-4.webp" alt="Mejor Informado — Entrevista a ETC sobre la ludopatía" loading="lazy">
-            <div class="press-slide-lbl"><span class="press-slide-src">Mejor Informado</span><span class="press-slide-tag">· Entrevista a ETC</span></div>
-          </div>
-          <div class="press-slide">
-            <img src="images/media-2.webp" alt="Canal 4 Mallorca — ETC en televisión" loading="lazy" style="object-position:center center;object-fit:contain;background:#f8f8f8;">
-            <div class="press-slide-lbl"><span class="press-slide-src">Canal 4 Mallorca</span><span class="press-slide-tag">· Mallorca a la Carta</span></div>
-          </div>
-        </div>
-      </div>
-      <button class="press-nav press-nav-next" aria-label="Siguiente">&#8594;</button>
-    </div>
-    <div class="press-dots" id="pressDots">
-      <span class="press-dot on"></span>
-      <span class="press-dot"></span>
-      <span class="press-dot"></span>
-      <span class="press-dot"></span>
-      <span class="press-dot"></span>
-    </div>
-  </div>
-  </div><!-- /press-section-wrap -->
 </section>
 
 <!-- ════════════════════════════════════
@@ -1138,6 +1098,47 @@ body{
       </div>
     </div>
   </section>
+
+  <!-- Slider de prensa manual -->
+  <div class="press-section-wrap">
+  <div class="press-phone-frame">
+    <div class="press-slider-wrap">
+      <button class="press-nav press-nav-prev" aria-label="Anterior">&#8592;</button>
+      <div class="press-slider">
+        <div class="press-slides" id="pressSlides">
+          <div class="press-slide">
+            <img src="images/publico-apuestas-2.jpg" alt="Diario Público — Nacho citado sobre las casas de apuestas" loading="lazy">
+            <div class="press-slide-lbl"><span class="press-slide-src">Diario Público</span><span class="press-slide-tag">· Nacho, experto en adicciones</span></div>
+          </div>
+          <div class="press-slide">
+            <img src="images/publico-article.webp" alt="Diario Público — entrevista a Nacho sobre la ludopatía" loading="lazy">
+            <div class="press-slide-lbl"><span class="press-slide-src">Diario Público</span><span class="press-slide-tag">· Entrevista a Nacho</span></div>
+          </div>
+          <div class="press-slide">
+            <img src="images/publico-apuestas-1.jpg" alt="Diario Público — regulación de las apuestas" loading="lazy">
+            <div class="press-slide-lbl"><span class="press-slide-src">Diario Público</span><span class="press-slide-tag">· Regulación de apuestas</span></div>
+          </div>
+          <div class="press-slide">
+            <img src="images/media-4.webp" alt="Mejor Informado — Entrevista a ETC sobre la ludopatía" loading="lazy">
+            <div class="press-slide-lbl"><span class="press-slide-src">Mejor Informado</span><span class="press-slide-tag">· Entrevista a ETC</span></div>
+          </div>
+          <div class="press-slide">
+            <img src="images/media-2.webp" alt="Canal 4 Mallorca — ETC en televisión" loading="lazy" style="object-position:center center;object-fit:contain;background:#f8f8f8;">
+            <div class="press-slide-lbl"><span class="press-slide-src">Canal 4 Mallorca</span><span class="press-slide-tag">· Mallorca a la Carta</span></div>
+          </div>
+        </div>
+      </div>
+      <button class="press-nav press-nav-next" aria-label="Siguiente">&#8594;</button>
+    </div>
+    <div class="press-dots" id="pressDots">
+      <span class="press-dot on"></span>
+      <span class="press-dot"></span>
+      <span class="press-dot"></span>
+      <span class="press-dot"></span>
+      <span class="press-dot"></span>
+    </div>
+  </div>
+  </div><!-- /press-section-wrap -->
 
   <!-- Logos colaboradores — carrusel en color -->
   <div class="press-strip fade-up">
@@ -1468,8 +1469,9 @@ document.querySelectorAll('.yt-wrap, .case-yt').forEach(el => {
   if(!trap || !msgs.length) return;
   const steps = msgs.length;
   let cur = -1;
+  function trapTop(){ return trap.getBoundingClientRect().top + window.scrollY; }
   function update(){
-    const scrolled = window.scrollY - trap.offsetTop;
+    const scrolled = window.scrollY - trapTop();
     const vh = window.innerHeight;
     if(scrolled <= 0 || scrolled >= trap.offsetHeight - vh){
       msgs.forEach(m=>m.classList.remove('st-visible'));
