@@ -781,6 +781,60 @@ body{
   .why-badge-circle{width:120px;height:120px;}
   .why-badge-circle span{font-size:.7rem;}
 }
+
+/* ── Scroll Trap ── */
+.scroll-trap{
+  height:500vh;
+  position:relative;
+  background:#06101e;
+}
+.scroll-trap-pin{
+  position:sticky;
+  top:0;
+  height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:#06101e;
+  overflow:hidden;
+}
+.st-msg{
+  position:absolute;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  text-align:center;
+  padding:0 max(24px,env(safe-area-inset-left,0px));
+  opacity:0;
+  transform:scale(.88) translateY(16px);
+  transition:opacity .45s cubic-bezier(.22,1,.36,1), transform .45s cubic-bezier(.22,1,.36,1);
+  pointer-events:none;
+  will-change:opacity,transform;
+}
+.st-msg.st-visible{
+  opacity:1;
+  transform:scale(1) translateY(0);
+}
+.st-big{
+  font-family:var(--d);font-weight:900;
+  font-size:clamp(3rem,13vw,7.5rem);
+  color:#fff;line-height:.95;letter-spacing:-.045em;
+  display:block;text-wrap:balance;
+}
+.st-big .st-green{color:var(--g);}
+.st-mid{
+  font-family:var(--d);font-weight:900;
+  font-size:clamp(1.9rem,6.5vw,4.2rem);
+  color:#fff;line-height:1.05;letter-spacing:-.03em;
+  display:block;margin-bottom:6px;text-wrap:balance;
+}
+.st-sub{
+  font-family:var(--r);font-weight:600;
+  font-size:clamp(.95rem,2.8vw,1.4rem);
+  color:rgba(255,255,255,.5);
+  display:block;margin-top:4px;
+}
+.st-red{color:var(--red);}
 </style>
 </head>
 <body>
@@ -1022,6 +1076,35 @@ body{
     </div>
   </div>
   </div><!-- /press-section-wrap -->
+</section>
+
+<!-- ════════════════════════════════════
+     SCROLL TRAP — frases de ruptura
+════════════════════════════════════ -->
+<section class="scroll-trap" id="scrollTrap">
+  <div class="scroll-trap-pin">
+
+    <div class="st-msg" data-step="0">
+      <span class="st-big">No<br><span class="st-green">más</span><br>excusas.</span>
+    </div>
+
+    <div class="st-msg" data-step="1">
+      <span class="st-mid">Deja de bajar.</span>
+      <span class="st-sub">Deja de ponerte excusas.</span>
+    </div>
+
+    <div class="st-msg" data-step="2">
+      <span class="st-mid">No sigas.</span>
+      <span class="st-sub">No hay nada aquí.</span>
+      <span class="st-sub" style="opacity:.35;margin-top:2px;">No busques más excusas.</span>
+    </div>
+
+    <div class="st-msg" data-step="3">
+      <span class="st-mid">Deja de engañarte.</span>
+      <span class="st-mid st-red">¿Qué buscas?</span>
+    </div>
+
+  </div>
 </section>
 
 <!-- ════════════════════════════════════
@@ -1377,6 +1460,30 @@ document.querySelectorAll('.yt-wrap, .case-yt').forEach(el => {
   track.addEventListener('touchstart', slow, {passive:true});
   track.addEventListener('touchend', normal, {passive:true});
   track.addEventListener('touchcancel', normal, {passive:true});
+})();
+
+/* ── Scroll trap ── */
+(function(){
+  const trap = document.getElementById('scrollTrap');
+  const msgs = document.querySelectorAll('.st-msg');
+  if(!trap || !msgs.length) return;
+  const steps = msgs.length;
+  let cur = -1;
+  function update(){
+    const scrolled = window.scrollY - trap.offsetTop;
+    const vh = window.innerHeight;
+    if(scrolled <= 0 || scrolled >= trap.offsetHeight - vh){
+      msgs.forEach(m=>m.classList.remove('st-visible'));
+      cur = -1;
+      return;
+    }
+    const idx = Math.floor(scrolled / vh) % steps;
+    if(idx === cur) return;
+    cur = idx;
+    msgs.forEach((m,i)=>m.classList.toggle('st-visible', i===idx));
+  }
+  window.addEventListener('scroll', update, {passive:true});
+  update();
 })();
 </script>
 </body>
