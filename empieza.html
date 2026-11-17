@@ -112,12 +112,27 @@ body{
 /* Headline */
 .gate-headline{
   font-family:var(--d);font-weight:700;
-  font-size:clamp(2rem,4vw,3rem);
-  line-height:1.1;letter-spacing:-.02em;
+  font-size:clamp(1.45rem,3.2vw,2.1rem);
+  line-height:1.15;letter-spacing:-.02em;
   color:#fff;text-wrap:balance;
-  margin-top:24px;margin-bottom:24px;
+  margin-top:36px;margin-bottom:20px;
 }
-.gate-headline .accent{color:var(--g);}
+/* Green line animates as a whole blur-flow */
+@keyframes blurFlow{
+  0%  {opacity:0;filter:blur(14px);transform:translateY(8px);}
+  100%{opacity:1;filter:blur(0);transform:translateY(0);}
+}
+.gate-headline .accent{
+  color:var(--g);
+  display:block;
+  opacity:0;
+  animation:blurFlow .85s cubic-bezier(.22,1,.36,1) .55s forwards;
+}
+/* Cancel word-by-word animation inside accent — the whole line moves instead */
+.gate-headline .accent .hl-word,
+.gate-headline .accent .hl-word.hl-in{
+  opacity:1!important;transform:none!important;animation:none!important;
+}
 /* Headline word animation */
 .hl-word{
   display:inline-block;
