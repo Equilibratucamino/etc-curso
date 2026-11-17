@@ -122,24 +122,23 @@ body{
 .hl-word{
   display:inline-block;
   opacity:0;
-  transform:translateY(28px) skewY(4deg);
-  filter:blur(6px);
-  will-change:opacity,transform,filter;
+  transform:translateY(22px);
+  will-change:opacity,transform;
 }
 @keyframes hlWord{
-  to{opacity:1;transform:none;filter:blur(0);}
+  to{opacity:1;transform:none;}
 }
 .hl-word.hl-in{
-  animation:hlWord .55s cubic-bezier(.22,1,.36,1) forwards;
+  animation:hlWord .38s cubic-bezier(.22,1,.36,1) forwards;
 }
 @keyframes soloDrop{
-  0%  {opacity:0;filter:blur(0);transform:translateY(-160px) scaleY(1);}
-  55% {opacity:1;filter:blur(0);transform:translateY(6px) scaleY(.92);}
+  0%  {opacity:0;transform:translateY(-160px) scaleY(1);}
+  55% {opacity:1;transform:translateY(6px) scaleY(.92);}
   68% {transform:translateY(-22px) scaleY(1.05);}
   80% {transform:translateY(5px) scaleY(.96);}
   90% {transform:translateY(-8px) scaleY(1.02);}
   97% {transform:translateY(2px) scaleY(.99);}
-  100%{opacity:1;filter:blur(0);transform:translateY(0) scaleY(1);}
+  100%{opacity:1;transform:translateY(0) scaleY(1);}
 }
 .hl-word.hl-solo.hl-in{
   animation:soloDrop .95s cubic-bezier(.22,1,.36,1) forwards!important;
