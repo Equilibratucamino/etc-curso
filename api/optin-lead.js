@@ -15,6 +15,29 @@ export default async function handler(req, res) {
     return res.status(400).json({ error: 'Faltan campos obligatorios' });
   }
 
+  // Crear contacto en GHL (dispara secuencias de email automáticamente)
+  try {
+    await fetch('https://services.leadconnectorhq.com/contacts/', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${process.env.GHL_API_KEY}`,
+        'Version': '2021-07-28',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        firstName: nombre,
+        lastName: apellidos,
+        email,
+        phone: tlf || undefined,
+        locationId: 'CbmUySp7rItdfeF88pUK',
+        tags: ['optin-funnel'],
+        source: 'Funnel ETC',
+      }),
+    });
+  } catch (err) {
+    console.error('GHL contact error:', err);
+  }
+
   // Intentar enviar el email, pero no bloquear el flujo si falla
   try {
     const r = await fetch('https://api.resend.com/emails', {
